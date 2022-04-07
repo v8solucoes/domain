@@ -7,7 +7,7 @@ export class ModeloRequisicao {
   async crud(requisicao: Requisicao){
 
     const req = new ConstrutorRequisicao(requisicao).crud()
-    const acao = requisicao.credencial.requisicao.acao as Exclude<nomeAcao, 'lerColecao' | 'lerDocumento'>
+    const acao = requisicao.credencial.requisicao.acao as nomeAcao
 
     try {
       return req[acao] as Promise<Resposta>

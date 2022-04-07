@@ -14,17 +14,18 @@ export interface InterfaceDados {
 }
 
 export interface Dados {
-  interface: 'string' | 'boolean' | 'any' | 'Date'
+  interface: 'string' | 'boolean' | 'any' | 'Date' | 'number'
   | `nomePermissao`
   | `nomeStringOuBoolean`
   | `nomeAcao`
   | `nomeModulo`
   | `nomeModuloPasta`
   | `nomeAmbiente`
+  | `nomeTema`
   
   valor: any;
 }
-
+export type nomeTema = 'pad-tema-black' | 'pad-tema-white' | 'cus-tema-black' | 'cus-tema-white' 
 export type nomeAcao = 'criar' | 'set' | 'editar' | 'deletar' | 'lerColecao' | 'lerDocumento'
 export type nomeStringOuBoolean = string | boolean
 export type nomePermissao = "adm" | "revenda" | "cliente" | "usuario"
@@ -59,6 +60,7 @@ export interface Resposta {
   itemId?: string;
   respostaDataBase?: any;
 }
+
     export const permissao_Dados : permissao_Interface ={ usuarioAdm :
       [  {
       
@@ -170,6 +172,25 @@ export interface Resposta {
         exibir: {"formulario":true,"titulo":false,"subTitulo":false},
 }]
     } ]
+    } , {
+      
+        id: "design",
+        tipo: "objeto",
+        exibir: {"formulario":true,"titulo":true,"subTitulo":true},
+
+      _grupo: [ {
+        id: "iniciarMenuFixo",
+        tipo: "string",
+        exibir: {"formulario":true,"titulo":false,"subTitulo":false},
+},{
+        id: "tema",
+        tipo: "string",
+        exibir: {"formulario":true,"titulo":false,"subTitulo":false},
+},{
+        id: "temaFonte",
+        tipo: "string",
+        exibir: {"formulario":true,"titulo":false,"subTitulo":false},
+}]
     } ]
     } ] }
     export interface permissao_Interface{ usuarioAdm :
@@ -283,6 +304,25 @@ export interface Resposta {
         exibir: Partial<Exibir>,
 }]
     } ]
+    } , {
+      
+        id: "design",
+        tipo: Modelo['tipo'],
+        exibir: Partial<Exibir>,
+
+      _grupo: [ {
+        id: "iniciarMenuFixo",
+        tipo: Modelo['tipo'],
+        exibir: Partial<Exibir>,
+},{
+        id: "tema",
+        tipo: Modelo['tipo'],
+        exibir: Partial<Exibir>,
+},{
+        id: "temaFonte",
+        tipo: Modelo['tipo'],
+        exibir: Partial<Exibir>,
+}]
     } ]
     } ] }
     export const dados_Dados : dados_Interface ={ usuarioAdm : { credencial : { usuario : { id_adm :  "v8888asdfasdf"
@@ -298,13 +338,16 @@ export interface Resposta {
 ,servico : true
 ,tipoModulo :  "adm"
  },requisicao : { ambiente :  "ambienteTesteV8"
-,acao : 'criar'
+,acao :  "set"
 ,item :  "sem item"
 ,itemCriar :  "itemCriar - sem dados"
 ,dominio :  "localhost"
 ,dataUpdate : new Date()
 ,dataCriacao : new Date()
- } } } }
+ } },design : { iniciarMenuFixo : true
+,tema :  "pad-tema-black"
+,temaFonte :  "temaFonte - sem dados"
+ } } }
     export interface dados_Interface{ usuarioAdm : { credencial : { usuario : { id_adm : string
 ,id_usuario : string
 ,id_revenda : string
@@ -324,7 +367,10 @@ export interface Resposta {
 ,dominio : string
 ,dataUpdate : Date
 ,dataCriacao : Date
- } } } }
+ } },design : { iniciarMenuFixo : boolean
+,tema : nomeTema
+,temaFonte : string
+ } } }
     export const modelo_Dados : modelo_Interface ={ usuarioAdm : { credencial : { usuario : { id_adm : {"nome":"Administrador","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
 ,id_usuario : {"nome":"Usuário","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
 ,id_revenda : {"nome":"Revenda","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
@@ -344,7 +390,10 @@ export interface Resposta {
 ,dominio : {"nome":"Domínio","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
 ,dataUpdate : {"nome":"Data Update","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
 ,dataCriacao : {"nome":"Data Criacao","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
- } } } }
+ } },design : { iniciarMenuFixo : {"nome":"Iniciar Menu Fixo","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,tema : {"nome":"Tema","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,temaFonte : {"nome":"Tema Fonte","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+ } } }
     export interface modelo_Interface{ usuarioAdm : { credencial : { usuario : { id_adm : Partial<Modelo>
 ,id_usuario : Partial<Modelo>
 ,id_revenda : Partial<Modelo>
@@ -364,5 +413,8 @@ export interface Resposta {
 ,dominio : Partial<Modelo>
 ,dataUpdate : Partial<Modelo>
 ,dataCriacao : Partial<Modelo>
- } } } }
+ } },design : { iniciarMenuFixo : Partial<Modelo>
+,tema : Partial<Modelo>
+,temaFonte : Partial<Modelo>
+ } } }
     

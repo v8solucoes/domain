@@ -1,6 +1,6 @@
 // FIREBASE NUNCA REMOVER IMPORT DO TOPO
 import * as admin from "firebase-admin";
-admin.initializeApp();
+if (admin.apps.length === 0) {admin.initializeApp()}
 import { getFirestore, FieldValue } from "firebase-admin/firestore";
 /* SE PRECISAR EXECUTE ESSE COMANDO PARA GRAVAR AS CREDENCIAIS
  export GOOGLE_APPLICATION_CREDENTIALS="/home/v8/meu-apresentador/construtor/src/v8app-888cd-a6f93a11cbe1.json"
@@ -88,7 +88,7 @@ export class ConstrutorRequisicao {
       get criar() {
         lote.create(rota.documentoLista, { ...dados, ...historico });
         lote.create(rota.documentoHistorico, historico);
-        lote.update(rota.documentoRelatorio, relatorio.criar);
+        lote.create(rota.documentoRelatorio, relatorio.criar);
         return gravar()
       },
       get set() {
@@ -133,7 +133,7 @@ export class ConstrutorRequisicao {
         dataBase[doc.id] = doc.data()
       });
 
-      return this.resposta(true, acao, null, `Sucesso LerColecao${acao}`, dataBase)
+      return this.resposta(true, acao, snapshot, `Sucesso Ler Colecao: ${acao}`, dataBase)
 
     } catch (error) {
       return this.resposta(false, acao, error, `Erro Ler Colecao: ${acao}`)
@@ -149,7 +149,7 @@ export class ConstrutorRequisicao {
 
       const snapshot = await rota.documentoLista.get() as any
 
-      return this.resposta(true, acao, null, `Sucesso Ler Documento: ${acao}`, snapshot.data())
+      return this.resposta(true, acao, snapshot, `Sucesso Ler Documento: ${acao}`, snapshot.data())
 
     } catch (error) {
       return this.resposta(false, acao, error, `Erro Ler Documento: ${acao}`)
@@ -160,9 +160,9 @@ export class ConstrutorRequisicao {
 
     try {
       const lote = await this.lote.commit()
-      return this.resposta(true, acao, lote, `Sucesso Gravar${acao}`)
+      return this.resposta(true, acao, lote, `Sucesso Gravar: ${acao}`)
     } catch (error) {
-      return this.resposta(false, acao, error, `Erro Gravar${acao}`)
+      return this.resposta(false, acao, error, `Erro Gravar: ${acao}`)
     }
   }
 
@@ -174,7 +174,7 @@ export class ConstrutorRequisicao {
       return `${this.credencial.requisicao.itemCriar}`
     } else {
 
-      return this.credencial.requisicao.acao == "criar" ? this.db.bundle().bundleId : this.credencial.requisicao.item;
+      return (this.credencial.requisicao.acao == "criar" || this.credencial.requisicao.acao == 'set')  ? this.db.bundle().bundleId : this.credencial.requisicao.item;
     }
   }
 

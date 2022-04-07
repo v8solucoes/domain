@@ -6,8 +6,9 @@ import { Requisicao } from "./construtor/requisicao/requisicao.interface";
 export class Start  {
 
   constructor() {
-  /*  Arquivo.dados('dadosApp') */
-  this.start()
+   Arquivo.dados('dadosApp')
+   
+/*   this.start() */
   
   }
   async start(){

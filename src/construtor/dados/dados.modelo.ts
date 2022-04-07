@@ -28,12 +28,20 @@ export class ModeloDados {
       id: "requisicao",
       _grupo: [
         Criar.string({ id: "ambiente", nome: 'Ambiente', valor: 'ambienteTesteV8', interface: 'nomeAmbiente' }),
-        Criar.string({ id: "acao", nome: 'Ação', valor: 'criar', interface: 'nomeAcao' }),
+        Criar.string({ id: "acao", nome: 'Ação', valor: 'set', interface: 'nomeAcao' }),
         Criar.string({ id: "item", nome: 'Item', valor: 'sem item', interface: 'string' }),
         Criar.string({ id: "itemCriar", nome: 'Item Criar', valor: false, interface: 'nomeStringOuBoolean' }),
         Criar.string({ id: "dominio", nome: 'Domínio', valor: 'localhost', interface: 'string' }),
         Criar.string({ id: "dataUpdate", nome: 'Data Update', valor: 'new Date()', interface: 'Date' }),
         Criar.string({ id: "dataCriacao", nome: 'Data Criacao', valor: 'new Date()', interface: 'Date' }),
+      ],
+    }),
+    ...Criar.objeto({
+      id: "design",
+      _grupo: [
+        Criar.string({ id: "iniciarMenuFixo", nome: 'Iniciar Menu Fixo', valor: true, interface: 'boolean' }),
+        Criar.string({ id: "tema", nome: 'Tema', valor: 'pad-tema-black', interface: 'nomeTema' }),
+        Criar.string({ id: "temaFonte", nome: 'Tema Fonte', valor: 0, interface: 'string' }),
       ],
     }),
   };
@@ -50,7 +58,10 @@ export class ModeloDados {
   static modulo = {
     ...Criar.objeto({
       id: "usuarioAdm",
-      _grupo: [Criar.objeto(ModeloDados.compartilhado.credencial)],
+      _grupo: [
+        Criar.objeto(ModeloDados.compartilhado.credencial),
+        Criar.objeto(ModeloDados.grupo.design)
+      ],
     }),
   };
 }

@@ -13,17 +13,18 @@ export interface InterfaceDados {
 }
 
 export interface Dados {
-  interface: 'string' | 'boolean' | 'any' | 'Date'
+  interface: 'string' | 'boolean' | 'any' | 'Date' | 'number'
   | `nomePermissao`
   | `nomeStringOuBoolean`
   | `nomeAcao`
   | `nomeModulo`
   | `nomeModuloPasta`
   | `nomeAmbiente`
+  | `nomeTema`
   
   valor: any;
 }
-
+export type nomeTema = 'pad-tema-black' | 'pad-tema-white' | 'cus-tema-black' | 'cus-tema-white' 
 export type nomeAcao = 'criar' | 'set' | 'editar' | 'deletar' | 'lerColecao' | 'lerDocumento'
 export type nomeStringOuBoolean = string | boolean
 export type nomePermissao = "adm" | "revenda" | "cliente" | "usuario"
