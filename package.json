@@ -6,6 +6,7 @@
   "scripts": {
     "start:dev": "nodemon",
     "start": "ts-node ./src/index.ts",
+    "teste": "ts-node ./src/indexTeste.ts",
     "build": "npx tsc"
   },
   "author": "",

@@ -12,6 +12,8 @@ export class ModeloDados {
         Criar.string({ id: "tipoAcesso", nome: 'Tipo de Acesso', valor: 'adm', interface: 'nomePermissao' }),
         Criar.string({ id: "nome", nome: 'Nome', valor: 'Emerson', interface: 'string' }),
         Criar.string({ id: "email", nome: 'E-mail', valor: 'teste@v8sites.com.br', interface: 'string' }),
+        Criar.string({ id: "telefone", nome: 'Telefone:', valor: '11-0000-0000', interface: 'string' }),
+        Criar.string({ id: "senha", nome: 'Senha:', valor: '123456', interface: 'string' }),
       ],
     }),
     ...Criar.objeto({
@@ -28,6 +30,7 @@ export class ModeloDados {
       id: "requisicao",
       _grupo: [
         Criar.string({ id: "ambiente", nome: 'Ambiente', valor: 'ambienteTesteV8', interface: 'nomeAmbiente' }),
+        Criar.string({ id: "funcao", nome: 'Funcao', valor: 'semFuncao', interface: 'nomeFuncao' }),
         Criar.string({ id: "acao", nome: 'Ação', valor: 'set', interface: 'nomeAcao' }),
         Criar.string({ id: "item", nome: 'Item', valor: 'sem item', interface: 'string' }),
         Criar.string({ id: "itemCriar", nome: 'Item Criar', valor: false, interface: 'nomeStringOuBoolean' }),

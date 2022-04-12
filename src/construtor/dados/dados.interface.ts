@@ -21,14 +21,16 @@ export interface Dados {
   | `nomeModuloPasta`
   | `nomeAmbiente`
   | `nomeTema`
+  | `nomeFuncao`
   
   valor: any;
 }
+export type nomeFuncao = 'semFuncao' | 'criarAutenticacao'
 export type nomeTema = 'pad-tema-black' | 'pad-tema-white' | 'cus-tema-black' | 'cus-tema-white' 
 export type nomeAcao = 'criar' | 'set' | 'editar' | 'deletar' | 'lerColecao' | 'lerDocumento'
 export type nomeStringOuBoolean = string | boolean
 export type nomePermissao = "adm" | "revenda" | "cliente" | "usuario"
-export type nomeModulo = `usuario_${nomePermissao}`
+export type nomeModulo = `usuario_${nomePermissao}` | `modelo_${nomePermissao}`
 export type nomeModuloPasta = '/lista' | '/relatorio' | '/historico' | '/deletar'
 export type nomeAmbiente = 'ambienteTesteV8' | 'ambienteProducao'
 
@@ -49,13 +51,4 @@ export interface Modelo {
     lista: boolean;
     objeto: boolean;
   };
-}
-export interface Resposta {
-  acao: nomeAcao;
-  sucesso: boolean;
-  mensagem?: string;
-  credencial?: any
-  data?: any;
-  itemId?: string;
-  respostaDataBase?: any;
 }

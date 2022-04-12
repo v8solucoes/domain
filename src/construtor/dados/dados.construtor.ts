@@ -1,9 +1,4 @@
-import {
-  Dados,
-  Exibir,
-  Modelo,
-  InterfaceDados,
-} from "./dados.interface";
+import { Dados,  Exibir, Modelo, InterfaceDados} from "./dados.interface";
 
 export class ConstrutorDados {
   static carregarModelo(valor: InterfaceDados): Required<InterfaceDados> {

@@ -22,14 +22,16 @@ export interface Dados {
   | `nomeModuloPasta`
   | `nomeAmbiente`
   | `nomeTema`
+  | `nomeFuncao`
   
   valor: any;
 }
+export type nomeFuncao = 'semFuncao' | 'criarAutenticacao'
 export type nomeTema = 'pad-tema-black' | 'pad-tema-white' | 'cus-tema-black' | 'cus-tema-white' 
 export type nomeAcao = 'criar' | 'set' | 'editar' | 'deletar' | 'lerColecao' | 'lerDocumento'
 export type nomeStringOuBoolean = string | boolean
 export type nomePermissao = "adm" | "revenda" | "cliente" | "usuario"
-export type nomeModulo = `usuario_${nomePermissao}`
+export type nomeModulo = `usuario_${nomePermissao}` | `modelo_${nomePermissao}`
 export type nomeModuloPasta = '/lista' | '/relatorio' | '/historico' | '/deletar'
 export type nomeAmbiente = 'ambienteTesteV8' | 'ambienteProducao'
 
@@ -50,15 +52,6 @@ export interface Modelo {
     lista: boolean;
     objeto: boolean;
   };
-}
-export interface Resposta {
-  acao: nomeAcao;
-  sucesso: boolean;
-  mensagem?: string;
-  credencial?: any
-  data?: any;
-  itemId?: string;
-  respostaDataBase?: any;
 }
 
     export const permissao_Dados : permissao_Interface ={ usuarioAdm :
@@ -108,6 +101,14 @@ export interface Resposta {
         id: "email",
         tipo: "string",
         exibir: {"formulario":true,"titulo":false,"subTitulo":false},
+},{
+        id: "telefone",
+        tipo: "string",
+        exibir: {"formulario":true,"titulo":false,"subTitulo":false},
+},{
+        id: "senha",
+        tipo: "string",
+        exibir: {"formulario":true,"titulo":false,"subTitulo":false},
 }]
     } , {
       
@@ -144,6 +145,10 @@ export interface Resposta {
 
       _grupo: [ {
         id: "ambiente",
+        tipo: "string",
+        exibir: {"formulario":true,"titulo":false,"subTitulo":false},
+},{
+        id: "funcao",
         tipo: "string",
         exibir: {"formulario":true,"titulo":false,"subTitulo":false},
 },{
@@ -240,6 +245,14 @@ export interface Resposta {
         id: "email",
         tipo: Modelo['tipo'],
         exibir: Partial<Exibir>,
+},{
+        id: "telefone",
+        tipo: Modelo['tipo'],
+        exibir: Partial<Exibir>,
+},{
+        id: "senha",
+        tipo: Modelo['tipo'],
+        exibir: Partial<Exibir>,
 }]
     } , {
       
@@ -276,6 +289,10 @@ export interface Resposta {
 
       _grupo: [ {
         id: "ambiente",
+        tipo: Modelo['tipo'],
+        exibir: Partial<Exibir>,
+},{
+        id: "funcao",
         tipo: Modelo['tipo'],
         exibir: Partial<Exibir>,
 },{
@@ -332,12 +349,15 @@ export interface Resposta {
 ,tipoAcesso :  "adm"
 ,nome :  "Emerson"
 ,email :  "teste@v8sites.com.br"
+,telefone :  "11-0000-0000"
+,senha :  "123456"
  },modulo : { id :  "usuario_adm"
 ,nome :  "Usuario Adm"
 ,url :  "usuario-adm"
 ,servico : true
 ,tipoModulo :  "adm"
  },requisicao : { ambiente :  "ambienteTesteV8"
+,funcao :  "semFuncao"
 ,acao :  "set"
 ,item :  "sem item"
 ,itemCriar :  "itemCriar - sem dados"
@@ -355,12 +375,15 @@ export interface Resposta {
 ,tipoAcesso : nomePermissao
 ,nome : string
 ,email : string
+,telefone : string
+,senha : string
  },modulo : { id : nomeModulo
 ,nome : string
 ,url : string
 ,servico : boolean
 ,tipoModulo : nomePermissao
  },requisicao : { ambiente : nomeAmbiente
+,funcao : nomeFuncao
 ,acao : nomeAcao
 ,item : string
 ,itemCriar : nomeStringOuBoolean
@@ -378,12 +401,15 @@ export interface Resposta {
 ,tipoAcesso : {"nome":"Tipo de Acesso","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
 ,nome : {"nome":"Nome","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
 ,email : {"nome":"E-mail","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,telefone : {"nome":"Telefone:","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,senha : {"nome":"Senha:","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
  },modulo : { id : {"nome":"Id","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
 ,nome : {"nome":"Nome","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
 ,url : {"nome":"Url","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
 ,servico : {"nome":"Serviço","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
 ,tipoModulo : {"nome":"tipoModulo","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
  },requisicao : { ambiente : {"nome":"Ambiente","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,funcao : {"nome":"Funcao","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
 ,acao : {"nome":"Ação","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
 ,item : {"nome":"Item","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
 ,itemCriar : {"nome":"Item Criar","tipo":"string","valorInicial":"string","design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
@@ -401,12 +427,15 @@ export interface Resposta {
 ,tipoAcesso : Partial<Modelo>
 ,nome : Partial<Modelo>
 ,email : Partial<Modelo>
+,telefone : Partial<Modelo>
+,senha : Partial<Modelo>
  },modulo : { id : Partial<Modelo>
 ,nome : Partial<Modelo>
 ,url : Partial<Modelo>
 ,servico : Partial<Modelo>
 ,tipoModulo : Partial<Modelo>
  },requisicao : { ambiente : Partial<Modelo>
+,funcao : Partial<Modelo>
 ,acao : Partial<Modelo>
 ,item : Partial<Modelo>
 ,itemCriar : Partial<Modelo>

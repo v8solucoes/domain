@@ -1,19 +1,13 @@
-// FIREBASE NUNCA REMOVER IMPORT DO TOPO
-import * as admin from "firebase-admin";
-if (admin.apps.length === 0) {admin.initializeApp()}
-import { getFirestore, FieldValue } from "firebase-admin/firestore";
-/* SE PRECISAR EXECUTE ESSE COMANDO PARA GRAVAR AS CREDENCIAIS
- export GOOGLE_APPLICATION_CREDENTIALS="/home/v8/meu-apresentador/construtor/src/v8app-888cd-a6f93a11cbe1.json"
-*/
-import { nomeModulo, nomeModuloPasta, nomePermissao } from "../dist/dadosApp/dadosApp.dados";
-import { nomeAcao, Resposta } from "../dados/dados.interface";
-import { Requisicao, Usuario } from "./requisicao.interface";
+import { nomeAcao, nomeModulo, nomeModuloPasta, nomePermissao } from "../dados/dados.interface";
+import { Requisicao, RespostaErro, RespostaSucesso, UsuarioNomePropriedade } from '../interface/interface'
+import { ConstrutorFirebase as Firebase } from "../firebase/firebase.construtor";
+import { respostaErro, respostaSucesso } from "../../funcoes/sincronas/resposta";
 
 export class ConstrutorRequisicao {
 
   credencial: Requisicao["credencial"];
   dados: any;
-  db = getFirestore();
+  db = Firebase.db;
   lote = this.db.batch();
 
   constructor(requisicao: Requisicao) {
@@ -25,12 +19,11 @@ export class ConstrutorRequisicao {
   // Rotas Criação
   get rotaDinamica() { return this.criarRota(this.credencial.modulo.id, this.tipoID()) }
   rotaUsuario(id: string) {
-    const acao = this.credencial.requisicao.acao
     const modulo = this.credencial.modulo.id
-    const tipoUsuario: Usuario = `id_${this.credencial.usuario.tipoAcesso}`
+    const tipoUsuario: UsuarioNomePropriedade = `id_${this.credencial.usuario.tipoAcesso}`
     const id_usuario = this.credencial.usuario[tipoUsuario]
     let valorId = id
-    if (acao == 'criar' && modulo == 'usuario_adm' || 'usuario_cliente' || 'usuario_revenda') {
+    if (this.acaoGravar() && modulo == 'usuario_adm' || 'usuario_cliente' || 'usuario_revenda') {
 
     } else {
       valorId = id_usuario
@@ -38,13 +31,34 @@ export class ConstrutorRequisicao {
 
     return this.criarRota(`usuario_${this.credencial.usuario.tipoAcesso}`, valorId)
   }
+
+  acaoGravar(): boolean {
+    const tipoAcao = this.credencial.requisicao.acao
+    return (tipoAcao == 'criar' || tipoAcao == 'set') ? true : false
+  }
+
+  tipoModulo(nomeModulo: nomeModulo): nomePermissao {
+
+    const modulo: Record<nomeModulo, nomePermissao> = {
+      usuario_adm: 'adm',
+      usuario_revenda: 'revenda',
+      usuario_cliente: 'cliente',
+      usuario_usuario: 'usuario',
+      modelo_adm: 'adm',
+      modelo_revenda: 'revenda',
+      modelo_cliente: 'cliente',
+      modelo_usuario: 'usuario',
+
+    }
+    return modulo[nomeModulo] as nomePermissao
+  }
   criarRota(nomeModulo: nomeModulo, id: string) {
 
-    const tipoModulo = this.credencial.modulo.tipoModulo
+    const tipoModulo = this.tipoModulo(nomeModulo)
+
     const ambiente = this.credencial.requisicao.ambiente;
-    const id_usuario = this.credencial.usuario
-    const acao = this.credencial.requisicao.acao
-    acao == 'criar' ? this.credencial.requisicao.item = id : ''
+    const id_usuario = this.credencial.usuario;
+    this.acaoGravar() ? this.credencial.requisicao.item = id : ''
 
     const pastaTipo = (nomeModulo: nomeModulo): Record<nomePermissao, string> => {
       return {
@@ -54,8 +68,9 @@ export class ConstrutorRequisicao {
         usuario: `${ambiente}/_revenda/${id_usuario.id_revenda}/_cliente/${id_usuario.id_cliente}/_usuario/${id_usuario.id_usuario}/${nomeModulo}`,
       }
     };
-    const dbColecao = (nomeModuloPasta: nomeModuloPasta) => this.db.collection(pastaTipo(nomeModulo)[tipoModulo] + nomeModuloPasta)
-    const dbDocumento = () => this.db.doc(pastaTipo(nomeModulo)[tipoModulo])
+    const pataTipo = pastaTipo(nomeModulo);
+    const dbColecao = (nomeModuloPasta: nomeModuloPasta) => this.db.collection(pataTipo[tipoModulo] + nomeModuloPasta)
+    const dbDocumento = () => this.db.doc(pataTipo[tipoModulo])
 
     return {
       get colecaoLista() { return dbColecao('/lista') },
@@ -71,7 +86,7 @@ export class ConstrutorRequisicao {
 
   }
 
-  crud(): Record<nomeAcao, Promise<Resposta>> {
+  crud(): Record<nomeAcao, Promise<RespostaSucesso | RespostaErro>> {
 
     const acao = this.credencial.requisicao.acao,
       rota = this.rotaDinamica,
@@ -80,9 +95,9 @@ export class ConstrutorRequisicao {
       dados = this.dados,
       historico = this.historico,
       relatorio = this.relatorio,
-      gravar = ()=> { return this.gravar(acao) },
-      lerColecao = ()=> { return this.lerColecao() },
-      lerDocumento = ()=> { return this.lerDocumento() }
+      gravar = () => { return this.gravar(acao) },
+      lerColecao = () => { return this.lerColecao() },
+      lerDocumento = () => { return this.lerDocumento() }
 
     return {
       get criar() {
@@ -117,9 +132,7 @@ export class ConstrutorRequisicao {
     }
   }
 
-  async lerColecao(): Promise<Resposta> {
-
-    const acao = this.credencial.requisicao.acao
+  async lerColecao(): Promise<RespostaSucesso | RespostaErro> {
 
     try {
 
@@ -133,60 +146,105 @@ export class ConstrutorRequisicao {
         dataBase[doc.id] = doc.data()
       });
 
-      return this.resposta(true, acao, snapshot, `Sucesso Ler Colecao: ${acao}`, dataBase)
+      return respostaSucesso(
+        {
+          sucesso: true,
+          mensagem: `Sucesso Ler Colecao`,
+          mensagemCodigo: 'lerColecao',
+          data: dataBase,
+          credencial: this.credencial
+        }
+      )
 
     } catch (error) {
-      return this.resposta(false, acao, error, `Erro Ler Colecao: ${acao}`)
+
+      return respostaErro({
+        sucesso: false,
+        erroMensagem: `Erro Ler Colecao`,
+        erroCodigo: 'lerColecao',
+        data: error,
+        credencial: this.credencial
+      })
     }
 
   }
 
-  async lerDocumento(): Promise<Resposta> {
-    const acao = this.credencial.requisicao.acao
+  async lerDocumento(): Promise<RespostaSucesso | RespostaErro> {
+
     try {
 
       const rota = this.rotaDinamica
 
-      const snapshot = await rota.documentoLista.get() as any
+      const snapshot = await rota.documentoLista.get()
 
-      return this.resposta(true, acao, snapshot, `Sucesso Ler Documento: ${acao}`, snapshot.data())
+      if (snapshot.exists) {
+
+        return respostaSucesso(
+          {
+            sucesso: true,
+            mensagem: `Sucesso Ler Documento itemId: ${this.credencial.requisicao.item}`,
+            mensagemCodigo: 'lerDocumento',
+            data: snapshot.data(),
+            credencial: this.credencial
+          }
+        )
+
+      } else {
+        return respostaSucesso(
+          {
+            sucesso: true,
+            mensagem: `Documento não Existe itemId: ${rota.id}`,
+            mensagemCodigo: 'lerDocumento',
+            data: snapshot.data(),
+            credencial: this.credencial
+          })
+      }
 
     } catch (error) {
-      return this.resposta(false, acao, error, `Erro Ler Documento: ${acao}`)
+
+      return respostaErro(
+        {
+          sucesso: false,
+          erroMensagem: `Erro Ler Documento itemId: ${this.credencial.requisicao.item}`,
+          erroCodigo: 'lerDocumento',
+          data: error,
+          credencial: this.credencial
+        })
     }
   }
 
-  async gravar(acao: nomeAcao): Promise<Resposta> {
-
+  async gravar(acao: nomeAcao): Promise<RespostaSucesso | RespostaErro> {
+    /*     true, acao, lote, `Sucesso Gravar: ${acao}`, null */
     try {
       const lote = await this.lote.commit()
-      return this.resposta(true, acao, lote, `Sucesso Gravar: ${acao}`)
+      return respostaSucesso(
+        {
+          sucesso: true,
+          mensagem: `Sucesso Gravar: ${acao} / itemId: ${this.credencial.requisicao.item}`,
+          mensagemCodigo: 'gravarLote',
+          data: lote,
+          credencial: this.credencial
+        }
+      )
     } catch (error) {
-      return this.resposta(false, acao, error, `Erro Gravar: ${acao}`)
+      return respostaErro(
+        {
+          sucesso: false,
+          erroMensagem: `Erro Gravar: ${acao} / itemId: ${this.credencial.requisicao.item}`,
+          erroCodigo: 'gravarLote',
+          data: error,
+          credencial: this.credencial
+        })
     }
   }
 
   tipoID() {
 
-    const novoIdDaRequisicao = this.credencial.requisicao.itemCriar;
-
-    if (novoIdDaRequisicao != false) {
+    if (this.credencial.requisicao.itemCriar != false) {
       return `${this.credencial.requisicao.itemCriar}`
     } else {
 
-      return (this.credencial.requisicao.acao == "criar" || this.credencial.requisicao.acao == 'set')  ? this.db.bundle().bundleId : this.credencial.requisicao.item;
-    }
-  }
-
-  resposta(sucesso: boolean, acao: nomeAcao, repostaDB: any, mensagem: string, data?: any): Resposta {
-    return {
-      acao,
-      sucesso: sucesso,
-      mensagem: mensagem,
-      data: data || null,
-      ...this.credencial as any,
-      itemId: this.credencial.requisicao.item,
-      respostaDataBase: repostaDB
+      return this.acaoGravar() ? this.db.bundle().bundleId : this.credencial.requisicao.item;
     }
   }
 
@@ -197,25 +255,25 @@ export class ConstrutorRequisicao {
 
       get criar() {
         return {
-          criado: FieldValue.increment(1),
-          dataUpdate: FieldValue.serverTimestamp(),
-          dataCriacao: FieldValue.serverTimestamp(),
+          criado: Firebase.fieldValue.increment(1),
+          dataUpdate: Firebase.fieldValue.serverTimestamp(),
+          dataCriacao: Firebase.fieldValue.serverTimestamp(),
           ...historico,
         }
       },
 
       get editar() {
         return {
-          editado: FieldValue.increment(1),
-          dataUpdate: FieldValue.serverTimestamp(),
+          editado: Firebase.fieldValue.increment(1),
+          dataUpdate: Firebase.fieldValue.serverTimestamp(),
           ...historico,
         }
       },
-      
+
       get deletar() {
         return {
-          deletado: FieldValue.increment(1),
-          dataUpdate: FieldValue.serverTimestamp(),
+          deletado: Firebase.fieldValue.increment(1),
+          dataUpdate: Firebase.fieldValue.serverTimestamp(),
           ...historico,
         }
       }
@@ -223,7 +281,7 @@ export class ConstrutorRequisicao {
   }
   get historico() {
     this.credencial.requisicao.dataCriacao = new Date();
-    return { _historico: FieldValue.arrayUnion(this.credencial) }
+    return { _historico: Firebase.fieldValue.arrayUnion(this.credencial) }
   }
 
 }
