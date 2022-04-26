@@ -1,11 +1,11 @@
 
-import { nomeAcao, nomeModulo } from '../dados/dados.interface';
+import { Nome_Dados} from '../dados/dados.interface';
 import { Credencial, CredencialOpcional } from '../interface/interface';
 
 export class ConstrutorCredencial {
 
   static modelo(
-    moduloNome: nomeModulo, acao: nomeAcao, id: string, credencial? : CredencialOpcional): Credencial {
+    moduloNome: Nome_Dados['modulo'], acao: Nome_Dados['acao'], id: string, credencial? : CredencialOpcional): Credencial {
 
     const item = (acao == 'criar' || acao == 'set') ? 'semIDcontrutor' : id
     const itemCriar = (acao == 'criar' || acao == 'set') ? id : false

@@ -4,7 +4,7 @@ import { Credencial, Requisicao, RespostaErro, RespostaSucesso } from "../../con
 import { respostaErro, respostaSucesso } from "../sincronas/resposta";
 
 export class CriarAutenticacao {
-
+   
     static async start(requisicao: Requisicao): Promise<RespostaSucesso | RespostaErro> {
 
         const usuario = requisicao.credencial.usuario as Credencial['usuario']

@@ -1,71 +1,118 @@
-import { Dados,  Exibir, Modelo, InterfaceDados} from "./dados.interface";
+import { Req_Dados, Resposta_Dados, } from "./dados.interface";
 
-export class ConstrutorDados {
-  static carregarModelo(valor: InterfaceDados): Required<InterfaceDados> {
-    const modeloString: InterfaceDados = {
-      // Dados Atalhos
-      id: valor.id || "string",
-      nome: valor.nome || "sem nome",
-      valor: valor.valor || "sem Valor",
-      tipo: valor.tipo,
-      interface: valor.interface || valor.dados?.interface || "any",
+export class Construtor_Dados {
 
-      // Dados do Atalho Estruturados
-      dados: this.dados(valor),
-      modelo: this.modelo(valor),
-      exibir: this.exibir(valor),
-    };
-
-    if ((valor.tipo = "objeto")) {
-      modeloString["_grupo"] = valor._grupo;
+  static objeto(req: Req_Dados['objeto']): Resposta_Dados['objeto'] {
+    req.tipo = req.tipo || 'objeto'
+    return {
+      ...this.criarValor(req),
+      '_grupo': req._grupo
     }
-
-    return modeloString as Required<InterfaceDados>;
   }
-  static string(valor: InterfaceDados): {
-    [key: string]: Required<Omit<InterfaceDados, "_grupo">>;
-  } {
-    valor.tipo = 'string'
-    return { [valor.id]: this.carregarModelo(valor) };
+  static lista(req: Req_Dados['lista']): Resposta_Dados['lista'] {
+    req.tipo = req.tipo || 'lista'
+    return {
+      ...this.criarValor(req),
+      '_grupo': req._grupo
+    }
   }
-
-  static objeto(valor: InterfaceDados): {
-    [key: string]: Required<InterfaceDados>;
-  } {
-    valor.tipo = 'objeto'
-    return { [valor.id]: this.carregarModelo(valor) };
+  static valor(req: Req_Dados['valor']): Resposta_Dados['valor'] {
+    req.tipo = req.tipo || 'valor'
+    return this.criarValor(req);
   }
 
-  static dados(valor: InterfaceDados): Dados {
+  static criarValor(req: Req_Dados['criarValor']): Resposta_Dados['criarValor'] {
+
+    return {
+      // Dados Atalhos
+      id: req.id || "sem Id",
+      nome: req.nome || "sem Nome",
+      valor: req.valor || 'Sem Valor Inicial',
+      tipo: req.tipo || 'valor',
+      interface: req.interface || "any",
+      modelo: this.criarModelo(req),
+      permissao: this.criarPermissao(req)
+    }
+  }
+
+  static criarModelo(req: Req_Dados['criarValor']): Resposta_Dados['modelo'] {
     // procura Modelo na sequencia > Atalho, Estruturado ou Default
     return {
-      interface: valor.interface || valor.dados?.interface || "any",
-      valor: valor.valor || valor.dados?.valor || `${valor.id} - sem dados`,
-    };
-  }
-
-  static modelo(valor: InterfaceDados): Modelo {
-    // procura Modelo na sequencia > Atalho, Estruturado ou Default
-    return {
-      nome: valor.nome || valor.modelo?.nome || `${valor.id} 'Sem Nome'`,
-      tipo: valor.tipo || valor.modelo?.tipo || "string",
-      valorInicial: valor.tipo || valor.modelo?.valorInicial || "Sem Valor",
-      design: valor.modelo?.design || `string;`,
-      validarSincrono: valor.modelo?.validarSincrono || false,
-      validarAssincrono: valor.modelo?.validarAssincrono || false,
+      design: req.modelo?.design || `string;`,
+      validarSincrono: req.modelo?.validarSincrono || false,
+      validarAssincrono: req.modelo?.validarAssincrono || false,
       colecao: {
-        lista: valor.modelo?.colecao?.lista || false,
-        objeto: valor.modelo?.colecao?.objeto || false,
+        lista: req.modelo?.colecao?.lista || false,
+        objeto: req.modelo?.colecao?.objeto || false,
       },
     };
   }
 
-  static exibir(valor: InterfaceDados): Exibir {
+  static criarPermissao(req: Req_Dados['criarValor']): Resposta_Dados['permissao'] {
     // procura Modelo na sequencia > Atalho, Estruturado ou Default
     return {
-      formulario: valor.exibir?.formulario || true,
-      titulo: valor.exibir?.formulario || false,
-      subTitulo: valor.exibir?.formulario || false,
+      formulario: req.permissao?.formulario || true,
+      titulo: req.permissao?.formulario || false,
+      subTitulo: req.permissao?.formulario || false,
     };
   }
 }
+
+/* export class ConstrutorDados {
+
+  static objeto(req: InterfaceDados): Required<InterfaceDados> {
+    req.tipo = req.tipo || 'objeto'
+    return {
+      ...this.carregarModeloString(req),
+      '_grupo': req._grupo
+    }
+  }
+  static lista(req: InterfaceDados): Required<InterfaceDados> {
+    req.tipo = req.tipo || 'lista'
+    return {
+      ...this.carregarModeloString(req),
+      '_grupo': req._grupo
+    }
+  }
+  static valor(req: Omit<InterfaceDados, '_grupo'>): Required<Omit<InterfaceDados, '_grupo'>> {
+    req.tipo = req.tipo || 'valor'
+    return this.carregarModeloString(req);
+  }
+
+  static carregarModeloString(req: Omit<InterfaceDados, '_grupo'>): Required<Omit<InterfaceDados, '_grupo'>> {
+
+    return {
+
+      id: req.id || "sem Id",
+      nome: req.nome || "sem Nome",
+      valor: req.valor || 'Sem Valor Inicial',
+      tipo: req.tipo || 'valor',
+      interface: req.interface || "any",
+      modelo: this.modelo(req),
+      permissao: this.permissao(req)
+    }
+  }
+
+  static modelo(req: Omit<InterfaceDados, '_grupo'>): Modelo {
+
+    return {
+      design: req.modelo?.design || `string;`,
+      validarSincrono: req.modelo?.validarSincrono || false,
+      validarAssincrono: req.modelo?.validarAssincrono || false,
+      colecao: {
+        lista: req.modelo?.colecao?.lista || false,
+        objeto: req.modelo?.colecao?.objeto || false,
+      },
+    };
+  }
+
+  static permissao(req: Omit<InterfaceDados, '_grupo'>): Permissao {
+
+    return {
+      formulario: req.permissao?.formulario || true,
+      titulo: req.permissao?.formulario || false,
+      subTitulo: req.permissao?.formulario || false,
+    };
+  }
+}
+ */

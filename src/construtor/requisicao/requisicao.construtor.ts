@@ -1,4 +1,4 @@
-import { nomeAcao, nomeModulo, nomeModuloPasta, nomePermissao } from "../dados/dados.interface";
+import { Nome_Dados } from "../dados/dados.interface";
 import { Requisicao, RespostaErro, RespostaSucesso, UsuarioNomePropriedade } from '../interface/interface'
 import { ConstrutorFirebase as Firebase } from "../firebase/firebase.construtor";
 import { respostaErro, respostaSucesso } from "../../funcoes/sincronas/resposta";
@@ -37,9 +37,9 @@ export class ConstrutorRequisicao {
     return (tipoAcao == 'criar' || tipoAcao == 'set') ? true : false
   }
 
-  tipoModulo(nomeModulo: nomeModulo): nomePermissao {
+  tipoModulo(nomeModulo: Nome_Dados['modulo']): Nome_Dados['tipoAcesso'] {
 
-    const modulo: Record<nomeModulo, nomePermissao> = {
+    const modulo: Record<Nome_Dados['modulo'], Nome_Dados['tipoAcesso']> = {
       usuario_adm: 'adm',
       usuario_revenda: 'revenda',
       usuario_cliente: 'cliente',
@@ -50,9 +50,9 @@ export class ConstrutorRequisicao {
       modelo_usuario: 'usuario',
 
     }
-    return modulo[nomeModulo] as nomePermissao
+    return modulo[nomeModulo] as Nome_Dados['tipoAcesso']
   }
-  criarRota(nomeModulo: nomeModulo, id: string) {
+  criarRota(nomeModulo: Nome_Dados['modulo'], id: string) {
 
     const tipoModulo = this.tipoModulo(nomeModulo)
 
@@ -60,7 +60,7 @@ export class ConstrutorRequisicao {
     const id_usuario = this.credencial.usuario;
     this.acaoGravar() ? this.credencial.requisicao.item = id : ''
 
-    const pastaTipo = (nomeModulo: nomeModulo): Record<nomePermissao, string> => {
+    const pastaTipo = (nomeModulo: Nome_Dados['modulo']): Record<Nome_Dados['tipoAcesso'], string> => {
       return {
         adm: `${ambiente}/${nomeModulo}`,
         revenda: `${ambiente}/_revenda/${id_usuario.id_revenda}/${nomeModulo}`,
@@ -69,7 +69,7 @@ export class ConstrutorRequisicao {
       }
     };
     const pataTipo = pastaTipo(nomeModulo);
-    const dbColecao = (nomeModuloPasta: nomeModuloPasta) => this.db.collection(pataTipo[tipoModulo] + nomeModuloPasta)
+    const dbColecao = (nomeModuloPasta: Nome_Dados['moduloPasta']) => this.db.collection(pataTipo[tipoModulo] + nomeModuloPasta)
     const dbDocumento = () => this.db.doc(pataTipo[tipoModulo])
 
     return {
@@ -86,7 +86,7 @@ export class ConstrutorRequisicao {
 
   }
 
-  crud(): Record<nomeAcao, Promise<RespostaSucesso | RespostaErro>> {
+  crud(): Record<Nome_Dados['acao'], Promise<RespostaSucesso | RespostaErro>> {
 
     const acao = this.credencial.requisicao.acao,
       rota = this.rotaDinamica,
@@ -213,7 +213,7 @@ export class ConstrutorRequisicao {
     }
   }
 
-  async gravar(acao: nomeAcao): Promise<RespostaSucesso | RespostaErro> {
+  async gravar(acao: Nome_Dados['acao']): Promise<RespostaSucesso | RespostaErro> {
     /*     true, acao, lote, `Sucesso Gravar: ${acao}`, null */
     try {
       const lote = await this.lote.commit()

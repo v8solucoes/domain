@@ -1,0 +1,45 @@
+{
+  "usuarioAdm": {
+    "credencial": {
+      "usuario": {
+        "id_adm": "v8888asdfasdf",
+        "id_usuario": "ZEjRkWCDc1PkuIaFyaWnYqmJY4q1",
+        "id_revenda": "C0JrcUWVqTQR3sPt8Qqo",
+        "id_cliente": "gfFyiX5IU4OaoXm4BDzX",
+        "tipoAcesso": "adm",
+        "nome": "Emerson",
+        "email": "teste@v8sites.com.br",
+        "telefone": "11-0000-0000",
+        "senha": "123456"
+      },
+      "modulo": {
+        "id": "usuario_adm",
+        "nome": "Usuario Adm",
+        "url": "usuario-adm",
+        "servico": "true",
+        "tipoModulo": "adm"
+      },
+      "requisicao": {
+        "ambiente": "ambienteTesteV8",
+        "funcao": "semFuncao",
+        "acao": "set",
+        "item": "sem item",
+        "itemCriar": "sem valor lista",
+        "dominio": "localhost",
+        "dataUpdate": "new Date()",
+        "dataCriacao": "new Date()"
+      }
+    },
+    "design": {
+      "iniciarMenuFixo": "true",
+      "tema": "pad-tema-black",
+      "temaFonte": "sem valor lista"
+    },
+    "menu": { 
+        "adm": { 
+            "principal": { 
+                "string2": "sem valor lista" 
+                }
+                 } }
+  }
+}

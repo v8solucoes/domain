@@ -6,13 +6,13 @@ export class DocumentoConstrutor {
   modulo = ModeloDados.modulo;
 
   constructor() {
-/*     this.start() */
+    console.log(this.start())
   }
 
   start() {
 
     return `
-    import { Modelo_Dados, Nome_Dados, Permissao_Dados } from "../../dados/dados.interface";
+    import { Modelo_Dados, Nome_Dados, Permissao_Dados } from "../dados/dados.interface";
     ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'dados_Dados' })}
     ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'dados_Interface' })}
     ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'permissao_Dados' })}
@@ -173,3 +173,4 @@ export class DocumentoConstrutor {
   }
 
 }
+new DocumentoConstrutor().start()

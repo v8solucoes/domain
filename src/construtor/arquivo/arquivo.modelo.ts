@@ -1,9 +1,9 @@
-import { ModeloDados as Dados } from "../dados/dados.modelo";
-import { ModeloDocumento as Documento } from "../documento/documento.modelo";
+import { DocumentoConstrutor as Documento } from "../documento/documento.construtor";
 import { ConstrutorArquivo as Arquivo } from "./arquivo.construtor";
 
 export class ModeloArquivo {
   static dados(nome: string) {
-    Arquivo.novo(`../dist/${nome}`,`${nome}.dados.ts`, Documento.dados(nome, Dados.modulo));
+ 
+    Arquivo.novo(`../dist/${nome}`,`${nome}.dados.ts`, new Documento().start());
     } 
 }

@@ -1,5 +1,5 @@
-import { CredencialModelo } from "../credencial/credencial.modelo";
-import { nomeAcao, nomePermissao } from "../dados/dados.interface";
+import { ModeloCredencial } from "../credencial/credencial.modelo";
+import { Nome_Dados } from "../dados/dados.interface";
 import { Credencial, Requisicao, RespostaErro, RespostaSucesso } from "../interface/interface";
 import { ConstrutorRequisicao } from "./requisicao.construtor";
 
@@ -8,7 +8,7 @@ export class ModeloRequisicao {
   async crud(requisicao: Requisicao){
 
     const req = new ConstrutorRequisicao(requisicao).crud()
-    const acao = requisicao.credencial.requisicao.acao as nomeAcao
+    const acao = requisicao.credencial.requisicao.acao as Nome_Dados['acao']
 
     try {
       return req[acao] as Promise<RespostaSucesso | RespostaErro>
@@ -24,9 +24,9 @@ export class ModeloRequisicao {
       dados
     }
   }
- static modelo(acao: nomeAcao, tipoAcesso: nomePermissao, dados?:any): Requisicao{
+  static modelo(acao: Nome_Dados['acao'], tipoAcesso: Nome_Dados['tipoAcesso'], dados?:any): Requisicao{
     return {
-       credencial: CredencialModelo.modelo(acao)[tipoAcesso], 
+       credencial: ModeloCredencial.modelo(acao)[tipoAcesso], 
       dados: dados || null
     }
   }

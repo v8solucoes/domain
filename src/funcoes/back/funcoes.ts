@@ -1,9 +1,9 @@
-import { nomeFuncao } from "../../construtor/dados/dados.interface"
+import { Nome_Dados } from "../../construtor/dados/dados.interface"
 import { Requisicao, RespostaErro, RespostaSucesso } from "../../construtor/interface/interface"
 import { CriarAutenticacao } from "../assincronas/criar-autenticacao"
 import { SemFuncao } from "../assincronas/semFuncao"
 
-export class Funcoes implements Record<(nomeFuncao), Promise<RespostaSucesso | RespostaErro>>{
+export class Funcoes implements Record<(Nome_Dados['funcao']), Promise<RespostaSucesso | RespostaErro>>{
 
     private requisicao: Requisicao
 
