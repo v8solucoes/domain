@@ -22,7 +22,8 @@ export interface Req_Doc {
 }
 export interface Resposta_Doc {
   documentoTipo: Record<Nome_Doc['documentoTipo'], {
-    cabecalho(documento: string): string
+    cabecalho(documento: string): string,
+    modelo:string
   } & Record<Nome_Dados['tipoDados'], string>>
   documentoCabecalho: {
     nomeDocumento: Nome_Doc['documentoTipo']

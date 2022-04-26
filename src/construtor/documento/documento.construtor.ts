@@ -107,7 +107,8 @@ export class DocumentoConstrutor {
           cabecalho(documento: string) { return dados.cabecalhoDados('dados_Interface', documento) },
           get objeto() { return dados.objeto() },
           get lista() { return dados.lista() },
-          get valor() { return dados.valor(`${JSON.stringify(req.dados.valor)}`) },
+          get valor() { return this.modelo },
+          get modelo() { return dados.valor(`${JSON.stringify(req.dados.valor)}`) },
         };
       },
       /* DADOS - Interface */
@@ -116,7 +117,8 @@ export class DocumentoConstrutor {
           cabecalho(documento: string) { return dados.cabecalhoInterface(documento) },
           get objeto() { return dados.objeto() },
           get lista() { return dados.lista() },
-          get valor() { return dados.valor(`${req.dados.interface}`) },
+          get valor() { return this.modelo },
+          get modelo() { return dados.valor(`${req.dados.interface}`) },
         }
       },
       /* PERMISSÃO - Dados */
