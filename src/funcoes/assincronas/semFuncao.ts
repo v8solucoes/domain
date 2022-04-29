@@ -1,6 +1,6 @@
 
 import { Requisicao, RespostaErro, RespostaSucesso } from "../../construtor/interface/interface";
-import { respostaErro, respostaSucesso } from "../sincronas/resposta";
+import { respostaErro, respostaSucesso } from "../sincronas/resposta.construtor";
 
 export class SemFuncao {
 

@@ -1,5 +1,6 @@
 export const _debugar ={
-    autenticar: true
+    autenticar: true,
+    logar: true
 }
 export class Debugar  {
  public debugar: boolean

@@ -65,6 +65,26 @@ export class ModeloDados {
                         Criar.valor({ id: 'acao', valor: 'lerColecao', nome: 'Ação', interface: `Nome_Dados['acao']` }),
                         Criar.valor({ id: 'item', valor: 'ffffff', nome: 'Item', interface: 'string' }),
                         Criar.valor({ id: 'icone', valor: 'home', nome: 'Icone', interface: 'string' }),
+                        Criar.lista({
+                          id: 'grupo', '_grupo': [
+                           Criar.objeto({id:'menuAdm', '_grupo': [
+                            Criar.valor({ id: 'moduloNome', valor: 'usuario', nome: ' Usuário', interface: `string` }),
+                            Criar.valor({ id: 'url', valor: 'usuario-adm', nome: '', interface: `Nome_Dados['moduloUrl']` }),
+                            Criar.valor({ id: 'tipo', valor: 'adm', nome: 'Tipo', interface: `Nome_Dados['tipoAcesso']` }),
+                            Criar.valor({ id: 'acao', valor: 'lerColecao', nome: 'Ação', interface: `Nome_Dados['acao']` }),
+                            Criar.valor({ id: 'item', valor: 'ffffff', nome: 'Item', interface: 'string' }),
+                            Criar.valor({ id: 'icone', valor: 'home', nome: 'Icone', interface: 'string' }),
+                           ]}),
+                           Criar.objeto({id:'menuCliente', '_grupo': [
+                            Criar.valor({ id: 'moduloNome', valor: 'usuario', nome: ' Usuário', interface: `string` }),
+                            Criar.valor({ id: 'url', valor: 'usuario-adm', nome: '', interface: `Nome_Dados['moduloUrl']` }),
+                            Criar.valor({ id: 'tipo', valor: 'adm', nome: 'Tipo', interface: `Nome_Dados['tipoAcesso']` }),
+                            Criar.valor({ id: 'acao', valor: 'lerColecao', nome: 'Ação', interface: `Nome_Dados['acao']` }),
+                            Criar.valor({ id: 'item', valor: 'ffffff', nome: 'Item', interface: 'string' }),
+                            Criar.valor({ id: 'icone', valor: 'home', nome: 'Icone', interface: 'string' }),
+                           ]})
+                          ]
+                        }),
                       ]
                     }),
                   ]

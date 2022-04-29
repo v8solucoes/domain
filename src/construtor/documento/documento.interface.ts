@@ -16,7 +16,6 @@ export interface Req_Doc {
   criarGrupo: {
     dados: Required<Estrutura_Dados>,
     pai: Nome_Dados['tipoDados'],
-    filho: Nome_Dados['tipoDados'],
     nomeDocumento: Nome_Doc['documentoTipo']
   }
 }

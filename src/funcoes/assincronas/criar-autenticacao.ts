@@ -1,7 +1,7 @@
 
 import { ConstrutorFirebase as Firebase } from "../../construtor/firebase/firebase.construtor";
 import { Credencial, Requisicao, RespostaErro, RespostaSucesso } from "../../construtor/interface/interface";
-import { respostaErro, respostaSucesso } from "../sincronas/resposta";
+import { respostaErro, respostaSucesso } from "../sincronas/resposta.construtor";
 
 export class CriarAutenticacao {
    

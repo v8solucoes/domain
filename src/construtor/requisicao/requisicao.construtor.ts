@@ -1,7 +1,7 @@
 import { Nome_Dados } from "../dados/dados.interface";
 import { Requisicao, RespostaErro, RespostaSucesso, UsuarioNomePropriedade } from '../interface/interface'
 import { ConstrutorFirebase as Firebase } from "../firebase/firebase.construtor";
-import { respostaErro, respostaSucesso } from "../../funcoes/sincronas/resposta";
+import { respostaErro, respostaSucesso } from "../../funcoes/sincronas/resposta.construtor";
 
 export class ConstrutorRequisicao {
 

@@ -6,11 +6,16 @@ export class DocumentoConstrutor {
   modulo = ModeloDados.modulo;
 
   constructor() {
-/*     this.start() */
+ /*   console.log(this.start()) */
   }
 
   start() {
 
+ /*    return `
+    import { Modelo_Dados, Nome_Dados, Permissao_Dados } from "../../dados/dados.interface";
+    ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'dados_Dados' })}
+    ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'dados_Interface' })}
+    ` */
     return `
     import { Modelo_Dados, Nome_Dados, Permissao_Dados } from "../../dados/dados.interface";
     ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'dados_Dados' })}
@@ -33,7 +38,6 @@ export class DocumentoConstrutor {
       requisicaoGrupo = {
         dados: dados,
         pai: dados.tipo,
-        filho: dados.tipo,
         nomeDocumento: req.nomeDocumento
       }
       let documento = this.tipoDocumento(requisicaoGrupo)[req.nomeDocumento]
@@ -54,8 +58,7 @@ export class DocumentoConstrutor {
 
       const documento = this.tipoDocumento(
         {
-          pai: (index === 0 ? req.dados.tipo : req.pai),
-          filho: req.dados.tipo,
+          pai: req.dados.tipo,
           dados: dados as Req_Doc['criarGrupo']['dados'],
           nomeDocumento: req.nomeDocumento,
         })[req.nomeDocumento];
@@ -78,9 +81,9 @@ export class DocumentoConstrutor {
     const dados = {
       cabecalhoDados: (nomeInterface: string, documento: string) => cabecalho_Dados(nomeInterface, ` { ${documento} } `),
       cabecalhoInterface: (documento: string) => cabecalho_Interface(` { ${documento} } `),
-      objeto: () => (req.pai == 'objeto') ? ` ${req.dados.id} : { ${grupo()} } ` : ` { ${grupo()} }  `,
-      lista: () => (req.pai == 'objeto') ? ` ${req.dados.id} : [ ${grupo()} ] ` : ` [ ${grupo()} ] `,
-      valor: (dados: string) => (req.filho == 'objeto') ? ` ${req.dados.id} : ${dados} ` : ` ${dados} `
+      objeto: () => (req.pai == 'objeto') ? ` ${req.dados.id} : { ${grupo()} }  ` : ` { ${grupo()} } `,
+      lista: () => (req.pai == 'objeto') ? ` ${req.dados.id} : [ ${grupo()} ] ` : ` [ ${grupo()} ] ` ,
+      valor: (dados: string) => (req.pai == 'objeto') ? ` ${req.dados.id} : ${dados} ` : ` ${dados} `
     }
 
     const permissao = {
@@ -175,3 +178,5 @@ export class DocumentoConstrutor {
   }
 
 }
+
+/* new DocumentoConstrutor() */

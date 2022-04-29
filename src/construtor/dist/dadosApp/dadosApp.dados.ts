@@ -9,13 +9,13 @@
 , email : "teste@v8sites.com.br" 
 , telefone : "11-0000-0000" 
 , senha : "123456" 
- } 
+ }  
 , modulo : {  id : "usuario_adm" 
 , nome : "Usuario Adm" 
 , url : "usuario-adm" 
 , servico : true 
 , tipoModulo : "adm" 
- } 
+ }  
 , requisicao : {  ambiente : "ambienteTesteV8" 
 , funcao : "semFuncao" 
 , acao : "set" 
@@ -24,23 +24,38 @@
 , dominio : "localhost" 
 , dataUpdate : "Sem Valor Inicial" 
 , dataCriacao : "Sem Valor Inicial" 
- } 
- } 
+ }  
+ }  
 , design : {  iniciarMenuFixo : true 
 , tema : "pad-tema-black" 
 , temaFonte : "Sem Valor Inicial" 
- } 
+ }  
 , menu : {  adm : {  principal : [  {  moduloNome : "usuario" 
 , url : "usuario-adm" 
 , tipo : "adm" 
 , acao : "lerColecao" 
 , item : "ffffff" 
 , icone : "home" 
- }  
+, grupo : [  {  moduloNome : "usuario" 
+, url : "usuario-adm" 
+, tipo : "adm" 
+, acao : "lerColecao" 
+, item : "ffffff" 
+, icone : "home" 
+ } 
+, {  moduloNome : "usuario" 
+, url : "usuario-adm" 
+, tipo : "adm" 
+, acao : "lerColecao" 
+, item : "ffffff" 
+, icone : "home" 
+ } 
  ] 
  } 
- } 
- }  }  
+ ] 
+ }  
+ }  
+ }   }  
      export interface dados_Interface  {  usuarioAdm : {  credencial : {  usuario : {  id_adm : string 
 , id_usuario : string 
 , id_revenda : string 
@@ -50,13 +65,13 @@
 , email : string 
 , telefone : string 
 , senha : string 
- } 
+ }  
 , modulo : {  id : Nome_Dados['modulo'] 
 , nome : string 
 , url : string 
 , servico : boolean 
 , tipoModulo : Nome_Dados['tipoAcesso'] 
- } 
+ }  
 , requisicao : {  ambiente : Nome_Dados['ambiente'] 
 , funcao : Nome_Dados['funcao'] 
 , acao : Nome_Dados['acao'] 
@@ -65,23 +80,38 @@
 , dominio : string 
 , dataUpdate : Date | string 
 , dataCriacao : Date | string 
- } 
- } 
+ }  
+ }  
 , design : {  iniciarMenuFixo : boolean 
 , tema : Nome_Dados['tema'] 
 , temaFonte : string 
- } 
+ }  
 , menu : {  adm : {  principal : [  {  moduloNome : string 
 , url : Nome_Dados['moduloUrl'] 
 , tipo : Nome_Dados['tipoAcesso'] 
 , acao : Nome_Dados['acao'] 
 , item : string 
 , icone : string 
- }  
+, grupo : [  {  moduloNome : string 
+, url : Nome_Dados['moduloUrl'] 
+, tipo : Nome_Dados['tipoAcesso'] 
+, acao : Nome_Dados['acao'] 
+, item : string 
+, icone : string 
+ } 
+, {  moduloNome : string 
+, url : Nome_Dados['moduloUrl'] 
+, tipo : Nome_Dados['tipoAcesso'] 
+, acao : Nome_Dados['acao'] 
+, item : string 
+, icone : string 
+ } 
  ] 
  } 
- } 
- }  }  
+ ] 
+ }  
+ }  
+ }   }  
      export const permissao_Dados : permissao_Interface[]  =  [  {  
           id: "usuarioAdm",
           tipo: "objeto",
@@ -251,6 +281,69 @@
           id: "icone",
           tipo: "valor",
           exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
+, {  
+          id: "grupo",
+          tipo: "lista",
+          exibir: {"formulario":true,"titulo":false,"subTitulo":false},  
+ _grupo: [  {  
+          id: "menuAdm",
+          tipo: "objeto",
+          exibir: {"formulario":true,"titulo":false,"subTitulo":false},  
+ _grupo: [  { 
+          id: "moduloNome",
+          tipo: "valor",
+          exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
+, { 
+          id: "url",
+          tipo: "valor",
+          exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
+, { 
+          id: "tipo",
+          tipo: "valor",
+          exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
+, { 
+          id: "acao",
+          tipo: "valor",
+          exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
+, { 
+          id: "item",
+          tipo: "valor",
+          exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
+, { 
+          id: "icone",
+          tipo: "valor",
+          exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
+ ] } 
+, {  
+          id: "menuCliente",
+          tipo: "objeto",
+          exibir: {"formulario":true,"titulo":false,"subTitulo":false},  
+ _grupo: [  { 
+          id: "moduloNome",
+          tipo: "valor",
+          exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
+, { 
+          id: "url",
+          tipo: "valor",
+          exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
+, { 
+          id: "tipo",
+          tipo: "valor",
+          exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
+, { 
+          id: "acao",
+          tipo: "valor",
+          exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
+, { 
+          id: "item",
+          tipo: "valor",
+          exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
+, { 
+          id: "icone",
+          tipo: "valor",
+          exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
+ ] } 
+ ] } 
  ] } 
  ] } 
  ] } 
@@ -466,6 +559,84 @@
           tipo: Nome_Dados['tipoDados'];
           exibir: Partial<Permissao_Dados>
            } 
+, {  
+          id: "grupo";
+          tipo: Nome_Dados['tipoDados'];
+          exibir: Partial<Permissao_Dados>
+            
+ _grupo: [  {  
+          id: "menuAdm";
+          tipo: Nome_Dados['tipoDados'];
+          exibir: Partial<Permissao_Dados>
+            
+ _grupo: [  { 
+          id: "moduloNome";
+          tipo: Nome_Dados['tipoDados'];
+          exibir: Partial<Permissao_Dados>
+           } 
+, { 
+          id: "url";
+          tipo: Nome_Dados['tipoDados'];
+          exibir: Partial<Permissao_Dados>
+           } 
+, { 
+          id: "tipo";
+          tipo: Nome_Dados['tipoDados'];
+          exibir: Partial<Permissao_Dados>
+           } 
+, { 
+          id: "acao";
+          tipo: Nome_Dados['tipoDados'];
+          exibir: Partial<Permissao_Dados>
+           } 
+, { 
+          id: "item";
+          tipo: Nome_Dados['tipoDados'];
+          exibir: Partial<Permissao_Dados>
+           } 
+, { 
+          id: "icone";
+          tipo: Nome_Dados['tipoDados'];
+          exibir: Partial<Permissao_Dados>
+           } 
+ ] } 
+, {  
+          id: "menuCliente";
+          tipo: Nome_Dados['tipoDados'];
+          exibir: Partial<Permissao_Dados>
+            
+ _grupo: [  { 
+          id: "moduloNome";
+          tipo: Nome_Dados['tipoDados'];
+          exibir: Partial<Permissao_Dados>
+           } 
+, { 
+          id: "url";
+          tipo: Nome_Dados['tipoDados'];
+          exibir: Partial<Permissao_Dados>
+           } 
+, { 
+          id: "tipo";
+          tipo: Nome_Dados['tipoDados'];
+          exibir: Partial<Permissao_Dados>
+           } 
+, { 
+          id: "acao";
+          tipo: Nome_Dados['tipoDados'];
+          exibir: Partial<Permissao_Dados>
+           } 
+, { 
+          id: "item";
+          tipo: Nome_Dados['tipoDados'];
+          exibir: Partial<Permissao_Dados>
+           } 
+, { 
+          id: "icone";
+          tipo: Nome_Dados['tipoDados'];
+          exibir: Partial<Permissao_Dados>
+           } 
+ ] } 
+ ] } 
  ] } 
  ] } 
  ] } 
@@ -507,6 +678,21 @@
 ,acao : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
 ,item : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
 ,icone : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+, grupo : {  menuAdm : { moduloNome : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,url : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,tipo : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,acao : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,item : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,icone : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+ } 
+, menuCliente : { moduloNome : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,url : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,tipo : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,acao : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,item : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,icone : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+ } 
+ } 
  } 
  } 
  } 
@@ -548,6 +734,21 @@
 ,acao : Modelo_Dados
 ,item : Modelo_Dados
 ,icone : Modelo_Dados
+, grupo : {  menuAdm : { moduloNome : Modelo_Dados
+,url : Modelo_Dados
+,tipo : Modelo_Dados
+,acao : Modelo_Dados
+,item : Modelo_Dados
+,icone : Modelo_Dados
+ } 
+, menuCliente : { moduloNome : Modelo_Dados
+,url : Modelo_Dados
+,tipo : Modelo_Dados
+,acao : Modelo_Dados
+,item : Modelo_Dados
+,icone : Modelo_Dados
+ } 
+ } 
  } 
  } 
  } 

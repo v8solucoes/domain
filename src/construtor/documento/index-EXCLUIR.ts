@@ -6,20 +6,24 @@ export class DocumentoConstrutor {
   modulo = ModeloDados.modulo;
 
   constructor() {
-    console.log(this.start())
+   console.log(this.start())
   }
 
   start() {
 
     return `
-    import { Modelo_Dados, Nome_Dados, Permissao_Dados } from "../dados/dados.interface";
+    import { Modelo_Dados, Nome_Dados, Permissao_Dados } from "../../dados/dados.interface";
+    ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'dados_Dados' })}
+    `
+   /*  return `
+    import { Modelo_Dados, Nome_Dados, Permissao_Dados } from "../../dados/dados.interface";
     ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'dados_Dados' })}
     ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'dados_Interface' })}
     ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'permissao_Dados' })}
     ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'permissao_Interface' })}
     ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'modelo_Dados' })}
     ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'modelo_Interface' })}
-    `
+    ` */
   }
 
   criarDocumento(req: Req_Doc["criarDocumento"]) {
@@ -107,7 +111,8 @@ export class DocumentoConstrutor {
           cabecalho(documento: string) { return dados.cabecalhoDados('dados_Interface', documento) },
           get objeto() { return dados.objeto() },
           get lista() { return dados.lista() },
-          get valor() { return dados.valor(`${JSON.stringify(req.dados.valor)}`) },
+          get valor() { return this.modelo },
+          get modelo() { return dados.valor(`${JSON.stringify(req.dados.valor)}`) },
         };
       },
       /* DADOS - Interface */
@@ -116,7 +121,8 @@ export class DocumentoConstrutor {
           cabecalho(documento: string) { return dados.cabecalhoInterface(documento) },
           get objeto() { return dados.objeto() },
           get lista() { return dados.lista() },
-          get valor() { return dados.valor(`${req.dados.interface}`) },
+          get valor() { return this.modelo },
+          get modelo() { return dados.valor(`${req.dados.interface}`) },
         }
       },
       /* PERMISSÃO - Dados */
@@ -173,4 +179,5 @@ export class DocumentoConstrutor {
   }
 
 }
-new DocumentoConstrutor().start()
+
+new DocumentoConstrutor()

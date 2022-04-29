@@ -1,3 +1,5 @@
+import { RespostaAsync } from "../../funcoes/sincronas/resposta.interface";
+export { RespostaAsync}
 export type NomePropriedades<T> = { [K in keyof T]: K }[keyof T];
 
 export interface Nome_Dados {
