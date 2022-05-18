@@ -1,0 +1,1 @@
+export { Funcao_Modelo } from "./funcao.modelo";
