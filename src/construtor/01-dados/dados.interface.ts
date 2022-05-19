@@ -1,22 +1,22 @@
-import { TipoAcesso } from "../01-validar/opcoes/tipoAcesso";
+
 import { PropriedadeNome } from "../typscript/typscript.funcoes";
-import { TipoCampo } from "./dados.tipo";
+import { DadosEntidades } from "./dados.entidades";
 
 export type NomePropriedades<T> = { [K in keyof T]: K }[keyof T];
 
 export interface Nome_Dados {
   tipoDados: 'objeto' | 'lista' | 'valor'
-  tipoAcesso: PropriedadeNome<TipoAcesso>,
-  funcao: 'criarAutenticacao',
+  ambiente: PropriedadeNome<DadosEntidades['ambiente']>,
+  acao: PropriedadeNome<DadosEntidades['acaoCrud']>,
+  funcao: DadosEntidades['funcao'],
+  moduloId: PropriedadeNome<DadosEntidades['moduloId']>,
+  tipoAcesso: PropriedadeNome<DadosEntidades['tipoAcesso']>,
   tema: 'pad-tema-black' | 'pad-tema-white' | 'cus-tema-black' | 'cus-tema-white'
-  acao: 'criar' | 'set' | 'editar' | 'deletar' | 'lerColecao' | 'lerDocumento',
   stringOuBoolean: string | boolean,
-  moduloId: `conta-${Nome_Dados['tipoAcesso']}` | `usuario-${Nome_Dados['tipoAcesso']}` | `modelo-${Nome_Dados['tipoAcesso']}`
   moduloNome: 'funcao'
   | `Usuário ${Capitalize<Nome_Dados['tipoAcesso']>}`
   | `Conta ${Capitalize<Nome_Dados['tipoAcesso']>}`
   moduloPasta: '/lista' | '/relatorio' | '/historico' | '/deletar'
-  ambiente: 'ambienteTesteV8' | 'ambienteProducao',
   documento: "Dados" | "Interface" | "PermissaoDados" | "PermissaoInterface"
 }
 
@@ -41,7 +41,7 @@ export interface Construtor_Dados {
   valor?: any | boolean
   tipo?: Nome_Dados['tipoDados']
   interface?: any;
-  tipoCampo?: PropriedadeNome<TipoCampo>;
+  tipoCampo?: PropriedadeNome<DadosEntidades>;
   modelo?: Partial<Modelo_Dados>;
   permissao?: Partial<Permissao_Dados>;
   _grupo: Required<Construtor_Dados>[] | Required<Omit<Construtor_Dados, '_grupo'>>[]

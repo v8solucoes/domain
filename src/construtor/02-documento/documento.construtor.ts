@@ -1,5 +1,4 @@
 import { ModeloDados } from "../01-dados/dados.modelo";
-import { Testar_Modelo } from "../01-validar/testar/testar.modelo";
 import { Req_Doc, Resposta_Doc } from "./documento.interface";
 
 export class DocumentoConstrutor {

@@ -15,31 +15,31 @@ export class ModeloDados {
             Criar.valor({ id: 'cpf', valor: '283110418', nome: 'CPF', tipoCampo: 'string'}),
           ]
         }),
-   /*      Criar.objeto({
+        Criar.objeto({
           id: "credencial", _grupo: [
             Criar.objeto({
               id: "usuario", _grupo: [
-                Criar.valor({ id: "id_usuario", nome: 'Usuário', valor: 'ZEjRkWCDc1PkuIaFyaWnYqmJY4q1', tipoCampo: new TipoCampo()['string'] }),
-                Criar.valor({ id: "id_revenda", nome: 'Revenda', valor: 'C0JrcUWVqTQR3sPt8Qqo', tipoCampo: new TipoCampo()['string'] }),
-                Criar.valor({ id: "id_cliente", nome: 'Cliente', valor: 'gfFyiX5IU4OaoXm4BDzX', tipoCampo: new TipoCampo()['string'] }),
-                Criar.valor({ id: "tipoAcesso", nome: 'Tipo de Acesso', valor: 'adm', tipoCampo: new TipoCampo()['tipoAcesso'] }),
+                Criar.valor({ id: "id_usuario", nome: 'Usuário', valor: 'ZEjRkWCDc1PkuIaFyaWnYqmJY4q1', tipoCampo: 'string' }),
+                Criar.valor({ id: "id_revenda", nome: 'Revenda', valor: 'C0JrcUWVqTQR3sPt8Qqo', tipoCampo: 'string' }),
+                Criar.valor({ id: "id_cliente", nome: 'Cliente', valor: 'gfFyiX5IU4OaoXm4BDzX', tipoCampo: 'string' }),
+                Criar.valor({ id: "tipoAcesso", nome: 'Tipo de Acesso', valor: 'adm', tipoCampo: 'tipoAcesso' }),
               ],
             }),
  
             Criar.objeto({
               id: "requisicao", _grupo: [
-                Criar.valor({ id: "ambiente", nome: 'Ambiente', valor: 'ambienteTesteV8', tipoCampo: new TipoCampo()['ambiente'] }),
-                Criar.valor({ id: "idModulo", nome: 'Modulo Id', valor: 'usuario-adm', tipoCampo: `Nome_Dados['moduloId']` }),
-                Criar.valor({ id: "idItem", nome: 'Item', valor: 'sem item', tipoCampo: `Nome_Dados['stringOuBoolean']` }),
-                Criar.valor({ id: "acao", nome: 'Ação', valor: 'set', tipoCampo: `Nome_Dados['acao']` }),
-                Criar.valor({ id: "funcao", nome: 'Funcao', valor: 'criarAutenticacao', tipoCampo: `Nome_Dados['funcao']` }),
+                Criar.valor({ id: "ambiente", nome: 'Ambiente', valor: 'ambienteTesteV8', tipoCampo: 'ambiente' }),
+                Criar.valor({ id: "idModulo", nome: 'Modulo Id', valor: 'conta-adm', tipoCampo: 'moduloId' }),
+                Criar.valor({ id: "idItem", nome: 'Item', valor: 'sem item', tipoCampo: 'stringOuBoolean'}),
+                Criar.valor({ id: "acao", nome: 'Ação', valor: 'set', tipoCampo: 'acaoCrud'}),
+                Criar.valor({ id: "funcao", nome: 'Funcao', valor: 'criarAutenticacao', tipoCampo: 'funcao' }),
                 Criar.valor({ id: "dominio", nome: 'Domínio', valor: 'localhost', tipoCampo: 'string' }),
-                Criar.valor({ id: "dataUpdate", nome: 'Data Update', valor: null, tipoCampo: 'Date | string' }),
-                Criar.valor({ id: "dataCriacao", nome: 'Data Criacao', valor: null, tipoCampo: 'Date | string' }),
+                Criar.valor({ id: "dataUpdate", nome: 'Data Update', valor: null, tipoCampo: 'stringOuData' }),
+                Criar.valor({ id: "dataCriacao", nome: 'Data Criacao', valor: null, tipoCampo: 'stringOuData' }),
               ],
             }),
           ],
-        }), */
+        }),
    /*      Criar.objeto({
           id: "design", _grupo: [
             Criar.valor({ id: "iniciarMenuFixo", nome: 'Iniciar Menu Fixo', valor: true, tipoCampo: 'boolean' }),

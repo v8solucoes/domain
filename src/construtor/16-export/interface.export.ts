@@ -1,5 +1,5 @@
 import { NomePropriedades } from "../../funcoes/outras/funcoes.typscript";
-import { dados_Interface } from "../04-dist/dadosApp/-dadosApp.dados";
+import { dados_Interface } from "../04-dist/dadosApp/dadosApp.dados";
 
 export type Modulo = dados_Interface['adm']
 export type Credencial = dados_Interface['adm']['credencial']

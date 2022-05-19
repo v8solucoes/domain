@@ -1,4 +1,4 @@
-import { Funcao_Mascara_Construtor } from "../../15-funcao/funcao.construtor";
+import { Funcao_Mascara_Construtor } from "../../../15-funcao/funcao.construtor";
 import { Mascara_Construtor } from "./mascara.construtor";
 
 export class Mascara_Modelo extends Mascara_Construtor {

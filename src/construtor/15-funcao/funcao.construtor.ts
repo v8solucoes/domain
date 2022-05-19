@@ -1,9 +1,7 @@
-import { Resposta_Padrao_Construtor, Resposta_Mascara_Construtor, Resposta_Testar_Construtor } from "../14-resposta/resposta.construtor"
+import { Resposta_Padrao_Construtor, Resposta_Mascara_Construtor} from "../14-resposta/resposta.construtor"
 import { Resposta, RespostaMascara, RespostaTeste } from "../14-resposta/resposta.interface"
 
 export class Funcao_Testar_Construtor {
-
-  resposta = new Resposta_Testar_Construtor()
 
   compor(...funcoes: any) {
 

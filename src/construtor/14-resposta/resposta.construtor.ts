@@ -1,14 +1,14 @@
-import { Resposta, RespostaMascara, RespostaMascaraReq, RespostaPadrao,RespostaTeste,RespostaTesteReq } from "./resposta.interface"
+import { Resposta, RespostaMascara, RespostaMascaraReq, RespostaPadrao } from "./resposta.interface"
 import { Modelo_Resposta } from "./resposta.modelo"
 
 export class Resposta_Padrao_Construtor {
 
-   sucesso(req: RespostaPadrao ): Resposta<any> {
+  sucesso(req: RespostaPadrao): Resposta<any> {
 
     return this.resposta_Padrao(req, true)
   }
 
-   erro(req: RespostaPadrao): Resposta<any> {
+  erro(req: RespostaPadrao): Resposta<any> {
 
     return this.resposta_Padrao(req, false)
   }
@@ -29,12 +29,12 @@ export class Resposta_Padrao_Construtor {
 }
 export class Resposta_Mascara_Construtor {
 
-   sucesso(req: RespostaMascaraReq ): RespostaMascara<any> {
+  sucesso(req: RespostaMascaraReq): RespostaMascara<any> {
 
     return this.resposta_Mascara(req, true)
   }
 
-   erro(req: RespostaMascaraReq): RespostaMascara<any> {
+  erro(req: RespostaMascaraReq): RespostaMascara<any> {
 
     return this.resposta_Mascara(req, false)
   }
@@ -52,28 +52,22 @@ export class Resposta_Mascara_Construtor {
     }
   }
 }
-export class Resposta_Testar_Construtor {
 
-   sucesso(req: RespostaTesteReq ): RespostaTeste {
+export class RespostaTesteConstrutor {
 
-    return this.resposta_Teste(req, true)
-  }
+ public resposta(sucesso: boolean, resposta: string) {
 
-   erro(req: RespostaTesteReq): RespostaTeste {
+    try {
 
-    return this.resposta_Teste(req, false)
-  }
+      if (sucesso) {
+        return true
+      } else {
 
-  resposta_Teste(req: RespostaTesteReq, sucesso: boolean): RespostaTeste {
+        throw new Error(resposta)
+      }
+    } catch (error) {
 
-    const mensagem = new Modelo_Resposta(req.data).mensagem
-    const erro = sucesso ? 'sucesso' : 'erro'
-
-    return {
-      sucesso: sucesso,
-      mensagem: req.mensagem || mensagem[req.codigo][erro],
-      codigo: req.codigo,
-      data: req.data,
+      return error
     }
   }
 }

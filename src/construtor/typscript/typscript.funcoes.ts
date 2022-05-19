@@ -6,6 +6,19 @@ export type PropriedadeValor<T> = T [keyof T]
 /* Recebe { propriedade: valor } Devolve Nome = "valor" | "prop..." | 
 Documentação: https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html */
 
+
+/* const constLista = ['adm', 'revenda', 'cliente']
+const constObjeto = { adm: 'string', revenda:'string', cliente:'string'}
+
+type Lista = typeof constLista
+type ListaValor = PropriedadeValor<Lista[]>
+type Objeto = typeof constObjeto
+
+function teste(){
+  const constObjeto: PropriedadeNome<Objeto> = 'adm'
+
+} */
+
 /* 
 PROVA DE CONCEITO ==============================================
 

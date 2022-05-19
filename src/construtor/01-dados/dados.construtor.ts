@@ -1,5 +1,5 @@
 import { Req_Dados, Resposta_Dados, } from "./dados.interface";
-import { TipoCampo } from "./dados.tipo";
+import { DadosEntidades } from "./dados.entidades";
 
 export class Construtor_Dados {
 
@@ -25,7 +25,8 @@ export class Construtor_Dados {
   }
 
   static criarValor(req: Req_Dados['criarValor']): Resposta_Dados['criarValor'] {
-
+    const testar = new DadosEntidades()[req.tipoCampo || 'string'].testar(req.valor)
+    console.log(req.id,testar)
     return {
       // Dados Atalhos
       id: req.id || "sem Id",
@@ -33,7 +34,7 @@ export class Construtor_Dados {
       valor: req.valor || 'Sem Valor Inicial',
       tipo: req.tipo || 'valor',
       tipoCampo: req.tipoCampo || 'string',
-      interface: new TipoCampo()[req.tipoCampo || 'string'].interface,
+      interface: new DadosEntidades()[req.tipoCampo || 'string'].interface,
       modelo: this.criarModelo(req),
       permissao: this.criarPermissao(req)
     }

@@ -12,9 +12,8 @@ export type Resposta<data> = {
   data: data;
 }
 
-export type RespostaTeste = 
-Omit<Resposta<{ input:any, objeto:any, config:any}>, 'credencial'>
-export type RespostaTesteReq = Omit<RespostaMascara<any>,'sucesso'>
+export type RespostaTeste = Omit<Resposta<{ input:any, objeto:any, config:any}>, 'credencial'>
+export type RespostaTesteReq = Omit<RespostaTeste,'sucesso' | 'codigo'> & Partial<RespostaTeste['codigo']>
 
 export type RespostaMascara<data> = Omit<Resposta<data>, 'credencial'>
 export type RespostaMascaraReq = Omit<RespostaMascara<any>,'sucesso'>
