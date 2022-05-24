@@ -1,72 +1,72 @@
 
     import { Modelo_Dados, Nome_Dados, Permissao_Dados } from "../../01-dados/dados.interface";
-     export const dados_Dados : dados_Interface  =  {  adm : {  conta : {  nome : "José" 
+     export const dados : Idados  =  {  adm : {  conta : {  nome : "José" 
 , email : "teste@v8teste.com" 
 , senha : "123456" 
 , telefone : "11-98123-1970" 
 , cpf : "283110418" 
  }  
-, credencial : {  usuario : {  id_usuario : "ZEjRkWCDc1PkuIaFyaWnYqmJY4q1" 
-, id_revenda : "C0JrcUWVqTQR3sPt8Qqo" 
-, id_cliente : "gfFyiX5IU4OaoXm4BDzX" 
-, tipoAcesso : "adm" 
+, credential : {  user : {  userUid : "ZEjRkWCDc1PkuIaFyaWnYqmJY4q1" 
+, agencyId : "C0JrcUWVqTQR3sPt8Qqo" 
+, clientId : "gfFyiX5IU4OaoXm4BDzX" 
+, accessType : "adm" 
  }  
-, requisicao : {  ambiente : "ambienteTesteV8" 
-, idModulo : "conta-adm" 
-, idItem : "sem item" 
-, acao : "set" 
-, funcao : "criarAutenticacao" 
-, dominio : "localhost" 
-, dataUpdate : "Sem Valor Inicial" 
-, dataCriacao : "Sem Valor Inicial" 
+, request : {  environment : "ambienteTesteV8" 
+, moduleId : "conta-adm" 
+, itemId : "sem item" 
+, action : "set" 
+, function : "criarAutenticacao" 
+, domain : "localhost" 
+, dateUpdate : "Sem Valor Inicial" 
+, dateCreate : "Sem Valor Inicial" 
  }  
  }  
  }   }  
-     export interface dados_Interface  {  adm : {  conta : {  nome : string 
+     export interface Idados  {  adm : {  conta : {  nome : string 
 , email : string 
 , senha : string 
 , telefone : string 
 , cpf : string 
  }  
-, credencial : {  usuario : {  id_usuario : string 
-, id_revenda : string 
-, id_cliente : string 
-, tipoAcesso : 'adm' | 'revenda' | 'cliente' 
+, credential : {  user : {  userUid : string 
+, agencyId : string 
+, clientId : string 
+, accessType : 'adm' | 'revenda' | 'cliente' 
  }  
-, requisicao : {  ambiente : 'ambienteTesteV8' | 'producao' 
-, idModulo : 'conta-adm' 
-, idItem : string | boolean 
-, acao : 'criar' | 'set' | 'deletar' | 'update' | 'lerColecao' | 'lerDocumento' 
-, funcao : 'criarAutenticacao' 
-, dominio : string 
-, dataUpdate : string | Date 
-, dataCriacao : string | Date 
+, request : {  environment : 'ambienteTesteV8' | 'producao' 
+, moduleId : 'conta-adm' 
+, itemId : string | boolean 
+, action : 'criar' | 'set' | 'deletar' | 'update' | 'lerColecao' | 'lerDocumento' 
+, function : 'criarAutenticacao' 
+, domain : string 
+, dateUpdate : string | Date 
+, dateCreate : string | Date 
  }  
  }  
  }   }  
-     export interface dados_Interface_Opcional  {  adm : {  conta : {  nome ?: string 
+     export interface IdadosOpcional  {  adm : {  conta : {  nome ?: string 
 , email ?: string 
 , senha ?: string 
 , telefone ?: string 
 , cpf ?: string 
  }  
-, credencial : {  usuario : {  id_usuario ?: string 
-, id_revenda ?: string 
-, id_cliente ?: string 
-, tipoAcesso ?: 'adm' | 'revenda' | 'cliente' 
+, credential : {  user : {  userUid ?: string 
+, agencyId ?: string 
+, clientId ?: string 
+, accessType ?: 'adm' | 'revenda' | 'cliente' 
  }  
-, requisicao : {  ambiente ?: 'ambienteTesteV8' | 'producao' 
-, idModulo ?: 'conta-adm' 
-, idItem ?: string | boolean 
-, acao ?: 'criar' | 'set' | 'deletar' | 'update' | 'lerColecao' | 'lerDocumento' 
-, funcao ?: 'criarAutenticacao' 
-, dominio ?: string 
-, dataUpdate ?: string | Date 
-, dataCriacao ?: string | Date 
+, request : {  environment ?: 'ambienteTesteV8' | 'producao' 
+, moduleId ?: 'conta-adm' 
+, itemId ?: string | boolean 
+, action ?: 'criar' | 'set' | 'deletar' | 'update' | 'lerColecao' | 'lerDocumento' 
+, function ?: 'criarAutenticacao' 
+, domain ?: string 
+, dateUpdate ?: string | Date 
+, dateCreate ?: string | Date 
  }  
  }  
  }   }  
-     export const permissao_Dados : permissao_Interface[]  =  [  {  
+     export const permissao : Ipermissao[]  =  [  {  
           id: "adm",
           tipo: "objeto",
           exibir: {"formulario":true,"titulo":false,"subTitulo":false},  
@@ -96,70 +96,70 @@
           exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
  ] } 
 , {  
-          id: "credencial",
+          id: "credential",
           tipo: "objeto",
           exibir: {"formulario":true,"titulo":false,"subTitulo":false},  
  _grupo: [  {  
-          id: "usuario",
+          id: "user",
           tipo: "objeto",
           exibir: {"formulario":true,"titulo":false,"subTitulo":false},  
  _grupo: [  { 
-          id: "id_usuario",
+          id: "userUid",
           tipo: "valor",
           exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
 , { 
-          id: "id_revenda",
+          id: "agencyId",
           tipo: "valor",
           exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
 , { 
-          id: "id_cliente",
+          id: "clientId",
           tipo: "valor",
           exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
 , { 
-          id: "tipoAcesso",
+          id: "accessType",
           tipo: "valor",
           exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
  ] } 
 , {  
-          id: "requisicao",
+          id: "request",
           tipo: "objeto",
           exibir: {"formulario":true,"titulo":false,"subTitulo":false},  
  _grupo: [  { 
-          id: "ambiente",
+          id: "environment",
           tipo: "valor",
           exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
 , { 
-          id: "idModulo",
+          id: "moduleId",
           tipo: "valor",
           exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
 , { 
-          id: "idItem",
+          id: "itemId",
           tipo: "valor",
           exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
 , { 
-          id: "acao",
+          id: "action",
           tipo: "valor",
           exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
 , { 
-          id: "funcao",
+          id: "function",
           tipo: "valor",
           exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
 , { 
-          id: "dominio",
+          id: "domain",
           tipo: "valor",
           exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
 , { 
-          id: "dataUpdate",
+          id: "dateUpdate",
           tipo: "valor",
           exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
 , { 
-          id: "dataCriacao",
+          id: "dateCreate",
           tipo: "valor",
           exibir: {"formulario":true,"titulo":false,"subTitulo":false}, } 
  ] } 
  ] } 
  ] }  ]  
-     export interface permissao_Interface  {  
+     export interface Ipermissao  {  
           id: "adm";
           tipo: Nome_Dados['tipoDados'];
           exibir: Partial<Permissao_Dados>
@@ -196,125 +196,125 @@
            } 
  ] } 
 , {  
-          id: "credencial";
+          id: "credential";
           tipo: Nome_Dados['tipoDados'];
           exibir: Partial<Permissao_Dados>
             
  _grupo: [  {  
-          id: "usuario";
+          id: "user";
           tipo: Nome_Dados['tipoDados'];
           exibir: Partial<Permissao_Dados>
             
  _grupo: [  { 
-          id: "id_usuario";
+          id: "userUid";
           tipo: Nome_Dados['tipoDados'];
           exibir: Partial<Permissao_Dados>
            } 
 , { 
-          id: "id_revenda";
+          id: "agencyId";
           tipo: Nome_Dados['tipoDados'];
           exibir: Partial<Permissao_Dados>
            } 
 , { 
-          id: "id_cliente";
+          id: "clientId";
           tipo: Nome_Dados['tipoDados'];
           exibir: Partial<Permissao_Dados>
            } 
 , { 
-          id: "tipoAcesso";
+          id: "accessType";
           tipo: Nome_Dados['tipoDados'];
           exibir: Partial<Permissao_Dados>
            } 
  ] } 
 , {  
-          id: "requisicao";
+          id: "request";
           tipo: Nome_Dados['tipoDados'];
           exibir: Partial<Permissao_Dados>
             
  _grupo: [  { 
-          id: "ambiente";
+          id: "environment";
           tipo: Nome_Dados['tipoDados'];
           exibir: Partial<Permissao_Dados>
            } 
 , { 
-          id: "idModulo";
+          id: "moduleId";
           tipo: Nome_Dados['tipoDados'];
           exibir: Partial<Permissao_Dados>
            } 
 , { 
-          id: "idItem";
+          id: "itemId";
           tipo: Nome_Dados['tipoDados'];
           exibir: Partial<Permissao_Dados>
            } 
 , { 
-          id: "acao";
+          id: "action";
           tipo: Nome_Dados['tipoDados'];
           exibir: Partial<Permissao_Dados>
            } 
 , { 
-          id: "funcao";
+          id: "function";
           tipo: Nome_Dados['tipoDados'];
           exibir: Partial<Permissao_Dados>
            } 
 , { 
-          id: "dominio";
+          id: "domain";
           tipo: Nome_Dados['tipoDados'];
           exibir: Partial<Permissao_Dados>
            } 
 , { 
-          id: "dataUpdate";
+          id: "dateUpdate";
           tipo: Nome_Dados['tipoDados'];
           exibir: Partial<Permissao_Dados>
            } 
 , { 
-          id: "dataCriacao";
+          id: "dateCreate";
           tipo: Nome_Dados['tipoDados'];
           exibir: Partial<Permissao_Dados>
            } 
  ] } 
  ] } 
  ] }  
-     export const modelo_Dados : modelo_Interface  =  {  adm : {  conta : { nome : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+     export const modelo : Imodelo  =  {  adm : {  conta : { nome : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
 ,email : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
 ,senha : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
 ,telefone : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
 ,cpf : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
  } 
-, credencial : {  usuario : { id_usuario : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
-,id_revenda : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
-,id_cliente : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
-,tipoAcesso : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+, credential : {  user : { userUid : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,agencyId : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,clientId : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,accessType : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
  } 
-, requisicao : { ambiente : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
-,idModulo : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
-,idItem : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
-,acao : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
-,funcao : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
-,dominio : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
-,dataUpdate : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
-,dataCriacao : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+, request : { environment : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,moduleId : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,itemId : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,action : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,function : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,domain : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,dateUpdate : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
+,dateCreate : {"design":"string;","validarSincrono":false,"validarAssincrono":false,"colecao":{"lista":false,"objeto":false}}
  } 
  } 
  }  }  
-     export interface modelo_Interface  {  adm : {  conta : { nome : Modelo_Dados
+     export interface Imodelo  {  adm : {  conta : { nome : Modelo_Dados
 ,email : Modelo_Dados
 ,senha : Modelo_Dados
 ,telefone : Modelo_Dados
 ,cpf : Modelo_Dados
  } 
-, credencial : {  usuario : { id_usuario : Modelo_Dados
-,id_revenda : Modelo_Dados
-,id_cliente : Modelo_Dados
-,tipoAcesso : Modelo_Dados
+, credential : {  user : { userUid : Modelo_Dados
+,agencyId : Modelo_Dados
+,clientId : Modelo_Dados
+,accessType : Modelo_Dados
  } 
-, requisicao : { ambiente : Modelo_Dados
-,idModulo : Modelo_Dados
-,idItem : Modelo_Dados
-,acao : Modelo_Dados
-,funcao : Modelo_Dados
-,dominio : Modelo_Dados
-,dataUpdate : Modelo_Dados
-,dataCriacao : Modelo_Dados
+, request : { environment : Modelo_Dados
+,moduleId : Modelo_Dados
+,itemId : Modelo_Dados
+,action : Modelo_Dados
+,function : Modelo_Dados
+,domain : Modelo_Dados
+,dateUpdate : Modelo_Dados
+,dateCreate : Modelo_Dados
  } 
  } 
  }  }  

@@ -4,16 +4,16 @@ import { NomePropriedades } from "./construtor/01-dados/dados.interface";
 import { Mascara_Modelo } from "./construtor/01-validar/mascara/mascara.modelo";
 import { Testar_Modelo } from "./construtor/01-validar/testar/testar.modelo";
 import { dados_Dados, dados_Teste, modelo_Dados, permissao_Dados } from "./construtor/04-dist/dadosApp/-dadosApp.dados"; */
-import { Credencial_Modelo } from "./construtor/11-credencial/credencial.modelo";
+/* import { Credencial_Modelo } from "./method/credential/credential.method"; */
 import { ambiente } from "./construtor/01-dados/entidades/opcoes";
 /* import { Construtor_Crud } from "./construtor/13-CRUD/crud.construtor"; */
 
 export class Start {
 
-  credencial = new Credencial_Modelo()
+/*   credencial = new Credencial_Modelo() */
 
   constructor() {
-    console.log(ambiente.testar('adm'))
+  /*   console.log(ambiente.testar('adm')) */
     Arquivo.dados('dadosApp')
   /*   this.start() */
   }
@@ -40,7 +40,7 @@ export class Start {
       return 'sucesso'
 
     } catch (error) {
-      console.log(error)
+/*       console.log(error) */
 
       return error
 

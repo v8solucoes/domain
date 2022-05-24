@@ -1,7 +1,7 @@
 import { Nome_Dados } from "../01-dados/dados.interface"
 import { Resposta } from "../14-resposta/resposta.interface"
 import { CriarUsuario } from "../../funcoes/usuario/criarUsuario"
-import { RequisicaoDados } from "../11-credencial/credencial.export"
+import { RequisicaoDados } from "../../method/credential/credencial.export"
 
 export class Funcao_Modelo
 

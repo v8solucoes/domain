@@ -1,5 +1,5 @@
 import { ModeloDados } from "../01-dados/dados.modelo";
-import { Req_Doc, Resposta_Doc } from "./documento.interface";
+import { Nome_Doc, Req_Doc, Resposta_Doc } from "./documento.interface";
 
 export class DocumentoConstrutor {
 
@@ -18,13 +18,13 @@ export class DocumentoConstrutor {
     ` */
     return `
     import { Modelo_Dados, Nome_Dados, Permissao_Dados } from "../../01-dados/dados.interface";
-    ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'dados_Dados' })}
-    ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'dados_Interface' })}
-    ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'dados_Interface_Opcional' })}
-    ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'permissao_Dados' })}
-    ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'permissao_Interface' })}
-    ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'modelo_Dados' })}
-    ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'modelo_Interface' })}
+    ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'dados' })}
+    ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'Idados' })}
+    ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'IdadosOpcional' })}
+    ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'permissao' })}
+    ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'Ipermissao' })}
+    ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'modelo' })}
+    ${this.criarDocumento({ dados: ModeloDados.modulo, nomeDocumento: 'Imodelo' })}
     `
   }
 
@@ -76,11 +76,11 @@ export class DocumentoConstrutor {
 
     const grupo = () => { return this.criarGrupo(req) }
 
-    const cabecalho_Dados = (nomeInterface: string, documento: string) => ` export const ${req.nomeDocumento} : ${nomeInterface}  = ${documento} `
+    const cabecalho_Dados = (nomeInterface: string, documento: string) => ` export const ${req.nomeDocumento} : I${nomeInterface}  = ${documento} `
     const cabecalho_Interface = (documento: string) => ` export interface ${req.nomeDocumento} ${documento} `
 
     const dados = {
-      cabecalhoDados: (nomeInterface: string, documento: string) => cabecalho_Dados(nomeInterface, ` { ${documento} } `),
+      cabecalhoDados: (nomeInterface:Nome_Doc['documentoTipo'], documento: string) => cabecalho_Dados(nomeInterface, ` { ${documento} } `),
       cabecalhoInterface: (documento: string) => cabecalho_Interface(` { ${documento} } `),
       objeto: () => (req.pai == 'objeto') ? ` ${req.dados.id} : { ${grupo()} }  ` : ` { ${grupo()} } `,
       lista: () => (req.pai == 'objeto') ? ` ${req.dados.id} : [ ${grupo()} ] ` : ` [ ${grupo()} ] ` ,
@@ -91,7 +91,7 @@ export class DocumentoConstrutor {
     }
 
     const permissao = {
-      cabecalhoDados: (nomeInterface: string, documento: string) => cabecalho_Dados(`${nomeInterface}[]`, ` [ ${documento} ] `),
+      cabecalhoDados: (nomeInterface: Nome_Doc['documentoTipo'], documento: string) => cabecalho_Dados(`${nomeInterface}[]`, ` [ ${documento} ] `),
       cabecalhoInterface: (documento: string) => cabecalho_Interface(`${documento}`),
       objeto: (dados: string) => ` { ${dados} \n _grupo: [ ${grupo()} ] } `,
       lista: (dados: string) => ` { ${dados} \n _grupo: [ ${grupo()} ] } `,
@@ -99,7 +99,7 @@ export class DocumentoConstrutor {
     }
 
     const modelo = {
-      cabecalhoDados: (nomeInterface: string, documento: string) => cabecalho_Dados(nomeInterface, ` { ${documento} } `),
+      cabecalhoDados: (nomeInterface: Nome_Doc['documentoTipo'], documento: string) => cabecalho_Dados(nomeInterface, ` { ${documento} } `),
       cabecalhoInterface: (documento: string) => cabecalho_Interface(` { ${documento} } `),
       objeto: () => ` ${req.dados.id} : { ${grupo()} } `,
       lista: () => ` ${req.dados.id} : { ${grupo()} } `,
@@ -109,9 +109,9 @@ export class DocumentoConstrutor {
     return {
 
       /* DADOS - Dados */
-      get dados_Dados() {
+      get dados() {
         return {
-          cabecalho(documento: string) { return dados.cabecalhoDados('dados_Interface', documento) },
+          cabecalho(documento: string) { return dados.cabecalhoDados('dados', documento) },
           get objeto() { return dados.objeto() },
           get lista() { return dados.lista() },
           get valor() { return this.modelo },
@@ -119,7 +119,7 @@ export class DocumentoConstrutor {
         };
       },
       /* DADOS - Interface */
-      get dados_Interface() {
+      get Idados() {
         return {
           cabecalho(documento: string) { return dados.cabecalhoInterface(documento) },
           get objeto() { return dados.objeto() },
@@ -129,7 +129,7 @@ export class DocumentoConstrutor {
         }
       },
        /* DADOS - Interface Opcional */
-      get dados_Interface_Opcional() {
+      get IdadosOpcional() {
         return {
           cabecalho(documento: string) { return dados.cabecalhoInterface(documento) },
           get objeto() { return dados.objeto() },
@@ -139,9 +139,9 @@ export class DocumentoConstrutor {
         }
       },
       /* PERMISSÃO - Dados */
-      get permissao_Dados() {
+      get permissao() {
         return {
-          cabecalho(documento: string) { return permissao.cabecalhoDados('permissao_Interface', documento) },
+          cabecalho(documento: string) { return permissao.cabecalhoDados('permissao', documento) },
           get objeto() { return permissao.objeto(permissao.valor(false, this.modelo)) },
           get lista() { return permissao.lista(permissao.valor(false, this.modelo)) },
           get valor() { return permissao.valor(true, this.modelo) },
@@ -154,7 +154,7 @@ export class DocumentoConstrutor {
         };
       },
       /* PERMISSÃO - Interface */
-      get permissao_Interface() {
+      get Ipermissao() {
         return {
           cabecalho(documento: string) { return permissao.cabecalhoInterface(documento) },
           get objeto() { return permissao.objeto(permissao.valor(false, this.modelo)) },
@@ -169,9 +169,9 @@ export class DocumentoConstrutor {
         };
       },
       /* MODELO - Dados */
-      get modelo_Dados() {
+      get modelo() {
         return {
-          cabecalho(documento: string) { return modelo.cabecalhoDados('modelo_Interface', documento) },
+          cabecalho(documento: string) { return modelo.cabecalhoDados('modelo', documento) },
           get objeto() { return modelo.objeto() },
           get lista() { return modelo.lista() },
           get valor() { return modelo.valor(this.modelo) },
@@ -179,7 +179,7 @@ export class DocumentoConstrutor {
         };
       },
       /* MODELO - Interface */
-      get modelo_Interface() {
+      get Imodelo() {
         return {
           cabecalho(documento: string) { return dados.cabecalhoInterface(documento) },
           get objeto() { return modelo.objeto() },

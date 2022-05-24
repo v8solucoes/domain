@@ -1,4 +1,5 @@
-import { Credencial } from "../11-credencial/credencial.interface";
+import { Icredential } from "../../shared/interface";
+
 
 export type CodigoMensagem = 'semCodigo'| "funcoesAsync" | 'idUsuario'|
 'mesagemSemCodigo' | `lerColecao` | 'lerDocumento' 
@@ -8,7 +9,7 @@ export type Resposta<data> = {
   sucesso: boolean;
   mensagem: string;
   codigo: CodigoMensagem
-  credencial: Credencial | null
+  credencial: Icredential | null
   data: data;
 }
 

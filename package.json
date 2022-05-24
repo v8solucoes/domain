@@ -4,9 +4,9 @@
   "description": "Cria Interface",
   "main": "index.js",
   "scripts": {
-    "start:dev": "nodemon",
+    "dev": "nodemon",
     "start": "ts-node ./src/index.ts",
-    "teste": "ts-node ./src/indexTeste.ts",
+    "teste": "ts-node ./src/teste.ts",
     "build": "npx tsc"
   },
   "author": "",

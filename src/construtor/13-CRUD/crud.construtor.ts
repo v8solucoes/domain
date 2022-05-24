@@ -4,7 +4,7 @@ import { Construtor_Rota } from "../12-rota/rota.construtor";
 import { Resposta_Crud } from "./crud.interface";
 
 import { Resposta} from "../14-resposta/reposta.export";
-import { Credencial, RequisicaoDados } from "../11-credencial/credencial.interface";
+import { Credencial, RequisicaoDados } from "../../method/credential/credential.interface";
 import { Resposta_Padrao_Construtor } from "../14-resposta/resposta.construtor";
 
 export class Construtor_Crud {

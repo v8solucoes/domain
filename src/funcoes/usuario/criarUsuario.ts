@@ -1,5 +1,5 @@
 import { ConstrutorFirebase as Firebase } from "../../construtor/16-export/firebase.export";
-import { RequisicaoDados } from "../../construtor/11-credencial/credencial.interface";
+import { RequisicaoDados } from "../../method/credential/credential.interface";
 import { Funcao_Construtor } from "../../construtor/15-funcao/funcao.construtor";
 import { Resposta } from "../../construtor/14-resposta/resposta.interface";
 import { Resposta_Construtor } from "../../construtor/14-resposta/resposta.construtor";

@@ -3,7 +3,7 @@ import { Construtor_Dados, Nome_Dados, Req_Dados } from "../01-dados/dados.inter
 export interface Nome_Doc {
   cabecalho: 'interface' | 'constante' | 'json';
   documentoNome: 'permissao' | 'dados' | 'modelo'
-  documentoTipo: 'dados_Interface_Opcional' | `${Nome_Doc['documentoNome']}_Interface` | `${Nome_Doc['documentoNome']}_Dados`
+  documentoTipo: 'IdadosOpcional' | `I${Nome_Doc['documentoNome']}` | `${Nome_Doc['documentoNome']}`
 }
 
 export interface Req_Doc {
