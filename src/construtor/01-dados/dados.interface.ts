@@ -2,8 +2,6 @@
 import { PropriedadeNome } from "../typscript/typscript.funcoes";
 import { DadosEntidades } from "./dados.entidades";
 
-export type NomePropriedades<T> = { [K in keyof T]: K }[keyof T];
-
 export interface Nome_Dados {
   tipoDados: 'objeto' | 'lista' | 'valor'
   ambiente: PropriedadeNome<DadosEntidades['ambiente']>,

@@ -1,0 +1,1 @@
+export { ValidatorMethod } from "../validate/validator/validator.method";

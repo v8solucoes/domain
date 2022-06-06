@@ -1,0 +1,1 @@
+export type NameProperty<T> = { [K in keyof T]: K }[keyof T];
