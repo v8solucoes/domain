@@ -19,11 +19,14 @@ Basic Comand:
 - nvm ls (installed version)
 - nvm ls-remote (versions available)
 - nvm deactivate (Stop Node/NVM before Uninstall)
-- nvm uninstall 14.18.2 (desinstala Versão)
-- nvm install 14.19.1 (versão estável LTS/Usado pelo angular12)
-- nvm alias default 14.19.1 (executa versão defina)
+- nvm uninstall 16.15.0 (desinstala Versão)
+- nvm install 16.15.1 (versão estável LTS)
+- nvm alias default 16.15.1 (executa versão defina)
 
  ```
 
-# NPM (8.8.0)
-npm install -g npm (Update NPM)
+# NPM (8.12.1)
+```
+- npm - v (version)
+- npm install -g npm (Update NPM)
+```

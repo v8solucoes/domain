@@ -2,16 +2,37 @@
 ###### [README](./../README.md)
 
 ## FIREBASE CLI
-`curl -sL https://firebase.tools | bash`
+`curl -sL https://firebase.tools | bash` (Version 11.1.0)
+`npm install -g firebase-tools` 
 `firebase login`
-firebase projects:list (Test instalL correct )
-npm install -g firebase-tools
-npm install -g firebase-tools 
+`firebase projects:list`(Test instalL correct )
 
-### Last Update 24-05-22
+## FUNCTIONS
+`firebase init functions`
+Select: `TypeScript`
+Ignore: `ESLint` (n)
+
+Example Index.ts:
+```
+-------------------------------------------------------------
+import * as functions from 'firebase-functions'
+import * as express from 'express'
+
+var api = express()
+
+api.get('/', (req, res) => res.status(200).send('Hey there!'))
+
+exports.api = functions.https.onRequest(api)
+--------------------------------------------------------------
+```
+npm run serve (Teste Local)
+npm run deploy (Produção Firebase)
 
 ## Install / Update - Global
-`npm  i g firebase` (Versão 10.8.0 Bugada removi e instalei funcionou EMULADOR)
+`npm i g firebase` (Versão 10.8.0 Bugada removi e instalei funcionou EMULADOR)
+
+
+
 ## Install / Update - Local Angular
 ANGULAR - [Install / Update](../../front-app/.readme/angular.md) 
 

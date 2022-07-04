@@ -1,16 +1,45 @@
-import { Idados as Idata} from "../construtor/04-dist/dadosApp/dadosApp.dados";
-import { Resposta } from "../construtor/14-resposta/resposta.interface";
+/* import { Idados} from "../construtor/04-dist/dadosApp/dadosApp.dados";
+import { Resposta } from "../construtor/14-resposta/resposta.interface"; */
+/* import { OptionsValidator } from "./validator"; */
 import { NameProperty } from "./typscript";
-import { ValidatorMethod } from "./validator";
+import { ValidateCompose } from "./validator";
 
-export { Idata }
-export type Icredential = Idata['adm']['credential']
-export type Iuser = Idata['adm']['credential']['user']
-export type Iresponse<data> = Resposta<data>
-export type Irequest = Idata['adm']['credential']['request']
-export type IrequestData = { credential: Icredential, dados: any }
+export { IrequestDomain } from "../domain/request/request.domain";
+/* export type Icredential = Idados['adm']['credential']
+export type Iuser = Idados['adm']['credential']['user'] */
+/* export type Iresponse<data> = Resposta<data> */
+
+export type Irequest = {
+  language: 'en',
+  page: 'account',
+  colection: Irequest['document'] | null,
+  document: 'account-adm',
+  action: 'create',
+  validator: IValidatorRequest | null,
+  environment: 'prod' | 'value',
+  domain: 'localchost',
+  item: string | null,
+  dateUpdate: Date
+  dateCreate: Date | null,
+  data: any | null
+}
+/* export type IrequestData = { credential: Icredential, dados: any } */
 export type Ilanguage = 'en'
-export type InameValidator = NameProperty<ValidatorMethod>
+export type Ipage = 'account'
+export type ImoduleId = 'account-adm'
+export type Iaction = 'create'
+export type Ienvironment = 'test' | 'prod'
+export type Idomain = 'test' | 'prod'
+export type InameValidator = NameProperty<ValidateCompose>
+
+
+export type IdataProperty = { [keyof: string]: Idata }
+
+export interface Idata {
+  permission: Ipermission[]
+  dataDocument?: any
+  dataColection?: any[]
+}
 
 export interface Ipermission {
   id: string;
@@ -27,7 +56,7 @@ export type ImodelUndefinedProperty = { [key: string]: Imodel }
 export interface Imodel {
   id: string;
   typeData: ItypeName['dataType'];
-  typeInput: 'group'| 'range' | 'input' | 'radio' | 'text-area' | 'select' | 'galeriaHorizontal' | 'color' | 'slide-toggle';
+  typeInput: 'email'| 'group'| 'range' | 'input' | 'radio' | 'text-area' | 'select' | 'galeriaHorizontal' | 'color' | 'slide-toggle';
   text: {
     en?: {
       clearInput: string;
@@ -44,8 +73,8 @@ export interface Imodel {
     },
   },
   validate: {
-    sync: NameProperty<ValidatorMethod>[]
-    async: NameProperty<ValidatorMethod>[],
+    sync: NameProperty<ValidateCompose>[]
+    async: NameProperty<ValidateCompose>[],
     updateOn: 'blur' | 'submit' | 'change'
     disabled: boolean,
     valueMin: number,
@@ -53,7 +82,7 @@ export interface Imodel {
     required: boolean
     front: string
     back: string
-    teste: string
+    test: NameProperty<ValidateCompose>
   }
   design: {
     tools?: {
@@ -95,13 +124,16 @@ export interface ItypeName {
 
 }
 
-export interface ValidatorRequest {
+export interface IValidatorRequest {
+  language: Ilanguage;
   value: any;
-  language: Ilanguage
+  valueId: string
+  valueAll: any | null,
+  nameValidator: InameValidator
 }
 export interface ValidatorError {
   en: { [key: string]: any };
 }
-export type ValidatorReponse = {
+export type ValidatorResponse = {
   [key: string]: any;
 } | null;

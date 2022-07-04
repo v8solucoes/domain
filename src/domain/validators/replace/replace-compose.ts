@@ -1,6 +1,6 @@
-import { Mask_Constructor } from "./mask-constructor";
+import { ReplaceUnit } from "./replace-unit";
 
-export class Mask_Model extends Mask_Constructor {
+export class ReplaceCompose extends ReplaceUnit {
   modelUrl(text: string) {
     return this.composeMask(
       this.removeEmptySpace,
@@ -8,11 +8,6 @@ export class Mask_Model extends Mask_Constructor {
       this.removeMultiplesHypensStartEnd,
       this.removeAccent,
       this.toLowerCase
-    )(text);
-  }
-  modelNamePersonal(text: string) {
-    return this.composeMask(
-      this.removeEmptySpace,
     )(text);
   }
 }

@@ -1,12 +1,15 @@
-import { ValidatorReponse } from "./shared/interface";
+import { ValidatorResponse } from "./shared/interface";
+import { NameProperty, NameValue } from "./shared/typscript";
+
+
 
 export class Start {
   constructor() {
 
-    this.start()
+/*     this.start() */
  /*    this.compose({ id: 1 }, null, { salary: 100 }) */
   }
-  compose(...funcoes: any):ValidatorReponse {
+  compose(...funcoes: any):ValidatorResponse {
     
     const validators = funcoes.reduce(
       (accumulator:any, current:any) => {
@@ -32,13 +35,13 @@ export class Start {
     const caracterGlobal = /([^\w]+|\s+)/g
     const caracter = /(?<err>[-+=*&;%/()<>()\\{\\}$#@!_])/g
     // Conceito
-    // Testar Variável se tem caracter não permitido
+    // Testar Variável se tem caracter não permitidos adfasd
     console.log('Testar')
     console.log(caracter.test(texto))
     console.log(texto.match(caracter))
     console.log(caracter.exec(texto))
     // Substituir
-    console.log('Substituir')
+    console.log('Substituir' )
     console.log(texto.replace(caracterGlobal, ''))
 
     try {
