@@ -201,6 +201,8 @@ export class TestUnit {
   }
 
   reponseValidator(sucess: boolean, errorLanguage: { [key: string]: string }): ValidatorResponse {
+/*    console.log(sucess)
+   console.log(errorLanguage) */
     try {
       if (sucess) {
         return null;
@@ -255,18 +257,18 @@ export class TestUnit {
       const validators = await this.composeTest(funcoes)
       const sucess = !Object.keys(validators).length
       console.log(validators)
-      
-    if (sucess) {
-      return {email:'invalido email'}
-    } else {
-      console.log('INVALIDO')
-     /*  return {email:'invalido email'} */
-      throw new Error(`${JSON.stringify(validators)}`);
 
-    }
+      if (sucess) {
+        return { email: 'invalido email' }
+      } else {
+        console.log('INVALIDO')
+        /*  return {email:'invalido email'} */
+        throw new Error(`${JSON.stringify(validators)}`);
+
+      }
     } catch (error) {
       console.log('catherror')
-      return {xxx:'errrorrr'}
+      return { xxx: 'errrorrr' }
     }
   }
 }

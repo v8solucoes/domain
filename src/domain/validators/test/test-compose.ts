@@ -5,6 +5,13 @@ export class TestCompose extends TestUnit {
   constructor(req: IValidatorRequest) {
     super(req)
   }
+  get telephone(): ValidatorResponse {
+
+    return this.compose(
+      this.minCharacter(10),
+      this.maxCharacter(11),
+    )
+  }
   get namePersonal(): ValidatorResponse {
     return this.compose(
       this.minCharacter(8),
@@ -13,7 +20,7 @@ export class TestCompose extends TestUnit {
     )
   }
   get emailValid(): ValidatorResponse {
-    return this.composeAsync(
+    return this.compose(
       this.emailValidFormat,
     )
   }

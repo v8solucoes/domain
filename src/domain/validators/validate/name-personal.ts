@@ -21,4 +21,10 @@ export class NamePersonal extends ValidatorDomain {
     return new TestCompose(this.req).namePersonal
   }
 
+  get validateAsync(): Promise<ValidatorResponse> {
+    return new Promise<ValidatorResponse>((resolve, reject) => {
+      resolve(this.validate)
+    })
+  }
+
 }

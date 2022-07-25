@@ -9,4 +9,5 @@ export abstract class ValidatorDomain {
   abstract get applyMaskView(): string
   abstract get applyMaskData(): string
   abstract get validate(): ValidatorResponse
+  abstract get validateAsync(): Promise<ValidatorResponse> 
 }

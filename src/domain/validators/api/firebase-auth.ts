@@ -5,17 +5,21 @@ export class FirebaseAuth {
 
   static async emailAccountExist(req: IValidatorRequest): Promise<ValidatorResponse> {
    
-    console.log('FIREBASE AUTH')
+ /*    console.log('FIREBASE AUTH') */
+    // 'conta@v8sitesxx.com.br'
    
     try {
+      const error = {
+        en: 'Email already exists!',
+        pt: 'Email já existe!'
+      }
+     await FirebaseAPI.auth.getUserByEmail(req.value)
 
-      await FirebaseAPI.auth.getUserByEmail('conta@v8sitesxx.com.br')
-
-      return null
+      return { error: error[req.language] }
 
     } catch (error) {
 
-      return { emailAccountExist:`Email já Existe`}
+      return null
     }
 
   }

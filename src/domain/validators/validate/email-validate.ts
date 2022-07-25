@@ -10,15 +10,21 @@ export class EmailValidate extends ValidatorDomain {
   }
   
   get applyMaskView(): string {
-    return new ReplaceCompose().removeEspecialCharactersEmail(this.clearDirt)
+    return this.clearDirt
   }
 
   get applyMaskData(): string {
-    return new ReplaceCompose().removeEspecialCharactersEmail(this.clearDirt)
+    return this.clearDirt
   }
 
   get validate(): ValidatorResponse {
     return new TestCompose(this.req).emailValid
+  }
+  get validateAsync(): Promise<ValidatorResponse> {
+    
+    return new Promise<ValidatorResponse>((resolve, reject) => {
+      resolve(this.validate)
+    })
   }
 
 }

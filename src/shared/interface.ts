@@ -1,13 +1,29 @@
 /* import { Idados} from "../construtor/04-dist/dadosApp/dadosApp.dados";
 import { Resposta } from "../construtor/14-resposta/resposta.interface"; */
 /* import { OptionsValidator } from "./validator"; */
+import { ValidatorsBack } from "../domain/validators/validators-back";
 import { NameProperty } from "./typscript";
-import { ValidateCompose } from "./validator";
+import { Validators } from "./validator";
 
 export { IrequestDomain } from "../domain/request/request.domain";
 /* export type Icredential = Idados['adm']['credential']
 export type Iuser = Idados['adm']['credential']['user'] */
 /* export type Iresponse<data> = Resposta<data> */
+export interface IFormData {
+  permission: Ipermission[];
+  model: ImodelUndefinedProperty;
+  form: any
+  language: Ilanguage
+}
+export interface Idata { ['account-adm']: {
+  permission: Ipermission[]
+  model: Imodel
+  document: any
+  colection: any[]
+  request: Irequest | null
+  form?: IFormData | null
+}
+}
 
 export type Irequest = {
   language: 'en',
@@ -30,16 +46,17 @@ export type ImoduleId = 'account-adm'
 export type Iaction = 'create'
 export type Ienvironment = 'test' | 'prod'
 export type Idomain = 'test' | 'prod'
-export type InameValidator = NameProperty<ValidateCompose>
+export type InameValidator = NameProperty<Validators>
+export type InameValidatorBack = NameProperty<ValidatorsBack>
 
 
 export type IdataProperty = { [keyof: string]: Idata }
 
-export interface Idata {
+/* export interface Idata {
   permission: Ipermission[]
   dataDocument?: any
   dataColection?: any[]
-}
+} */
 
 export interface Ipermission {
   id: string;
@@ -49,19 +66,36 @@ export interface Ipermission {
     subTitle: boolean;
   }
   _group?: Ipermission[]
-} 
+}
 export type ImodelDefinedProperty = ImodelUndefinedProperty
 export type ImodelUndefinedProperty = { [key: string]: Imodel }
+
+export type ValidatorType = {
+  type: 'back';
+  validator: InameValidatorBack
+} |
+  {
+    type: 'validator';
+    validator: InameValidator
+  }
+export type ValidatorTypeAsync = {
+  type: 'back';
+  validator: InameValidatorBack
+} |
+  {
+    type: 'validator';
+    validator: InameValidator
+  }
 
 export interface Imodel {
   id: string;
   typeData: ItypeName['dataType'];
-  typeInput: 'email'| 'group'| 'range' | 'input' | 'radio' | 'text-area' | 'select' | 'galeriaHorizontal' | 'color' | 'slide-toggle';
+  typeInput: 'email' | 'acceptTerms' | 'group' | 'range' | 'input' | 'radio' | 'text-area' | 'select' | 'galeriaHorizontal' | 'color' | 'slide-toggle';
   text: {
     en?: {
       clearInput: string;
       label: string;
-      valueTest: string;
+      valueTest: string | boolean;
       placeholder: string;
       prefix?: string;
       suffix?: string;
@@ -73,8 +107,9 @@ export interface Imodel {
     },
   },
   validate: {
-    sync: NameProperty<ValidateCompose>[]
-    async: NameProperty<ValidateCompose>[],
+    sync: ValidatorType[]
+    /*   async: NameProperty<Validators>[], */
+    async: ValidatorType[],
     updateOn: 'blur' | 'submit' | 'change'
     disabled: boolean,
     valueMin: number,
@@ -82,7 +117,7 @@ export interface Imodel {
     required: boolean
     front: string
     back: string
-    test: NameProperty<ValidateCompose>
+    test: NameProperty<Validators>
   }
   design: {
     tools?: {
@@ -114,7 +149,7 @@ export interface Imodel {
       }
     }
   }
-  _group?: ImodelUndefinedProperty
+  _group?: ImodelUndefinedProperty 
 
 }
 
@@ -129,7 +164,7 @@ export interface IValidatorRequest {
   value: any;
   valueId: string
   valueAll: any | null,
-  nameValidator: InameValidator
+  nameValidator: InameValidatorBack
 }
 export interface ValidatorError {
   en: { [key: string]: any };
