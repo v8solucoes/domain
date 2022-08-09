@@ -5,7 +5,7 @@ import { ValidatorsBack } from "../domain/validators/validators-back";
 import { NameProperty } from "./typscript";
 import { Validators } from "./validator";
 
-export { IrequestDomain } from "../domain/request/request.domain";
+/* export { IrequestDomain } from "../domain/request/request.domain"; */
 /* export type Icredential = Idados['adm']['credential']
 export type Iuser = Idados['adm']['credential']['user'] */
 /* export type Iresponse<data> = Resposta<data> */
