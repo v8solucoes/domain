@@ -1,8 +1,8 @@
-import { IValidatorRequest, ValidatorResponse } from "../../shared/interface"
+import { Irequest, ValidatorResponse } from "../../shared/interface"
 
 export abstract class ValidatorDomain {
-  req: IValidatorRequest
-  constructor(req: IValidatorRequest) {
+  req: Irequest
+  constructor(req: Irequest) {
     this.req = req
   }
   abstract get clearDirt(): string

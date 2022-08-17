@@ -6,7 +6,7 @@ import { ValidatorDomain } from "../validator.domain";
 export class NamePersonal extends ValidatorDomain {
 
   get clearDirt(): string {
-    return new ReplaceCompose().removeEspecialCharactersName(this.req.value)
+    return new ReplaceCompose().removeEspecialCharactersName(this.req.validator?.value)
   }
   
   get applyMaskView(): string {

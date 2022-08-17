@@ -6,7 +6,7 @@ export class Telephone extends ValidatorDomain {
 
   get clearDirt(): string {
 
-    return this.req.value.replace(/\D/g, "").slice(0,11)
+    return this.req.validator?.value.replace(/\D/g, "").slice(0,11)
   }
   
   get applyMaskView(): string {
@@ -20,6 +20,7 @@ export class Telephone extends ValidatorDomain {
   }
 
   get applyMaskData(): string {
+    
     return this.clearDirt
   }
 

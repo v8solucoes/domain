@@ -1,1 +1,0 @@
-export { FunctionsBack } from "../domain/functions/functions-back";

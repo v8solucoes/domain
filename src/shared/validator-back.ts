@@ -1,1 +1,0 @@
-export { ValidatorsBack } from "../domain/validators/validators-back";

@@ -1,11 +1,10 @@
 import { Irequest } from "../../shared/interface"
-import { AccountAdm } from "./function/account-adm"
-import { Functions } from "./functions"
+import { AccountAdm } from "./module/account-adm"
 
-export class FunctionsBack extends Functions{
+export class Module {
   private request: Irequest
   constructor(req: Irequest) {
-    super(req)
+/*     super(req) */
     this.request = req
   }
  get accountAdm() { return new AccountAdm(this.request) }

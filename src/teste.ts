@@ -5,6 +5,7 @@ import { NameProperty, NameValue } from "./shared/typscript";
 
 export class Start {
   constructor() {
+    console.log('start')
 
 /*     this.start() */
  /*    this.compose({ id: 1 }, null, { salary: 100 }) */
@@ -41,7 +42,7 @@ export class Start {
     console.log(texto.match(caracter))
     console.log(caracter.exec(texto))
     // Substituir
-    console.log('Substituir' )
+    console.log('Substituir ' )
     console.log(texto.replace(caracterGlobal, ''))
 
     try {

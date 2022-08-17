@@ -6,7 +6,7 @@ import { ReplaceCompose } from "../replace/replace-compose";
 export class EmailValidate extends ValidatorDomain {
 
   get clearDirt(): string {
-    return new ReplaceCompose().removeEspecialCharactersEmail(this.req.value)
+    return new ReplaceCompose().removeEspecialCharactersEmail(this.req.validator?.value)
   }
   
   get applyMaskView(): string {

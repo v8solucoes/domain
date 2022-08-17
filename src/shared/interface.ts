@@ -1,9 +1,9 @@
 /* import { Idados} from "../construtor/04-dist/dadosApp/dadosApp.dados";
 import { Resposta } from "../construtor/14-resposta/resposta.interface"; */
 /* import { OptionsValidator } from "./validator"; */
-import { ValidatorsBack } from "../domain/validators/validators-back";
+import { ValidatorsRemote } from "../domain/validators/validators-remote";
 import { NameProperty } from "./typscript";
-import { Validators } from "./validator";
+import { ValidatorsLocal } from "./validator-local";
 
 /* export { IrequestDomain } from "../domain/request/request.domain"; */
 /* export type Icredential = Idados['adm']['credential']
@@ -14,6 +14,19 @@ export interface IFormData {
   model: ImodelUndefinedProperty;
   form: any
   language: Ilanguage
+}
+export interface IcreateForm {
+  permission: Ipermission[];
+  model: ImodelUndefinedProperty;
+  document: any
+  language: Ilanguage
+  request: Irequest
+  form: any
+}
+export interface Imodule {
+  permission: Ipermission[];
+  model: ImodelUndefinedProperty;
+  document: any
 }
 export interface Idata { ['account-adm']: {
   permission: Ipermission[]
@@ -26,18 +39,18 @@ export interface Idata { ['account-adm']: {
 }
 
 export type Irequest = {
-  language: 'en',
-  page: 'account',
-  colection: Irequest['document'] | null,
-  document: 'account-adm',
-  action: 'create',
-  validator: IValidatorRequest | null,
-  environment: 'prod' | 'value',
-  domain: 'localchost',
-  item: string | null,
-  dateUpdate: Date
-  dateCreate: Date | null,
-  data: any | null
+  language: 'en';
+  page: 'account';
+  document: 'account-adm';
+  action: 'create';
+  environment: 'prod' | 'value';
+  domain: 'localchost';
+  dateUpdate: Date;
+  colection: Irequest['document'] | null;
+  validator: IValidatorRequest | null;
+  data: any | null;
+  item: string | null;
+  dateCreate: Date | null;
 }
 /* export type IrequestData = { credential: Icredential, dados: any } */
 export type Ilanguage = 'en'
@@ -46,8 +59,8 @@ export type ImoduleId = 'account-adm'
 export type Iaction = 'create'
 export type Ienvironment = 'test' | 'prod'
 export type Idomain = 'test' | 'prod'
-export type InameValidator = NameProperty<Validators>
-export type InameValidatorBack = NameProperty<ValidatorsBack>
+export type InameValidatorLocal = NameProperty<ValidatorsLocal>
+export type InameValidatorRemote = NameProperty<ValidatorsRemote>
 
 
 export type IdataProperty = { [keyof: string]: Idata }
@@ -70,23 +83,6 @@ export interface Ipermission {
 export type ImodelDefinedProperty = ImodelUndefinedProperty
 export type ImodelUndefinedProperty = { [key: string]: Imodel }
 
-export type ValidatorType = {
-  type: 'back';
-  validator: InameValidatorBack
-} |
-  {
-    type: 'validator';
-    validator: InameValidator
-  }
-export type ValidatorTypeAsync = {
-  type: 'back';
-  validator: InameValidatorBack
-} |
-  {
-    type: 'validator';
-    validator: InameValidator
-  }
-
 export interface Imodel {
   id: string;
   typeData: ItypeName['dataType'];
@@ -107,22 +103,19 @@ export interface Imodel {
     },
   },
   validate: {
-    sync: ValidatorType[]
-    /*   async: NameProperty<Validators>[], */
-    async: ValidatorType[],
-    updateOn: 'blur' | 'submit' | 'change'
-    disabled: boolean,
-    valueMin: number,
-    valueMax: number,
-    required: boolean
-    front: string
-    back: string
-    test: NameProperty<Validators>
+    sync: InameValidatorLocal[];
+    async: InameValidatorRemote[];
+    updateOn: 'blur' | 'submit' | 'change';
+    disabled: boolean;
+    valueMin: number;
+    valueMax: number;
+    required: boolean;
+    mask: InameValidatorLocal;
   }
   design: {
     tools?: {
-      accont?: boolean,
-      clear?: boolean
+      accont?: boolean;
+      clear?: boolean;
     }
     html?: {
       typeInput?: 'text' | 'color' | 'url'
@@ -130,8 +123,8 @@ export interface Imodel {
     icon?: {
       prefix?: string;
       suffix?: string;
-      start?: string
-      end?: string
+      start?: string;
+      end?: string;
     }
     css: {
       materialDesign: {
@@ -160,11 +153,12 @@ export interface ItypeName {
 }
 
 export interface IValidatorRequest {
-  language: Ilanguage;
+  id: string;
+  name: InameValidatorLocal | InameValidatorRemote;
+  label: string;
   value: any;
-  valueId: string
-  valueAll: any | null,
-  nameValidator: InameValidatorBack
+  language: Ilanguage;
+  typeExecute: 'front' | 'back'
 }
 export interface ValidatorError {
   en: { [key: string]: any };

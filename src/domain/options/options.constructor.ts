@@ -1,5 +1,5 @@
 import { Ilanguage, ValidatorResponse } from "../../shared/interface";
-import { TestCompose } from "../validators/test/test-compose";
+
 
 
 export class OptionsConstructor {
@@ -19,8 +19,9 @@ export class OptionsConstructor {
   
   }
 
-  test(campo: string, language:Ilanguage = 'en'): ValidatorResponse {
-
-    return new TestCompose({ language, 'value': campo, 'valueId':'', 'valueAll': null,'nameValidator':'emailValidate'}).existStringInArray(this.array)
-  }
+  test(campo: string, language: Ilanguage = 'en'): ValidatorResponse {
+    
+ return null
+/*     return new TestCompose({ language, 'value': campo, validator:{ '' , name:'namePersonal'}, 'id':'', 'name':''}).existStringInArray(this.array)
+ */  }
 }
