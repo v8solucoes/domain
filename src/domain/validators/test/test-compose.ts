@@ -6,28 +6,27 @@ export class TestCompose extends TestUnit {
     super(req)
   }
   get telephone(): ValidatorResponse {
-    return this.compose(
+    const test = this.compose(
       this.minCharacter(10),
       this.maxCharacter(11),
     )
+    return this.reponseValidatorCompose(test, this.req)
   }
 
   get namePersonal(): ValidatorResponse {
-    return this.compose(
+    const test = this.compose(
       this.minCharacter(8),
       this.maxCharacter(35),
       this.minWord(2),
     )
+    return this.reponseValidatorCompose(test, this.req)
+   /*  return this.reponseValidatorCompose(test, this.req) */
   }
   get emailValid(): ValidatorResponse {
-    return this.compose(
+    const test = this.compose(
       this.emailValidFormat,
     )
-  }
-/*   get emailExist(): ValidatorResponse {
-    return this.compose(
-      this.emailExistDatabase,
-    )
-  } */
+    return this.reponseValidatorCompose(test, this.req)
+  } 
   
 }

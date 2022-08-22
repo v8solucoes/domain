@@ -1,19 +1,11 @@
 import { Irequest, ValidatorResponse } from "../../shared/interface"
 import { DataLocalDomain } from "../repository/data-local";
 import { Test } from "../test/test";
+
 export abstract class ModuleDomain {
-  req: Irequest
-  document: any = {
-    [`account-adm`]: {
-      name: 'Em',
-      email: 'contato@v8sites.com.br',
-      telephone: '11981231970',
-      acceptTerms: true
-    },
-  }
-  constructor(req: Irequest) {
-    this.req = req
-  }
+
+  constructor(public req: Irequest) { }
+  
   abstract create(): Promise<ValidatorResponse>
 
   async testPermisionDomain(): Promise<ValidatorResponse> {
@@ -22,11 +14,11 @@ export abstract class ModuleDomain {
 
       const local = new DataLocalDomain().getModule(this.req.document)
       const test = new Test(
+        this.req.language,
         this.req,
         local.permission,
         local.model,
-        this.req.language,
-        this.document).start()
+        this.req.data).exe()
       return test
 
     } catch (error) {

@@ -8,7 +8,7 @@ export class NamePersonal extends ValidatorDomain {
   get clearDirt(): string {
     return new ReplaceCompose().removeEspecialCharactersName(this.req.validator?.value)
   }
-  
+
   get applyMaskView(): string {
     return new ReplaceCompose().toUpperCaseFirstAll(this.clearDirt)
   }
@@ -28,3 +28,4 @@ export class NamePersonal extends ValidatorDomain {
   }
 
 }
+

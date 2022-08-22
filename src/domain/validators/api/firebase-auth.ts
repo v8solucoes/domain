@@ -1,22 +1,24 @@
 import { FirebaseAPI } from "../../../shared/api"
-import { IValidatorRequest, ValidatorResponse } from "../../../shared/interface"
+import { IValidatorRequest, ValidatorResponseCompose } from "../../../shared/interface"
 
 export class FirebaseAuth {
 
-  static async emailAccountExist(req: IValidatorRequest): Promise<ValidatorResponse> {
-   
-    console.log('FIREBASE AUTH')
-    // 'conta@v8sitesxx.com.br'
-   
-    try {
-      const error = {
-        en: 'Email already exists!',
-        pt: 'Email já existe!'
-      }
-      await FirebaseAPI.auth.getUserByEmail(req.value)
-  /*     console.log({ error: error[req.language] }) */
+  static async emailAccountExist(req: IValidatorRequest): Promise<ValidatorResponseCompose> {
 
-      return { [`email-exist > ${req.value}`]: error[req.language] }
+    const errors = {
+      en: 'Email already exists!',
+      pt: 'Email já existe!'
+    }
+
+    try {
+      await FirebaseAPI.auth.getUserByEmail(req.value)
+     
+      return  {
+        validator: req,
+        error: {[`email-exist`]: errors[req.language]},
+        label: req!.label
+      }
+
 
     } catch (error) {
 

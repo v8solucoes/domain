@@ -1,6 +1,5 @@
-import { Ilanguage, ValidatorResponse } from "../../shared/interface";
-
-
+import { Ilanguage, Irequest, ValidatorResponse } from "../../shared/interface";
+import { TestCompose } from "../validators/test/test-compose";
 
 export class OptionsConstructor {
 
@@ -14,14 +13,35 @@ export class OptionsConstructor {
       this.object[valor] = valor
       this.array.push(valor)
     })
-    
+
     this.interface = `'${this.array.join(`' | '`)}'`
-  
+
   }
 
-  test(campo: string, language: Ilanguage = 'en'): ValidatorResponse {
-    
- return null
-/*     return new TestCompose({ language, 'value': campo, validator:{ '' , name:'namePersonal'}, 'id':'', 'name':''}).existStringInArray(this.array)
- */  }
+  test(value: string, language: Ilanguage = 'en'): ValidatorResponse {
+    // request not efect
+    const requestGeneric: Irequest = {
+      language,
+      page: "account",
+      domain: 'localchost',
+      environment: 'prod',
+      action: "create",
+      document: "account-adm",
+      dateUpdate: new Date(),
+      dateCreate: new Date(),
+      colection: null,
+      validator: {
+        id: "notId",
+        name: 'namePersonal',
+        label: "notId",
+        value,
+        language: "en",
+        typeExecute: "front"
+      },
+      item: null,
+      data: null
+    }
+
+    return new TestCompose(requestGeneric).existStringInArray(this.array)
+  }
 }

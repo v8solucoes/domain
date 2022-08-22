@@ -134,7 +134,7 @@ export class DataLocalDomain {
             disabled: false,
             valueMin: 8,
             valueMax: 35,
-            required: true,
+            required: false,
             mask: 'emailValidate',
           },
           design: {
@@ -232,7 +232,7 @@ export class DataLocalDomain {
   document:any = {
     [`account-adm`]: {
       name: 'Emerson Felix',
-      email: 'contato@v8sitesV.com.br',
+      email: 'contato@v8sites.com.br',
       telephone: '11981231970',
       acceptTerms: true
     },

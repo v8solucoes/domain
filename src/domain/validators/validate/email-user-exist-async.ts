@@ -18,6 +18,7 @@ export class EmailUserExistAsync extends ValidatorDomain {
     return {null:'not implemented'}
   }
   get validateAsync(): Promise<ValidatorResponse> {
-    return FirebaseAuth.emailAccountExist(this.req.validator?.value)
+    console.log(this.req.validator?.value)
+    return FirebaseAuth.emailAccountExist(this.req.validator!)
   }
 }

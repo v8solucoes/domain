@@ -1,9 +1,9 @@
 import { Irequest, ValidatorResponse } from "../../shared/interface"
 
 export abstract class ValidatorDomain {
-  req: Irequest
-  constructor(req: Irequest) {
-    this.req = req
+
+  constructor(public req: Irequest) {
+    
   }
   abstract get clearDirt(): string
   abstract get applyMaskView(): string

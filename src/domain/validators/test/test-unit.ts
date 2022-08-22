@@ -1,4 +1,4 @@
-import { ValidatorResponse, ValidatorError, Irequest } from "../../../shared/interface";
+import { ValidatorResponse, ValidatorError, Irequest, ValidatorResponseCompose } from "../../../shared/interface";
 import { ReplaceCompose } from "../replace/replace-compose";
 
 export class TestUnit {
@@ -200,9 +200,19 @@ export class TestUnit {
     return this.reponseValidator(sucess, error[req.language]);
   }
 
+  reponseValidatorCompose(test: ValidatorResponse, req: Irequest): ValidatorResponseCompose {
+
+    return test == null ? null : {
+      validator: req.validator,
+      error: test,
+      label: req.validator!.label
+    }
+
+  }
+
   reponseValidator(sucess: boolean, errorLanguage: { [key: string]: string }): ValidatorResponse {
-/*    console.log(sucess)
-   console.log(errorLanguage) */
+    /*    console.log(sucess)
+       console.log(errorLanguage) */
     try {
       if (sucess) {
         return null;

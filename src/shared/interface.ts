@@ -165,4 +165,11 @@ export interface ValidatorError {
 }
 export type ValidatorResponse = {
   [key: string]: any;
-} | null;
+} | null
+
+export type ResponseCompose = {
+  label: string,
+  error: ValidatorResponse
+  validator: IValidatorRequest | null;
+} 
+export type ValidatorResponseCompose = ResponseCompose | ResponseCompose[] | null 
