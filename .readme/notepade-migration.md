@@ -164,8 +164,8 @@ fazer o roteamento da aplicação. Para mais de um site coloque o Hosting como l
 
 {
   "hosting": [{
-    "target": "app-Front",
-   "public": "app-Front/dist/app-Front",
+    "target": "front",
+   "public": "front/dist/app-Front",
    "rewrites": [ {
     "source": "**",
     "destination": "/index.html"
