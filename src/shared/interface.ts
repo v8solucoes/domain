@@ -47,7 +47,7 @@ export type Irequest = {
   domain: 'localchost';
   dateUpdate: Date;
   colection: Irequest['document'] | null;
-  validator: IValidatorRequest | null;
+  validator: IValidatorRequest;
   data: any | null;
   item: string | null;
   dateCreate: Date | null;

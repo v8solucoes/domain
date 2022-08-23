@@ -82,7 +82,7 @@ export class Test {
 
   }
 
-  aprovated(): ValidatorResponse {
+ /*  aprovated(): ValidatorResponse {
 
     const result = [
       {
@@ -101,6 +101,6 @@ export class Test {
     } catch (error) {
       return { error }
     }
-  }
+  } */
 
 }

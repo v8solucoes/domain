@@ -202,14 +202,14 @@ export class DataLocalDomain {
             },
           },
           validate: {
-            sync: [],
+            sync: ['checkIsTrue'],
             async: [],
             updateOn: 'change',
             disabled: false,
             valueMin: 10,
             valueMax: 11,
             required: true,
-            mask: 'telephone',
+            mask: 'checkIsTrue',
           },
           design: {
             tools: {

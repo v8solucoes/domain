@@ -60,6 +60,20 @@ export class TestUnit {
     return this.reponseValidator(sucess, error[req.language]);
   }
 
+  get checkValueIsTrue(): ValidatorResponse {
+    const req = this.req.validator!
+    const value = req.value as boolean;
+    const sucess = value == true ? true : false;
+    const error: ValidatorError = {
+      en: {
+        [`typeBoolean--${value}`]: `" ${typeof value} " deve ser tipo: 'Boolean`,
+      },
+    };
+
+    return this.reponseValidator(sucess, error[req.language]);
+  }
+  // not used yet
+
   get typeNumber(): ValidatorResponse {
 
     const req = this.req.validator!
@@ -130,6 +144,20 @@ export class TestUnit {
     return this.reponseValidator(sucess, error[req.language]);
   }
 
+  existValueInArray(value: string, array: any[]): ValidatorResponse {
+    const req = this.req
+    const sucess = array.includes(value);
+    const error: ValidatorError = {
+      en: {
+        valueInaArray: `" ${value} " não existe na Lista: ${JSON.stringify(
+          array
+        )}`
+      },
+    };
+    /*    console.log(sucess)
+       console.log(value) */
+    return this.reponseValidator(sucess, error[req.language]);
+  }
   existStringInArray(array: any[]): ValidatorResponse {
     const req = this.req.validator!
     const value = req.value;
