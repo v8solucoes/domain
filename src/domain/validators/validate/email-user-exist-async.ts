@@ -1,4 +1,4 @@
-import { ValidatorResponse } from "../../../shared/interface";
+import { IvalidatorResponse } from "../../../shared/interface";
 import { FirebaseAuth } from "../api/firebase-auth";
 import { ValidatorsLocal } from "../validators-local";
 import { ValidatorDomain } from "../validator.domain";
@@ -14,10 +14,10 @@ export class EmailUserExistAsync extends ValidatorDomain {
   get applyMaskData(): string {
     return new ValidatorsLocal(this.req).emailValidate.applyMaskData
   }
-  get validate(): ValidatorResponse {
+  get validate(): IvalidatorResponse {
     return {null:'not implemented'}
   }
-  get validateAsync(): Promise<ValidatorResponse> {
+  get validateAsync(): Promise<IvalidatorResponse> {
     console.log(this.req.validator?.value)
     return FirebaseAuth.emailAccountExist(this.req.validator!)
   }

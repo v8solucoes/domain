@@ -1,14 +1,14 @@
-import { Irequest, ValidatorResponse } from "../../shared/interface"
+import { Irequest, Ivalidator, IvalidatorResponse } from "../../shared/interface"
 import { DataLocalDomain } from "../repository/data-local";
-import { Test } from "../test/test";
+import { Test } from "../validators/test/test-document";
 
 export abstract class ModuleDomain {
 
   constructor(public req: Irequest) { }
   
-  abstract create(): Promise<ValidatorResponse>
+  abstract create(): Promise<Ivalidator>
 
-  async testPermisionDomain(): Promise<ValidatorResponse> {
+  async testPermisionDomain(): Promise<Ivalidator> {
 
     try {
 
@@ -22,12 +22,13 @@ export abstract class ModuleDomain {
       return test
 
     } catch (error) {
-      return { error }
+      this.req.validator.error = error as any
+      return this.req.validator
     }
 
   }
 
-  abstract get async(): Promise<ValidatorResponse>
-  abstract get sync(): ValidatorResponse
+  abstract get async(): Promise<IvalidatorResponse>
+  abstract get sync(): IvalidatorResponse
 
 }

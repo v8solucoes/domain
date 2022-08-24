@@ -47,7 +47,7 @@ export type Irequest = {
   domain: 'localchost';
   dateUpdate: Date;
   colection: Irequest['document'] | null;
-  validator: IValidatorRequest;
+  validator: Ivalidator;
   data: any | null;
   item: string | null;
   dateCreate: Date | null;
@@ -152,24 +152,25 @@ export interface ItypeName {
 
 }
 
-export interface IValidatorRequest {
+export interface Ivalidator {
   id: string;
   name: InameValidatorLocal | InameValidatorRemote;
   label: string;
   value: any;
+  error: IvalidatorError | Ivalidator[] | null;
   language: Ilanguage;
   typeExecute: 'front' | 'back'
 }
-export interface ValidatorError {
+export interface IvalidatorError {
   en: { [key: string]: any };
 }
-export type ValidatorResponse = {
+export type IvalidatorResponse = {
   [key: string]: any;
 } | null
 
 export type ResponseCompose = {
   label: string,
-  error: ValidatorResponse
-  validator: IValidatorRequest | null;
+  error: IvalidatorResponse
+  validator: Ivalidator | null;
 } 
-export type ValidatorResponseCompose = ResponseCompose | ResponseCompose[] | null 
+export type IvalidatorResponseCompose = ResponseCompose | ResponseCompose[] | null 

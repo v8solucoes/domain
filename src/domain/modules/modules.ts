@@ -12,8 +12,8 @@ export class Module {
 }
  
 /* export class ValidatorsBack extends Validators {
-  private request: IValidatorRequest
-  constructor(req: IValidatorRequest) {
+  private request: IvalidatorRequest
+  constructor(req: IvalidatorRequest) {
     super(req);
     this.request = req
   }

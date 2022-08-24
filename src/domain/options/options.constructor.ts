@@ -1,4 +1,4 @@
-import { Ilanguage, Irequest, ValidatorResponse } from "../../shared/interface";
+import { Ilanguage, Irequest, IvalidatorResponse } from "../../shared/interface";
 import { TestCompose } from "../validators/test/test-compose";
 
 export class OptionsConstructor {
@@ -18,7 +18,7 @@ export class OptionsConstructor {
 
   }
 
-  test(value: string, language: Ilanguage = 'en'): ValidatorResponse {
+  test(value: string, language: Ilanguage = 'en'): IvalidatorResponse {
     // request not efect
     const requestGeneric: Irequest = {
       language,
@@ -36,7 +36,8 @@ export class OptionsConstructor {
         label: "notId",
         value,
         language: "en",
-        typeExecute: "front"
+        typeExecute: "front",
+        error: null
       },
       item: null,
       data: null

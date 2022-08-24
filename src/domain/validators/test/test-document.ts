@@ -1,5 +1,5 @@
-import { Ilanguage, ImodelUndefinedProperty, InameValidatorLocal, InameValidatorRemote, Ipermission, Irequest, IValidatorRequest, ValidatorResponse } from "../../shared/interface";
-import { ValidatorsRemote } from "../../shared/validator-remote";
+import { Ilanguage, ImodelUndefinedProperty, InameValidatorLocal, InameValidatorRemote, Ipermission, Irequest, Ivalidator } from "../../../shared/interface";
+import { ValidatorsRemote } from "../../../shared/validator-remote";
 
 export class Test {
 
@@ -7,51 +7,59 @@ export class Test {
 
   constructor(
     public language: Ilanguage,
-    public request: Irequest,
+    private request: Irequest,
     public permissions: Ipermission[],
     public model: ImodelUndefinedProperty,
-    public document: any) { }
+    public document: any) { 
+    console.log('this.request')
+    console.log(this.request)
+    }
 
-  async exe(): Promise<ValidatorResponse> {
+  async exe(): Promise<Ivalidator> {
 
     try {
 
-      this.registerTest(this.request.language, this.permissions, this.model, this.document)
+      this.registerTest(this.request.language, this.request, this.permissions, this.model, this.document)
 
-      console.log(this.listTest)
+     /*  console.log(this.listTest) */
 
       return Promise.all(this.listTest).then(o => {
         const errors = o.filter(result => result !== null)
-        const aprovated = !errors ? null : { test: errors }
-        return aprovated as ValidatorResponse
+        this.request.validator.error = !errors ? null : errors
+       /*  console.log(this.request) */
+        return this.request.validator
       })
     } catch (error) {
-      return { error }
+      this.request.validator.error = error as any
+        return this.request.validator
     }
   }
 
-  registerTest(language: Ilanguage, permissions: Ipermission[], model: ImodelUndefinedProperty, data: any) {
+  registerTest(language: Ilanguage, request: Irequest, permissions: Ipermission[], model: ImodelUndefinedProperty, data: any) {
 
     for (const permission of permissions) {
 
-      const validatorRequest = (validator: InameValidatorLocal | InameValidatorRemote): Irequest => {
-        const req: IValidatorRequest = {
+      const validatorRequest = (validatorName: InameValidatorLocal | InameValidatorRemote): Irequest => {
+        const  req = {...request}
+        const validator: Ivalidator = {
           id: permission.id,
           label: model[permission.id].text[language]!.label,
           value: data[permission.id] ? data[permission.id] : null,
           language: language,
-          name: validator,
-          typeExecute: 'back'
+          name: validatorName,
+          typeExecute: 'back',
+          error: null
         }
-        this.request.validator = req
-        console.log(this.request)
-        return this.request
+        req.validator = validator
+        console.log(req)
+        return req
       }
 
       if (model[permission.id].typeData == 'object') {
 
         this.registerTest(
           language,
+          request,
           permission._group as Ipermission[],
           model[permission.id]._group as ImodelUndefinedProperty,
           data[permission.id]
@@ -72,35 +80,14 @@ export class Test {
             this.listTest.push(new ValidatorsRemote(validatorRequest(validator))[validator].validateAsync)
           })
       }
-
+      // Erro if type not exist
       if (model[permission.id].typeData != 'value' && model[permission.id].typeData != 'object') {
 
         this.listTest.push({ [`type-test`]: `${model[permission.id].typeData} > not registrer (typeData)` })
       }
+      ////
 
     }
 
   }
-
- /*  aprovated(): ValidatorResponse {
-
-    const result = [
-      {
-        "minChater--Em": "Mínimo 8 caracteres atual 2 ",
-        "minWord--1": "Minímo 2 palavras atual 1"
-      },
-      {
-        "error": "Email already exists!"
-      },
-      null,
-      null
-    ].filter(result => result !== null)
-
-    try {
-      return result
-    } catch (error) {
-      return { error }
-    }
-  } */
-
 }

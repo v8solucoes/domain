@@ -1,4 +1,4 @@
-import { ValidatorResponse } from "../../../shared/interface";
+import { IvalidatorResponse } from "../../../shared/interface";
 import { TestCompose } from "../test/test-compose";
 import { ValidatorDomain } from "../validator.domain";
 import { ReplaceCompose } from "../replace/replace-compose";
@@ -17,12 +17,13 @@ export class EmailValidate extends ValidatorDomain {
     return this.clearDirt
   }
 
-  get validate(): ValidatorResponse {
+  get validate(): IvalidatorResponse {
     return new TestCompose(this.req).emailValid
   }
-  get validateAsync(): Promise<ValidatorResponse> {
+  
+  get validateAsync(): Promise<IvalidatorResponse> {
     
-    return new Promise<ValidatorResponse>((resolve, reject) => {
+    return new Promise<IvalidatorResponse>((resolve, reject) => {
       resolve(this.validate)
     })
   }

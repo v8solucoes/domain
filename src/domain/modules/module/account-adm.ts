@@ -1,31 +1,32 @@
-import { ValidatorResponse } from "../../../shared/interface";
+import { Ivalidator, IvalidatorResponse } from "../../../shared/interface";
 import { ModuleDomain } from "../module.domain";
 
 export class AccountAdm extends ModuleDomain {
 
-  async create(): Promise<ValidatorResponse> {
+  async create(): Promise<Ivalidator> {
 
     try {
       /*  const data = this.req.data as {
      "name": string,
+     const test = await this.testPermisionDomain()
      "email": string,
      "telephone": number,
      "acceptTerms": boolean
    } */
       // Test value
 
-
       // Create
 
       return await this.testPermisionDomain()
 
     } catch (error) {
-      return { error }
+      this.req.validator.error = error as any
+      return this.req.validator
     }
 
   }
 
-  /* async test(): Promise<ValidatorResponse> {
+  /* async test(): Promise<IvalidatorResponse> {
 
     try {
 
@@ -42,10 +43,10 @@ export class AccountAdm extends ModuleDomain {
     }
 
   } */
-  get async(): Promise<ValidatorResponse> {
+  get async(): Promise<IvalidatorResponse> {
     throw new Error("Method not implemented.");
   }
-  get sync(): ValidatorResponse {
+  get sync(): IvalidatorResponse {
     throw new Error("Method not implemented.");
   }
 }

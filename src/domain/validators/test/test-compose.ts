@@ -1,4 +1,4 @@
-import { ValidatorResponse, Irequest } from "../../../shared/interface";
+import { IvalidatorResponse, Irequest } from "../../../shared/interface";
 import { OptionsValidator } from "../../options/options.validator"
 import { TestUnit } from "./test-unit";
 
@@ -7,14 +7,14 @@ export class TestCompose extends TestUnit {
     super(req)
   }
 
-  get checkIsTrue(): ValidatorResponse {
+  get checkIsTrue(): IvalidatorResponse {
     const test = this.compose(
       this.checkValueIsTrue,
     )
-    return test
+    return this.reponseValidatorCompose(test, this.req)
   }
 
-  get telephone(): ValidatorResponse {
+  get telephone(): IvalidatorResponse {
     const test = this.compose(
       this.minCharacter(10),
       this.maxCharacter(11),
@@ -22,14 +22,14 @@ export class TestCompose extends TestUnit {
     return this.reponseValidatorCompose(test, this.req)
   }
 
-  get emailValid(): ValidatorResponse {
+  get emailValid(): IvalidatorResponse {
     const test = this.compose(
       this.emailValidFormat,
     )
     return this.reponseValidatorCompose(test, this.req)
   } 
 
-  get namePersonal(): ValidatorResponse {
+  get namePersonal(): IvalidatorResponse {
     const test = this.compose(
       this.minCharacter(8),
       this.maxCharacter(35),
@@ -38,7 +38,7 @@ export class TestCompose extends TestUnit {
     return this.reponseValidatorCompose(test, this.req)
   }
 
-  get testRequest(): ValidatorResponse {
+  get testRequest(): IvalidatorResponse {
 
     const options = new OptionsValidator()
     const req = this.req

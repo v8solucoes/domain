@@ -1,4 +1,4 @@
-import { ValidatorResponse } from "../../../shared/interface";
+import { IvalidatorResponse } from "../../../shared/interface";
 import { TestCompose } from "../test/test-compose";
 import { ValidatorDomain } from "../validator.domain";
 
@@ -15,12 +15,12 @@ export class CheckIsTrue extends ValidatorDomain {
 
     return this.clearDirt
   }
-  get validate(): ValidatorResponse {
+  get validate(): IvalidatorResponse {
   
     return new TestCompose(this.req).checkIsTrue
   }
-  get validateAsync(): Promise<ValidatorResponse> {
-    return new Promise<ValidatorResponse>((resolve, reject) => {
+  get validateAsync(): Promise<IvalidatorResponse> {
+    return new Promise<IvalidatorResponse>((resolve, reject) => {
       resolve(this.validate)
     })
   }
