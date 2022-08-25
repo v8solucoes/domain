@@ -1,1 +1,1 @@
-export { Module } from "../domain/modules/modules";
+export { Documents } from "../domain/documents/document";

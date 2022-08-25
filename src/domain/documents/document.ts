@@ -1,13 +1,13 @@
 import { Irequest } from "../../shared/interface"
-import { AccountAdm } from "./module/account-adm"
+import { AccountAdm } from "./account-adm"
 
-export class Module {
+export class Documents {
   private request: Irequest
   constructor(req: Irequest) {
 /*     super(req) */
     this.request = req
   }
- get accountAdm() { return new AccountAdm(this.request) }
+ get account_adm() { return new AccountAdm(this.request) }
 
 }
  

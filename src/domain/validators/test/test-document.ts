@@ -1,25 +1,30 @@
 import { Ilanguage, ImodelUndefinedProperty, InameValidatorLocal, InameValidatorRemote, Ipermission, Irequest, Ivalidator } from "../../../shared/interface";
 import { ValidatorsRemote } from "../../../shared/validator-remote";
+import { DataLocalDomain } from "../../repository/data-local";
 
-export class Test {
+export class TestDocument {
 
   private listTest: any = []
 
   constructor(
-    public language: Ilanguage,
-    private request: Irequest,
-    public permissions: Ipermission[],
-    public model: ImodelUndefinedProperty,
-    public document: any) { 
-    console.log('this.request')
-    console.log(this.request)
+    public request: Irequest,
+) { 
+/*     console.log('this.request')
+    console.log(this.request) */
     }
 
-  async exe(): Promise<Ivalidator> {
+  async exe(
+    language: Ilanguage,
+    request: Irequest,
+    permissions: Ipermission[],
+    model: ImodelUndefinedProperty,
+    document: any
+
+  ): Promise<Ivalidator> {
 
     try {
 
-      this.registerTest(this.request.language, this.request, this.permissions, this.model, this.document)
+      this.registerTest(language, request, permissions, model, document)
 
      /*  console.log(this.listTest) */
 
@@ -87,6 +92,25 @@ export class Test {
       }
       ////
 
+    }
+
+  }
+
+  async permisionDomain(): Promise<Ivalidator> {
+
+    try {
+
+      const local = new DataLocalDomain().getModule(this.request.document)
+      const test = this.exe( this.request.language,
+        this.request,
+        local.permission,
+        local.model,
+        this.request.data)
+      return test
+
+    } catch (error) {
+      this.request.validator.error = error as any
+      return this.request.validator
     }
 
   }
