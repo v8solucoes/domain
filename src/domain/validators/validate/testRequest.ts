@@ -1,4 +1,4 @@
-import { IvalidatorResponse } from "../../../shared/interface";
+import { IresponseValidatorCompose } from "../../../shared/interface";
 import { ValidatorDomain } from "../validator.domain";
 
 export class TestRequest extends ValidatorDomain {
@@ -11,10 +11,10 @@ export class TestRequest extends ValidatorDomain {
   get applyMaskData(): string {
     throw new Error("Method not implemented.");
   }
-  get validate(): IvalidatorResponse {
+  get validate(): IresponseValidatorCompose {
     throw new Error("Method not implemented.");
   }
-  get validateAsync(): Promise<IvalidatorResponse> {
+  get validateAsync(): Promise<IresponseValidatorCompose> {
     throw new Error("Method not implemented.");
   }
 

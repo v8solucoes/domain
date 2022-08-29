@@ -1,9 +1,9 @@
 import { FirebaseAPI } from "../../../shared/api"
-import { Ivalidator, IvalidatorResponse } from "../../../shared/interface"
+import { Ivalidator, IresponseValidatorUnit } from "../../../shared/interface"
 
 export class FirebaseAuth {
 
-  static async emailAccountExist(req: Ivalidator): Promise<IvalidatorResponse> {
+  static async emailAccountExist(req: Ivalidator): Promise<IresponseValidatorUnit> {
 
     const errors = {
       en: 'Email already registered!',
@@ -22,7 +22,7 @@ export class FirebaseAuth {
     }
 
   }
-  /*  async criarIdAuth(req: Irequest): Promise<IvalidatorResponse> {
+  /*  async criarIdAuth(req: Irequest): Promise<IresponseValidatorUnit> {
  
      try {
          const data = await FirebaseAPI.auth.createUser({

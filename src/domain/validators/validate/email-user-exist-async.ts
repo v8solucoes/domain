@@ -1,7 +1,8 @@
-import { IvalidatorResponse } from "../../../shared/interface";
+import { IresponseValidatorCompose } from "../../../shared/interface";
 import { FirebaseAuth } from "../api/firebase-auth";
 import { ValidatorsLocal } from "../validators-local";
 import { ValidatorDomain } from "../validator.domain";
+import { reponseValidatorCompose } from "../validators-response";
 
 export class EmailUserExistAsync extends ValidatorDomain {
 
@@ -14,11 +15,17 @@ export class EmailUserExistAsync extends ValidatorDomain {
   get applyMaskData(): string {
     return new ValidatorsLocal(this.req).emailValidate.applyMaskData
   }
-  get validate(): IvalidatorResponse {
-    return {null:'not implemented'}
+  get validate(): IresponseValidatorCompose {
+
+    throw new Error("Method not implemented.");
+    
   }
-  get validateAsync(): Promise<IvalidatorResponse> {
-    console.log(this.req.validator?.value)
-    return FirebaseAuth.emailAccountExist(this.req.validator!)
+  get validateAsync(): Promise<IresponseValidatorCompose> {
+
+    return FirebaseAuth.emailAccountExist(this.req.validator!).then((test) => {
+
+      return reponseValidatorCompose(test, this.req)
+
+    } )
   }
 }

@@ -1,4 +1,4 @@
-import { IvalidatorResponse } from "./shared/interface";
+import { IresponseValidatorUnitUnit } from "./shared/interface";
 import { NameProperty, NameValue } from "./shared/typscript";
 
 
@@ -10,7 +10,7 @@ export class Start {
 /*     this.start() */
  /*    this.compose({ id: 1 }, null, { salary: 100 }) */
   }
-  compose(...funcoes: any):IvalidatorResponse {
+  compose(...funcoes: any):IresponseValidatorUnitUnit {
     
     const validators = funcoes.reduce(
       (accumulator:any, current:any) => {

@@ -1,4 +1,4 @@
-import { Irequest, IvalidatorResponse } from "../../shared/interface"
+import { Irequest, IresponseValidatorCompose } from "../../shared/interface"
 
 export abstract class ValidatorDomain {
 
@@ -8,6 +8,6 @@ export abstract class ValidatorDomain {
   abstract get clearDirt(): string | boolean 
   abstract get applyMaskView(): string | boolean
   abstract get applyMaskData(): string | boolean
-  abstract get validate(): IvalidatorResponse
-  abstract get validateAsync(): Promise<IvalidatorResponse> 
+  abstract get validate(): IresponseValidatorCompose
+  abstract get validateAsync(): Promise<IresponseValidatorCompose> 
 }

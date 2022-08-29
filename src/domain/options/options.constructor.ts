@@ -1,4 +1,4 @@
-import { Ilanguage, Irequest, IvalidatorResponse } from "../../shared/interface";
+import { Ilanguage, Irequest, IresponseValidatorUnit } from "../../shared/interface";
 import { TestCompose } from "../validators/test/test-compose";
 
 export class OptionsConstructor {
@@ -18,7 +18,7 @@ export class OptionsConstructor {
 
   }
 
-  test(value: string, language: Ilanguage = 'en'): IvalidatorResponse {
+  test(value: string, language: Ilanguage = 'en'): IresponseValidatorUnit {
     // request not efect
     const requestGeneric: Irequest = {
       language,

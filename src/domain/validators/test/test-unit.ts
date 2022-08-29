@@ -1,5 +1,6 @@
-import { IvalidatorResponse, IvalidatorError, Irequest, IvalidatorResponseCompose } from "../../../shared/interface";
+import { IresponseValidatorUnit, IvalidatorError, Irequest } from "../../../shared/interface";
 import { ReplaceCompose } from "../replace/replace-compose";
+import { responseValidatorUnit } from "../validators-response";
 
 export class TestUnit {
 
@@ -8,7 +9,7 @@ export class TestUnit {
 
   constructor(req: Irequest) { this.req = req }
 
-  minCharacter(min: number): IvalidatorResponse {
+  minCharacter(min: number): IresponseValidatorUnit {
     const req = this.req.validator!
     const value = req.value
     const sucess = value.length >= min ? true : false;
@@ -18,10 +19,10 @@ export class TestUnit {
       },
     };
 
-    return this.reponseValidator(sucess, error[req!.language]);
+    return responseValidatorUnit(sucess, error[req!.language]);
   }
 
-  maxCharacter(max: number): IvalidatorResponse {
+  maxCharacter(max: number): IresponseValidatorUnit {
     const req = this.req.validator!
     const value = req.value
     const sucess = value.length <= max ? true : false;
@@ -31,10 +32,10 @@ export class TestUnit {
       },
     };
 
-    return this.reponseValidator(sucess, error[req!.language]);
+    return responseValidatorUnit(sucess, error[req!.language]);
   }
 
-  maxWord(max: number): IvalidatorResponse {
+  maxWord(max: number): IresponseValidatorUnit {
     const req = this.req.validator!
     const value = req.value.split(' ').length
     const sucess = value <= max ? true : false;
@@ -44,10 +45,10 @@ export class TestUnit {
       },
     };
 
-    return this.reponseValidator(sucess, error[req.language]);
+    return responseValidatorUnit(sucess, error[req!.language]);
   }
 
-  minWord(min: number): IvalidatorResponse {
+  minWord(min: number): IresponseValidatorUnit {
     const req = this.req.validator!
     const value = req.value.trim().split(' ').length
     const sucess = value >= min ? true : false;
@@ -57,10 +58,10 @@ export class TestUnit {
       },
     };
 
-    return this.reponseValidator(sucess, error[req.language]);
+    return responseValidatorUnit(sucess, error[req!.language]);
   }
 
-  get checkValueIsTrue(): IvalidatorResponse {
+  get checkValueIsTrue(): IresponseValidatorUnit {
     const req = this.req.validator!
     const value = req.value as boolean;
     const sucess = value == true ? true : false;
@@ -70,11 +71,11 @@ export class TestUnit {
       },
     };
 
-    return this.reponseValidator(sucess, error[req.language]);
+    return responseValidatorUnit(sucess, error[req!.language]);
   }
   // not used yet
 
-  get typeNumber(): IvalidatorResponse {
+  get typeNumber(): IresponseValidatorUnit {
 
     const req = this.req.validator!
     const value = req!.value
@@ -85,10 +86,10 @@ export class TestUnit {
       },
     };
 
-    return this.reponseValidator(sucess, error[req.language]);
+    return responseValidatorUnit(sucess, error[req!.language]);
   }
 
-  get typeString(): IvalidatorResponse {
+  get typeString(): IresponseValidatorUnit {
     const req = this.req.validator!
     const value = req.value as string;
     const sucess = typeof value === "string" ? true : false;
@@ -98,10 +99,10 @@ export class TestUnit {
       },
     };
 
-    return this.reponseValidator(sucess, error[req.language]);
+    return responseValidatorUnit(sucess, error[req!.language]);
   }
 
-  get typeBoolean(): IvalidatorResponse {
+  get typeBoolean(): IresponseValidatorUnit {
     const req = this.req.validator!
     const value = req.value as string;
     const sucess = typeof value === "boolean" ? true : false;
@@ -111,10 +112,10 @@ export class TestUnit {
       },
     };
 
-    return this.reponseValidator(sucess, error[req.language]);
+    return responseValidatorUnit(sucess, error[req!.language]);
   }
 
-  get emailValidFormat(): IvalidatorResponse {
+  get emailValidFormat(): IresponseValidatorUnit {
     const req = this.req.validator!
     const value = req.value;
     const caracter = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
@@ -126,10 +127,10 @@ export class TestUnit {
       },
     };
 
-    return this.reponseValidator(sucess, error[req.language]);
+    return responseValidatorUnit(sucess, error[req!.language]);
   }
 
-  valueInObject(object: any): IvalidatorResponse {
+  valueInObject(object: any): IresponseValidatorUnit {
     const req = this.req.validator!
     const value = req.value;
     const sucess = object[value] ? true : false;
@@ -141,10 +142,10 @@ export class TestUnit {
       },
     };
 
-    return this.reponseValidator(sucess, error[req.language]);
+    return responseValidatorUnit(sucess, error[req!.language]);
   }
 
-  existValueInArray(value: string, array: any[]): IvalidatorResponse {
+  existValueInArray(value: string, array: any[]): IresponseValidatorUnit {
     const req = this.req
     const sucess = array.includes(value);
     const error: IvalidatorError = {
@@ -156,9 +157,9 @@ export class TestUnit {
     };
     /*    console.log(sucess)
        console.log(value) */
-    return this.reponseValidator(sucess, error[req.language]);
+       return responseValidatorUnit(sucess, error[req!.language]);
   }
-  existStringInArray(array: any[]): IvalidatorResponse {
+  existStringInArray(array: any[]): IresponseValidatorUnit {
     const req = this.req.validator!
     const value = req.value;
     const sucess = array.includes(value);
@@ -171,9 +172,9 @@ export class TestUnit {
     };
     /*    console.log(sucess)
        console.log(value) */
-    return this.reponseValidator(sucess, error[req.language]);
+       return responseValidatorUnit(sucess, error[req!.language]);
   }
-  existObjectInArray(array: any[]): IvalidatorResponse {
+  existObjectInArray(array: any[]): IresponseValidatorUnit {
     const req = this.req.validator!
     const value = req.value;
     const sucess = array.includes(value);
@@ -183,9 +184,9 @@ export class TestUnit {
       },
     };
 
-    return this.reponseValidator(sucess, error[req.language]);
+    return responseValidatorUnit(sucess, error[req!.language]);
   }
-  valueInaArray(array: string[]): IvalidatorResponse {
+  valueInaArray(array: string[]): IresponseValidatorUnit {
     const req = this.req.validator!
     const value = req.value;
     const sucess = array.includes(value);
@@ -197,10 +198,10 @@ export class TestUnit {
       },
     };
 
-    return this.reponseValidator(sucess, error[req.language]);
+    return responseValidatorUnit(sucess, error[req!.language]);
   }
 
-  maxLength(max: number): IvalidatorResponse {
+  maxLength(max: number): IresponseValidatorUnit {
     const req = this.req.validator!
     const value = req.value;
 
@@ -211,10 +212,10 @@ export class TestUnit {
       },
     };
 
-    return this.reponseValidator(sucess, error[req.language]);
+    return responseValidatorUnit(sucess, error[req!.language]);
   }
 
-  minName(min: number): IvalidatorResponse {
+  minName(min: number): IresponseValidatorUnit {
     const req = this.req.validator!
     const value = req.value as string
 
@@ -225,35 +226,10 @@ export class TestUnit {
       },
     };
 
-    return this.reponseValidator(sucess, error[req.language]);
+    return responseValidatorUnit(sucess, error[req!.language]);
   }
 
-  reponseValidatorCompose(test: IvalidatorResponse, req: Irequest): IvalidatorResponseCompose {
-
-    return test == null ? null : {
-      validator: req.validator,
-      error: test,
-      label: req.validator!.label
-    }
-
-  }
-
-  reponseValidator(sucess: boolean, errorLanguage: { [key: string]: string }): IvalidatorResponse {
-    /*    console.log(sucess)
-       console.log(errorLanguage) */
-    try {
-      if (sucess) {
-        return null;
-      } else {
-        throw new Error(`${JSON.stringify(errorLanguage)}`);
-      }
-    } catch (error) {
-      /*       console.log(errorLanguage) */
-      return errorLanguage;
-    }
-  }
-
-  compose(...funcoes: any): IvalidatorResponse {
+  compose(...funcoes: any): IresponseValidatorUnit {
     const validators = funcoes.reduce(
       (accumulator: any, current: any) => {
         return { ...accumulator, ...current };
@@ -289,7 +265,7 @@ export class TestUnit {
     }
 
   }
-  async composeAsync(...funcoes: any): Promise<IvalidatorResponse> {
+  async composeAsync(...funcoes: any): Promise<IresponseValidatorUnit> {
 
     try {
       const validators = await this.composeTest(funcoes)

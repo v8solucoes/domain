@@ -164,13 +164,13 @@ export interface Ivalidator {
 export interface IvalidatorError {
   en: { [key: string]: any };
 }
-export type IvalidatorResponse = {
+export type IresponseValidatorUnit = {
   [key: string]: any;
 } | null
 
-export type ResponseCompose = {
+export type IresponseValidatorCompose = {
   label: string,
-  error: IvalidatorResponse
+  error: IresponseValidatorUnit
   validator: Ivalidator | null;
-} 
-export type IvalidatorResponseCompose = ResponseCompose | ResponseCompose[] | null 
+} | null
+/* export type IresponseValidatorUnitCompose = IresponseValidatorCompose | IresponseValidatorCompose[] | null  */
