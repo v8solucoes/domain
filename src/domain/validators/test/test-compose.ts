@@ -1,6 +1,6 @@
 import { Irequest, IresponseValidatorCompose } from "../../../shared/interface";
 import { OptionsValidator } from "../../options/options.validator"
-import { reponseValidatorCompose } from "../validators-response";
+import { responseValidatorCompose } from "../validators-response";
 import { TestUnit } from "./test-unit";
 
 export class TestCompose extends TestUnit {
@@ -12,7 +12,7 @@ export class TestCompose extends TestUnit {
     const test = this.compose(
       this.checkValueIsTrue,
     )
-    return reponseValidatorCompose(test, this.req)
+    return responseValidatorCompose(test, this.req)
   }
 
   get telephone(): IresponseValidatorCompose {
@@ -20,14 +20,14 @@ export class TestCompose extends TestUnit {
       this.minCharacter(10),
       this.maxCharacter(11),
     )
-    return reponseValidatorCompose(test, this.req)
+    return responseValidatorCompose(test, this.req)
   }
 
   get emailValid(): IresponseValidatorCompose {
     const test = this.compose(
       this.emailValidFormat,
     )
-    return reponseValidatorCompose(test, this.req)
+    return responseValidatorCompose(test, this.req)
   } 
 
   get namePersonal(): IresponseValidatorCompose {
@@ -36,7 +36,7 @@ export class TestCompose extends TestUnit {
       this.maxCharacter(35),
       this.minWord(2),
     )
-    return reponseValidatorCompose(test, this.req)
+    return responseValidatorCompose(test, this.req)
   }
 
   get testRequest(): IresponseValidatorCompose {
@@ -52,6 +52,6 @@ export class TestCompose extends TestUnit {
       this.existValueInArray(req.language, options.language.array),
       this.existValueInArray(req.environment, options.environment.array),
     )
-    return reponseValidatorCompose(test, this.req)
+    return responseValidatorCompose(test, this.req)
   }
 }

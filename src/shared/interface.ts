@@ -1,14 +1,7 @@
-/* import { Idados} from "../construtor/04-dist/dadosApp/dadosApp.dados";
-import { Resposta } from "../construtor/14-resposta/resposta.interface"; */
-/* import { OptionsValidator } from "./validator"; */
 import { ValidatorsRemote } from "../domain/validators/validators-remote";
 import { NameProperty } from "./typscript";
 import { ValidatorsLocal } from "./validator-local";
 
-/* export { IrequestDomain } from "../domain/request/request.domain"; */
-/* export type Icredential = Idados['adm']['credential']
-export type Iuser = Idados['adm']['credential']['user'] */
-/* export type Iresponse<data> = Resposta<data> */
 export interface IFormData {
   permission: Ipermission[];
   model: ImodelUndefinedProperty;
@@ -52,7 +45,7 @@ export type Irequest = {
   item: string | null;
   dateCreate: Date | null;
 }
-/* export type IrequestData = { credential: Icredential, dados: any } */
+
 export type Ilanguage = 'en'
 export type Ipage = 'account'
 export type ImoduleId = 'account-adm'
@@ -62,14 +55,7 @@ export type Idomain = 'test' | 'prod'
 export type InameValidatorLocal = NameProperty<ValidatorsLocal>
 export type InameValidatorRemote = NameProperty<ValidatorsRemote>
 
-
 export type IdataProperty = { [keyof: string]: Idata }
-
-/* export interface Idata {
-  permission: Ipermission[]
-  dataDocument?: any
-  dataColection?: any[]
-} */
 
 export interface Ipermission {
   id: string;
@@ -157,10 +143,10 @@ export interface Ivalidator {
   name: InameValidatorLocal | InameValidatorRemote;
   label: string;
   value: any;
-  error: IvalidatorError | Ivalidator[] | null;
+  error: Ivalidator | Ivalidator[] | null;
   language: Ilanguage;
   typeExecute: 'front' | 'back'
-}
+} 
 export interface IvalidatorError {
   en: { [key: string]: any };
 }
@@ -168,9 +154,4 @@ export type IresponseValidatorUnit = {
   [key: string]: any;
 } | null
 
-export type IresponseValidatorCompose = {
-  label: string,
-  error: IresponseValidatorUnit
-  validator: Ivalidator | null;
-} | null
-/* export type IresponseValidatorUnitCompose = IresponseValidatorCompose | IresponseValidatorCompose[] | null  */
+export type IresponseValidatorCompose = Ivalidator | null

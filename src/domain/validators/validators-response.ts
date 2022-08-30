@@ -14,12 +14,9 @@ export const responseValidatorUnit = (sucess: boolean, errorLanguage: { [key: st
   }
 }
 
-export const reponseValidatorCompose = (test: IresponseValidatorUnit, req: Irequest): IresponseValidatorCompose => {
+export const responseValidatorCompose = (test: IresponseValidatorUnit, req: Irequest): IresponseValidatorCompose => {
 
-  return test == null ? null : {
-    validator: req.validator,
-    error: test,
-    label: req.validator!.label
-  }
+  req.validator.error = test as any
+  return test == null ? null : req.validator
 
 }

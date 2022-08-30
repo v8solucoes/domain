@@ -1,4 +1,5 @@
-import { Irequest, Ivalidator } from "../../shared/interface";
+import { Irequest, IresponseValidatorCompose } from "../../shared/interface";
+import { responseValidatorCompose, responseValidatorUnit } from "../validators/validators-response";
 import { DocumentDomain } from "./document.domain";
 
 
@@ -8,26 +9,31 @@ export class AccountAdm extends DocumentDomain {
     super(req)
   }
 
-  async create(): Promise<Ivalidator> {
+  async create(): Promise<IresponseValidatorCompose | null> {
 
     try {
-      /*  const data = this.req.data as {
-     "name": string,
-     const test = await this.testPermisionDomain()
-     "email": string,
-     "telephone": number,
-     "acceptTerms": boolean
-   } */
-      // Test value
+      
+      // Test Document
+      const testAprovated = (await this.testDocument.permisionDomain())
 
       // Create
 
-      return await this.testDocument.permisionDomain()
+      if (testAprovated == null) {
+
+        return null
+        
+      } else {
+
+        return testAprovated
+
+      }
 
     } catch (error) {
-      this.req.validator.error = error as any
-      return this.req.validator
+      const reprovated = responseValidatorUnit(false, {error: error as string})
+   
+      return responseValidatorCompose(reprovated,this.req)
     }
+ 
 
   }
 

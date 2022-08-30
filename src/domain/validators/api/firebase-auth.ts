@@ -11,10 +11,12 @@ export class FirebaseAuth {
     }
 
     try {
-      await FirebaseAPI.auth.getUserByEmail(req.value)
-     
-      return  {[`email-already-registered`]: errors[req.language]}
+      // Test diferent email
+      req.value = 'contato@v8sites.com.br'
 
+      await FirebaseAPI.auth.getUserByEmail('contato@v8sites.com.br')
+
+      return { [`email-already-registered`]: errors[req.language] }
 
     } catch (error) {
 

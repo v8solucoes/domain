@@ -1,13 +1,14 @@
-import { Ilanguage, ImodelUndefinedProperty, InameValidatorLocal, InameValidatorRemote, Ipermission, Irequest, Ivalidator } from "../../../shared/interface";
+import { Ilanguage, ImodelUndefinedProperty, InameValidatorLocal, InameValidatorRemote, Ipermission, Irequest, IresponseValidatorCompose, Ivalidator } from "../../../shared/interface";
 import { ValidatorsRemote } from "../../../shared/validator-remote";
 import { DataLocalDomain } from "../../repository/data-local";
+import { responseValidatorCompose, responseValidatorUnit } from "../validators-response";
 
 export class TestDocument {
 
   private listTest: any = []
 
   constructor(
-    public request: Irequest,
+    public req: Irequest,
 ) { 
 /*     console.log('this.request')
     console.log(this.request) */
@@ -15,28 +16,32 @@ export class TestDocument {
 
   async exe(
     language: Ilanguage,
-    request: Irequest,
+    req: Irequest,
     permissions: Ipermission[],
     model: ImodelUndefinedProperty,
     document: any
 
-  ): Promise<Ivalidator> {
+  ): Promise<IresponseValidatorCompose> {
 
     try {
+      req.validator.typeExecute = 'back'
 
-      this.registerTest(language, request, permissions, model, document)
+      this.registerTest(language, req, permissions, model, document)
 
-     /*  console.log(this.listTest) */
+      return Promise.all<IresponseValidatorCompose[]>(this.listTest).then(test => {
 
-      return Promise.all(this.listTest).then(o => {
-        const errors = o.filter(result => result !== null)
-        this.request.validator.error = !errors ? null : errors
-       /*  console.log(this.request) */
-        return this.request.validator
+        const errors = test.filter(result => result !== null)
+      
+        console.log('errors exe')
+        console.log(errors)
+       
+        return responseValidatorCompose(errors,this.req)
       })
     } catch (error) {
-      this.request.validator.error = error as any
-        return this.request.validator
+
+      const reprovated = responseValidatorUnit(false, {error: error as string})
+   
+      return responseValidatorCompose(reprovated,this.req)
     }
   }
 
@@ -56,7 +61,7 @@ export class TestDocument {
           error: null
         }
         req.validator = validator
-        console.log(req)
+        console.log(validator)
         return req
       }
 
@@ -96,21 +101,22 @@ export class TestDocument {
 
   }
 
-  async permisionDomain(): Promise<Ivalidator> {
+  async permisionDomain(): Promise<IresponseValidatorCompose | null> {
 
     try {
 
-      const local = new DataLocalDomain().getModule(this.request.document)
-      const test = this.exe( this.request.language,
-        this.request,
+      const local = new DataLocalDomain().getModule(this.req.document)
+      const test = await this.exe( this.req.language,
+        this.req,
         local.permission,
         local.model,
-        this.request.data)
+        this.req.data)
       return test
 
     } catch (error) {
-      this.request.validator.error = error as any
-      return this.request.validator
+      const reprovated = responseValidatorUnit(false, {error: error as string})
+   
+      return responseValidatorCompose(reprovated,this.req)
     }
 
   }
