@@ -5,7 +5,7 @@
 
 ## Erro Falha comando NVM
 
-If you don't run the NVM command, use `curl raw.github.com/creationix/nvm/master/install.sh | zsh` and restart console
+If you don't run the NVM command, use `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash` and restart console
 
 ## Update:
 Access site https://github.com/nvm-sh/nvm and copy url last version exemple:
@@ -21,13 +21,13 @@ Basic Comand:
 - nvm ls (installed version)
 - nvm ls-remote (versions available)
 - nvm deactivate (Stop Node/NVM before Uninstall)
-- nvm uninstall 16.16.0 (desinstala Versão)
-- nvm install 16.16.0 (versão estável LTS)
-- nvm alias default 16.16.0 (executa versão defina)
+- nvm uninstall 16.17.0 (desinstala Versão)
+- nvm install 16.17.0 (versão estável LTS)
+- nvm alias default 16.17.0 (executa versão defina)
 
  ```
 
-# NPM (8.15.1)
+# NPM (8.18.0)
 ```
 - npm -v (version)
 - npm install -g npm (Update NPM)

@@ -2,7 +2,8 @@
 ###### [README](./../README.md)
 
 ## FIREBASE CLI
-`curl -sL https://firebase.tools | bash` (Version 11.1.0)
+`curl -sL firebase.tools | upgrade=true bash` (Instal last version binary)
+`curl -sL https://firebase.tools | bash` (Version 11.8.0) old install (10.7.2)
 `npm install -g firebase-tools` 
 `firebase login`
 `firebase projects:list`(Test instalL correct )
