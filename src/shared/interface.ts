@@ -36,7 +36,7 @@ export type Irequest = {
   page: 'account';
   document: 'account-adm';
   action: 'create';
-  environment: 'prod' | 'value';
+  environment: 'prod' | 'test';
   domain: 'localchost';
   dateUpdate: Date;
   colection: Irequest['document'] | null;

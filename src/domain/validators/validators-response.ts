@@ -1,6 +1,6 @@
 import { Irequest, IresponseValidatorCompose, IresponseValidatorUnit } from "../../shared/interface";
 
-export const responseValidatorUnit = (sucess: boolean, errorLanguage: { [key: string]: string }): IresponseValidatorUnit => {
+export const responseValidatorUnit = (sucess: boolean, errorLanguage: IresponseValidatorUnit): IresponseValidatorUnit => {
 
   try {
     if (sucess) {
@@ -19,4 +19,11 @@ export const responseValidatorCompose = (test: IresponseValidatorUnit, req: Ireq
   req.validator['error'] = test as any
   return test == null ? null : req.validator
 
+}
+
+export const responseValidatorError = (error:any, req: Irequest): IresponseValidatorCompose => {
+
+  const reprovated = responseValidatorUnit(false, {error})
+   
+  return responseValidatorCompose(reprovated, req)
 }

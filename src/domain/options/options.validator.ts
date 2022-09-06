@@ -7,5 +7,5 @@ export class OptionsValidator {
   get document() { return new OptionsMethod('account-adm') }
   get action() { return new OptionsMethod('create') }
   get environment() { return new OptionsMethod('test','prod') }
-  get domain() { return new OptionsMethod('localhost','127.0.0.1') }
+  get domain() { return new OptionsMethod('localhost','127.0.0.1', 'v8app-888cd.firebaseapp.com') }
 }

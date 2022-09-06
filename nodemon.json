@@ -2,6 +2,6 @@
     "watch": ["src"],
     "ext": ".ts,.js",
     "ignore": ["/src/construtor/04-dist/"],
-    "exec": "ts-node ./src/domain/test/testPromises.ts"
+    "exec": "ts-node ./src/study-concept/compose-async.ts"
   }
   

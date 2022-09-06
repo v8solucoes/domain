@@ -1,5 +1,5 @@
 import { IresponseValidatorCompose } from "../../../shared/interface";
-import { FirebaseAuth } from "../api/firebase-auth";
+import { FirebaseAuth } from "../../api/firebase-auth";
 import { ValidatorsLocal } from "../validators-local";
 import { ValidatorDomain } from "../validator.domain";
 import { responseValidatorCompose } from "../validators-response";
