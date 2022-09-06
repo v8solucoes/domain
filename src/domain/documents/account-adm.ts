@@ -5,16 +5,21 @@ import { DocumentDomain } from "./document.domain";
 
 export class AccountAdm extends DocumentDomain {
 
-  constructor(req: Irequest) {
+  constructor(public req: Irequest) {
+
     super(req)
+
   }
 
 
   async create(): Promise<IresponseValidatorCompose | null> {
 
+    console.log('CREATE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+    console.log(this.req);
+
     // Functions
     const req = this.req
-    const test = this.testPermisionDomain()
+    /*    const test = this.testPermisionDomain() */
     const db = this.db
 
     // Values Get
@@ -29,7 +34,7 @@ export class AccountAdm extends DocumentDomain {
 
     // Create Status
     const create = {
-      test: false,
+      test: true,
       user: false,
       userConfig: false,
       userPermission: false,
@@ -38,9 +43,9 @@ export class AccountAdm extends DocumentDomain {
 
     try {
       //TEST
-      const func = await test
-      create.test = !func
-      
+      /*  const func = await test */
+      /*    create.test = !func */
+
       // CREATE USER
       if (create.user = create.test) {
 
@@ -51,24 +56,25 @@ export class AccountAdm extends DocumentDomain {
         if (create.userConfig = typeof uid === 'string' ? true : false) {
 
           const config = await db.createUserConfig.setCustomUserClaims(value.uid, value.config)
-          
+
           // CREATE USER PERMISSION and PERMISSION
 
           if (create.userPermission = typeof config == 'undefined' ? true : false) {
 
-            db.lote.create(db.path('account-adm', value.uid).colection, { permission: db.local.permission })
-            db.lote.set(db.path('account-adm').historic, { ...req })
-        
+            db.lote.create(db.path(value.uid).colection, { permission: db.local.permission })
+            db.lote.set(db.path().historic, { ...req })
+
             const salve = await db.lote.commit()
-        
+
 
             if (create.statistic = Array.isArray(salve)) {
 
-            const { exists } = await db.path('account-adm').statistic.get()
-              
+
+              const { exists } = await db.path('account-adm').statistic.get()
+
               console.log(create)
 
-              await (exists ? db.path('account-adm').statistic.update({...db.statistic.create}) : db.path('account-adm').statistic.create({...db.statistic.create}))
+              await (exists ? db.path('account-adm').statistic.update({ ...db.statistic.create }) : db.path('account-adm').statistic.create({ ...db.statistic.create }))
 
               return null
 

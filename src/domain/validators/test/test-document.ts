@@ -68,7 +68,7 @@ export class TestDocument {
           error: null
         }
         req.validator = validator
-        console.log(validator)
+       /*  console.log(validator) */
         return req
       }
 

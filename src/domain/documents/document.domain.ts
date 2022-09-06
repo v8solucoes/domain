@@ -3,9 +3,11 @@ import { FirebaseAPI } from "../../shared/api";
 import { Irequest, IresponseValidatorCompose } from "../../shared/interface";
 import { DataLocalDomain } from "../../domain/repository/data-local";
 import { FirebaseAuth } from "../api/firebase-auth";
-import { TestDocument } from "../validators/test/test-document";
+import { TestDocument } from "../../shared/validator-remote";
 
 export abstract class DocumentDomain {
+
+  constructor(public req: Irequest) { }
   get db() {
     return {
       createUser: FirebaseAuth.createUser(this.req),
@@ -14,20 +16,34 @@ export abstract class DocumentDomain {
       statistic: this.statistic,
       local: new DataLocalDomain().getModule(this.req.document),
       crud: getFirestore(),
-      path: this.path
+      path: (id?:string)=> this.path2(this.req,id),
     }
   }
   async testPermisionDomain() { return await new TestDocument(this.req).permisionDomain()
 
   }
 
-  constructor(public req: Irequest) { }
-
   abstract create(): Promise<IresponseValidatorCompose | null>
 
-  path(document: Irequest['document'], id: string = FirebaseAPI.db.bundle().bundleId) {
+  path2(req: Irequest, id: string = FirebaseAPI.db.bundle().bundleId) {
+   
+    console.log('PATH2 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    console.log(req)
     const rota = {
-      [`account-adm`]: { root: `adm/user-adm` }
+      [`account-adm`]: { root: `${req.environment}/${req.domain}/adm/user-adm` }
+    }
+    return {
+      get colection() { return FirebaseAPI.db.collection(`${rota[req.document].root}/colection/`).doc(id) },
+      get historic() { return FirebaseAPI.db.collection(`${rota[req.document].root}/historic/`).doc(id) },
+      get statistic() { return FirebaseAPI.db.doc(`${rota[req.document].root}/`) }
+    }
+  }
+  path(document: Irequest['document'], id: string = FirebaseAPI.db.bundle().bundleId) {
+    const req = this.req
+    console.log('PATH @@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    console.log(this.req)
+    const rota = {
+      [`account-adm`]: { root: `${req.environment}/${req.domain}/adm/user-adm` }
     }
     return {
       get colection() { return FirebaseAPI.db.collection(`${rota[document].root}/colection/`).doc(id) },
