@@ -1,6 +1,9 @@
+import { ModelUser } from "../domain/model/users";
 import { ValidatorsRemote } from "../domain/validators/validators-remote";
 import { NameProperty } from "./typscript";
 import { ValidatorsLocal } from "./validator-local";
+
+export { ModelUser as ImodelUser}
 
 export interface IFormData {
   permission: Ipermission[];

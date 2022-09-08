@@ -35,6 +35,14 @@ export class DataLocalDomain {
         },
       },
       {
+        id: 'password',
+        view: {
+          form: true,
+          title: true,
+          subTitle: true,
+        },
+      },
+      {
         id: 'acceptTerms',
         view: {
           form: true,
@@ -42,6 +50,7 @@ export class DataLocalDomain {
           subTitle: true,
         },
       },
+     
     ],
   }]
   model: ImodelUndefinedProperty = {
@@ -189,6 +198,43 @@ export class DataLocalDomain {
             },
           },
         },
+        password: {
+          id: 'password',
+          typeData: 'value',
+          typeInput: 'input',
+          text: {
+            en: {
+              label: 'Password',
+              valueTest: false,
+              placeholder: 'Accept Terms',
+              clearInput: 'Clear',
+            },
+          },
+          validate: {
+            sync: [],
+            async: [],
+            updateOn: 'change',
+            disabled: false,
+            valueMin: 10,
+            valueMax: 11,
+            required: true,
+            mask: 'checkIsTrue',
+          },
+          design: {
+            tools: {
+              accont: true,
+              clear: true,
+            },
+            css: {
+              materialDesign: {
+                appearance: 'fill',
+              },
+              form: {
+                container: 'f-total',
+              },
+            },
+          },
+        },
         acceptTerms: {
           id: 'acceptTerms',
           typeData: 'value',
@@ -234,6 +280,7 @@ export class DataLocalDomain {
       name: 'Emerson Felix',
       email: 'contato@v8sites.com.br',
       telephone: '11981231970',
+      password: '123456',
       acceptTerms: true
     },
   }
