@@ -6,10 +6,10 @@ import { responseValidatorError } from "../validators/validators-response"
 
 export class FirebaseAuth {
 
-  static async emailAccountExist(req: Ivalidator): Promise<IresponseValidatorUnit> {
+  static async emailAccountExistRespErrorAsync(req: Ivalidator): Promise<IresponseValidatorUnit> {
 
     const message = {
-      en: '"Email is already in use!"',
+      en: '"Email is already in use-Error!"',
       pt: 'Email já utilizado!'
     }
 
@@ -25,6 +25,28 @@ export class FirebaseAuth {
 
       // Return error null firebase if not exist.
       return null
+    }
+
+  }
+  static async emailAccountExistRespSucessAsync(req: Ivalidator): Promise<IresponseValidatorUnit> {
+
+    const message = {
+      en: '"Email invalid!"',
+      pt: 'Email já utilizado!'
+    }
+
+    try {
+      // Test diferent email
+      /*       req.value = 'contato@v8sites.com.br' */
+
+      await FirebaseAPI.auth.getUserByEmail(req.value)
+
+      return null
+
+    } catch (error) {
+
+      // Return error null firebase if not exist.
+      return { [`auth/email-already-exists`]: message[req.language] }
     }
 
   }

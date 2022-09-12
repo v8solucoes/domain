@@ -27,10 +27,9 @@ export abstract class DocumentDomain {
 
   path2(req: Irequest, id: string = FirebaseAPI.db.bundle().bundleId) {
    
-    console.log('PATH2 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    console.log(req)
     const rota = {
-      [`account-adm`]: { root: `${req.environment}/${req.domain}/adm/user-adm` }
+      [`account-adm`]: { root: `${req.environment}/${req.domain}/adm/user-adm` },
+      [`login`]: { root: `${req.environment}/${req.domain}/adm/user-adm` },
     }
     return {
       get colection() { return FirebaseAPI.db.collection(`${rota[req.document].root}/colection/`).doc(id) },
@@ -40,10 +39,9 @@ export abstract class DocumentDomain {
   }
   path(document: Irequest['document'], id: string = FirebaseAPI.db.bundle().bundleId) {
     const req = this.req
-    console.log('PATH @@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    console.log(this.req)
     const rota = {
-      [`account-adm`]: { root: `${req.environment}/${req.domain}/adm/user-adm` }
+      [`account-adm`]: { root: `${req.environment}/${req.domain}/adm/user-adm` },
+      [`login`]: { root: `${req.environment}/${req.domain}/adm/user-adm` },
     }
     return {
       get colection() { return FirebaseAPI.db.collection(`${rota[document].root}/colection/`).doc(id) },

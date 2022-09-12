@@ -11,13 +11,13 @@ export interface IFormData {
   form: any
   language: Ilanguage
 }
-export interface IcreateForm {
+export interface IcreateForm<T> {
   permission: Ipermission[];
   model: ImodelUndefinedProperty;
   document: any
   language: Ilanguage
   request: Irequest
-  form: any
+  form: T
 }
 export interface Imodule {
   permission: Ipermission[];
@@ -37,7 +37,7 @@ export interface Idata { ['account-adm']: {
 export type Irequest = {
   language: 'en';
   page: 'account';
-  document: 'account-adm';
+  document: 'account-adm' | 'login';
   action: 'create';
   environment: 'prod' | 'test';
   domain: 'localchost';
@@ -131,7 +131,7 @@ export interface Imodel {
       }
     }
   }
-  _group?: ImodelUndefinedProperty 
+  _group?: ImodelUndefinedProperty
 
 }
 
