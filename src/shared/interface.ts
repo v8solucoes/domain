@@ -37,7 +37,7 @@ export interface Idata { ['account-adm']: {
 export type Irequest = {
   language: 'en';
   page: 'account';
-  document: 'account-adm' | 'login';
+  document: 'account-adm' | 'sign-in';
   action: 'create';
   environment: 'prod' | 'test';
   domain: 'localchost';

@@ -16,7 +16,7 @@ export abstract class DocumentDomain {
       statistic: this.statistic,
       local: new DataLocalDomain().getModule(this.req.document),
       crud: getFirestore(),
-      path: (id?:string)=> this.path2(this.req,id),
+      path: (id?:string)=> this.path(this.req,id),
     }
   }
   async testPermisionDomain() { return await new TestDocument(this.req).permisionDomain()
@@ -25,11 +25,11 @@ export abstract class DocumentDomain {
 
   abstract create(): Promise<IresponseValidatorCompose | null>
 
-  path2(req: Irequest, id: string = FirebaseAPI.db.bundle().bundleId) {
+  path(req: Irequest, id: string = FirebaseAPI.db.bundle().bundleId) {
    
     const rota = {
       [`account-adm`]: { root: `${req.environment}/${req.domain}/adm/user-adm` },
-      [`login`]: { root: `${req.environment}/${req.domain}/adm/user-adm` },
+      [`sign-in`]: { root: `${req.environment}/${req.domain}/adm/user-adm` },
     }
     return {
       get colection() { return FirebaseAPI.db.collection(`${rota[req.document].root}/colection/`).doc(id) },
@@ -37,7 +37,7 @@ export abstract class DocumentDomain {
       get statistic() { return FirebaseAPI.db.doc(`${rota[req.document].root}/`) }
     }
   }
-  path(document: Irequest['document'], id: string = FirebaseAPI.db.bundle().bundleId) {
+/*   path(document: Irequest['document'], id: string = FirebaseAPI.db.bundle().bundleId) {
     const req = this.req
     const rota = {
       [`account-adm`]: { root: `${req.environment}/${req.domain}/adm/user-adm` },
@@ -48,7 +48,7 @@ export abstract class DocumentDomain {
       get historic() { return FirebaseAPI.db.collection(`${rota[document].root}/historic/`).doc(id) },
       get statistic() { return FirebaseAPI.db.doc(`${rota[document].root}/`) }
     }
-  }
+  } */
   get statistic() {
 
     const req = this.req

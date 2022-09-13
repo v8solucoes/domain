@@ -55,7 +55,7 @@ export class DataLocalDomain {
     ],
     },
     {
-    id: 'login',
+    id: 'sign-in',
     view: {
       form: true,
       title: true,
@@ -247,7 +247,7 @@ export class DataLocalDomain {
             valueMin: 10,
             valueMax: 11,
             required: true,
-            mask: 'checkIsTrue',
+            mask: 'anyResNull',
           },
           design: {
             tools: {
@@ -303,7 +303,7 @@ export class DataLocalDomain {
         },
       },
     },
-    [`login`]: {
+    [`sign-in`]: {
       id: 'login',
       typeData: 'object',
       typeInput: 'group',
@@ -455,7 +455,7 @@ export class DataLocalDomain {
             en: {
               label: 'Password',
               valueTest: false,
-              placeholder: 'Accept Terms',
+              placeholder: 'Password',
               clearInput: 'Clear',
             },
           },
@@ -467,7 +467,7 @@ export class DataLocalDomain {
             valueMin: 10,
             valueMax: 11,
             required: true,
-            mask: 'checkIsTrue',
+            mask: 'anyResNull',
           },
           design: {
             tools: {
@@ -533,7 +533,7 @@ export class DataLocalDomain {
       password: '123456',
       acceptTerms: true
     },
-    [`login`]: {
+    [`sign-in`]: {
       name: 'Emerson Felix',
       email: 'contato@v8sites.com.br',
       telephone: '11981231970',
@@ -548,10 +548,14 @@ export class DataLocalDomain {
     }],
   }
   getModule(module: Irequest['document']): Imodule {
+
  
     const permission = this.permission.filter((permissions:Ipermission) => permissions.id == module)
     const model = this.model
     const document = {[module]: this.document[module]}
+
+   this.permission.length ? 'tem': console.log(`não tem Permission: ${module}`)
+   this.model[module] ? 'tem': console.log(`não tem Model: ${module}`)
 
     return {
       permission,
