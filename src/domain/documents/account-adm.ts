@@ -14,8 +14,8 @@ export class AccountAdm extends DocumentDomain {
 
   async create(): Promise<IresponseValidatorCompose | null> {
 
-    console.log('CREATE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
-    console.log(this.req);
+   /*  console.log('CREATE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+    console.log(this.req); */
 
     // Functions
     const req = this.req

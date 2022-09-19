@@ -2,6 +2,8 @@ import { ImodelUndefinedProperty, Imodule, Ipermission, Irequest } from "../../s
 
 export class DataLocalDomain {
 
+  user = null
+
   permission: Ipermission[] = [
     {
     id: 'account-adm',
