@@ -6,6 +6,31 @@ import { responseValidatorError } from "../validators/validators-response"
 
 export class FirebaseAuth {
 
+  static async loginGetModelAsync(token: string, req: Irequest) {
+
+  /*  const tokenInvalid = `eyJfQXV0aEVtdWxhdG9yUmVmcmVzaFRva2VuIjoiRE8gTk9UIE1PRElGWSIsImxvY2FsSWQiOiJMNzlVTE1iZVV6OEowYnNJUDlkb0xNcXV5ajNzIiwicHJvdmlkZXIiOiJwYXNzd29yZCIsImV4dHJhQ2xhaW1zIjp7fSwicHJvamVjdElkIjoidjhhcHAtODg4Y2QifQ` */
+    
+    try {
+      console.log('loginGetModelAsync')
+      console.log(req)
+
+      const user = await FirebaseAPI.auth.verifyIdToken(token)
+      const nivel = user['nivel']
+
+      const model = await FirebaseAPI.db.collection(`${req.environment}/${req.domain}/${nivel}/user-${nivel}/colection/`).doc(user.uid).get()
+
+      return {
+        credential: model.data(),
+        user,
+        token
+      }
+      
+    } catch (error) {
+      return {error}
+    }
+
+  }
+
   static async emailAccountExistRespErrorAsync(req: Ivalidator): Promise<IresponseValidatorUnit> {
 
     const message = {

@@ -6,7 +6,7 @@ export class UserController {
 
 get firebaseCreate(): FirebaseCreateRequest {
     return {
-      displayName: this.user.name,
+      displayName: this.user.email,
       email: this.user.email,
       phoneNumber: this.user.phone,
       password: this.user.password

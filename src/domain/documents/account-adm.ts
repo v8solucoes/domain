@@ -27,7 +27,7 @@ export class AccountAdm extends DocumentDomain {
       uid: '',
       user: {},
       config: {
-        permission: 'adm',
+        nivel: 'adm',
         acceptTerms: true,
       },
     }
