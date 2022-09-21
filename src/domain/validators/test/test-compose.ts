@@ -54,6 +54,19 @@ export class TestCompose extends TestUnit {
     )
     return responseValidatorCompose(test, this.req)
   }
+  get testRequestDomainLangPageEnvi(): IresponseValidatorCompose {
+
+    const options = new OptionsValidator()
+    const req = this.req
+
+    const test = this.compose(
+      this.existValueInArray(req.domain, options.domain.array),
+      this.existValueInArray(req.language, options.language.array),
+      this.existValueInArray(req.page, options.page.array),
+      this.existValueInArray(req.environment, options.environment.array),
+    )
+    return responseValidatorCompose(test, this.req)
+  }
   get testRequestLogin(): IresponseValidatorCompose {
 
     const options = new OptionsValidator()

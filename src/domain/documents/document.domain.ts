@@ -30,6 +30,7 @@ export abstract class DocumentDomain {
     const rota = {
       [`account-adm`]: { root: `${req.environment}/${req.domain}/adm/user-adm` },
       [`sign-in`]: { root: `${req.environment}/${req.domain}/adm/user-adm` },
+      [`null`]: { root: `${req.environment}/${req.domain}/adm/null` },
     }
     return {
       get colection() { return FirebaseAPI.db.collection(`${rota[req.document].root}/colection/`).doc(id) },

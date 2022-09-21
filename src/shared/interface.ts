@@ -36,9 +36,9 @@ export interface Idata { ['account-adm']: {
 
 export type Irequest = {
   language: 'en';
-  page: 'account';
-  document: 'account-adm' | 'sign-in';
-  action: 'create';
+  page: 'account' ;
+  document: 'account-adm' | 'sign-in' | 'null';
+  action: 'create' | 'null';
   environment: 'prod' | 'test';
   domain: 'localchost';
   dateUpdate: Date;

@@ -2,6 +2,7 @@ import { FirebaseAPI, FirebaseUserRecord } from "../../shared/api"
 import { Ivalidator, IresponseValidatorUnit, Irequest, IresponseValidatorCompose } from "../../shared/interface"
 import { UserController } from "../model/user.controllers"
 import { ModelUser } from "../model/users"
+import { DataLocalDomain } from "../repository/data-local"
 import { responseValidatorError } from "../validators/validators-response"
 
 export class FirebaseAuth {
@@ -17,10 +18,15 @@ export class FirebaseAuth {
       const user = await FirebaseAPI.auth.verifyIdToken(token)
       const nivel = user['nivel']
 
-      const model = await FirebaseAPI.db.collection(`${req.environment}/${req.domain}/${nivel}/user-${nivel}/colection/`).doc(user.uid).get()
-
+      const credential = await FirebaseAPI.db.collection(`${req.environment}/${req.domain}/${nivel}/user-${nivel}/colection/`).doc(user.uid).get()
+      const { permission } = credential.data() as any
+      let model:any = {}
+      for (const acess of permission) {
+        model[`${acess.id}`] = new DataLocalDomain().getModule(acess.id).model[acess.id]
+      }
       return {
-        credential: model.data(),
+        permission,
+        model,
         user,
         token
       }
