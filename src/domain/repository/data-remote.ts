@@ -1,14 +1,24 @@
 import { getFirestore } from "firebase-admin/firestore";
 import { FirebaseAPI } from "../../shared/api";
 import { Irequest, IresponseValidatorCompose } from "../../shared/interface";
-import { DataLocalDomain } from "../../domain/repository/data-local";
+import { DataLocalDomain } from "./data-local";
 import { Firebase } from "../api/firebase";
 import { TestDocument } from "../../shared/validator-remote";
+import { getAuth } from "firebase-admin/auth";
 
-export abstract class DocumentDomain {
+export abstract class DbService {
 
   constructor(public req: Irequest) { }
 
+  get createUser(){ return Firebase.createUser(this.req)}
+  get createUserConfig(){ return getAuth()}
+  get createLote(){ return getFirestore().batch() }
+  get getStatistic(){ return this.statistic }
+  get getLocalPermision(){ return new DataLocalDomain().getModule(this.req.document).permission }
+  get getLocalModel(){ return new DataLocalDomain().getModule(this.req.document).model }
+  get getLocalDocument(){ return new DataLocalDomain().getModule(this.req.document).document }
+  pathDocument(id?: string) { this.path(this.req, id) }
+  
   get db() {
     return {
       createUser: Firebase.createUser(this.req),
@@ -45,7 +55,7 @@ export abstract class DocumentDomain {
       get colection() { return FirebaseAPI.db.collection(`${rota[req.document].root}/colection/`).doc(id) },
       get historic() { return FirebaseAPI.db.collection(`${rota[req.document].root}/historic/`).doc(id) },
       get statistic() { return FirebaseAPI.db.doc(`${rota[req.document].root}/`) },
-      get nivel() { return rota[req.document].nivel }
+      get nivel() { return FirebaseAPI.db.doc(`${rota[req.document].nivel}/`) }
     }
   }
 

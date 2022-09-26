@@ -11,7 +11,6 @@ export class AccountAdm extends DocumentDomain {
 
   }
 
-
   async create(): Promise<IresponseValidatorCompose | null> {
 
    /*  console.log('CREATE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
@@ -61,7 +60,9 @@ export class AccountAdm extends DocumentDomain {
 
           if (create.userPermission = typeof config == 'undefined' ? true : false) {
 
-            db.lote.create(db.path(value.uid).colection, { permission: db.local.permission })
+            db.lote.create(db.path(value.uid).colection, {
+              permission: { [`${value.config.nivel}`]: db.local.permission}
+            })
             db.lote.set(db.path().historic, { ...req })
 
             const salve = await db.lote.commit()

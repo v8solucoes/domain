@@ -1,8 +1,8 @@
 import { IresponseValidatorCompose } from "../../../shared/interface";
-import { FirebaseAuth } from "../../api/firebase-auth";
 import { ValidatorsLocal } from "../validators-local";
 import { ValidatorDomain } from "../validator.domain";
 import { responseValidatorCompose } from "../validators-response";
+import { FirebaseValidator } from "../../api/firebase.validators";
 
 export class EmailAccountExistRespErrorAsync extends ValidatorDomain {
 
@@ -22,7 +22,7 @@ export class EmailAccountExistRespErrorAsync extends ValidatorDomain {
   }
   get validateAsync(): Promise<IresponseValidatorCompose> {
 
-    return FirebaseAuth.emailAccountExistRespErrorAsync(this.req.validator!).then((test) => {
+    return FirebaseValidator.emailAccountExistRespErrorAsync(this.req.validator!).then((test) => {
 
      /*  console.log('firebase Response')
       console.log(reponseValidatorCompose(test, this.req)) */

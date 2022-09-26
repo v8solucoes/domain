@@ -33,7 +33,7 @@ export interface Idata { ['account-adm']: {
   form?: IFormData | null
 }
 }
-
+export type Inivel = 'adm' | 'agency' | 'client'
 export type Irequest = {
   language: 'en';
   page: 'account' ;

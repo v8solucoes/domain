@@ -19,6 +19,6 @@ export class FirebaseAPI {
   static auth = getAuth()
  
 }
-export { FirebaseCrud } from "../domain/api/firebase-crud";
+/* export { FirebaseCruds } from "../domain/api/firebase-crud"; */
 export interface FirebaseUserRecord extends UserRecord {}
 export interface FirebaseCreateRequest extends CreateRequest {}

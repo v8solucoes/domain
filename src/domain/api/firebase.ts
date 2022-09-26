@@ -1,27 +1,27 @@
 import { FirebaseAPI, FirebaseUserRecord } from "../../shared/api"
-import { Ivalidator, IresponseValidatorUnit, Irequest, IresponseValidatorCompose } from "../../shared/interface"
+import { Irequest, IresponseValidatorCompose, Ipermission } from "../../shared/interface"
 import { UserController } from "../model/user.controllers"
 import { ModelUser } from "../model/users"
 import { DataLocalDomain } from "../repository/data-local"
 import { responseValidatorError } from "../validators/validators-response"
 
-export class FirebaseAuth {
+export class Firebase {
 
-  static async loginGetModelAsync(token: string, req: Irequest) {
+  static async userPermissionAndModelAsync(token: string, req: Irequest) {
 
   /*  const tokenInvalid = `eyJfQXV0aEVtdWxhdG9yUmVmcmVzaFRva2VuIjoiRE8gTk9UIE1PRElGWSIsImxvY2FsSWQiOiJMNzlVTE1iZVV6OEowYnNJUDlkb0xNcXV5ajNzIiwicHJvdmlkZXIiOiJwYXNzd29yZCIsImV4dHJhQ2xhaW1zIjp7fSwicHJvamVjdElkIjoidjhhcHAtODg4Y2QifQ` */
     
     try {
-      console.log('loginGetModelAsync')
-      console.log(req)
 
       const user = await FirebaseAPI.auth.verifyIdToken(token)
       const nivel = user['nivel']
 
       const credential = await FirebaseAPI.db.collection(`${req.environment}/${req.domain}/${nivel}/user-${nivel}/colection/`).doc(user.uid).get()
-      const { permission } = credential.data() as any
-      let model:any = {}
-      for (const acess of permission) {
+     
+      const { permission }= credential.data() as any
+    
+      let model: any = {}
+      for (const acess of permission.adm) {
         model[`${acess.id}`] = new DataLocalDomain().getModule(acess.id).model[acess.id]
       }
       return {
@@ -36,51 +36,48 @@ export class FirebaseAuth {
     }
 
   }
+  securityAccess(permission: { adm: Ipermission[] }, req: Irequest) {
+/*    const documentNivel =  new DocumentDomain(req) */
+  }
+  static async colection(token: string, req: Irequest) {
 
-  static async emailAccountExistRespErrorAsync(req: Ivalidator): Promise<IresponseValidatorUnit> {
-
-    const message = {
-      en: '"Email is already in use-Error!"',
-      pt: 'Email já utilizado!'
-    }
-
+  /*  const tokenInvalid = `eyJfQXV0aEVtdWxhdG9yUmVmcmVzaFRva2VuIjoiRE8gTk9UIE1PRElGWSIsImxvY2FsSWQiOiJMNzlVTE1iZVV6OEowYnNJUDlkb0xNcXV5ajNzIiwicHJvdmlkZXIiOiJwYXNzd29yZCIsImV4dHJhQ2xhaW1zIjp7fSwicHJvamVjdElkIjoidjhhcHAtODg4Y2QifQ` */
+    
     try {
-      // Test diferent email
-      /*       req.value = 'contato@v8sites.com.br' */
 
-      await FirebaseAPI.auth.getUserByEmail(req.value)
+      const user = await Firebase.userPermissionAndModelAsync(token, req)
+/* 
+      const { permission } = user
 
-      return { [`auth/email-already-exists`]: message[req.language] }
+      const reqPermission = req.document
+ */
+      /* Compare */
 
+      return user
+      
+      // Test Permission Request X DB ?
+/*       const nivel = user */
+
+     /*  const credential = await FirebaseAPI.db.collection(`${req.environment}/${req.domain}/${nivel}/user-${nivel}/colection/`).doc(user.uid).get() */
+    /*   const { permission } = credential.data() as any
+    
+      let model: any = {}
+      for (const acess of user.permission) {
+        model[`${acess.id}`] = new DataLocalDomain().getModule(acess.id).model[acess.id]
+      }
+      return {
+        permission,
+        model,
+        user,
+        token
+      } */
+      
     } catch (error) {
-
-      // Return error null firebase if not exist.
-      return null
+      return {error}
     }
 
   }
-  static async emailAccountExistRespSucessAsync(req: Ivalidator): Promise<IresponseValidatorUnit> {
 
-    const message = {
-      en: '"Email invalid!"',
-      pt: 'Email já utilizado!'
-    }
-
-    try {
-      // Test diferent email
-      /*       req.value = 'contato@v8sites.com.br' */
-
-      await FirebaseAPI.auth.getUserByEmail(req.value)
-
-      return null
-
-    } catch (error) {
-
-      // Return error null firebase if not exist.
-      return { [`auth/email-already-exists`]: message[req.language] }
-    }
-
-  }
   static create() { return FirebaseAPI.auth }
   
   static async createUser(req: Irequest): Promise<FirebaseUserRecord | IresponseValidatorCompose> {
