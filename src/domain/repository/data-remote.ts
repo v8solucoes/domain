@@ -4,40 +4,32 @@ import { Irequest, IresponseValidatorCompose } from "../../shared/interface";
 import { DataLocalDomain } from "./data-local";
 import { Firebase } from "../api/firebase";
 import { TestDocument } from "../../shared/validator-remote";
-import { getAuth } from "firebase-admin/auth";
+import { Documents } from "../documents/document";
 
-export abstract class DbService {
+export abstract class DataRemote {
 
   constructor(public req: Irequest) { }
 
-  get createUser(){ return Firebase.createUser(this.req)}
-  get createUserConfig(){ return getAuth()}
-  get createLote(){ return getFirestore().batch() }
-  get getStatistic(){ return this.statistic }
-  get getLocalPermision(){ return new DataLocalDomain().getModule(this.req.document).permission }
-  get getLocalModel(){ return new DataLocalDomain().getModule(this.req.document).model }
-  get getLocalDocument(){ return new DataLocalDomain().getModule(this.req.document).document }
-  pathDocument(id?: string) { this.path(this.req, id) }
-  
   get db() {
     return {
       createUser: Firebase.createUser(this.req),
       createUserConfig: Firebase.create(),
       lote: getFirestore().batch(),
-      statistic: this.statistic,
-      local: new DataLocalDomain().getModule(this.req.document),
+      getStatistic: this.statistic,
+      getLocalDocument: new DataLocalDomain().getModule(this.req.document),
+      pathDocument: (id?: string) => Documents.path(this.req, id),
       crud: getFirestore(),
-      path: (id?:string)=> this.path(this.req,id),
     }
   }
-  async testPermisionDomain() { return await new TestDocument(this.req).permisionDomain()
+  async testPermisionDomain() {
+    return await new TestDocument(this.req).permisionDomain()
 
   }
 
   abstract create(): Promise<IresponseValidatorCompose | null>
 
-  path(req: Irequest, id: string = FirebaseAPI.db.bundle().bundleId) {
-   
+/*   path(req: Irequest, id: string = FirebaseAPI.db.bundle().bundleId) {
+
     const rota = {
       [`account-adm`]: {
         root: `${req.environment}/${req.domain}/adm/user-adm`,
@@ -45,7 +37,8 @@ export abstract class DbService {
       },
       [`sign-in`]: {
         root: `${req.environment}/${req.domain}/adm/user-adm`,
-        nivel: 'adm' },
+        nivel: 'adm'
+      },
       [`null`]: {
         root: `${req.environment}/${req.domain}/adm/null`,
         nivel: 'adm'
@@ -57,7 +50,7 @@ export abstract class DbService {
       get statistic() { return FirebaseAPI.db.doc(`${rota[req.document].root}/`) },
       get nivel() { return FirebaseAPI.db.doc(`${rota[req.document].nivel}/`) }
     }
-  }
+  } */
 
   get statistic() {
 

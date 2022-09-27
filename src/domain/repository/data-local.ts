@@ -11,7 +11,8 @@ export class DataLocalDomain {
       form: true,
       title: true,
       subTitle: true,
-    },
+      },
+    colection:'account-adm',
     _group: [
       {
         id: 'name',

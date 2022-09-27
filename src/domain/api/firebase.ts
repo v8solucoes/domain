@@ -1,85 +1,86 @@
+
 import { FirebaseAPI, FirebaseUserRecord } from "../../shared/api"
-import { Irequest, IresponseValidatorCompose, Ipermission } from "../../shared/interface"
+import { Irequest, IresponseValidatorCompose, Ipermission, Inivel, IpermissionNivel } from "../../shared/interface"
+import { Documents } from "../documents/document"
 import { UserController } from "../model/user.controllers"
 import { ModelUser } from "../model/users"
 import { DataLocalDomain } from "../repository/data-local"
+/* import { DataLocalDomain } from "../repository/data-local" */
 import { responseValidatorError } from "../validators/validators-response"
 
 export class Firebase {
 
   static async userPermissionAndModelAsync(token: string, req: Irequest) {
 
-  /*  const tokenInvalid = `eyJfQXV0aEVtdWxhdG9yUmVmcmVzaFRva2VuIjoiRE8gTk9UIE1PRElGWSIsImxvY2FsSWQiOiJMNzlVTE1iZVV6OEowYnNJUDlkb0xNcXV5ajNzIiwicHJvdmlkZXIiOiJwYXNzd29yZCIsImV4dHJhQ2xhaW1zIjp7fSwicHJvamVjdElkIjoidjhhcHAtODg4Y2QifQ` */
-    
+    /*  const tokenInvalid = `eyJfQXV0aEVtdWxhdG9yUmVmcmVzaFRva2VuIjoiRE8gTk9UIE1PRElGWSIsImxvY2FsSWQiOiJMNzlVTE1iZVV6OEowYnNJUDlkb0xNcXV5ajNzIiwicHJvdmlkZXIiOiJwYXNzd29yZCIsImV4dHJhQ2xhaW1zIjp7fSwicHJvamVjdElkIjoidjhhcHAtODg4Y2QifQ` */
+
     try {
 
       const user = await FirebaseAPI.auth.verifyIdToken(token)
       const nivel = user['nivel']
 
       const credential = await FirebaseAPI.db.collection(`${req.environment}/${req.domain}/${nivel}/user-${nivel}/colection/`).doc(user.uid).get()
-     
-      const { permission }= credential.data() as any
-    
-      let model: any = {}
-      for (const acess of permission.adm) {
-        model[`${acess.id}`] = new DataLocalDomain().getModule(acess.id).model[acess.id]
+
+      if (credential.exists) {
+        const { permission } = credential.data() as any  
+       
+        const localModel = new DataLocalDomain()
+
+        let model: any = {}
+
+        for (const acess of permission[nivel]) {
+
+          if (localModel.getModule(acess.id).model[acess.id].id == 'undefined') {
+            throw `Model not Exist ${acess.id}`
+          } else {
+            model[`${acess.id}`] = localModel.getModule(acess.id).model[acess.id]
+          }
+        }
+        return {
+          permission,
+          model,
+          user,
+          token
+        }
+      } else {
+        throw `Colection not Exist`
       }
-      return {
-        permission,
-        model,
-        user,
-        token
-      }
-      
+
     } catch (error) {
-      return {error}
+      return { error }
     }
-
   }
-  securityAccess(permission: { adm: Ipermission[] }, req: Irequest) {
-/*    const documentNivel =  new DocumentDomain(req) */
-  }
-  static async colection(token: string, req: Irequest) {
+  static securityColectionAndDocumentAcessIsValid(permission: IpermissionNivel, req: Irequest): boolean {
+    const documentNivel = Documents.path(req).nivel as Inivel
+    const documenteName = req.document
 
-  /*  const tokenInvalid = `eyJfQXV0aEVtdWxhdG9yUmVmcmVzaFRva2VuIjoiRE8gTk9UIE1PRElGWSIsImxvY2FsSWQiOiJMNzlVTE1iZVV6OEowYnNJUDlkb0xNcXV5ajNzIiwicHJvdmlkZXIiOiJwYXNzd29yZCIsImV4dHJhQ2xhaW1zIjp7fSwicHJvamVjdElkIjoidjhhcHAtODg4Y2QifQ` */
-    
+    let test: any = []
+
+    for (const acess of permission[documentNivel]) {
+
+      if (documenteName == acess?.colection && acess.id) {
+        test.push(documenteName)
+      } else {
+        throw `Colection: ${acess.id} not Permission: ID: ${acess.id} / Colection: ${acess.colection}`
+      }
+    }
+    return test.length ? true : false
+  }
+  static async colection(req: Irequest) {
+
+
     try {
 
-      const user = await Firebase.userPermissionAndModelAsync(token, req)
-/* 
-      const { permission } = user
+      return {colection:'cheguei'}
 
-      const reqPermission = req.document
- */
-      /* Compare */
-
-      return user
-      
-      // Test Permission Request X DB ?
-/*       const nivel = user */
-
-     /*  const credential = await FirebaseAPI.db.collection(`${req.environment}/${req.domain}/${nivel}/user-${nivel}/colection/`).doc(user.uid).get() */
-    /*   const { permission } = credential.data() as any
-    
-      let model: any = {}
-      for (const acess of user.permission) {
-        model[`${acess.id}`] = new DataLocalDomain().getModule(acess.id).model[acess.id]
-      }
-      return {
-        permission,
-        model,
-        user,
-        token
-      } */
-      
     } catch (error) {
-      return {error}
+      return { error }
     }
 
   }
 
   static create() { return FirebaseAPI.auth }
-  
+
   static async createUser(req: Irequest): Promise<FirebaseUserRecord | IresponseValidatorCompose> {
 
     const user = req.data[req.document] as ModelUser

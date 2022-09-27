@@ -1,9 +1,9 @@
 import { FirebaseUserRecord } from "../../shared/api";
 import { Irequest, IresponseValidatorCompose } from "../../shared/interface";
+import { DataRemote } from "../repository/data-remote";
 import { responseValidatorError } from "../validators/validators-response";
-import { DocumentDomain } from "./document.domain";
 
-export class AccountAdm extends DocumentDomain {
+export class AccountAdm extends DataRemote {
 
   constructor(public req: Irequest) {
 
@@ -60,10 +60,10 @@ export class AccountAdm extends DocumentDomain {
 
           if (create.userPermission = typeof config == 'undefined' ? true : false) {
 
-            db.lote.create(db.path(value.uid).colection, {
-              permission: { [`${value.config.nivel}`]: db.local.permission}
+            db.lote.create(db.pathDocument(value.uid).colection, {
+              permission: { [`${value.config.nivel}`]: db.getLocalDocument.permission}
             })
-            db.lote.set(db.path().historic, { ...req })
+            db.lote.set(db.pathDocument().historic, { ...req })
 
             const salve = await db.lote.commit()
 
@@ -71,11 +71,11 @@ export class AccountAdm extends DocumentDomain {
             if (create.statistic = Array.isArray(salve)) {
 
 
-              const { exists } = await db.path('account-adm').statistic.get()
+              const { exists } = await db.pathDocument('account-adm').statistic.get()
 
               console.log(create)
 
-              await (exists ? db.path('account-adm').statistic.update({ ...db.statistic.create }) : db.path('account-adm').statistic.create({ ...db.statistic.create }))
+              await (exists ? db.pathDocument('account-adm').statistic.update({ ...db.getStatistic.create }) : db.pathDocument('account-adm').statistic.create({ ...db.getStatistic.create }))
 
               return null
 

@@ -33,7 +33,12 @@ export interface Idata { ['account-adm']: {
   form?: IFormData | null
 }
 }
-export type Inivel = 'adm' | 'agency' | 'client'
+export type Inivel = 'adm'
+export type Ipath = {
+  [keyof: string]: {
+    root: string
+    nivel: Inivel
+}}
 export type Irequest = {
   language: 'en';
   page: 'account' ;
@@ -59,6 +64,9 @@ export type InameValidatorLocal = NameProperty<ValidatorsLocal>
 export type InameValidatorRemote = NameProperty<ValidatorsRemote>
 
 export type IdataProperty = { [keyof: string]: Idata }
+export type IpermissionNivel = {
+  adm: Ipermission[]
+}
 
 export interface Ipermission {
   id: string;
@@ -67,6 +75,7 @@ export interface Ipermission {
     title: boolean;
     subTitle: boolean;
   }
+  colection?: Irequest['document']
   _group?: Ipermission[]
 }
 export type ImodelDefinedProperty = ImodelUndefinedProperty
