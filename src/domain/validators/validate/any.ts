@@ -6,7 +6,7 @@ export class AnyResNull extends ValidatorDomain {
 
   get clearDirt() { 
 
-    return this.req.validator.value 
+    return this.req.validator!.value 
   }
   get applyMaskView() {
 

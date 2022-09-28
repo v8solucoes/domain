@@ -55,7 +55,7 @@ export type Irequest = {
   domain: 'localchost';
   dateUpdate: Date;
   colection: Irequest['document'] | null;
-  validator: Ivalidator;
+  validator?: Ivalidator;
   data: any | null;
   item: string | null;
   dateCreate: Date | null;
@@ -146,6 +146,11 @@ export interface Imodel {
         | 'f-2-esquerda',
       }
     }
+  }
+  colection?: {
+    title: string,
+    subTitle: string,
+    description: string
   }
   _group?: ImodelUndefinedProperty
 

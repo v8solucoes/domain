@@ -1,7 +1,7 @@
 {
-    "watch": ["src"],
+    "watch": ["src/study-concept/"],
     "ext": ".ts,.js",
     "ignore": ["/src/construtor/04-dist/"],
-    "exec": "ts-node ./src/study-concept/compose-async.ts"
+    "exec": "ts-node ./src/study-concept/head-object.ts"
   }
   

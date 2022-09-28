@@ -25,7 +25,7 @@ export class TestDocument {
 
     try {
 
-      req.validator.typeExecute = 'back'
+      req.validator!.typeExecute = 'back'
 
       this.registerTest(language, req, permissions, model, document)
 

@@ -4,7 +4,7 @@ import { ValidatorDomain } from "../validator.domain";
 
 export class CheckIsTrue extends ValidatorDomain {
   get clearDirt() { 
-    const value = this.req.validator.value == true ? true : false
+    const value = this.req.validator!.value == true ? true : false
     return value 
   }
   get applyMaskView() {

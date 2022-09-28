@@ -305,6 +305,11 @@ export class DataLocalDomain {
           },
         },
       },
+      colection: {
+        title: 'name',
+        subTitle: 'email',
+        description: 'userId'
+      }
     },
     [`sign-in`]: {
       id: 'login',

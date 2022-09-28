@@ -5,6 +5,7 @@ import { DataLocalDomain } from "./data-local";
 import { Firebase } from "../api/firebase";
 import { TestDocument } from "../../shared/validator-remote";
 import { Documents } from "../documents/document";
+import { ModelUser } from "../model/users";
 
 export abstract class DataRemote {
 
@@ -27,30 +28,6 @@ export abstract class DataRemote {
   }
 
   abstract create(): Promise<IresponseValidatorCompose | null>
-
-/*   path(req: Irequest, id: string = FirebaseAPI.db.bundle().bundleId) {
-
-    const rota = {
-      [`account-adm`]: {
-        root: `${req.environment}/${req.domain}/adm/user-adm`,
-        nivel: 'adm'
-      },
-      [`sign-in`]: {
-        root: `${req.environment}/${req.domain}/adm/user-adm`,
-        nivel: 'adm'
-      },
-      [`null`]: {
-        root: `${req.environment}/${req.domain}/adm/null`,
-        nivel: 'adm'
-      },
-    }
-    return {
-      get colection() { return FirebaseAPI.db.collection(`${rota[req.document].root}/colection/`).doc(id) },
-      get historic() { return FirebaseAPI.db.collection(`${rota[req.document].root}/historic/`).doc(id) },
-      get statistic() { return FirebaseAPI.db.doc(`${rota[req.document].root}/`) },
-      get nivel() { return FirebaseAPI.db.doc(`${rota[req.document].nivel}/`) }
-    }
-  } */
 
   get statistic() {
 
@@ -90,7 +67,17 @@ export abstract class DataRemote {
         }
       },
       get historic() {
+        delete  req.validator 
         return fire.arrayUnion(req)
+      },
+       historicDocument(user: Pick<ModelUser,'name'| 'userId' | 'email'>, modification:any) {
+         const  dateUpdate = new Date()
+         const historic = {
+          dateUpdate,
+          ...user,
+          modification
+        } 
+        return fire.arrayUnion(historic)
       }
     }
   }
