@@ -1,6 +1,6 @@
 
 import { FirebaseAPI, FirebaseUserRecord } from "../../shared/api"
-import { Irequest, IresponseValidatorCompose, Ipermission, Inivel, IpermissionNivel } from "../../shared/interface"
+import { Irequest, IresponseValidatorCompose, Inivel, IpermissionNivel } from "../../shared/interface"
 import { Documents } from "../documents/document"
 import { UserController } from "../model/user.controllers"
 import { ModelUser } from "../model/users"
@@ -68,10 +68,17 @@ export class Firebase {
   }
   static async colection(req: Irequest) {
 
-
+    
     try {
-
-      return {colection:'cheguei'}
+      
+      const colection = await Documents.path(req).colection.get()
+      let dataBase: any = {}
+      colection.forEach((doc: { id: string; data: any }) => {
+        dataBase[doc.id] = {
+          document: doc.data()
+        }
+      });
+        return dataBase
 
     } catch (error) {
       return { error }

@@ -60,7 +60,7 @@ export class AccountAdm extends DataRemote {
 
           if (create.userPermission = typeof config == 'undefined' ? true : false) {
 
-            db.lote.create(db.pathDocument(value.uid).colection, {
+            db.lote.create(db.pathDocument(value.uid).document, {
               permission: { [`${value.config.nivel}`]: db.getLocalDocument.permission}
             })
             db.lote.set(db.pathDocument().historic, { ...req })

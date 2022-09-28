@@ -27,7 +27,8 @@ export class Documents {
       },
     }
     return {
-      get colection() { return FirebaseAPI.db.collection(`${rota[req.document].root}/colection/`).doc(id) },
+      get colection() { return FirebaseAPI.db.collection(`${rota[req.document].root}/colection/`)},
+      get document() { return FirebaseAPI.db.collection(`${rota[req.document].root}/colection/`).doc(id)},
       get historic() { return FirebaseAPI.db.collection(`${rota[req.document].root}/historic/`).doc(id) },
       get statistic() { return FirebaseAPI.db.doc(`${rota[req.document].root}/`) },
       get nivel() { return `${rota[req.document].nivel}`}

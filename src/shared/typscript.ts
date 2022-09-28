@@ -1,5 +1,9 @@
+export { ModelUser as AccountAdm} from "../domain/model/users";
+
 export type NameProperty<T> = { [K in keyof T]: K }[keyof T];
 export type NameValue<T> = T[keyof T]
+
+
 
 //Prova de conceito
 export class Teste {
@@ -7,6 +11,7 @@ export class Teste {
   objeto = { casa: 'casa', teste: 'as' }
   lista = ['ricado','teste']
 }
+
 
 /* const nomeValue: NameValue<Teste['nome']> = 'asasd'
 const nomeProperty: NameProperty<Teste['nome']> = 'asdfaf'

@@ -1,6 +1,6 @@
 import { ModelUser } from "../domain/model/users";
 import { ValidatorsRemote } from "../domain/validators/validators-remote";
-import { NameProperty } from "./typscript";
+import { AccountAdm, NameProperty } from "./typscript";
 import { ValidatorsLocal } from "./validator-local";
 
 export { ModelUser as ImodelUser}
@@ -38,7 +38,14 @@ export type Ipath = {
   [keyof: string]: {
     root: string
     nivel: Inivel
-}}
+  }
+}
+export interface Icolection {
+ [`account-Adm`]: Ipermission
+ [`sign-in`]: AccountAdm
+ [`null`]: AccountAdm
+}
+
 export type Irequest = {
   language: 'en';
   page: 'account' ;
