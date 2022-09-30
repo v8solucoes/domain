@@ -110,7 +110,7 @@ export class TestDocument {
 
   async permisionDomain(): Promise<IresponseValidatorCompose | null> {
 
-    const local = new DataLocalDomain().getModule(this.req.document)
+    const local = new DataLocalDomain().getModule(this.req.document,this.req.user!.nivel)
 
     return await this.exe(this.req.language,
       this.req,

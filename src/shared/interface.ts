@@ -41,6 +41,7 @@ export type Ipath = {
   }
 }
 export interface Icolection {
+ [keyof:string]: any
  [`account-Adm`]: Ipermission
  [`sign-in`]: AccountAdm
  [`null`]: AccountAdm
@@ -49,12 +50,13 @@ export interface Icolection {
 export type Irequest = {
   language: 'en';
   page: 'account' ;
-  document: 'account-adm' | 'sign-in' | 'null';
+  document: 'user-adm' | 'account-adm' | 'sign-in' | 'null' ;
   action: 'create' | 'null';
   environment: 'prod' | 'test';
   domain: 'localchost';
   dateUpdate: Date;
   colection: Irequest['document'] | null;
+  user?: Iuser
   validator?: Ivalidator;
   data: any | null;
   item: string | null;
@@ -87,7 +89,7 @@ export interface Ipermission {
 }
 export type ImodelDefinedProperty = ImodelUndefinedProperty
 export type ImodelUndefinedProperty = { [key: string]: Imodel }
-
+export type Iuser =  Pick<ModelUser,'nivel' | 'name' | 'userId'>
 export interface Imodel {
   id: string;
   typeData: ItypeName['dataType'];

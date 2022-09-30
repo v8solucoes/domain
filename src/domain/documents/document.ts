@@ -17,6 +17,10 @@ export class Documents {
         root: `${req.environment}/${req.domain}/adm/user-adm`,
         nivel: 'adm'
       },
+      [`user-adm`]: {
+        root: `${req.environment}/${req.domain}/adm/user-adm`,
+        nivel: 'adm'
+      },
       [`sign-in`]: {
         root: `${req.environment}/${req.domain}/adm/user-adm`,
         nivel: 'adm'

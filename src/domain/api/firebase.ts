@@ -1,6 +1,6 @@
 
 import { FirebaseAPI, FirebaseUserRecord } from "../../shared/api"
-import { Irequest, IresponseValidatorCompose, Inivel, IpermissionNivel } from "../../shared/interface"
+import { Irequest, IresponseValidatorCompose, Inivel, IpermissionNivel, Iuser } from "../../shared/interface"
 import { Documents } from "../documents/document"
 import { UserController } from "../model/user.controllers"
 import { ModelUser } from "../model/users"
@@ -16,10 +16,16 @@ export class Firebase {
 
     try {
 
-      const user = await FirebaseAPI.auth.verifyIdToken(token)
-      const nivel = user['nivel']
+      const getUser = await FirebaseAPI.auth.verifyIdToken(token)
+      const nivel = getUser['nivel'] as  Inivel
+      
+      const user: Iuser = {
+        'name': getUser.name,
+         nivel,
+        'userId' : getUser.uid
+      }
 
-      const credential = await FirebaseAPI.db.collection(`${req.environment}/${req.domain}/${nivel}/user-${nivel}/colection/`).doc(user.uid).get()
+      const credential = await FirebaseAPI.db.collection(`${req.environment}/${req.domain}/${nivel}/user-${nivel}/colection/`).doc(getUser.uid).get()
 
       if (credential.exists) {
         const { permission } = credential.data() as any  
@@ -30,17 +36,18 @@ export class Firebase {
 
         for (const acess of permission[nivel]) {
 
-          if (localModel.getModule(acess.id).model[acess.id].id == 'undefined') {
+          if (localModel.getModule(acess.id,nivel).model[acess.id].id == 'undefined') {
             throw `Model not Exist ${acess.id}`
           } else {
-            model[`${acess.id}`] = localModel.getModule(acess.id).model[acess.id]
+            model[`${acess.id}`] = localModel.getModule(acess.id,nivel).model[acess.id]
           }
         }
         return {
           permission,
           model,
           user,
-          token
+          token,
+          getUser
         }
       } else {
         throw `Colection not Exist`
@@ -52,9 +59,13 @@ export class Firebase {
   }
   static securityColectionAndDocumentAcessIsValid(permission: IpermissionNivel, req: Irequest): boolean {
     const documentNivel = Documents.path(req).nivel as Inivel
-    const documenteName = req.document
+    const documenteName = req.document == 'account-adm' ? 'user-adm' : req.document
 
     let test: any = []
+
+    console.log('permission[documentNivel]')
+    console.log(permission[documentNivel])
+    console.log(documenteName)
 
     for (const acess of permission[documentNivel]) {
 

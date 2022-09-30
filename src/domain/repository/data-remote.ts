@@ -17,7 +17,8 @@ export abstract class DataRemote {
       createUserConfig: Firebase.create(),
       lote: getFirestore().batch(),
       getStatistic: this.statistic,
-      getLocalDocument: new DataLocalDomain().getModule(this.req.document),
+      getLocalDocument: new DataLocalDomain().getModule(this.req.document, this.req.user!.nivel),
+      getUserAdm: new DataLocalDomain().getModule('user-adm', 'adm'),
       pathDocument: (id?: string) => Documents.path(this.req, id),
       crud: getFirestore(),
     }

@@ -64,7 +64,7 @@ export class AccountAdm extends DataRemote {
               ...personUser,
               userId
            }
-            const permission = { [`${customUser.nivel}`]: db.getLocalDocument.permission }
+            const permission = { [`${customUser.nivel}`]: db.getUserAdm.permission }  
             
             db.lote.create(db.pathDocument(userId).document, {
               permission,
@@ -79,17 +79,15 @@ export class AccountAdm extends DataRemote {
 
             const salve = await db.lote.commit()
 
-
             if (create.statistic = Array.isArray(salve)) {
 
-
-              const { exists } = await db.pathDocument('account-adm').statistic.get()
+              const { exists } = await db.pathDocument('user-adm').statistic.get()
 
               console.log(create)
 
               await (exists ?
-                db.pathDocument('account-adm').statistic.update({ ...db.getStatistic.create }) :
-                db.pathDocument('account-adm').statistic.create({ ...db.getStatistic.create }))
+                db.pathDocument('user-adm').statistic.update({ ...db.getStatistic.create }) :
+                db.pathDocument('user-adm').statistic.create({ ...db.getStatistic.create }))
 
               return null
 
