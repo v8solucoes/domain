@@ -16,91 +16,79 @@ export class DataLocalDomain {
       colection: 'user-adm',
       _group: [
         {
-          id: 'user',
+          id: 'email',
           view: {
             form: true,
             title: true,
             subTitle: true,
           },
-          _group: [
-            {
-              id: 'email',
-              view: {
-                form: true,
-                title: true,
-                subTitle: true,
-              },
-            },
-            {
-              id: 'acceptTerms',
-              view: {
-                form: true,
-                title: true,
-                subTitle: true,
-              },
-            },
-            {
-              id: 'emailVerified',
-              view: {
-                form: true,
-                title: true,
-                subTitle: true,
-              },
-            },
-            {
-              id: 'multiFactor',
-              view: {
-                form: true,
-                title: true,
-                subTitle: true,
-              },
-            },
-            {
-              id: 'name',
-              view: {
-                form: true,
-                title: true,
-                subTitle: true,
-              },
-            },
-            {
-              id: 'nivel',
-              view: {
-                form: true,
-                title: true,
-                subTitle: true,
-              },
-            },
-            {
-              id: 'password',
-              view: {
-                form: true,
-                title: true,
-                subTitle: true,
-              },
-            },
-            {
-              id: 'telephone',
-              view: {
-                form: true,
-                title: true,
-                subTitle: true,
-              },
-            },
-            {
-              id: 'userId',
-              view: {
-                form: true,
-                title: true,
-                subTitle: true,
-              },
-            },
-
-          ]
         },
-        
-       
-      ],
+        {
+          id: 'acceptTerms',
+          view: {
+            form: true,
+            title: true,
+            subTitle: true,
+          },
+        },
+        {
+          id: 'emailVerified',
+          view: {
+            form: true,
+            title: true,
+            subTitle: true,
+          },
+        },
+        {
+          id: 'multiFactor',
+          view: {
+            form: true,
+            title: true,
+            subTitle: true,
+          },
+        },
+        {
+          id: 'name',
+          view: {
+            form: true,
+            title: true,
+            subTitle: true,
+          },
+        },
+        {
+          id: 'nivel',
+          view: {
+            form: true,
+            title: true,
+            subTitle: true,
+          },
+        },
+        {
+          id: 'password',
+          view: {
+            form: true,
+            title: true,
+            subTitle: true,
+          },
+        },
+        {
+          id: 'telephone',
+          view: {
+            form: true,
+            title: true,
+            subTitle: true,
+          },
+        },
+        {
+          id: 'userId',
+          view: {
+            form: true,
+            title: true,
+            subTitle: true,
+          },
+        },
+
+      ]
       },
       {
       id: 'account-adm',

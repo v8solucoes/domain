@@ -82,7 +82,7 @@ export class Firebase {
       let dataBase: any = {}
       colection.forEach((doc: { id: string; data: any }) => {
         dataBase[doc.id] = {
-          document: doc.data()
+           ...doc.data()
         }
       });
         return dataBase

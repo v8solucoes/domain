@@ -27,9 +27,8 @@ export class OptionsConstructor {
       environment: 'prod',
       action: "create",
       document: "account-adm",
-      dateUpdate: new Date(),
-      dateCreate: new Date(),
-      colection: null,
+      dateTime: new Date(),
+      colection: `null`,
       validator: {
         id: "notId",
         name: 'namePersonal',

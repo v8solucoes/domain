@@ -52,15 +52,14 @@ export type Irequest = {
   page: 'account' ;
   document: 'user-adm' | 'account-adm' | 'sign-in' | 'null' ;
   action: 'create' | 'null';
+  item: string | null;
   environment: 'prod' | 'test';
   domain: 'localchost';
-  dateUpdate: Date;
-  colection: Irequest['document'] | null;
+  dateTime: Date | null;
+  colection: Irequest['document']
   user?: Iuser
   validator?: Ivalidator;
-  data: any | null;
-  item: string | null;
-  dateCreate: Date | null;
+  data?: any | null;
 }
 
 export type Ilanguage = 'en'

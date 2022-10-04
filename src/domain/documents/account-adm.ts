@@ -68,7 +68,7 @@ export class AccountAdm extends DataRemote {
             
             db.lote.create(db.pathDocument(userId).document, {
               permission,
-              user,
+              [`user-adm`]: user,
               _hitoric: db.getStatistic.historicDocument({
                 userId: user.userId,
                 name: user.name,
