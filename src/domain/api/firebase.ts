@@ -63,10 +63,6 @@ export class Firebase {
 
     let test: any = []
 
-    console.log('permission[documentNivel]')
-    console.log(permission[documentNivel])
-    console.log(documenteName)
-
     for (const acess of permission[documentNivel]) {
 
       if (documenteName == acess?.colection && acess.id) {
