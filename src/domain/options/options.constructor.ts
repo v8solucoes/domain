@@ -38,7 +38,7 @@ export class OptionsConstructor {
         typeExecute: "front",
         error: null
       },
-      item: null,
+      key: null,
       data: null
     }
 

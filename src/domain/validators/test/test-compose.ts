@@ -54,6 +54,18 @@ export class TestCompose extends TestUnit {
     )
     return responseValidatorCompose(test, this.req)
   }
+  get testRequestDocument(): IresponseValidatorCompose {
+    const testRequest  = this.testRequest
+    const options = new OptionsValidator()
+    const req = this.req
+
+    const testDocument = this.compose(
+      this.existValueInArray(req.action, options.action.array),
+      this.typeStringValue(req.key as string),
+    )
+    const result = testRequest == null && testDocument == null ? null : { ...testDocument, ...testRequest}
+    return responseValidatorCompose(result, this.req)
+  }
   get testRequestDomainLangPageEnvi(): IresponseValidatorCompose {
 
     const options = new OptionsValidator()
@@ -67,19 +79,5 @@ export class TestCompose extends TestUnit {
     )
     return responseValidatorCompose(test, this.req)
   }
-  get testRequestLogin(): IresponseValidatorCompose {
-
-    const options = new OptionsValidator()
-    const req = this.req
-
-    const test = this.compose(
-      this.existValueInArray(req.page, options.page.array),
-      this.existValueInArray(req.domain, options.domain.array),
-      this.existValueInArray(req.action, options.action.array),
-      this.existValueInArray(req.document, options.document.array),
-      this.existValueInArray(req.language, options.language.array),
-      this.existValueInArray(req.environment, options.environment.array),
-    )
-    return responseValidatorCompose(test, this.req)
-  }
+ 
 }

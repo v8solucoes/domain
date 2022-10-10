@@ -101,6 +101,17 @@ export class TestUnit {
 
     return responseValidatorUnit(sucess, error[req!.language]);
   }
+ typeStringValue(value:string): IresponseValidatorUnit {
+ 
+    const sucess = typeof value === "string" ? true : false;
+    const error: IvalidatorError = {
+      en: {
+        [`typeString > ${value}`]: `" ${typeof value} " deve ser tipo: 'STRING`,
+      },
+    };
+
+    return responseValidatorUnit(sucess, error[this.req!.language]);
+  }
 
   get typeBoolean(): IresponseValidatorUnit {
     const req = this.req.validator!
