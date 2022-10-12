@@ -1,7 +1,7 @@
 import { getFirestore } from "firebase-admin/firestore";
 import { FirebaseAPI } from "../../shared/api";
 import { Irequest, IresponseValidatorCompose } from "../../shared/interface";
-import { DataLocalDomain } from "./data-local";
+import { DataLocal } from "./data-local";
 import { Firebase } from "../api/firebase";
 import { TestDocument } from "../../shared/validator-remote";
 import { Documents } from "../documents/document";
@@ -17,8 +17,8 @@ export abstract class DataRemote {
       createUserConfig: Firebase.create(),
       lote: getFirestore().batch(),
       getStatistic: this.statistic,
-      getLocalDocument: new DataLocalDomain().getModule(this.req.document, this.req.user!.nivel),
-      getUserAdm: new DataLocalDomain().getModule('user-adm', 'adm'),
+      getLocalDocument: new DataLocal().getModule(this.req.document, this.req.user!.nivel),
+      getUserAdm: new DataLocal().getModule('user-adm', 'adm'),
       pathDocument: (id?: string) => Documents.path(this.req, id),
       crud: getFirestore(),
     }

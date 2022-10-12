@@ -1,6 +1,6 @@
 import { ImodelUndefinedProperty, Imodule, Inivel, Ipermission, IpermissionNivel, Irequest } from "../../shared/interface"
 
-export class DataLocalDomain {
+export class DataLocal {
 
   user = null
 
@@ -1088,6 +1088,7 @@ export class DataLocalDomain {
     const model = this.model
     const document = {[module]: this.document[module]}
 
+   nivel ? 'tem': console.log(`não tem Nível de Acesso: ${nivel}`)
    permission.length ? 'tem': console.log(`não tem Permission: ${module}`)
    this.permission[nivel].length ? 'tem': console.log(`não tem Permission: ${module}`)
    this.model[module] ? 'tem': console.log(`não tem Model: ${module}`)

@@ -4,7 +4,7 @@ import { Irequest, IresponseValidatorCompose, Inivel, IpermissionNivel, Iuser } 
 import { Documents } from "../documents/document"
 import { UserController } from "../model/user.controllers"
 import { ModelUser } from "../model/users"
-import { DataLocalDomain } from "../repository/data-local"
+import { DataLocal } from "../repository/data-local"
 /* import { DataLocalDomain } from "../repository/data-local" */
 import { responseValidatorError } from "../validators/validators-response"
 
@@ -30,7 +30,7 @@ export class Firebase {
       if (credential.exists) {
         const { permission } = credential.data() as any  
        
-        const localModel = new DataLocalDomain()
+        const localModel = new DataLocal()
 
         let model: any = {}
 
@@ -86,6 +86,22 @@ export class Firebase {
         }
       });
         return dataBase
+
+    } catch (error) {
+      return { error }
+    }
+
+  }
+  static async document(req: Irequest) {
+    
+    try {
+      
+      const document = await Documents.path(req, req.key as string).document.get()
+      /*    let dataBase: any = {} */
+      
+      console.log(document.data())
+
+        return document.data()
 
     } catch (error) {
       return { error }

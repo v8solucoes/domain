@@ -1,6 +1,6 @@
 import { Ilanguage, ImodelUndefinedProperty, InameValidatorLocal, InameValidatorRemote, Ipermission, Irequest, IresponseValidatorCompose, Ivalidator } from "../../../shared/interface";
 import { ValidatorsRemote } from "../../../shared/validator-remote";
-import { DataLocalDomain } from "../../repository/data-local";
+import { DataLocal } from "../../repository/data-local";
 import { responseValidatorError } from "../validators-response";
 
 export class TestDocument {
@@ -110,7 +110,7 @@ export class TestDocument {
 
   async permisionDomain(): Promise<IresponseValidatorCompose | null> {
 
-    const local = new DataLocalDomain().getModule(this.req.document,this.req.user!.nivel)
+    const local = new DataLocal().getModule(this.req.document,this.req.user!.nivel)
 
     return await this.exe(this.req.language,
       this.req,

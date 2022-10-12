@@ -42,9 +42,9 @@ export type Ipath = {
 }
 export interface Icolection {
  [keyof:string]: any
- [`account-Adm`]: Ipermission
- [`sign-in`]: AccountAdm
- [`null`]: AccountAdm
+ [`account-Adm`]: { [keyof:string]: Ipermission}
+ [`sign-in`]: { [keyof:string]: AccountAdm}
+ [`null`]: { [keyof:string]: AccountAdm}
 }
 
 export type Irequest = {

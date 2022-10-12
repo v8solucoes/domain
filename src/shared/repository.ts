@@ -1,3 +1,3 @@
-import { DataLocalDomain } from "../domain/repository/data-local";
+import { DataLocal } from "../domain/repository/data-local";
 
-export { DataLocalDomain }
+export { DataLocal}
