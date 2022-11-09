@@ -393,7 +393,7 @@ export class DataLocal {
         emailVerified: {
           id: 'emailVerified',
           typeData: 'value',
-          typeInput: 'input',
+          typeInput: 'booleanToggle',
           text: {
             en: {
               label: 'Email Verified',
@@ -430,7 +430,7 @@ export class DataLocal {
         multiFactor: {
           id: 'multiFactor',
           typeData: 'value',
-          typeInput: 'input',
+          typeInput: 'booleanToggle',
           text: {
             en: {
               label: 'Multi Factor',

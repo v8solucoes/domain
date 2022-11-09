@@ -92,7 +92,7 @@ export type Iuser =  Pick<ModelUser,'nivel' | 'name' | 'userId'>
 export interface Imodel {
   id: string;
   typeData: ItypeName['dataType'];
-  typeInput: 'email' | 'acceptTerms' | 'group' | 'range' | 'input' | 'radio' | 'text-area' | 'select' | 'galeriaHorizontal' | 'color' | 'slide-toggle';
+  typeInput: 'booleanToggle' | 'email' | 'acceptTerms' | 'group' | 'range' | 'input' | 'radio' | 'text-area' | 'select' | 'galeriaHorizontal' | 'color' | 'slide-toggle';
   text: {
     en?: {
       clearInput: string;
