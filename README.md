@@ -1,7 +1,10 @@
-# README: LastUpdate (30/08/22)
+# README: LastUpdate (15/11/22)
+### SETUP WorkSpace - [WSL - Update](.readme/ubunto.md)
 ### UBUNTO  - [WSL - Update](.readme/ubunto.md)
 ### NVM - [Install / Update - Node, NPM](.readme/nvm.md) 
+### GIT - [Git](.readme/git.md) 
 ### FIREBASE - [Install / Update](.readme/firebase.md) 
+### FIREBASE - Emulator [Install / Update](.readme/firebase-emulator.md) 
 ### NOTEPAD Migration- [Install / Update](.readme/notepade-migration.md) 
 
   - [Update](#npm-comand) 

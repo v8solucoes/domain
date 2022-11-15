@@ -1,4 +1,4 @@
-# UBUNTO 18.4 (WSL)
+# UBUNTO 20.4 (WSL)
 ###### [README](./../README.md)
 
 ## Update
