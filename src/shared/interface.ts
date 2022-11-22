@@ -1,6 +1,6 @@
 import { ModelUser } from "../domain/model/users";
 import { ValidatorsRemote } from "../domain/validators/validators-remote";
-import { AccountAdm, NameProperty } from "./typscript";
+import { NameProperty } from "./typscript";
 import { ValidatorsLocal } from "./validator-local";
 
 export { ModelUser as ImodelUser}
@@ -40,27 +40,43 @@ export type Ipath = {
     nivel: Inivel
   }
 }
-export interface Icolection {
- [keyof:string]: any
- [`account-Adm`]: { [keyof:string]: Ipermission}
- [`sign-in`]: { [keyof:string]: AccountAdm}
- [`null`]: { [keyof:string]: AccountAdm}
+/* export type ok = 'teste' | 'este'
+export type Idocumentlast<T extends Irequest['document']> = {
+ [K in keyof Idocument]:`${ok}`
 }
+const test: Idocumentlast<'user-adm'> = { 'teste': 'este'} */
+
+/* { [K in keyof Idocument]?: IcreateForm<UntypedFormGroup> } */
+/* export type names='teste'
+type T0 = InstanceType<typeof Irequest['document']>; */
+/* export type teste<T  extends names> = {
+  T : any 
+}  */
+ 
+export type Idocument = {
+  [`user-adm`]: ModelUser
+  [`account-adm`]: Pick<ModelUser, 'name' | 'email' | 'phone' | 'password' | 'acceptTerms'>
+  [`sign-in`]: Pick<ModelUser, 'name'| 'password'>
+  [`null`]: any
+}
+export type Icolection =  Idocument & {[keyof:string]: any}
 
 export type Irequest = {
   language: 'en';
   page: 'account' ;
-  document: 'user-adm' | 'account-adm' | 'sign-in' | 'null' ;
-  action: 'create' | 'null';
+  document: NameProperty<Idocument> ;
+  action: 'create' | 'null' ;
   key: string | null;
-  environment: 'prod' | 'test';
+  environment: 'prod' | 'test' | 'create' | 'update' | 'set';
   domain: 'localchost';
   dateTime: Date | null;
   colection: Irequest['document']
   user?: Iuser
   validator?: Ivalidator;
   data?: any | null;
+  dataLast?: {[keyof in Irequest['document']]: Idata}
 }
+
 
 export type Ilanguage = 'en'
 export type Ipage = 'account'

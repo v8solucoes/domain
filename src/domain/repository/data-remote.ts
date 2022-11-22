@@ -14,7 +14,7 @@ export abstract class DataRemote {
   get db() {
     return {
       createUser: Firebase.createUser(this.req),
-      createUserConfig: Firebase.create(),
+      createUserConfig: FirebaseAPI.auth,
       lote: getFirestore().batch(),
       getStatistic: this.statistic,
       getLocalDocument: new DataLocal().getModule(this.req.document, this.req.user!.nivel),

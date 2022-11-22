@@ -109,7 +109,7 @@ export class Firebase {
 
   }
 
-  static create() { return FirebaseAPI.auth }
+  static create() { return FirebaseAPI }
 
   static async createUser(req: Irequest): Promise<FirebaseUserRecord | IresponseValidatorCompose> {
 
