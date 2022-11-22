@@ -11,7 +11,7 @@
 
 # NPM Comand:
 - npm i (create Packote Loc Json)
-- npm i name (name packte install)
+- npm i name (intall Local)
 - npm i -g nome (install global)
 - npm i --D nome (save dependenci local)
 - npm controler version: Video time 20:58
