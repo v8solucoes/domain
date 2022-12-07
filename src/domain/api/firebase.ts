@@ -1,7 +1,6 @@
-
 import { FirebaseAPI, FirebaseUserRecord } from "../../shared/api"
-import { Irequest, IresponseValidatorCompose, Inivel, IpermissionNivel, Iuser } from "../../shared/interface"
-import { Documents } from "../documents/document"
+import { Ipermission2, Irequest, IresponseValidatorCompose, Inivel, IpermissionNivel, Iuser } from "../../shared/interface"
+import { Controllers } from "../controllers/controllers"
 import { UserController } from "../model/user.controllers"
 import { ModelUser } from "../model/users"
 import { DataLocal } from "../repository/data-local"
@@ -34,12 +33,12 @@ export class Firebase {
 
         let model: any = {}
 
-        for (const acess of permission[nivel]) {
+        for (const acess of permission[nivel] as Ipermission2) {
 
-          if (localModel.getModule(acess.id,nivel).model[acess.id].id == 'undefined') {
+          if (localModel.getRecursive(acess.id).model[acess.id].id == 'account-adm') {
             throw `Model not Exist ${acess.id}`
           } else {
-            model[`${acess.id}`] = localModel.getModule(acess.id,nivel).model[acess.id]
+            model[`${acess.id}`] = localModel.getRecursive(acess.id).model[acess.id]
           }
         }
         return {
@@ -58,7 +57,7 @@ export class Firebase {
     }
   }
   static securityColectionAndDocumentAcessIsValid(permission: IpermissionNivel, req: Irequest): boolean {
-    const documentNivel = Documents.path(req).nivel as Inivel
+    const documentNivel = Controllers.path(req).nivel as Inivel
     const documenteName = req.document == 'account-adm' ? 'user-adm' : req.document
 
     let test: any = []
@@ -78,7 +77,7 @@ export class Firebase {
     
     try {
       
-      const colection = await Documents.path(req).colection.get()
+      const colection = await Controllers.path(req).colection.get()
       let dataBase: any = {}
       colection.forEach((doc: { id: string; data: any }) => {
         dataBase[doc.id] = {
@@ -96,7 +95,7 @@ export class Firebase {
     
     try {
       
-      const document = await Documents.path(req, req.key as string).document.get()
+      const document = await Controllers.path(req, req.key as string).document.get()
       /*    let dataBase: any = {} */
       
       console.log(document.data())
@@ -112,15 +111,15 @@ export class Firebase {
   static create() { return FirebaseAPI }
 
   static async createUser(req: Irequest): Promise<FirebaseUserRecord | IresponseValidatorCompose> {
-
     const user = req.data[req.document] as ModelUser
+    
     const message = {
       en: 'Problema create account.',
       pt: 'Problema ao criar a conta.'
     }
-
+    
     try {
-
+      
       return await FirebaseAPI.auth.createUser(new UserController(user).firebaseCreate)
 
     } catch (error) {

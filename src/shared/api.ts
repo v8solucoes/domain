@@ -9,7 +9,7 @@ import { UserRecord } from "../../node_modules/firebase-admin/lib/auth/user-reco
 import { CreateRequest } from "../../node_modules/firebase-admin/lib/auth/auth-config"
 
 /* SE PRECISAR EXECUTE ESSE COMANDO PARA GRAVAR AS CREDENCIAIS
- export GOOGLE_APPLICATION_CREDENTIALS="/home/v8/meu-apresentador/domain/environments/v8.json"
+ export GOOGLE_APPLICATION_CREDENTIALS="/home/v8emerson/meu-apresentador/domain/environments/v8.json"
 */
 export class FirebaseAPI {
 

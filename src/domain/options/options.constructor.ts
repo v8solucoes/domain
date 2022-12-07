@@ -25,10 +25,11 @@ export class OptionsConstructor {
       page: "account",
       domain: 'localchost',
       environment: 'prod',
+      controller: null,
       action: "create",
-      document: "account-adm",
+      document: 'sign-in',
       dateTime: new Date(),
-      colection: `null`,
+      colection: 'sign-in',
       validator: {
         id: "notId",
         name: 'namePersonal',

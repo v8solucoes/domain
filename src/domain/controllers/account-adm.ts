@@ -49,11 +49,12 @@ export class AccountAdm extends DataRemote {
 
         const { uid } = await db.createUser as FirebaseUserRecord
         userId = uid
-
+        
         // CREATE CONFIG
         if (create.userConfig = typeof uid === 'string' ? true : false) {
-
+          
           const config = await db.createUserConfig.setCustomUserClaims(userId, customUser)
+
 
           // CREATE USER PERMISSION
 

@@ -2,13 +2,14 @@ import { FirebaseAPI } from "../../shared/api"
 import { Ipath, Irequest } from "../../shared/interface"
 import { AccountAdm } from "./account-adm"
 
-export class Documents {
+export class Controllers {
   private request: Irequest
   constructor(req: Irequest) {
 /*     super(req) */
     this.request = req
   }
   get account_adm() { return new AccountAdm(this.request) }
+  get accountAdmFirst() { return new AccountAdm(this.request) }
   
  static path(req: Irequest, id: string = FirebaseAPI.db.bundle().bundleId) {
 
@@ -25,8 +26,8 @@ export class Documents {
         root: `${req.environment}/${req.domain}/adm/user-adm`,
         nivel: 'adm'
       },
-      [`null`]: {
-        root: `${req.environment}/${req.domain}/adm/null`,
+      [`recursive`]: {
+        root: `${req.environment}/${req.domain}/adm/any`,
         nivel: 'adm'
       },
     }

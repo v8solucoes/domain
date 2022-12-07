@@ -1,4 +1,5 @@
-import { Ilanguage, ImodelUndefinedProperty, InameValidatorLocal, InameValidatorRemote, Ipermission, Irequest, IresponseValidatorCompose, Ivalidator } from "../../../shared/interface";
+import { ImodelRecursive } from './../../../shared/interface';
+import { Ilanguage, InameValidatorLocal, InameValidatorRemote, Ipermission2, Irequest, IresponseValidatorCompose, Ivalidator } from "../../../shared/interface";
 import { ValidatorsRemote } from "../../../shared/validator-remote";
 import { DataLocal } from "../../repository/data-local";
 import { responseValidatorError } from "../validators-response";
@@ -17,8 +18,8 @@ export class TestDocument {
   async exe(
     language: Ilanguage,
     req: Irequest,
-    permissions: Ipermission[],
-    model: ImodelUndefinedProperty,
+    permissions: Ipermission2,
+    model: ImodelRecursive,
     document: any
 
   ): Promise<IresponseValidatorCompose> {
@@ -52,7 +53,7 @@ export class TestDocument {
     }
   }
 
-  registerTest(language: Ilanguage, request: Irequest, permissions: Ipermission[], model: ImodelUndefinedProperty, data: any) {
+  registerTest(language: Ilanguage, request: Irequest, permissions: Ipermission2, model: ImodelRecursive, data: any) {
 
     for (const permission of permissions) {
 
@@ -77,8 +78,8 @@ export class TestDocument {
         this.registerTest(
           language,
           request,
-          permission._group as Ipermission[],
-          model[permission.id]._group as ImodelUndefinedProperty,
+          permission._group as Ipermission2,
+          model[permission.id]._group as ImodelRecursive,
           data[permission.id]
         );
 
@@ -110,7 +111,7 @@ export class TestDocument {
 
   async permisionDomain(): Promise<IresponseValidatorCompose | null> {
 
-    const local = new DataLocal().getModule(this.req.document,this.req.user!.nivel)
+    const local = new DataLocal().getRecursive(this.req.document) as any
 
     return await this.exe(this.req.language,
       this.req,

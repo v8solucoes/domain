@@ -1,18 +1,16 @@
-import { ImodelUndefinedProperty, Imodule, Inivel, Ipermission, IpermissionNivel, Irequest } from "../../shared/interface"
+import { DataModel } from './data-model';
+import { Icol, IpermissionRecursive, Idoc, Imodel2, Ipermission2, Irequest, ImodelRecursive } from "../../shared/interface"
 
-export class DataLocal {
+export class DataLocal extends DataModel {
 
-  user = null
-
-  permission: IpermissionNivel = {
-    adm:    [
-      {
+  permission: Ipermission2 = [
+    {
       id: 'user-adm',
       view: {
         form: true,
         title: true,
         subTitle: true,
-        },
+      },
       colection: 'user-adm',
       _group: [
         {
@@ -72,7 +70,7 @@ export class DataLocal {
           },
         },
         {
-          id: 'telephone',
+          id: 'phone',
           view: {
             form: true,
             title: true,
@@ -89,14 +87,14 @@ export class DataLocal {
         },
 
       ]
-      },
-      {
+    },
+    {
       id: 'account-adm',
       view: {
         form: true,
         title: true,
         subTitle: true,
-        },
+      },
       _group: [
         {
           id: 'name',
@@ -115,7 +113,7 @@ export class DataLocal {
           },
         },
         {
-          id: 'telephone',
+          id: 'phone',
           view: {
             form: true,
             title: true,
@@ -138,10 +136,10 @@ export class DataLocal {
             subTitle: true,
           },
         },
-       
+
       ],
-      },
-      {
+    },
+    {
       id: 'sign-in',
       view: {
         form: true,
@@ -165,13 +163,29 @@ export class DataLocal {
             subTitle: true,
           },
         },
-       
+
       ],
-      }
-    ]
-  }
- 
-  model: ImodelUndefinedProperty = {
+    },
+    {
+      id: 'recursive',
+      view: {
+        form: true,
+        title: true,
+        subTitle: true,
+      },
+      _group: [
+        {
+          id: 'any',
+          view: {
+            form: true,
+            title: true,
+            subTitle: true,
+          },
+        },
+      ],
+    }
+  ]
+  model: Imodel2 = {
     [`user-adm`]: {
       id: 'user-adm',
       typeData: 'object',
@@ -204,341 +218,7 @@ export class DataLocal {
           },
         },
       },
-      _group: {
-        name: {
-          id: 'name',
-          typeData: 'value',
-          typeInput: 'input',
-          text: {
-            en: {
-              label: 'Personal Name',
-              valueTest: 'Test Name',
-              placeholder: 'Fill in you name',
-              clearInput: 'Clear',
-            },
-          },
-          validate: {
-            sync: ['namePersonal'],
-            async: [],
-            updateOn: 'change',
-            disabled: false,
-            valueMin: 8,
-            valueMax: 35,
-            required: true,
-            mask:'namePersonal',
-          },
-          design: {
-            tools: {
-              accont: true,
-              clear: true,
-            },
-            css: {
-              materialDesign: {
-                appearance: 'fill',
-              },
-              form: {
-                container: 'f-total',
-              },
-            },
-          },
-        },
-        email: {
-          id: 'email',
-          typeData: 'value',
-          typeInput: 'email',
-          text: {
-            en: {
-              label: 'E-mail',
-              valueTest: 'Test Email',
-              placeholder: 'Fill in you email',
-              clearInput: 'Clear',
-            },
-          },
-          validate: {
-            sync: ['emailValidate'],
-            async: ['emailAccountExistResponseErrorAsync'],
-            updateOn: 'change',
-            disabled: false,
-            valueMin: 8,
-            valueMax: 35,
-            required: false,
-            mask: 'emailValidate',
-          },
-          design: {
-            tools: {
-              accont: true,
-              clear: true,
-            },
-            css: {
-              materialDesign: {
-                appearance: 'fill',
-              },
-              form: {
-                container: 'f-total',
-              },
-            },
-          },
-        },
-        telephone: {
-          id: 'telephone',
-          typeData: 'value',
-          typeInput: 'input',
-          text: {
-            en: {
-              label: 'Telephone',
-              valueTest: 'Test Telephone',
-              placeholder: 'Fill in your Telephone',
-              clearInput: 'Clear',
-            },
-          },
-          validate: {
-            sync: ['telephone'],
-            async: [],
-            updateOn: 'change',
-            disabled: false,
-            valueMin: 10,
-            valueMax: 11,
-            required: true,
-            mask: 'telephone',
-          },
-          design: {
-            tools: {
-              accont: true,
-              clear: true,
-            },
-            css: {
-              materialDesign: {
-                appearance: 'fill',
-              },
-              form: {
-                container: 'f-total',
-              },
-            },
-          },
-        },
-        password: {
-          id: 'password',
-          typeData: 'value',
-          typeInput: 'input',
-          text: {
-            en: {
-              label: 'Password',
-              valueTest: false,
-              placeholder: 'Accept Terms',
-              clearInput: 'Clear',
-            },
-          },
-          validate: {
-            sync: [],
-            async: [],
-            updateOn: 'change',
-            disabled: false,
-            valueMin: 10,
-            valueMax: 11,
-            required: true,
-            mask: 'anyResNull',
-          },
-          design: {
-            tools: {
-              accont: true,
-              clear: true,
-            },
-            css: {
-              materialDesign: {
-                appearance: 'fill',
-              },
-              form: {
-                container: 'f-total',
-              },
-            },
-          },
-        },
-        acceptTerms: {
-          id: 'acceptTerms',
-          typeData: 'value',
-          typeInput: 'acceptTerms',
-          text: {
-            en: {
-              label: 'Accept Terms',
-              valueTest: false,
-              placeholder: 'Accept Terms',
-              clearInput: 'Clear',
-            },
-          },
-          validate: {
-            sync: ['checkIsTrue'],
-            async: [],
-            updateOn: 'change',
-            disabled: false,
-            valueMin: 10,
-            valueMax: 11,
-            required: true,
-            mask: 'checkIsTrue',
-          },
-          design: {
-            tools: {
-              accont: true,
-              clear: true,
-            },
-            css: {
-              materialDesign: {
-                appearance: 'fill',
-              },
-              form: {
-                container: 'f-total',
-              },
-            },
-          },
-        },
-        emailVerified: {
-          id: 'emailVerified',
-          typeData: 'value',
-          typeInput: 'booleanToggle',
-          text: {
-            en: {
-              label: 'Email Verified',
-              valueTest: false,
-              placeholder: 'Accept Terms',
-              clearInput: 'Clear',
-            },
-          },
-          validate: {
-            sync: ['checkIsTrue'],
-            async: [],
-            updateOn: 'change',
-            disabled: false,
-            valueMin: 10,
-            valueMax: 11,
-            required: true,
-            mask: 'checkIsTrue',
-          },
-          design: {
-            tools: {
-              accont: true,
-              clear: true,
-            },
-            css: {
-              materialDesign: {
-                appearance: 'fill',
-              },
-              form: {
-                container: 'f-total',
-              },
-            },
-          },
-        },
-        multiFactor: {
-          id: 'multiFactor',
-          typeData: 'value',
-          typeInput: 'booleanToggle',
-          text: {
-            en: {
-              label: 'Multi Factor',
-              valueTest: false,
-              placeholder: 'Mult Factor',
-              clearInput: 'Clear',
-            },
-          },
-          validate: {
-            sync: ['checkIsTrue'],
-            async: [],
-            updateOn: 'change',
-            disabled: false,
-            valueMin: 10,
-            valueMax: 11,
-            required: true,
-            mask: 'checkIsTrue',
-          },
-          design: {
-            tools: {
-              accont: true,
-              clear: true,
-            },
-            css: {
-              materialDesign: {
-                appearance: 'fill',
-              },
-              form: {
-                container: 'f-total',
-              },
-            },
-          },
-        },
-        nivel: {
-          id: 'nivel',
-          typeData: 'value',
-          typeInput: 'input',
-          text: {
-            en: {
-              label: 'Nível',
-              valueTest: false,
-              placeholder: 'Nivel',
-              clearInput: 'Clear',
-            },
-          },
-          validate: {
-            sync: [],
-            async: [],
-            updateOn: 'change',
-            disabled: false,
-            valueMin: 10,
-            valueMax: 11,
-            required: true,
-            mask: 'anyResNull',
-          },
-          design: {
-            tools: {
-              accont: true,
-              clear: true,
-            },
-            css: {
-              materialDesign: {
-                appearance: 'fill',
-              },
-              form: {
-                container: 'f-total',
-              },
-            },
-          },
-        },
-        userId: {
-          id: 'userId',
-          typeData: 'value',
-          typeInput: 'input',
-          text: {
-            en: {
-              label: 'User Id',
-              valueTest: false,
-              placeholder: 'ID',
-              clearInput: 'Clear',
-            },
-          },
-          validate: {
-            sync: [],
-            async: [],
-            updateOn: 'change',
-            disabled: false,
-            valueMin: 10,
-            valueMax: 11,
-            required: true,
-            mask: 'anyResNull',
-          },
-          design: {
-            tools: {
-              accont: true,
-              clear: true,
-            },
-            css: {
-              materialDesign: {
-                appearance: 'fill',
-              },
-              form: {
-                container: 'f-total',
-              },
-            },
-          },
-        },
-      },
+      _group: this.userModel.model._group,
       colection: {
         title: 'name',
         subTitle: 'email',
@@ -578,191 +258,11 @@ export class DataLocal {
         },
       },
       _group: {
-        name: {
-          id: 'name',
-          typeData: 'value',
-          typeInput: 'input',
-          text: {
-            en: {
-              label: 'Personal Name',
-              valueTest: 'Test Name',
-              placeholder: 'Fill in you name',
-              clearInput: 'Clear',
-            },
-          },
-          validate: {
-            sync: ['namePersonal'],
-            async: [],
-            updateOn: 'change',
-            disabled: false,
-            valueMin: 8,
-            valueMax: 35,
-            required: true,
-            mask:'namePersonal',
-          },
-          design: {
-            tools: {
-              accont: true,
-              clear: true,
-            },
-            css: {
-              materialDesign: {
-                appearance: 'fill',
-              },
-              form: {
-                container: 'f-total',
-              },
-            },
-          },
-        },
-        email: {
-          id: 'email',
-          typeData: 'value',
-          typeInput: 'email',
-          text: {
-            en: {
-              label: 'E-mail',
-              valueTest: 'Test Email',
-              placeholder: 'Fill in you email',
-              clearInput: 'Clear',
-            },
-          },
-          validate: {
-            sync: ['emailValidate'],
-            async: ['emailAccountExistResponseErrorAsync'],
-            updateOn: 'change',
-            disabled: false,
-            valueMin: 8,
-            valueMax: 35,
-            required: false,
-            mask: 'emailValidate',
-          },
-          design: {
-            tools: {
-              accont: true,
-              clear: true,
-            },
-            css: {
-              materialDesign: {
-                appearance: 'fill',
-              },
-              form: {
-                container: 'f-total',
-              },
-            },
-          },
-        },
-        telephone: {
-          id: 'telephone',
-          typeData: 'value',
-          typeInput: 'input',
-          text: {
-            en: {
-              label: 'Telephone',
-              valueTest: 'Test Telephone',
-              placeholder: 'Fill in your Telephone',
-              clearInput: 'Clear',
-            },
-          },
-          validate: {
-            sync: ['telephone'],
-            async: [],
-            updateOn: 'change',
-            disabled: false,
-            valueMin: 10,
-            valueMax: 11,
-            required: true,
-            mask: 'telephone',
-          },
-          design: {
-            tools: {
-              accont: true,
-              clear: true,
-            },
-            css: {
-              materialDesign: {
-                appearance: 'fill',
-              },
-              form: {
-                container: 'f-total',
-              },
-            },
-          },
-        },
-        password: {
-          id: 'password',
-          typeData: 'value',
-          typeInput: 'input',
-          text: {
-            en: {
-              label: 'Password',
-              valueTest: false,
-              placeholder: 'Accept Terms',
-              clearInput: 'Clear',
-            },
-          },
-          validate: {
-            sync: [],
-            async: [],
-            updateOn: 'change',
-            disabled: false,
-            valueMin: 10,
-            valueMax: 11,
-            required: true,
-            mask: 'anyResNull',
-          },
-          design: {
-            tools: {
-              accont: true,
-              clear: true,
-            },
-            css: {
-              materialDesign: {
-                appearance: 'fill',
-              },
-              form: {
-                container: 'f-total',
-              },
-            },
-          },
-        },
-        acceptTerms: {
-          id: 'acceptTerms',
-          typeData: 'value',
-          typeInput: 'acceptTerms',
-          text: {
-            en: {
-              label: 'Accept Terms',
-              valueTest: false,
-              placeholder: 'Accept Terms',
-              clearInput: 'Clear',
-            },
-          },
-          validate: {
-            sync: ['checkIsTrue'],
-            async: [],
-            updateOn: 'change',
-            disabled: false,
-            valueMin: 10,
-            valueMax: 11,
-            required: true,
-            mask: 'checkIsTrue',
-          },
-          design: {
-            tools: {
-              accont: true,
-              clear: true,
-            },
-            css: {
-              materialDesign: {
-                appearance: 'fill',
-              },
-              form: {
-                container: 'f-total',
-              },
-            },
-          },
-        },
+        name: this.userModel.model._group.name,
+        email: this.userModel.model._group.email,
+        phone: this.userModel.model._group.phone,
+        password: this.userModel.model._group.password,
+        acceptTerms: this.userModel.model._group.acceptTerms,
       },
       colection: {
         title: 'name',
@@ -771,7 +271,44 @@ export class DataLocal {
       }
     },
     [`sign-in`]: {
-      id: 'login',
+      id: 'sign-in',
+      _group: {
+        email: { ...this.emailAccountExistResponseSucessAsync },
+        password: this.userModel.model._group.password
+      },
+      typeData: 'object',
+      typeInput: 'group',
+      text: {
+        en: {
+          label: 'Login',
+          valueTest: 'Valor Teste',
+          placeholder: 'Faça su login',
+          clearInput: 'Clear',
+        },
+      },
+      validate: {
+        sync: [],
+        async: [],
+        updateOn: 'change',
+        disabled: false,
+        valueMin: 8,
+        valueMax: 35,
+        required: false,
+        mask: 'namePersonal',
+      },
+      design: {
+        css: {
+          materialDesign: {
+            appearance: 'fill',
+          },
+          form: {
+            container: 'f-total',
+          },
+        },
+      }
+    },
+    [`recursive`]: {
+      id: 'recursive',
       typeData: 'object',
       typeInput: 'group',
       text: {
@@ -823,7 +360,7 @@ export class DataLocal {
             valueMin: 8,
             valueMax: 35,
             required: true,
-            mask:'namePersonal',
+            mask: 'namePersonal',
           },
           design: {
             tools: {
@@ -839,267 +376,54 @@ export class DataLocal {
               },
             },
           },
-        },
-        email: {
-          id: 'email',
-          typeData: 'value',
-          typeInput: 'email',
-          text: {
-            en: {
-              label: 'E-mail',
-              valueTest: 'Test Email',
-              placeholder: 'Fill in you email',
-              clearInput: 'Clear',
-            },
-          },
-          validate: {
-            sync: ['emailValidate'],
-            async: ['emailAccountExistResponseSucessAsync'],
-            updateOn: 'change',
-            disabled: false,
-            valueMin: 8,
-            valueMax: 35,
-            required: false,
-            mask: 'emailValidate',
-          },
-          design: {
-            tools: {
-              accont: true,
-              clear: true,
-            },
-            css: {
-              materialDesign: {
-                appearance: 'fill',
-              },
-              form: {
-                container: 'f-total',
-              },
-            },
-          },
-        },
-        telephone: {
-          id: 'telephone',
-          typeData: 'value',
-          typeInput: 'input',
-          text: {
-            en: {
-              label: 'Telephone',
-              valueTest: 'Test Telephone',
-              placeholder: 'Fill in your Telephone',
-              clearInput: 'Clear',
-            },
-          },
-          validate: {
-            sync: ['telephone'],
-            async: [],
-            updateOn: 'change',
-            disabled: false,
-            valueMin: 10,
-            valueMax: 11,
-            required: true,
-            mask: 'telephone',
-          },
-          design: {
-            tools: {
-              accont: true,
-              clear: true,
-            },
-            css: {
-              materialDesign: {
-                appearance: 'fill',
-              },
-              form: {
-                container: 'f-total',
-              },
-            },
-          },
-        },
-        password: {
-          id: 'password',
-          typeData: 'value',
-          typeInput: 'input',
-          text: {
-            en: {
-              label: 'Password',
-              valueTest: false,
-              placeholder: 'Password',
-              clearInput: 'Clear',
-            },
-          },
-          validate: {
-            sync: [],
-            async: [],
-            updateOn: 'change',
-            disabled: false,
-            valueMin: 10,
-            valueMax: 11,
-            required: true,
-            mask: 'anyResNull',
-          },
-          design: {
-            tools: {
-              accont: true,
-              clear: true,
-            },
-            css: {
-              materialDesign: {
-                appearance: 'fill',
-              },
-              form: {
-                container: 'f-total',
-              },
-            },
-          },
-        },
-        acceptTerms: {
-          id: 'acceptTerms',
-          typeData: 'value',
-          typeInput: 'acceptTerms',
-          text: {
-            en: {
-              label: 'Accept Terms',
-              valueTest: false,
-              placeholder: 'Accept Terms',
-              clearInput: 'Clear',
-            },
-          },
-          validate: {
-            sync: ['checkIsTrue'],
-            async: [],
-            updateOn: 'change',
-            disabled: false,
-            valueMin: 10,
-            valueMax: 11,
-            required: true,
-            mask: 'checkIsTrue',
-          },
-          design: {
-            tools: {
-              accont: true,
-              clear: true,
-            },
-            css: {
-              materialDesign: {
-                appearance: 'fill',
-              },
-              form: {
-                container: 'f-total',
-              },
-            },
-          },
-        },
+        }
       },
     },
-   
   }
-  document: any = {
+  document: Idoc = {
     [`user-adm`]: {
-      "permission": {
-          "adm": [
-              {
-                  "view": {
-                      "form": true,
-                      "subTitle": true,
-                      "title": true
-                  },
-                  "id": "account-adm",
-                  "_group": [
-                      {
-                          "view": {
-                              "form": true,
-                              "subTitle": true,
-                              "title": true
-                          },
-                          "id": "name"
-                      },
-                      {
-                          "view": {
-                              "form": true,
-                              "subTitle": true,
-                              "title": true
-                          },
-                          "id": "email"
-                      },
-                      {
-                          "view": {
-                              "form": true,
-                              "subTitle": true,
-                              "title": true
-                          },
-                          "id": "telephone"
-                      },
-                      {
-                          "view": {
-                              "form": true,
-                              "subTitle": true,
-                              "title": true
-                          },
-                          "id": "password"
-                      },
-                      {
-                          "view": {
-                              "form": true,
-                              "subTitle": true,
-                              "title": true
-                          },
-                          "id": "acceptTerms"
-                      }
-                  ],
-                  "colection": "account-adm"
-              }
-          ]
-      },
-      "user": {
-          "emailVerified": false,
-          "password": "123456",
-          "multiFactor": false,
-          "name": "Emerson Felix",
-          "acceptTerms": true,
-          "telephone": "11981231970",
-          "nivel": "adm",
-          "userId": "mvP0YpF2NIm0EFf50gfTR7EnBNUz",
-          "email": "contato@v8sites.com.bry"
-      }
-  },
+      "emailVerified": false,
+      "password": "123456",
+      "multiFactor": false,
+      "name": "Emerson Felix",
+      "acceptTerms": true,
+      "phone": "11981231970",
+      "nivel": "adm",
+      "userId": "mvP0YpF2NIm0EFf50gfTR7EnBNUz",
+      "email": "contato@v8sites.com.br"
+    },
     [`account-adm`]: {
       name: 'Emerson Felix',
       email: 'contato@v8sites.com.br',
-      telephone: '11981231970',
+      phone: '11981231970',
       password: '123456',
       acceptTerms: true
     },
     [`sign-in`]: {
-      name: 'Emerson Felix',
       email: 'contato@v8sites.com.br',
-      telephone: '11981231970',
       password: '123456',
-      acceptTerms: true
+    },
+    [`recursive`]: {
+      any: 'any',
     },
   }
-  colection:{[keyof:string]: any[]} = {
-    [`account-adm`]: [{
-      name: 'DB Emeson Felix',
-    /*   email: 'teste@vo.com' */
-    }],
-  }
-  getModule(module: Irequest['document'], nivel:Inivel): Imodule {
+  colection: Icol = {} as any
 
-    const permission = this.permission[nivel].filter((permissions:Ipermission) => permissions.id == module)
-    const model = this.model
-    const document = {[module]: this.document[module]}
+  getRecursive(module: Irequest['document']) {
 
-   nivel ? 'tem': console.log(`não tem Nível de Acesso: ${nivel}`)
-   permission.length ? 'tem': console.log(`não tem Permission: ${module}`)
-   this.permission[nivel].length ? 'tem': console.log(`não tem Permission: ${module}`)
-   this.model[module] ? 'tem': console.log(`não tem Model: ${module}`)
+    const permission = this.permission.filter((permissions) => permissions.id == module)
+    const model = this.model as unknown as ImodelRecursive
+    const document = this.document[module]
+
+    permission.length ? 'tem' : console.log(`não tem Permission: ${module}`)
+    this.model[module] ? 'tem' : console.log(`não tem Model: ${module}`)
+    this.document[module] ? 'tem' : console.log(`não tem Document: ${module}`)
 
     return {
-      permission,
-      model,
-      document
+      get permission() { return permission as unknown as IpermissionRecursive[] },
+      get model() { return model as unknown as ImodelRecursive },
+      get document() { return document as unknown as any }
     };
   }
-  constructor() { 
-    
-  }
+
 }
