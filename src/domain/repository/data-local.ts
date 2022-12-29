@@ -89,7 +89,7 @@ export class DataLocal extends DataModel {
       ]
     },
     {
-      id: 'account-adm',
+      id: 'account-adm-new',
       view: {
         form: true,
         title: true,
@@ -196,6 +196,7 @@ export class DataLocal extends DataModel {
           valueTest: 'Valor Teste',
           placeholder: 'Faça su conta',
           clearInput: 'Clear',
+          valueDefault: null
         },
       },
       validate: {
@@ -225,8 +226,8 @@ export class DataLocal extends DataModel {
         description: 'userId'
       }
     },
-    [`account-adm`]: {
-      id: 'account-adm',
+    [`account-adm-new`]: {
+      id: 'account-adm-new',
       typeData: 'object',
       typeInput: 'group',
       text: {
@@ -235,6 +236,7 @@ export class DataLocal extends DataModel {
           valueTest: 'Valor Teste',
           placeholder: 'Faça su conta',
           clearInput: 'Clear',
+          valueDefault: null
         },
       },
       validate: {
@@ -259,7 +261,7 @@ export class DataLocal extends DataModel {
       },
       _group: {
         name: this.userModel.model._group.name,
-        email: this.userModel.model._group.email,
+        email: this.emailAccountExistResponseErrorAsync,
         phone: this.userModel.model._group.phone,
         password: this.userModel.model._group.password,
         acceptTerms: this.userModel.model._group.acceptTerms,
@@ -284,6 +286,7 @@ export class DataLocal extends DataModel {
           valueTest: 'Valor Teste',
           placeholder: 'Faça su login',
           clearInput: 'Clear',
+          valueDefault: null
         },
       },
       validate: {
@@ -317,6 +320,7 @@ export class DataLocal extends DataModel {
           valueTest: 'Valor Teste',
           placeholder: 'Faça su login',
           clearInput: 'Clear',
+          valueDefault: null
         },
       },
       validate: {
@@ -348,8 +352,9 @@ export class DataLocal extends DataModel {
             en: {
               label: 'Personal Name',
               valueTest: 'Test Name',
+              valueDefault: null,
               placeholder: 'Fill in you name',
-              clearInput: 'Clear',
+              clearInput: 'Clear'
             },
           },
           validate: {
@@ -392,7 +397,7 @@ export class DataLocal extends DataModel {
       "userId": "mvP0YpF2NIm0EFf50gfTR7EnBNUz",
       "email": "contato@v8sites.com.br"
     },
-    [`account-adm`]: {
+    [`account-adm-new`]: {
       name: 'Emerson Felix',
       email: 'contato@v8sites.com.br',
       phone: '11981231970',

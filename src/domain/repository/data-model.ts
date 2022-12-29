@@ -1,7 +1,6 @@
 import { UserModel } from "../../shared/interface"
 
 export class DataModel {
-
   emailAccountExistResponseErrorAsync: UserModel['model']['_group']['email'] = {
 
     id: 'email',
@@ -13,6 +12,7 @@ export class DataModel {
         valueTest: 'Test Email',
         placeholder: 'Fill in you email',
         clearInput: 'Clear',
+        valueDefault: null
       },
     },
     validate: {
@@ -52,6 +52,7 @@ export class DataModel {
         valueTest: 'Test Email',
         placeholder: 'Fill in you email',
         clearInput: 'Clear',
+        valueDefault: null
       },
     },
     validate: {
@@ -91,6 +92,7 @@ export class DataModel {
           valueTest: 'Valor Teste',
           placeholder: 'Faça su conta',
           clearInput: 'Clear',
+          valueDefault: null
         },
       },
       validate: {
@@ -122,8 +124,9 @@ export class DataModel {
             en: {
               label: 'Personal Name',
               valueTest: 'Test Name',
+              valueDefault: null,
               placeholder: 'Fill in you name',
-              clearInput: 'Clear',
+              clearInput: 'Clear'
             },
           },
           validate: {
@@ -151,42 +154,8 @@ export class DataModel {
             },
           },
         },
-        email: {
-          id: 'email',
-          typeData: 'value',
-          typeInput: 'email',
-          text: {
-            en: {
-              label: 'E-mail',
-              valueTest: 'Test Email',
-              placeholder: 'Fill in you email',
-              clearInput: 'Clear',
-            },
-          },
-          validate: {
-            sync: ['emailValidate'],
-            async: ['emailAccountExistResponseErrorAsync'],
-            updateOn: 'change',
-            disabled: false,
-            valueMin: 8,
-            valueMax: 35,
-            required: false,
-            mask: 'emailValidate',
-          },
-          design: {
-            tools: {
-              accont: true,
-              clear: true,
-            },
-            css: {
-              materialDesign: {
-                appearance: 'fill',
-              },
-              form: {
-                container: 'f-total',
-              },
-            },
-          },
+        email: {...this.emailAccountExistResponseSucessAsync
+          
         },
         phone: {
           id: 'phone',
@@ -196,6 +165,7 @@ export class DataModel {
             en: {
               label: 'Telephone',
               valueTest: 'Test Telephone',
+              valueDefault: null,
               placeholder: 'Fill in your Telephone',
               clearInput: 'Clear',
             },
@@ -233,6 +203,7 @@ export class DataModel {
             en: {
               label: 'Password',
               valueTest: false,
+              valueDefault: null,
               placeholder: 'Accept Terms',
               clearInput: 'Clear',
             },
@@ -270,6 +241,7 @@ export class DataModel {
             en: {
               label: 'Accept Terms',
               valueTest: false,
+              valueDefault: null,
               placeholder: 'Accept Terms',
               clearInput: 'Clear',
             },
@@ -307,6 +279,7 @@ export class DataModel {
             en: {
               label: 'Email Verified',
               valueTest: false,
+              valueDefault: false,
               placeholder: 'Accept Terms',
               clearInput: 'Clear',
             },
@@ -344,6 +317,7 @@ export class DataModel {
             en: {
               label: 'Multi Factor',
               valueTest: false,
+              valueDefault: false,
               placeholder: 'Mult Factor',
               clearInput: 'Clear',
             },
@@ -381,6 +355,7 @@ export class DataModel {
             en: {
               label: 'Nível',
               valueTest: false,
+              valueDefault: null,
               placeholder: 'Nivel',
               clearInput: 'Clear',
             },
@@ -418,6 +393,7 @@ export class DataModel {
             en: {
               label: 'User Id',
               valueTest: false,
+              valueDefault: null,
               placeholder: 'ID',
               clearInput: 'Clear',
             },
@@ -455,4 +431,5 @@ export class DataModel {
       }
     }
   }
+
 }

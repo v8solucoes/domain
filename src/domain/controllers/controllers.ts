@@ -9,12 +9,12 @@ export class Controllers {
     this.request = req
   }
   get account_adm() { return new AccountAdm(this.request) }
-  get accountAdmFirst() { return new AccountAdm(this.request) }
+  get genericCrud() { return new AccountAdm(this.request) }
   
  static path(req: Irequest, id: string = FirebaseAPI.db.bundle().bundleId) {
 
     const rota: Ipath = {
-      [`account-adm`]: {
+      [`account-adm-new`]: {
         root: `${req.environment}/${req.domain}/adm/user-adm`,
         nivel: 'adm'
       },

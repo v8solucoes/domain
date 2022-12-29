@@ -24,7 +24,7 @@ export type UserModel = {
 export type Idoc = {
   /*   [`user-create-adm`]: Pick<ModelUser, 'name' | 'email' | 'nivel'> */
   [`user-adm`]: Pick<ModelUser, 'name' | 'email' | 'phone' | 'password' | 'acceptTerms' | 'emailVerified' | 'multiFactor' | 'nivel' | 'userId'>
-  [`account-adm`]: Pick<ModelUser, 'name' | 'email' | 'phone' | 'password' | 'acceptTerms'>
+  [`account-adm-new`]: Pick<ModelUser, 'name' | 'email' | 'phone' | 'password' | 'acceptTerms'>
   [`sign-in`]: Pick<ModelUser, 'email' | 'password'>
   [`recursive`]: { [x:string] : string}
 }
@@ -54,7 +54,7 @@ export type IpermissionRecursiveConfig = IpermissionRecursive
 
 export type Ipermission2 = [
     IpermissionCreate<'user-adm'>,
-    IpermissionCreate<'account-adm'>,
+    IpermissionCreate<'account-adm-new'>,
     IpermissionCreate<'sign-in'>,
     IpermissionCreate<'recursive'>,
   ]
@@ -70,6 +70,7 @@ export interface ImodelConfig {
       clearInput: string;
       label: string;
       valueTest: string | boolean;
+      valueDefault: any;
       placeholder: string;
       prefix?: string;
       suffix?: string;
@@ -142,7 +143,7 @@ export type ImodelRecursiveConfig =
   Partial<Record<keyof Pick<ImodelCreate<'recursive'>, '_group'>, ImodelRecursive>> &
   ImodelConfig
 
-export type Iuser = Pick<ModelUser, 'nivel' | 'name' | 'userId'>
+export type Iuser = Pick<ModelUser, 'nivel' | 'name' | 'userId'> & {acessToken:string}
 
 export interface IFormData {
   permission: Ipermission[];

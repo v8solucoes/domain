@@ -21,7 +21,8 @@ export class Firebase {
       const user: Iuser = {
         'name': getUser.name,
          nivel,
-        'userId' : getUser.uid
+        'userId': getUser.uid,
+        acessToken: token
       }
 
       const credential = await FirebaseAPI.db.collection(`${req.environment}/${req.domain}/${nivel}/user-${nivel}/colection/`).doc(getUser.uid).get()
@@ -58,7 +59,7 @@ export class Firebase {
   }
   static securityColectionAndDocumentAcessIsValid(permission: IpermissionNivel, req: Irequest): boolean {
     const documentNivel = Controllers.path(req).nivel as Inivel
-    const documenteName = req.document == 'account-adm' ? 'user-adm' : req.document
+    const documenteName = req.document == 'account-adm-new' ? 'user-adm' : req.document
 
     let test: any = []
 
