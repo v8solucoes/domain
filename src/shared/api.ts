@@ -1,6 +1,6 @@
 // FIREBASE NUNCA REMOVER IMPORT DO TOPO
-import * as admin from "firebase-admin";
-if (admin.apps.length === 0) { admin.initializeApp({
+import * as admin from "firebase-admin/app";
+if (admin.getApp.length === 0) { admin.initializeApp({
   
 }) }
 import { getFirestore, FieldValue } from "firebase-admin/firestore";

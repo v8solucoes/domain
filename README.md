@@ -1,4 +1,4 @@
-# README: LastUpdate (15/11/22)
+# README: LastUpdate (03/01/22)
 
 ## SETUP WorkSpace - [WSL - Update](.readme/ubunto.md)
 
@@ -17,6 +17,10 @@
 - [Update](#npm-comand)
 
 # NPM Comand
+
+npm outdated                     # verifica dependências que possuem atualização
+npm update                       # atualiza dependências
+npm install                      # instala dependências
 
 - npm i (create Packote Loc Json)
 - npm i name (intall Local)

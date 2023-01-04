@@ -384,6 +384,80 @@ export class DataLocal extends DataModel {
         }
       },
     },
+    [`null`]: {
+      id: 'null',
+      typeData: 'object',
+      typeInput: 'group',
+      text: {
+        en: {
+          label: 'Login',
+          valueTest: 'Valor Teste',
+          placeholder: 'Faça su login',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+      },
+      validate: {
+        sync: [],
+        async: [],
+        updateOn: 'change',
+        disabled: false,
+        valueMin: 8,
+        valueMax: 35,
+        required: false,
+        mask: 'namePersonal',
+      },
+      design: {
+        css: {
+          materialDesign: {
+            appearance: 'fill',
+          },
+          form: {
+            container: 'f-total',
+          },
+        },
+      },
+      _group: {
+        name: {
+          id: 'name',
+          typeData: 'value',
+          typeInput: 'input',
+          text: {
+            en: {
+              label: 'Personal Name',
+              valueTest: 'Test Name',
+              valueDefault: null,
+              placeholder: 'Fill in you name',
+              clearInput: 'Clear'
+            },
+          },
+          validate: {
+            sync: ['namePersonal'],
+            async: [],
+            updateOn: 'change',
+            disabled: false,
+            valueMin: 8,
+            valueMax: 35,
+            required: true,
+            mask: 'namePersonal',
+          },
+          design: {
+            tools: {
+              accont: true,
+              clear: true,
+            },
+            css: {
+              materialDesign: {
+                appearance: 'fill',
+              },
+              form: {
+                container: 'f-total',
+              },
+            },
+          },
+        }
+      },
+    },
   }
   document: Idoc = {
     [`user-adm`]: {
@@ -409,6 +483,9 @@ export class DataLocal extends DataModel {
       password: '123456',
     },
     [`recursive`]: {
+      any: 'any',
+    },
+    [`null`]: {
       any: 'any',
     },
   }

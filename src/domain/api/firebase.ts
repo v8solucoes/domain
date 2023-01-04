@@ -4,8 +4,7 @@ import { Controllers } from "../controllers/controllers"
 import { UserController } from "../model/user.controllers"
 import { ModelUser } from "../model/users"
 import { DataLocal } from "../repository/data-local"
-/* import { DataLocalDomain } from "../repository/data-local" */
-import { responseValidatorError } from "../validators/validators-response"
+
 
 export class Firebase {
 
@@ -114,6 +113,19 @@ export class Firebase {
   static async createUser(req: Irequest): Promise<FirebaseUserRecord | IresponseValidatorCompose> {
     const user = req.data[req.document] as ModelUser
     
+    return await FirebaseAPI.auth.createUser(new UserController(user).firebaseCreate)
+
+  }
+  static async updateUser(req: Irequest): Promise<FirebaseUserRecord | IresponseValidatorCompose> {
+    const user = req.data[req.document] as ModelUser
+    
+    return await FirebaseAPI.auth.createUser(new UserController(user).firebaseCreate)
+
+  }
+}
+ /*  static async createUser(req: Irequest): Promise<FirebaseUserRecord | IresponseValidatorCompose> {
+    const user = req.data[req.document] as ModelUser
+    
     const message = {
       en: 'Problema create account.',
       pt: 'Problema ao criar a conta.'
@@ -129,4 +141,4 @@ export class Firebase {
     }
 
   }
-}
+} */

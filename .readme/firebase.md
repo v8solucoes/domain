@@ -1,9 +1,9 @@
 # FIREBASE
 ###### [README](./../README.md)
-
+## NÃO ESQUEÇA DE INSTALAR NA PASTA DOMAIN E BACK CASO CONTRÁRIO NÃO CARREGA AS BIBLIOTECAS ATUAIS 
 ## FIREBASE CLI
 `curl -sL firebase.tools | upgrade=true bash` (Instal last version binary)
-`curl -sL https://firebase.tools | bash` (Version 11.16.0) old install (10.8.0)
+`curl -sL https://firebase.tools | bash` (Version 11.19.0)
 `npm install -g firebase-tools` 
 `firebase login`
 `npm install firebase` (após instação do NODE)

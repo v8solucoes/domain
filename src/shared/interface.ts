@@ -22,13 +22,18 @@ export type UserModel = {
 }
 
 export type Idoc = {
-  /*   [`user-create-adm`]: Pick<ModelUser, 'name' | 'email' | 'nivel'> */
+
   [`user-adm`]: Pick<ModelUser, 'name' | 'email' | 'phone' | 'password' | 'acceptTerms' | 'emailVerified' | 'multiFactor' | 'nivel' | 'userId'>
   [`account-adm-new`]: Pick<ModelUser, 'name' | 'email' | 'phone' | 'password' | 'acceptTerms'>
   [`sign-in`]: Pick<ModelUser, 'email' | 'password'>
-  [`recursive`]: { [x:string] : string}
+
+  // funcões básicas do sistema não modificar
+  [`recursive`]: { [x: string]: string }
+  [`null`]: { [x:string] : string}
 }
+export type test = { oi:string}
 export type Icol = { [key in keyof Idoc]: { [x:string]: any } }
+export type Icontrollers = { [key in keyof Idoc]: Record<Irequest['action'], () => Promise<IresponseValidatorCompose | null> > }
 
 //Constructor PERMISSION
 
@@ -174,13 +179,13 @@ export type Ipath = {
 
 export type Irequest = {
   language: 'en';
-  page: 'account';
+  page: 'account' | 'login' | 'app';
   document: NameProperty<Idoc>;
   controller: 'accountAdmFirst' | null
-  action: 'create' | 'null';
+  action: 'create' | 'update' | 'null';
   key: string | null;
   environment: 'prod' | 'test' | 'create' | 'update' | 'set';
-  domain: 'localchost';
+  domain: 'localhost' | '127.0.0.1' | 'v8app-888cd.firebaseapp.com' | 'v8app-888cd.web.app';
   dateTime: Date | null;
   colection: Irequest['document']
   user?: Iuser

@@ -22,8 +22,8 @@ export class OptionsConstructor {
     // request not efect
     const requestGeneric: Irequest = {
       language,
-      page: "account",
-      domain: 'localchost',
+      page: 'account',
+      domain: 'localhost',
       environment: 'prod',
       controller: null,
       action: "create",
