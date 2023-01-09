@@ -1,1 +1,1 @@
-export { Documents } from "../domain/controllers/controllers";
+/* export { Documents } from "../domain/controllers/controllers"; */

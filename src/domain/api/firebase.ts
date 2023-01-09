@@ -116,12 +116,12 @@ export class Firebase {
     return await FirebaseAPI.auth.createUser(new UserController(user).firebaseCreate)
 
   }
-  static async updateUser(req: Irequest): Promise<FirebaseUserRecord | IresponseValidatorCompose> {
+  /* static async updateUser(req: Irequest): Promise<FirebaseUserRecord | IresponseValidatorCompose> {
     const user = req.data[req.document] as ModelUser
-    
-    return await FirebaseAPI.auth.createUser(new UserController(user).firebaseCreate)
+    const getUser = await FirebaseAPI.auth.verifyIdToken(req.user!.userId).
+    return await FirebaseAPI.auth.updateUser(req.user!.userId, user.email)
 
-  }
+  } */
 }
  /*  static async createUser(req: Irequest): Promise<FirebaseUserRecord | IresponseValidatorCompose> {
     const user = req.data[req.document] as ModelUser

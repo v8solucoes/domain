@@ -80,6 +80,45 @@ export class DataModel {
       },
     }
   }
+  emailSimpleValidation: UserModel['model']['_group']['email'] = {
+
+    id: 'email',
+    typeData: 'value',
+    typeInput: 'email',
+    text: {
+      en: {
+        label: 'E-mail',
+        valueTest: 'Test Email',
+        placeholder: 'Fill in you email',
+        clearInput: 'Clear',
+        valueDefault: null
+      },
+    },
+    validate: {
+      sync: ['emailValidate'],
+      async: [],
+      updateOn: 'change',
+      disabled: false,
+      valueMin: 8,
+      valueMax: 35,
+      required: false,
+      mask: 'emailValidate',
+    },
+    design: {
+      tools: {
+        accont: true,
+        clear: true,
+      },
+      css: {
+        materialDesign: {
+          appearance: 'fill',
+        },
+        form: {
+          container: 'f-total',
+        },
+      },
+    }
+  }
 
   userModel: UserModel = {
     model: {
@@ -154,7 +193,7 @@ export class DataModel {
             },
           },
         },
-        email: {...this.emailAccountExistResponseSucessAsync
+        email: {...this.emailSimpleValidation
           
         },
         phone: {

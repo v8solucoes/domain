@@ -3,6 +3,7 @@ import { Irequest, IresponseValidatorCompose } from "../../shared/interface";
 import { ModelUser } from "../model/users";
 import { DataRemote } from "../repository/data-remote";
 import { responseValidatorError } from "../validators/validators-response";
+import { UserController } from "../model/user.controllers"
 
 export class AccountAdm extends DataRemote {
 
@@ -119,7 +120,7 @@ export class AccountAdm extends DataRemote {
       nivel: data.nivel
     }
     // User - ID Firebase Auth
-    let userId: ModelUser['userId']
+/*     let userId: ModelUser['userId'] */
 
     // User Default Config
     const personUser: Pick<ModelUser, 'emailVerified' | 'multiFactor'> = {
@@ -138,16 +139,15 @@ export class AccountAdm extends DataRemote {
 
     try {
 
-      // Update USER
+      // Update Get USER
       if (create.user = create.test) {
 
-        const { uid } = await db.createUser as FirebaseUserRecord
-        userId = uid
-        
+      /*  const emailUpdate = await FirebaseAPI.auth.updateProviderConfig(this.req.user!.userId, new UserController(data).firebaseCreate)
+        console.log(emailUpdate) */
         // CREATE CONFIG
-        if (create.userConfig = typeof uid === 'string' ? true : false) {
+        if (create.userConfig = true) {
           
-          const config = await db.createUserConfig.setCustomUserClaims(userId, customUser)
+          const config = await db.createUserConfig.setCustomUserClaims(this.req.user!.userId, customUser)
 
 
           // CREATE USER PERMISSION
@@ -157,11 +157,11 @@ export class AccountAdm extends DataRemote {
               ...data,
               ...customUser,
               ...personUser,
-              userId
+              userId: this.req.user!.userId
            }
             const permission = { [`${customUser.nivel}`]: db.getUserAdm.permission }  
             
-            db.lote.create(db.pathDocument(userId).document, {
+            db.lote.update(db.pathDocument(this.req.user!.userId).document, {
               permission,
               [`user-adm`]: user,
               _hitoric: db.getStatistic.historicDocument({
@@ -170,7 +170,7 @@ export class AccountAdm extends DataRemote {
                 email: user.email
               },{permission,user})
             })
-            db.lote.set(db.pathDocument().historic, { ...db.getStatistic.create })
+            db.lote.set(db.pathDocument().historic, { ...db.getStatistic.update })
 
             const salve = await db.lote.commit()
 
@@ -181,7 +181,7 @@ export class AccountAdm extends DataRemote {
               console.log(create)
 
               await (exists ?
-                db.pathDocument('user-adm').statistic.update({ ...db.getStatistic.create }) :
+                db.pathDocument('user-adm').statistic.update({ ...db.getStatistic.update }) :
                 db.pathDocument('user-adm').statistic.create({ ...db.getStatistic.create }))
 
               return null
@@ -197,6 +197,8 @@ export class AccountAdm extends DataRemote {
 
     } catch (error) {
       console.log('Error Create user')
+      console.log(new UserController(data).firebaseCreate)
+
       return responseValidatorError(error, this.req)
     }
   }

@@ -3,6 +3,7 @@ import { Icontrollers, Ipath, Irequest } from "../../shared/interface"
 import { AccountAdm } from "./account-adm"
 
 export class Controllers implements Icontrollers {
+  
   private request: Irequest = null as any
 
   constructor(req: Irequest) {
