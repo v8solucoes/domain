@@ -1,6 +1,7 @@
 export const _debug = {
   resolver: false,
   guard: false,
+  action: false,
   pg: {
     document: false,
     login: false,

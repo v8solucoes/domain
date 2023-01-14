@@ -214,6 +214,12 @@ export interface Ipermission {
   colection?: Irequest['document']
   _group?: Ipermission[]
 }
+export interface ImodalErrorForm {
+  width: string,
+  error: string[],
+  model: ImodelRecursive,
+  language: Ilanguage
+}
 export type ImodelDefinedProperty = ImodelUndefinedProperty
 export type ImodelUndefinedProperty = { [key: string]: Imodel }
 

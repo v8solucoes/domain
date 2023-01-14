@@ -4,6 +4,7 @@ import { Controllers } from "../controllers/controllers"
 import { UserController } from "../model/user.controllers"
 import { ModelUser } from "../model/users"
 import { DataLocal } from "../repository/data-local"
+import { responseValidatorError } from "../validators/validators-response"
 
 
 export class Firebase {
@@ -15,11 +16,11 @@ export class Firebase {
     try {
 
       const getUser = await FirebaseAPI.auth.verifyIdToken(token)
-      const nivel = getUser['nivel'] as  Inivel
-      
+      const nivel = getUser['nivel'] as Inivel
+
       const user: Iuser = {
         'name': getUser.name,
-         nivel,
+        nivel,
         'userId': getUser.uid,
         acessToken: token
       }
@@ -27,8 +28,8 @@ export class Firebase {
       const credential = await FirebaseAPI.db.collection(`${req.environment}/${req.domain}/${nivel}/user-${nivel}/colection/`).doc(getUser.uid).get()
 
       if (credential.exists) {
-        const { permission } = credential.data() as any  
-       
+        const { permission } = credential.data() as any
+
         const localModel = new DataLocal()
 
         let model: any = {}
@@ -74,17 +75,17 @@ export class Firebase {
   }
   static async colection(req: Irequest) {
 
-    
+
     try {
-      
+
       const colection = await Controllers.path(req).colection.get()
       let dataBase: any = {}
       colection.forEach((doc: { id: string; data: any }) => {
         dataBase[doc.id] = {
-           ...doc.data()
+          ...doc.data()
         }
       });
-        return dataBase
+      return dataBase
 
     } catch (error) {
       return { error }
@@ -92,15 +93,15 @@ export class Firebase {
 
   }
   static async document(req: Irequest) {
-    
+
     try {
-      
+
       const document = await Controllers.path(req, req.key as string).document.get()
       /*    let dataBase: any = {} */
-      
+
       console.log(document.data())
 
-        return document.data()
+      return document.data()
 
     } catch (error) {
       return { error }
@@ -110,10 +111,31 @@ export class Firebase {
 
   static create() { return FirebaseAPI }
 
+  /*   static async createUser(req: Irequest): Promise<FirebaseUserRecord | IresponseValidatorCompose> {
+      const user = req.data[req.document] as ModelUser
+      console.log('Create USER')
+      return await FirebaseAPI.auth.createUser(new UserController(user).firebaseCreate)
+  
+    } */
+
   static async createUser(req: Irequest): Promise<FirebaseUserRecord | IresponseValidatorCompose> {
     const user = req.data[req.document] as ModelUser
-    
-    return await FirebaseAPI.auth.createUser(new UserController(user).firebaseCreate)
+
+    const message = {
+      en: 'Problema create account.',
+      pt: 'Problema ao criar a conta.'
+    }
+
+    try {
+      const newUser = await FirebaseAPI.auth.createUser(new UserController(user).firebaseCreate)
+
+      return newUser
+
+    } catch (error) {
+      console.log('error Firebase Create user')
+      console.log(error)
+      return responseValidatorError({ error, message }, req)
+    }
 
   }
   /* static async updateUser(req: Irequest): Promise<FirebaseUserRecord | IresponseValidatorCompose> {
@@ -124,21 +146,21 @@ export class Firebase {
   } */
 }
  /*  static async createUser(req: Irequest): Promise<FirebaseUserRecord | IresponseValidatorCompose> {
-    const user = req.data[req.document] as ModelUser
-    
-    const message = {
-      en: 'Problema create account.',
-      pt: 'Problema ao criar a conta.'
-    }
-    
-    try {
-      
-      return await FirebaseAPI.auth.createUser(new UserController(user).firebaseCreate)
+   const user = req.data[req.document] as ModelUser
+   
+   const message = {
+     en: 'Problema create account.',
+     pt: 'Problema ao criar a conta.'
+   }
+   
+   try {
+     
+     return await FirebaseAPI.auth.createUser(new UserController(user).firebaseCreate)
 
-    } catch (error) {
-      console.log('error Create user')
-      return responseValidatorError({ error, message }, req)
-    }
+   } catch (error) {
+     console.log('error Create user')
+     return responseValidatorError({ error, message }, req)
+   }
 
-  }
+ }
 } */

@@ -13,7 +13,7 @@ export class GenericCrud extends DataRemote {
   }
 
   async update(): Promise<IresponseValidatorCompose | null> {
-
+    console.log('CRETAASDFASDFASDF')
     const db = this.db
 
     // User - Front Input
@@ -97,17 +97,17 @@ export class GenericCrud extends DataRemote {
         }
 
       }
-      console.log(process)
 
       return null
 
     } catch (error) {
-      console.log(process)
+      console.log('Peguei erro')
+      console.log(error)
       return responseValidatorError(error, this.req)
     }
   }
   async create(): Promise<IresponseValidatorCompose | null> {
-
+    console.log('CRETAASDFASDFASDF')
     const db = this.db
 
     // User - Front Input
@@ -192,12 +192,14 @@ export class GenericCrud extends DataRemote {
         }
 
       }
+      console.log('NOerror CreateUser')
       console.log(process)
 
       return null
 
     } catch (error) {
-      console.log(process)
+      console.log('error CreateUser')
+      console.log(error)
       return responseValidatorError(error, this.req)
     }
   }

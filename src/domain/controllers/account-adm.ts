@@ -15,25 +15,27 @@ export class AccountAdm extends DataRemote {
 
   async create(): Promise<IresponseValidatorCompose | null> {
 
-    const db = this.db
+    console.log('Error DE user')
 
+    const db = this.db
+    
     // User - Front Input
     const data = this.req.data[this.req.document] as Pick<
-      ModelUser, 'name' | 'email' | 'password' |'phone' | 'acceptTerms'> 
-
+    ModelUser, 'name' | 'email' | 'password' |'phone' | 'acceptTerms'> 
+    
     // User - Custom Back
     const customUser: Pick<ModelUser, 'nivel'> = {
       nivel: 'adm'
     }
     // User - ID Firebase Auth
     let userId: ModelUser['userId']
-
+    
     // User Default Config
     const personUser: Pick<ModelUser, 'emailVerified' | 'multiFactor'> = {
       emailVerified: false,
       multiFactor: false
     }
-
+    
     // Create Status
     const create = {
       test: true,
@@ -42,20 +44,19 @@ export class AccountAdm extends DataRemote {
       userPermission: false,
       statistic: false
     }
-
+    
     try {
-
+      
       // CREATE USER
       if (create.user = create.test) {
-
+        
         const { uid } = await db.createUser as FirebaseUserRecord
         userId = uid
-        
+      
         // CREATE CONFIG
         if (create.userConfig = typeof uid === 'string' ? true : false) {
           
           const config = await db.createUserConfig.setCustomUserClaims(userId, customUser)
-
 
           // CREATE USER PERMISSION
 
@@ -109,25 +110,24 @@ export class AccountAdm extends DataRemote {
   }
  
   async update(): Promise<IresponseValidatorCompose | null> {
-
     const db = this.db
-
+    
     // User - Front Input
     const data = this.req.data[this.req.document] as ModelUser 
-
+    
     // User - Custom Back
     const customUser: Pick<ModelUser, 'nivel'> = {
       nivel: data.nivel
     }
     // User - ID Firebase Auth
-/*     let userId: ModelUser['userId'] */
-
+    /*     let userId: ModelUser['userId'] */
+    
     // User Default Config
     const personUser: Pick<ModelUser, 'emailVerified' | 'multiFactor'> = {
       emailVerified: false,
       multiFactor: false
     }
-
+    
     // Create Status
     const create = {
       test: true,
@@ -136,13 +136,14 @@ export class AccountAdm extends DataRemote {
       userPermission: false,
       statistic: false
     }
-
+    
     try {
-
+      
+      console.log('Error DE user')
       // Update Get USER
       if (create.user = create.test) {
-
-      /*  const emailUpdate = await FirebaseAPI.auth.updateProviderConfig(this.req.user!.userId, new UserController(data).firebaseCreate)
+        
+        /*  const emailUpdate = await FirebaseAPI.auth.updateProviderConfig(this.req.user!.userId, new UserController(data).firebaseCreate)
         console.log(emailUpdate) */
         // CREATE CONFIG
         if (create.userConfig = true) {
