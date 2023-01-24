@@ -38,6 +38,11 @@ export abstract class DataRemote {
 
     return {
 
+      get dateLastUpdate() {
+        return {
+          dateLastUpdate: fire.serverTimestamp()     
+        }
+      },
       get create() {
         return {
           create: fire.increment(1),

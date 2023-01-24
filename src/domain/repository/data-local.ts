@@ -1,7 +1,10 @@
-import { DataModel } from './data-model';
 import { Icol, IpermissionRecursive, Idoc, Imodel2, Ipermission2, Irequest, ImodelRecursive } from "../../shared/interface"
+import { action, level } from './data-text-language';
+import { DataModel } from './data-model';
 
 export class DataLocal extends DataModel {
+
+  text = { action, level }
 
   permission: Ipermission2 = [
     {
