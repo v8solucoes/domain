@@ -4,8 +4,9 @@ export class DataModel {
   emailAccountExistResponseErrorAsync: UserModel['model']['_group']['email'] = {
 
     id: 'email',
-    typeData: 'value',
-    typeInput: 'email',
+    typeModel: 'value',
+    typeInput: 'generic',
+    typeInputHtml: 'email',
     text: {
       en: {
         label: 'E-mail',
@@ -44,8 +45,9 @@ export class DataModel {
   emailAccountExistResponseSucessAsync: UserModel['model']['_group']['email'] = {
 
     id: 'email',
-    typeData: 'value',
-    typeInput: 'email',
+    typeModel: 'value',
+    typeInput: 'generic',
+    typeInputHtml: 'text',
     text: {
       en: {
         label: 'E-mail',
@@ -83,8 +85,9 @@ export class DataModel {
   emailSimpleValidation: UserModel['model']['_group']['email'] = {
 
     id: 'email',
-    typeData: 'value',
-    typeInput: 'email',
+    typeModel: 'value',
+    typeInput: 'generic',
+    typeInputHtml: 'email',
     text: {
       en: {
         label: 'E-mail',
@@ -123,8 +126,9 @@ export class DataModel {
   userModel: UserModel = {
     model: {
       id: 'user-adm',
-      typeData: 'object',
+      typeModel: 'object',
       typeInput: 'group',
+      typeInputHtml: 'text',
       text: {
         en: {
           label: 'User Adm',
@@ -157,8 +161,9 @@ export class DataModel {
       _group: {
         name: {
           id: 'name',
-          typeData: 'value',
-          typeInput: 'input',
+          typeModel: 'value',
+          typeInput: 'generic',
+          typeInputHtml: 'text',
           text: {
             en: {
               label: 'Personal Name',
@@ -198,8 +203,9 @@ export class DataModel {
         },
         phone: {
           id: 'phone',
-          typeData: 'value',
-          typeInput: 'input',
+          typeModel: 'value',
+          typeInput: 'generic',
+          typeInputHtml: 'text',
           text: {
             en: {
               label: 'Telephone',
@@ -236,14 +242,15 @@ export class DataModel {
         },
         password: {
           id: 'password',
-          typeData: 'value',
-          typeInput: 'input',
+          typeModel: 'value',
+          typeInput: 'generic',
+          typeInputHtml: 'password',
           text: {
             en: {
               label: 'Password',
               valueTest: false,
               valueDefault: null,
-              placeholder: 'Accept Terms',
+              placeholder: 'Password',
               clearInput: 'Clear',
             },
           },
@@ -274,8 +281,9 @@ export class DataModel {
         },
         acceptTerms: {
           id: 'acceptTerms',
-          typeData: 'value',
+          typeModel: 'value',
           typeInput: 'acceptTerms',
+          typeInputHtml: 'text',
           text: {
             en: {
               label: 'Accept Terms',
@@ -312,8 +320,9 @@ export class DataModel {
         },
         emailVerified: {
           id: 'emailVerified',
-          typeData: 'value',
+          typeModel: 'value',
           typeInput: 'booleanToggle',
+          typeInputHtml: 'text',
           text: {
             en: {
               label: 'Email Verified',
@@ -350,8 +359,9 @@ export class DataModel {
         },
         multiFactor: {
           id: 'multiFactor',
-          typeData: 'value',
+          typeModel: 'value',
           typeInput: 'booleanToggle',
+          typeInputHtml: 'text',
           text: {
             en: {
               label: 'Multi Factor',
@@ -388,8 +398,9 @@ export class DataModel {
         },
         nivel: {
           id: 'nivel',
-          typeData: 'value',
-          typeInput: 'input',
+          typeModel: 'value',
+          typeInput: 'generic',
+          typeInputHtml: 'text',
           text: {
             en: {
               label: 'Nível',
@@ -426,8 +437,9 @@ export class DataModel {
         },
         userId: {
           id: 'userId',
-          typeData: 'value',
-          typeInput: 'input',
+          typeModel: 'value',
+          typeInput: 'generic',
+          typeInputHtml: 'text',
           text: {
             en: {
               label: 'User Id',

@@ -73,7 +73,7 @@ export class TestDocument {
         return req
       }
 
-      if (model[permission.id].typeData == 'object') {
+      if (model[permission.id].typeModel == 'object') {
 
         this.registerTest(
           language,
@@ -85,7 +85,7 @@ export class TestDocument {
 
       }
 
-      if (model[permission.id].typeData == 'value') {
+      if (model[permission.id].typeModel == 'value') {
 
         // Validators Async
         model[permission.id].validate.async.map(
@@ -99,9 +99,9 @@ export class TestDocument {
           })
       }
       // Erro if type not exist
-      if (model[permission.id].typeData != 'value' && model[permission.id].typeData != 'object') {
+      if (model[permission.id].typeModel != 'value' && model[permission.id].typeModel != 'object') {
 
-        this.listTest.push({ [`type-test`]: `${model[permission.id].typeData} > not registrer (typeData)` })
+        this.listTest.push({ [`type-test`]: `${model[permission.id].typeModel} > not registrer (typeModel)` })
       }
       ////
 

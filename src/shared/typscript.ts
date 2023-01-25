@@ -6,7 +6,7 @@ import { ModelUser } from "../domain/model/users";
 /* const mod: ImodelRecursive = {
   'recursive': {
     id: 'recursive',
-    typeData: 'object',
+    typeModel: 'object',
     typeInput: 'group',
     text: {
       en: {
@@ -39,7 +39,7 @@ import { ModelUser } from "../domain/model/users";
     _group: {
       'name': {
         id: 'name',
-        typeData: 'value',
+        typeModel: 'value',
         typeInput: 'input',
         text: {
           en: {

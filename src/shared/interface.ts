@@ -56,7 +56,11 @@ export type IpermissionRecursive =
   Partial<Record<keyof Pick<IpermissionCreate<'recursive'>, 'colection'>, Irequest['document']>>
 
 export type IpermissionRecursiveConfig = IpermissionRecursive
-
+export type Isettings = {
+  theme: 'dark' | 'ligth',
+  fontSize: number,
+  language: Irequest['language']
+}
 export type Ipermission2 = [
     IpermissionCreate<'user-adm'>,
     IpermissionCreate<'account-adm-new'>,
@@ -68,8 +72,9 @@ export type Ipermission2 = [
 
 export interface ImodelConfig {
 
-  typeData: ItypeName['dataType'];
-  typeInput: 'booleanToggle' | 'email' | 'acceptTerms' | 'group' | 'range' | 'input' | 'radio' | 'text-area' | 'select' | 'galeriaHorizontal' | 'color' | 'slide-toggle';
+  typeModel: 'object' | 'array' | 'value'
+  typeInput: 'generic'| 'booleanToggle' | 'acceptTerms' | 'group';
+  typeInputHtml: 'password'| 'email' | 'text';
   text: {
     en: {
       clearInput: string;
@@ -150,14 +155,14 @@ export type ImodelRecursiveConfig =
 
 export type Iuser = Pick<ModelUser, 'nivel' | 'name' | 'userId'> & {acessToken:string}
 
-export interface IFormData {
+/* export interface IFormData {
   permission: Ipermission[];
   model: ImodelUndefinedProperty;
   form: any
   language: Ilanguage
-}
+} */
 
-export interface Idata {
+/* export interface Idata {
   ['account-adm']: {
     permission: Ipermission[]
     model: Imodel
@@ -166,7 +171,7 @@ export interface Idata {
     request: Irequest | null
     form?: IFormData | null
   }
-}
+} */
 
 export type Inivel = 'adm'
 
@@ -191,7 +196,7 @@ export type Irequest = {
   user?: Iuser
   validator?: Ivalidator;
   data?: any | null;
-  dataLast?: { [keyof in Irequest['document']]: Idata }
+  dataLast?: { [keyof in Irequest['document']]: Irequest }
 }
 
 export type Ilanguage = 'en'
@@ -220,13 +225,13 @@ export interface ImodalErrorForm {
   model: ImodelRecursive,
   language: Ilanguage
 }
-export type ImodelDefinedProperty = ImodelUndefinedProperty
-export type ImodelUndefinedProperty = { [key: string]: Imodel }
+/* export type ImodelDefinedProperty = ImodelUndefinedProperty */
+/* export type ImodelUndefinedProperty = { [key: string]: Imodel } */
 
-export interface Imodel {
+/* export interface Imodel {
   id: string;
-  typeData: ItypeName['dataType'];
-  typeInput: 'booleanToggle' | 'email' | 'acceptTerms' | 'group' | 'range' | 'input' | 'radio' | 'text-area' | 'select' | 'galeriaHorizontal' | 'color' | 'slide-toggle';
+  typeModel: ItypeName['dataType'];
+  typeInput: 'booleanToggle' | 'email' | 'acceptTerms' | 'group' | 'range' | 'input' | 'radio' | 'password' | 'text-area' | 'select' | 'galeriaHorizontal' | 'color' | 'slide-toggle';
   text: {
     en?: {
       clearInput: string;
@@ -289,13 +294,13 @@ export interface Imodel {
   }
   _group?: ImodelUndefinedProperty
 
-}
+} */
 
-export interface ItypeName {
+/* export interface ItypeName {
 
   dataType: 'object' | 'array' | 'value'
 
-}
+} */
 
 export interface Ivalidator {
   id: string;

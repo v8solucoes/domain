@@ -1,10 +1,19 @@
-import { Icol, IpermissionRecursive, Idoc, Imodel2, Ipermission2, Irequest, ImodelRecursive } from "../../shared/interface"
+
+import { Icol, IpermissionRecursive, Idoc, Imodel2, Ipermission2, Irequest, ImodelRecursive, Isettings } from "../../shared/interface"
 import { action, level } from './data-text-language';
 import { DataModel } from './data-model';
+import { inputModel, inputType, inputTypeHtml } from "./data-variables";
 
 export class DataLocal extends DataModel {
 
+  settings: Isettings = {
+    theme: 'dark',
+    fontSize: 1,
+    language: 'en'
+  }
+
   text = { action, level }
+  variable = { inputModel, inputType, inputTypeHtml }
 
   permission: Ipermission2 = [
     {
@@ -191,8 +200,9 @@ export class DataLocal extends DataModel {
   model: Imodel2 = {
     [`user-adm`]: {
       id: 'user-adm',
-      typeData: 'object',
+      typeModel: 'object',
       typeInput: 'group',
+      typeInputHtml: 'text',
       text: {
         en: {
           label: 'User Adm',
@@ -231,8 +241,9 @@ export class DataLocal extends DataModel {
     },
     [`account-adm-new`]: {
       id: 'account-adm-new',
-      typeData: 'object',
+      typeModel: 'object',
       typeInput: 'group',
+      typeInputHtml: 'text',
       text: {
         en: {
           label: 'New Account',
@@ -281,8 +292,9 @@ export class DataLocal extends DataModel {
         email: { ...this.emailAccountExistResponseSucessAsync },
         password: this.userModel.model._group.password
       },
-      typeData: 'object',
+      typeModel: 'object',
       typeInput: 'group',
+      typeInputHtml: 'text',
       text: {
         en: {
           label: 'Login',
@@ -315,8 +327,9 @@ export class DataLocal extends DataModel {
     },
     [`recursive`]: {
       id: 'recursive',
-      typeData: 'object',
+      typeModel: 'object',
       typeInput: 'group',
+    typeInputHtml: 'text',
       text: {
         en: {
           label: 'Login',
@@ -349,8 +362,9 @@ export class DataLocal extends DataModel {
       _group: {
         name: {
           id: 'name',
-          typeData: 'value',
-          typeInput: 'input',
+          typeModel: 'value',
+          typeInput: 'generic',
+          typeInputHtml: 'text',
           text: {
             en: {
               label: 'Personal Name',
@@ -389,8 +403,9 @@ export class DataLocal extends DataModel {
     },
     [`null`]: {
       id: 'null',
-      typeData: 'object',
+      typeModel: 'object',
       typeInput: 'group',
+      typeInputHtml: 'text',
       text: {
         en: {
           label: 'Login',
@@ -423,8 +438,9 @@ export class DataLocal extends DataModel {
       _group: {
         name: {
           id: 'name',
-          typeData: 'value',
-          typeInput: 'input',
+          typeModel: 'value',
+          typeInput: 'group',
+          typeInputHtml: 'text',
           text: {
             en: {
               label: 'Personal Name',
