@@ -4,7 +4,7 @@ import { Irequest } from "../../shared/interface";
 
 export class OptionsValidator {
 
-  language: Irequest['language'][] = ['en']
+  language: Irequest['language'][] = ['en','pt']
   page: Irequest['page'][] = ['account', 'login', 'app']
   action: Irequest['action'][] = ['create', 'update', 'null']
   document: Irequest['document'][] = ['account-adm-new', 'recursive', 'sign-in', 'user-adm', 'null']

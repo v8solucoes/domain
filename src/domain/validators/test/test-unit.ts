@@ -17,6 +17,9 @@ export class TestUnit {
       en: {
         [`minChater--${value}`]: `Mínimo ${min} caracteres atual ${value.length} `,
       },
+      pt: {
+        [`minChater--${value}`]: `Mínimo ${min} caracteres atual ${value.length} `,
+      }
     };
 
     return responseValidatorUnit(sucess, error[req!.language]);
@@ -28,7 +31,10 @@ export class TestUnit {
     const sucess = value.length <= max ? true : false;
     const error: IvalidatorError = {
       en: {
-        [`maxChater--${value}`]: `Máximo ${max} caracteres atual ${value.length} `,
+        [`maxChater--${value}`]: `Maximum ${max} characters / ${value.length} `,
+      },
+      pt: {
+        [`maxChater--${value}`]: `Máximo ${max} caracteres / ${value.length} `,
       },
     };
 
@@ -41,8 +47,11 @@ export class TestUnit {
     const sucess = value <= max ? true : false;
     const error: IvalidatorError = {
       en: {
-        [`maxWord--${value}`]: `Máximo ${max} palavras atual ${value}`,
+        [`maxWord--${value}`]: `Maximum ${max} words / ${value}`,
       },
+      pt: {
+        [`maxWord--${value}`]: `Máximo ${max} palavras / ${value}`,
+      }
     };
 
     return responseValidatorUnit(sucess, error[req!.language]);
@@ -54,7 +63,10 @@ export class TestUnit {
     const sucess = value >= min ? true : false;
     const error: IvalidatorError = {
       en: {
-        [`minWord--${value}`]: `Minímo ${min} palavras atual ${value}`,
+        [`minWord--${value}`]: `Minimum ${min} words / ${value}`,
+      },
+      pt: {
+        [`minWord--${value}`]: `Minímo ${min} palavras / ${value}`,
       },
     };
 
@@ -67,7 +79,10 @@ export class TestUnit {
     const sucess = value == true ? true : false;
     const error: IvalidatorError = {
       en: {
-        [`typeBoolean--${value}`]: `" ${typeof value} " deve ser tipo: 'Boolean`,
+        [`typeBoolean--${value}`]: `" Select"`,
+      },
+      pt: {
+        [`typeBoolean--${value}`]: `" Selecione "`,
       },
     };
 
@@ -82,7 +97,10 @@ export class TestUnit {
     const sucess = typeof value === 'number' ? true : false;
     const error: IvalidatorError = {
       en: {
-        [`typeNumber--${value}`]: `" ${typeof value} " deve ser tipo: 'Number`,
+        [`typeNumber--${value}`]: `" ${typeof value} " must be number`,
+      },
+      pt: {
+        [`typeNumber--${value}`]: `" ${typeof value} " deve ser número`,
       },
     };
 
@@ -95,7 +113,10 @@ export class TestUnit {
     const sucess = typeof value === "string" ? true : false;
     const error: IvalidatorError = {
       en: {
-        [`typeString > ${value}`]: `" ${typeof value} " deve ser tipo: 'STRING`,
+        [`typeString > ${value}`]: `" ${typeof value} " must be 'text'`,
+      },
+      pt: {
+        [`typeString > ${value}`]: `" ${typeof value} " deve ser texto`,
       },
     };
 
@@ -106,7 +127,10 @@ export class TestUnit {
     const sucess = typeof value === "string" ? true : false;
     const error: IvalidatorError = {
       en: {
-        [`typeString > ${value}`]: `" ${typeof value} " deve ser tipo: 'STRING`,
+        [`typeString > ${value}`]: `" ${typeof value} " must be 'text'`,
+      },
+      pt: {
+        [`typeString > ${value}`]: `" ${typeof value} " deve ser texto`,
       },
     };
 
@@ -119,7 +143,10 @@ export class TestUnit {
     const sucess = typeof value === "boolean" ? true : false;
     const error: IvalidatorError = {
       en: {
-        [`typeBoolean--${value}`]: `" ${typeof value} " deve ser tipo: 'Boolean`,
+        [`typeBoolean--${value}`]: `" ${typeof value} " deve ser true or false`,
+      },
+      pt: {
+        [`typeBoolean--${value}`]: `" ${typeof value} " deve ser true or false`,
       },
     };
 
@@ -134,6 +161,9 @@ export class TestUnit {
     const erroProp = value
     const error: IvalidatorError = {
       en: {
+        [`emailFormat--${erroProp}`]: `(${value}) E-mail invalid.`,
+      },
+      pt: {
         [`emailFormat--${erroProp}`]: `(${value}) E-mail inválido.`,
       },
     };
@@ -147,6 +177,11 @@ export class TestUnit {
     const sucess = object[value] ? true : false;
     const error: IvalidatorError = {
       en: {
+        valueInObject: `" ${value} "not exist no object: ${JSON.stringify(
+          object
+        )}`,
+      },
+      pt: {
         valueInObject: `" ${value} "não existe no objeto: ${JSON.stringify(
           object
         )}`,
@@ -161,6 +196,11 @@ export class TestUnit {
     const sucess = array.includes(value);
     const error: IvalidatorError = {
       en: {
+        valueInaArray: `" ${value} " not exist in List: ${JSON.stringify(
+          array
+        )}`
+      },
+      pt: {
         valueInaArray: `" ${value} " não existe na Lista: ${JSON.stringify(
           array
         )}`
@@ -176,6 +216,11 @@ export class TestUnit {
     const sucess = array.includes(value);
     const error: IvalidatorError = {
       en: {
+        valueInaArray: `" ${value} " not exist in List: ${JSON.stringify(
+          array
+        )}`
+      },
+      pt: {
         valueInaArray: `" ${value} " não existe na Lista: ${JSON.stringify(
           array
         )}`
@@ -191,7 +236,10 @@ export class TestUnit {
     const sucess = array.includes(value);
     const error: IvalidatorError = {
       en: {
-        existObjectInArray: `" ${value} "não existe na Objeto: ${JSON.stringify(array)}`
+        existObjectInArray: `" ${value} "not exist in Object: ${JSON.stringify(array)}`
+      },
+      pt: {
+        existObjectInArray: `" ${value} "não existe no Objeto: ${JSON.stringify(array)}`
       },
     };
 
@@ -203,7 +251,12 @@ export class TestUnit {
     const sucess = array.includes(value);
     const error: IvalidatorError = {
       en: {
-        valueInaArray: `" ${value} "não existe na Lista: ${JSON.stringify(
+        valueInaArray: `" ${value} " not exist in List: ${JSON.stringify(
+          array
+        )}`
+      },
+      pt: {
+        valueInaArray: `" ${value} " não existe na Lista: ${JSON.stringify(
           array
         )}`
       },
@@ -219,6 +272,9 @@ export class TestUnit {
     const sucess = value.length <= max ? true : false;
     const error: IvalidatorError = {
       en: {
+        maxLength: `Characters exceeded maximum ${value.length} / ${max}`,
+      },
+      pt: {
         maxLength: `Caracteres exedeu máximo ${value.length} / ${max}`,
       },
     };
@@ -233,6 +289,9 @@ export class TestUnit {
     const sucess = value.split('').length <= min ? true : false;
     const error: IvalidatorError = {
       en: {
+        maxName: `Minimum  nome/s ${value.length} / ${min}`,
+      },
+      pt: {
         maxName: `Mínimo  nome/s ${value.length} / ${min}`,
       },
     };

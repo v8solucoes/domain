@@ -8,7 +8,7 @@ export class DataLocal extends DataModel {
 
   settings: Isettings = {
     theme: 'dark',
-    fontSize: 1,
+    fontSize: 0,
     language: 'en'
   }
 
@@ -205,7 +205,14 @@ export class DataLocal extends DataModel {
       typeInputHtml: 'text',
       text: {
         en: {
-          label: 'User Adm',
+          label: 'Users Adm',
+          valueTest: 'Valor Teste',
+          placeholder: 'Faça su conta',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+        pt: {
+          label: 'Usuários Adm',
           valueTest: 'Valor Teste',
           placeholder: 'Faça su conta',
           clearInput: 'Clear',
@@ -247,8 +254,15 @@ export class DataLocal extends DataModel {
       text: {
         en: {
           label: 'New Account',
+          valueTest: 'Value Test',
+          placeholder: 'Create Account',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+        pt: {
+          label: 'Nova Conta',
           valueTest: 'Valor Teste',
-          placeholder: 'Faça su conta',
+          placeholder: 'Create Account',
           clearInput: 'Clear',
           valueDefault: null
         },
@@ -297,9 +311,16 @@ export class DataLocal extends DataModel {
       typeInputHtml: 'text',
       text: {
         en: {
+          label: 'Log In',
+          valueTest: 'Value Test',
+          placeholder: 'Text Name',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+        pt: {
           label: 'Login',
           valueTest: 'Valor Teste',
-          placeholder: 'Faça su login',
+          placeholder: 'Texto Nome',
           clearInput: 'Clear',
           valueDefault: null
         },
@@ -333,8 +354,15 @@ export class DataLocal extends DataModel {
       text: {
         en: {
           label: 'Login',
+          valueTest: 'Value Test',
+          placeholder: 'Text Name',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+        pt: {
+          label: 'Login',
           valueTest: 'Valor Teste',
-          placeholder: 'Faça su login',
+          placeholder: 'Texto Nome',
           clearInput: 'Clear',
           valueDefault: null
         },
@@ -368,10 +396,17 @@ export class DataLocal extends DataModel {
           text: {
             en: {
               label: 'Personal Name',
-              valueTest: 'Test Name',
-              valueDefault: null,
-              placeholder: 'Fill in you name',
-              clearInput: 'Clear'
+              valueTest: 'Value Test',
+              placeholder: 'Text Name',
+              clearInput: 'Clear',
+              valueDefault: null
+            },
+            pt: {
+              label: 'Nome',
+              valueTest: 'Valor Teste',
+              placeholder: 'Texto Nome',
+              clearInput: 'Clear',
+              valueDefault: null
             },
           },
           validate: {
@@ -408,9 +443,16 @@ export class DataLocal extends DataModel {
       typeInputHtml: 'text',
       text: {
         en: {
-          label: 'Login',
+          label: 'Null',
           valueTest: 'Valor Teste',
-          placeholder: 'Faça su login',
+          placeholder: 'Text Name',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+        pt: {
+          label: 'Null',
+          valueTest: 'Valor Teste',
+          placeholder: 'Texto Nome',
           clearInput: 'Clear',
           valueDefault: null
         },
@@ -444,10 +486,17 @@ export class DataLocal extends DataModel {
           text: {
             en: {
               label: 'Personal Name',
-              valueTest: 'Test Name',
-              valueDefault: null,
-              placeholder: 'Fill in you name',
-              clearInput: 'Clear'
+              valueTest: 'Valor Teste',
+              placeholder: 'Text Name',
+              clearInput: 'Clear',
+              valueDefault: null
+            },
+            pt: {
+              label: 'Name',
+              valueTest: 'Valor Teste',
+              placeholder: 'Texto Nome',
+              clearInput: 'Clear',
+              valueDefault: null
             },
           },
           validate: {

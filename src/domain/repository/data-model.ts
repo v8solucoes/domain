@@ -15,6 +15,13 @@ export class DataModel {
         clearInput: 'Clear',
         valueDefault: null
       },
+      pt: {
+        label: 'E-mail',
+        valueTest: 'Test Email',
+        placeholder: 'Digite seu email',
+        clearInput: 'Limpar',
+        valueDefault: null
+      },
     },
     validate: {
       sync: ['emailValidate'],
@@ -54,6 +61,13 @@ export class DataModel {
         valueTest: 'Test Email',
         placeholder: 'Fill in you email',
         clearInput: 'Clear',
+        valueDefault: null
+      },
+      pt: {
+        label: 'E-mail',
+        valueTest: 'Test Email',
+        placeholder: 'Digite seu email',
+        clearInput: 'Limpar',
         valueDefault: null
       },
     },
@@ -96,6 +110,13 @@ export class DataModel {
         clearInput: 'Clear',
         valueDefault: null
       },
+      pt: {
+        label: 'E-mail',
+        valueTest: 'Test Email',
+        placeholder: 'Digite seu email',
+        clearInput: 'Limpar',
+        valueDefault: null
+      },
     },
     validate: {
       sync: ['emailValidate'],
@@ -131,12 +152,19 @@ export class DataModel {
       typeInputHtml: 'text',
       text: {
         en: {
-          label: 'User Adm',
-          valueTest: 'Valor Teste',
-          placeholder: 'Faça su conta',
+          label: 'Administrator',
+          valueTest: 'Value Test',
+          placeholder: 'Preencha',
           clearInput: 'Clear',
           valueDefault: null
         },
+        pt: {
+          label: 'Administrador',
+          valueTest: 'Teste Valor',
+          placeholder: 'Preencha',
+          clearInput: 'Limpar',
+          valueDefault: null
+        }
       },
       validate: {
         sync: [],
@@ -171,6 +199,13 @@ export class DataModel {
               valueDefault: null,
               placeholder: 'Fill in you name',
               clearInput: 'Clear'
+            },
+            pt: {
+              label: 'Nome',
+              valueTest: 'Teste Nome',
+              valueDefault: null,
+              placeholder: 'Preencha seu Nome',
+              clearInput: 'Limpar'
             },
           },
           validate: {
@@ -214,6 +249,13 @@ export class DataModel {
               placeholder: 'Fill in your Telephone',
               clearInput: 'Clear',
             },
+            pt: {
+              label: 'Telefone',
+              valueTest: 'Teste Telefone',
+              valueDefault: null,
+              placeholder: 'Preencha seu Telefone',
+              clearInput: 'Limpar',
+            },
           },
           validate: {
             sync: ['telephone'],
@@ -252,6 +294,13 @@ export class DataModel {
               valueDefault: null,
               placeholder: 'Password',
               clearInput: 'Clear',
+            },
+            pt: {
+              label: 'Senha',
+              valueTest: false,
+              valueDefault: null,
+              placeholder: 'Senha',
+              clearInput: 'Limpar',
             },
           },
           validate: {
@@ -292,6 +341,13 @@ export class DataModel {
               placeholder: 'Accept Terms',
               clearInput: 'Clear',
             },
+            pt: {
+              label: 'Aceitar Termos',
+              valueTest: false,
+              valueDefault: null,
+              placeholder: 'Aceitar Termos',
+              clearInput: 'Limpar',
+            },
           },
           validate: {
             sync: ['checkIsTrue'],
@@ -330,6 +386,13 @@ export class DataModel {
               valueDefault: false,
               placeholder: 'Accept Terms',
               clearInput: 'Clear',
+            },
+            pt: {
+              label: 'Email Verificado',
+              valueTest: false,
+              valueDefault: false,
+              placeholder: 'Aceitar Termos',
+              clearInput: 'Limpar',
             },
           },
           validate: {
@@ -370,6 +433,13 @@ export class DataModel {
               placeholder: 'Mult Factor',
               clearInput: 'Clear',
             },
+            pt: {
+              label: 'Multi Fator',
+              valueTest: false,
+              valueDefault: false,
+              placeholder: 'Multi Fator',
+              clearInput: 'Limpar',
+            },
           },
           validate: {
             sync: ['checkIsTrue'],
@@ -409,6 +479,13 @@ export class DataModel {
               placeholder: 'Nivel',
               clearInput: 'Clear',
             },
+            pt: {
+              label: 'Nível',
+              valueTest: false,
+              valueDefault: null,
+              placeholder: 'Nivel',
+              clearInput: 'Limpar',
+            },
           },
           validate: {
             sync: [],
@@ -442,6 +519,13 @@ export class DataModel {
           typeInputHtml: 'text',
           text: {
             en: {
+              label: 'User Id',
+              valueTest: false,
+              valueDefault: null,
+              placeholder: 'ID',
+              clearInput: 'Clear',
+            },
+            pt: {
               label: 'User Id',
               valueTest: false,
               valueDefault: null,

@@ -11,7 +11,7 @@ export interface FormControl<T> {
   permission: Ipermission2[number];
   model: Imodel2;
   document: any
-  language: Ilanguage
+  language: Irequest['language']
   request: Irequest
   form: T
 }
@@ -90,6 +90,20 @@ export interface ImodelConfig {
       sucess?: string;
       error?: string;
     },
+    pt: {
+      clearInput: string;
+      label: string;
+      valueTest: string | boolean;
+      valueDefault: any;
+      placeholder: string;
+      prefix?: string;
+      suffix?: string;
+      help?: string;
+      hintStart?: string;
+      hintEnd?: string;
+      sucess?: string;
+      error?: string;
+    },
   },
   validate: {
     sync: InameValidatorLocal[];
@@ -155,24 +169,6 @@ export type ImodelRecursiveConfig =
 
 export type Iuser = Pick<ModelUser, 'nivel' | 'name' | 'userId'> & {acessToken:string}
 
-/* export interface IFormData {
-  permission: Ipermission[];
-  model: ImodelUndefinedProperty;
-  form: any
-  language: Ilanguage
-} */
-
-/* export interface Idata {
-  ['account-adm']: {
-    permission: Ipermission[]
-    model: Imodel
-    document: any
-    colection: any[]
-    request: Irequest | null
-    form?: IFormData | null
-  }
-} */
-
 export type Inivel = 'adm'
 
 export type Ipath = {
@@ -183,7 +179,7 @@ export type Ipath = {
 }
 
 export type Irequest = {
-  language: 'en';
+  language: 'en'| 'pt';
   page: 'account' | 'login' | 'app';
   document: NameProperty<Idoc>;
   controller: 'accountAdmFirst' | null
@@ -198,8 +194,6 @@ export type Irequest = {
   data?: any | null;
   dataLast?: { [keyof in Irequest['document']]: Irequest }
 }
-
-export type Ilanguage = 'en'
 
 export type InameValidatorLocal = NameProperty<ValidatorsLocal>
 export type InameValidatorRemote = NameProperty<ValidatorsRemote>
@@ -223,84 +217,8 @@ export interface ImodalErrorForm {
   width: string,
   error: string[],
   model: ImodelRecursive,
-  language: Ilanguage
+  language: Irequest['language']
 }
-/* export type ImodelDefinedProperty = ImodelUndefinedProperty */
-/* export type ImodelUndefinedProperty = { [key: string]: Imodel } */
-
-/* export interface Imodel {
-  id: string;
-  typeModel: ItypeName['dataType'];
-  typeInput: 'booleanToggle' | 'email' | 'acceptTerms' | 'group' | 'range' | 'input' | 'radio' | 'password' | 'text-area' | 'select' | 'galeriaHorizontal' | 'color' | 'slide-toggle';
-  text: {
-    en?: {
-      clearInput: string;
-      label: string;
-      valueTest: string | boolean;
-      placeholder: string;
-      prefix?: string;
-      suffix?: string;
-      help?: string;
-      hintStart?: string;
-      hintEnd?: string;
-      sucess?: string;
-      error?: string;
-    },
-  },
-  validate: {
-    sync: InameValidatorLocal[];
-    async: InameValidatorRemote[];
-    updateOn: 'blur' | 'submit' | 'change';
-    disabled: boolean;
-    valueMin: number;
-    valueMax: number;
-    required: boolean;
-    mask: InameValidatorLocal;
-  }
-  design: {
-    tools?: {
-      accont?: boolean;
-      clear?: boolean;
-    }
-    html?: {
-      typeInput?: 'text' | 'color' | 'url'
-    }
-    icon?: {
-      prefix?: string;
-      suffix?: string;
-      start?: string;
-      end?: string;
-    }
-    css: {
-      materialDesign: {
-        appearance: 'fill' | 'outline' | 'standard' | 'legacy';
-      },
-      form: {
-        container: 'f-total'
-        | 'f-metade-esquerda'
-        | 'f-metade-direita'
-        | 'f-1-direita'
-        | 'f-1-meio'
-        | 'f-1-esquerda'
-        | 'f-2-direita'
-        | 'f-2-esquerda',
-      }
-    }
-  }
-  colection?: {
-    title: string,
-    subTitle: string,
-    description: string
-  }
-  _group?: ImodelUndefinedProperty
-
-} */
-
-/* export interface ItypeName {
-
-  dataType: 'object' | 'array' | 'value'
-
-} */
 
 export interface Ivalidator {
   id: string;
@@ -308,12 +226,11 @@ export interface Ivalidator {
   label: string;
   value: any;
   error: Ivalidator | Ivalidator[] | null;
-  language: Ilanguage;
+  language: Irequest['language'];
   typeExecute: 'front' | 'back'
 }
-export interface IvalidatorError {
-  en: { [key: string]: any };
-}
+export type IvalidatorError = Record<Irequest['language'],{ [key: string]: any }>
+
 export type IresponseValidatorUnit = {
   [key: string]: any;
 } | null
