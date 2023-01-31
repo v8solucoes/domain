@@ -15,7 +15,7 @@ export class AccountAdm extends DataRemote {
 
   async create(): Promise<IresponseValidatorCompose | null> {
 
-    console.log('Error DE user')
+    /* console.log('Error DE user') */
 
     const db = this.db
     

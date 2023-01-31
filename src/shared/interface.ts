@@ -193,6 +193,8 @@ export type Irequest = {
   validator?: Ivalidator;
   data?: any | null;
   dataLast?: { [keyof in Irequest['document']]: Irequest }
+  lastUrlNoLanguage?: string
+  lastUrl?: string;
 }
 
 export type InameValidatorLocal = NameProperty<ValidatorsLocal>
