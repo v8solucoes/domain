@@ -10,6 +10,7 @@ export class Controllers implements Icontrollers {
     /*     super(req) */
     this.request = req
   }
+  get [`dashboard`]() { return new AccountAdm(this.request) }
   get [`user-adm`]() { return new AccountAdm(this.request) }
   get [`account-adm-new`]() { return new AccountAdm(this.request) }
   get [`sign-in`]() { return new AccountAdm(this.request) }
@@ -20,6 +21,10 @@ export class Controllers implements Icontrollers {
   static path(req: Irequest, id: string = FirebaseAPI.db.bundle().bundleId) {
 
     const rota: Ipath = {
+      [`dashboard`]: {
+        root: `${req.environment}/${req.domain}/adm/user-adm`,
+        nivel: 'adm'
+      },
       [`account-adm-new`]: {
         root: `${req.environment}/${req.domain}/adm/user-adm`,
         nivel: 'adm'

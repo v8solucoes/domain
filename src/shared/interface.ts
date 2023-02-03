@@ -26,6 +26,7 @@ export type Idoc = {
   [`user-adm`]: Pick<ModelUser, 'name' | 'email' | 'phone' | 'password' | 'acceptTerms' | 'emailVerified' | 'multiFactor' | 'nivel' | 'userId'>
   [`account-adm-new`]: Pick<ModelUser, 'name' | 'email' | 'phone' | 'password' | 'acceptTerms'>
   [`sign-in`]: Pick<ModelUser, 'email' | 'password'>
+  [`dashboard`]: { [x:string] : string}
 
   // funcões básicas do sistema não modificar
   [`recursive`]: { [x: string]: string }

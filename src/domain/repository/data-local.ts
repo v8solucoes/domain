@@ -436,6 +436,96 @@ export class DataLocal extends DataModel {
         }
       },
     },
+    [`dashboard`]: {
+      id: 'dashboard',
+      typeModel: 'object',
+      typeInput: 'group',
+      typeInputHtml: 'text',
+      text: {
+        en: {
+          label: 'Dashboard',
+          valueTest: 'Value Test',
+          placeholder: 'Text Name',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+        pt: {
+          label: 'Dashboard',
+          valueTest: 'Valor Teste',
+          placeholder: 'Texto Nome',
+          clearInput: 'Limpar',
+          valueDefault: null
+        },
+      },
+      validate: {
+        sync: [],
+        async: [],
+        updateOn: 'change',
+        disabled: false,
+        valueMin: 8,
+        valueMax: 35,
+        required: false,
+        mask: 'namePersonal',
+      },
+      design: {
+        css: {
+          materialDesign: {
+            appearance: 'fill',
+          },
+          form: {
+            container: 'f-total',
+          },
+        },
+      },
+      _group: {
+        name: {
+          id: 'name',
+          typeModel: 'value',
+          typeInput: 'group',
+          typeInputHtml: 'text',
+          text: {
+            en: {
+              label: 'Personal Name',
+              valueTest: 'Valor Teste',
+              placeholder: 'Text Name',
+              clearInput: 'Clear',
+              valueDefault: null
+            },
+            pt: {
+              label: 'Name',
+              valueTest: 'Valor Teste',
+              placeholder: 'Texto Nome',
+              clearInput: 'Clear',
+              valueDefault: null
+            },
+          },
+          validate: {
+            sync: ['namePersonal'],
+            async: [],
+            updateOn: 'change',
+            disabled: false,
+            valueMin: 8,
+            valueMax: 35,
+            required: true,
+            mask: 'namePersonal',
+          },
+          design: {
+            tools: {
+              accont: true,
+              clear: true,
+            },
+            css: {
+              materialDesign: {
+                appearance: 'fill',
+              },
+              form: {
+                container: 'f-total',
+              },
+            },
+          },
+        }
+      },
+    },
     [`null`]: {
       id: 'null',
       typeModel: 'object',
@@ -554,6 +644,9 @@ export class DataLocal extends DataModel {
       any: 'any',
     },
     [`null`]: {
+      any: 'any',
+    },
+    [`dashboard`]: {
       any: 'any',
     },
   }
