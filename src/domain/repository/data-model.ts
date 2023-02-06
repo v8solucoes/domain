@@ -1,6 +1,7 @@
 import { UserModel } from "../../shared/interface"
 
 export class DataModel {
+  
   emailAccountExistResponseErrorAsync: UserModel['model']['_group']['email'] = {
 
     id: 'email',

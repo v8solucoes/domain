@@ -1,8 +1,9 @@
-
-import { Icol, IpermissionRecursive, Idoc, Imodel2, Ipermission2, Irequest, ImodelRecursive, Isettings } from "../../shared/interface"
+import { Icol, IpermissionRecursive, Idoc, Imodel2, Irequest, ImodelRecursive, Isettings, Ipermission } from "../../shared/interface"
 import { action, level } from './data-text-language';
 import { DataModel } from './data-model';
 import { inputModel, inputType, inputTypeHtml } from "./data-variables";
+import { _permission } from "./data-permission";
+import { _router } from "./data-router-path";
 
 export class DataLocal extends DataModel {
 
@@ -15,188 +16,11 @@ export class DataLocal extends DataModel {
   text = { action, level }
   variable = { inputModel, inputType, inputTypeHtml }
 
-  permission: Ipermission2 = [
-    {
-      id: 'user-adm',
-      view: {
-        form: true,
-        title: true,
-        subTitle: true,
-      },
-      colection: 'user-adm',
-      _group: [
-        {
-          id: 'email',
-          view: {
-            form: true,
-            title: true,
-            subTitle: true,
-          },
-        },
-        {
-          id: 'acceptTerms',
-          view: {
-            form: true,
-            title: true,
-            subTitle: true,
-          },
-        },
-        {
-          id: 'emailVerified',
-          view: {
-            form: true,
-            title: true,
-            subTitle: true,
-          },
-        },
-        {
-          id: 'multiFactor',
-          view: {
-            form: true,
-            title: true,
-            subTitle: true,
-          },
-        },
-        {
-          id: 'name',
-          view: {
-            form: true,
-            title: true,
-            subTitle: true,
-          },
-        },
-        {
-          id: 'nivel',
-          view: {
-            form: true,
-            title: true,
-            subTitle: true,
-          },
-        },
-        {
-          id: 'password',
-          view: {
-            form: true,
-            title: true,
-            subTitle: true,
-          },
-        },
-        {
-          id: 'phone',
-          view: {
-            form: true,
-            title: true,
-            subTitle: true,
-          },
-        },
-        {
-          id: 'userId',
-          view: {
-            form: true,
-            title: true,
-            subTitle: true,
-          },
-        },
+  permission: Ipermission = _permission;
+  perm = {
+    system:''
+  }
 
-      ]
-    },
-    {
-      id: 'account-adm-new',
-      view: {
-        form: true,
-        title: true,
-        subTitle: true,
-      },
-      _group: [
-        {
-          id: 'name',
-          view: {
-            form: true,
-            title: true,
-            subTitle: true,
-          },
-        },
-        {
-          id: 'email',
-          view: {
-            form: true,
-            title: true,
-            subTitle: true,
-          },
-        },
-        {
-          id: 'phone',
-          view: {
-            form: true,
-            title: true,
-            subTitle: true,
-          },
-        },
-        {
-          id: 'password',
-          view: {
-            form: true,
-            title: true,
-            subTitle: true,
-          },
-        },
-        {
-          id: 'acceptTerms',
-          view: {
-            form: true,
-            title: true,
-            subTitle: true,
-          },
-        },
-
-      ],
-    },
-    {
-      id: 'sign-in',
-      view: {
-        form: true,
-        title: true,
-        subTitle: true,
-      },
-      _group: [
-        {
-          id: 'email',
-          view: {
-            form: true,
-            title: true,
-            subTitle: true,
-          },
-        },
-        {
-          id: 'password',
-          view: {
-            form: true,
-            title: true,
-            subTitle: true,
-          },
-        },
-
-      ],
-    },
-    {
-      id: 'recursive',
-      view: {
-        form: true,
-        title: true,
-        subTitle: true,
-      },
-      _group: [
-        {
-          id: 'any',
-          view: {
-            form: true,
-            title: true,
-            subTitle: true,
-          },
-        },
-      ],
-    }
-  ]
   model: Imodel2 = {
     [`user-adm`]: {
       id: 'user-adm',
@@ -651,10 +475,16 @@ export class DataLocal extends DataModel {
     },
   }
   colection: Icol = {} as any
+ 
+  constructor(){
+    super();
+    this.permission = _permission
+  }
 
   getRecursive(module: Irequest['document']) {
-
-    const permission = this.permission.filter((permissions) => permissions.id == module)
+   
+    const level = _router('', '')[module].frontAnd.level
+    const permission = this.permission[level].filter((permissions) => permissions.id == module)
     const model = this.model as unknown as ImodelRecursive
     const document = this.document[module]
 
@@ -668,5 +498,4 @@ export class DataLocal extends DataModel {
       get document() { return document as unknown as any }
     };
   }
-
 }

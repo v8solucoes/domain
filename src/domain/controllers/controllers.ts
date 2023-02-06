@@ -1,5 +1,6 @@
 import { FirebaseAPI } from "../../shared/api"
-import { Icontrollers, Ipath, Irequest } from "../../shared/interface"
+import { Icontrollers, Irequest } from "../../shared/interface"
+import { _router } from "../repository/data-router-path"
 import { AccountAdm } from "./account-adm"
 
 export class Controllers implements Icontrollers {
@@ -19,8 +20,11 @@ export class Controllers implements Icontrollers {
 
 
   static path(req: Irequest, id: string = FirebaseAPI.db.bundle().bundleId) {
-
-    const rota: Ipath = {
+    
+    const path = _router(req.environment,req.domain)[req.document].backAnd
+    const router: any = path.root
+    const level: any = path.level
+  /*   const rota: Ipath = {
       [`dashboard`]: {
         root: `${req.environment}/${req.domain}/adm/user-adm`,
         nivel: 'adm'
@@ -45,13 +49,13 @@ export class Controllers implements Icontrollers {
         root: `${req.environment}/${req.domain}/adm/any`,
         nivel: 'adm'
       },
-    }
+    } */
     return {
-      get colection() { return FirebaseAPI.db.collection(`${rota[req.document].root}/colection/`) },
-      get document() { return FirebaseAPI.db.collection(`${rota[req.document].root}/colection/`).doc(id) },
-      get historic() { return FirebaseAPI.db.collection(`${rota[req.document].root}/historic/`).doc(id) },
-      get statistic() { return FirebaseAPI.db.doc(`${rota[req.document].root}/`) },
-      get nivel() { return `${rota[req.document].nivel}` }
+      get colection() { return FirebaseAPI.db.collection(`${router}/colection/`) },
+      get document() { return FirebaseAPI.db.collection(`${router}/colection/`).doc(id) },
+      get historic() { return FirebaseAPI.db.collection(`${router}/historic/`).doc(id) },
+      get statistic() { return FirebaseAPI.db.doc(`${router}/`) },
+      get nivel() { return `${level}` }
     }
   }
 

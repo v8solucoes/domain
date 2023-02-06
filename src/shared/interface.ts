@@ -67,7 +67,25 @@ export type Ipermission2 = [
     IpermissionCreate<'account-adm-new'>,
     IpermissionCreate<'sign-in'>,
     IpermissionCreate<'recursive'>,
+    IpermissionCreate<'dashboard'>,
+    IpermissionCreate<'null'>,
   ]
+export type Ipermission = {
+  adm: [
+    IpermissionCreate<'user-adm'>,
+  ]
+  partner: [],
+  client: [],
+  system: [
+    IpermissionCreate<'user-adm'>,
+    IpermissionCreate<'account-adm-new'>,
+    IpermissionCreate<'sign-in'>,
+    IpermissionCreate<'recursive'>,
+    IpermissionCreate<'dashboard'>,
+    IpermissionCreate<'null'>,
+  ]
+}
+export type IpermissionTypes =  keyof Ipermission
 
 //Constructor Model
 
@@ -170,7 +188,26 @@ export type ImodelRecursiveConfig =
 
 export type Iuser = Pick<ModelUser, 'nivel' | 'name' | 'userId'> & {acessToken:string}
 
-export type Inivel = 'adm'
+export type Inivel = keyof Ipermission
+
+/* export type InivelDocument = { [key in keyof Idoc]: keyof Ipermission } */
+
+export type IpermissionNivel = {
+  [key in keyof Ipermission]: IpermissionRecursive[]
+}
+
+export type IrouterPath = { [key in keyof Idoc]: {
+  backAnd: {
+    root: string,
+    level: Inivel
+  }
+  frontAnd: {
+    root: string
+    level: Inivel
+  }
+} }
+
+export type IrouterPathFunction = { test():string}
 
 export type Ipath = {
   [key in keyof Idoc]: {
@@ -202,11 +239,9 @@ export type InameValidatorLocal = NameProperty<ValidatorsLocal>
 export type InameValidatorRemote = NameProperty<ValidatorsRemote>
 
 
-export type IpermissionNivel = {
-  adm: Ipermission[]
-}
 
-export interface Ipermission {
+
+/* export interface Ipermission {
   id: string;
   view: {
     form: boolean;
@@ -215,7 +250,7 @@ export interface Ipermission {
   }
   colection?: Irequest['document']
   _group?: Ipermission[]
-}
+} */
 export interface ImodalErrorForm {
   width: string,
   error: string[],
