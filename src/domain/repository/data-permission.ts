@@ -14,7 +14,23 @@ export const _permission: Ipermission = {
     colection: 'user-adm',
     _group: [
       {
+        id: 'name',
+        view: {
+          form: true,
+          title: true,
+          subTitle: true,
+        },
+      },
+      {
         id: 'email',
+        view: {
+          form: true,
+          title: true,
+          subTitle: true,
+        },
+      },
+      {
+        id: 'phone',
         view: {
           form: true,
           title: true,
@@ -45,14 +61,7 @@ export const _permission: Ipermission = {
           subTitle: true,
         },
       },
-      {
-        id: 'name',
-        view: {
-          form: true,
-          title: true,
-          subTitle: true,
-        },
-      },
+    
       {
         id: 'nivel',
         view: {
@@ -69,14 +78,7 @@ export const _permission: Ipermission = {
           subTitle: true,
         },
       },
-      {
-        id: 'phone',
-        view: {
-          form: true,
-          title: true,
-          subTitle: true,
-        },
-      },
+     
       {
         id: 'userId',
         view: {
