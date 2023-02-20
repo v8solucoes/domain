@@ -1,5 +1,5 @@
 export const _debug = {
-  resolver: true,
+  resolver: false,
   guard: false,
   action: false,
   pg: {
