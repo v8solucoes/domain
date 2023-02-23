@@ -1,5 +1,5 @@
 import { ImodelRecursive } from './../../../shared/interface';
-import { InameValidatorLocal, InameValidatorRemote, Ipermission2, Irequest, IresponseValidatorCompose, Ivalidator } from "../../../shared/interface";
+import { InameValidatorLocal, InameValidatorRemote, IpermissionFormControl, Irequest, IresponseValidatorCompose, Ivalidator } from "../../../shared/interface";
 import { ValidatorsRemote } from "../../../shared/validator-remote";
 import { DataLocal } from "../../repository/data-local";
 import { responseValidatorError } from "../validators-response";
@@ -18,7 +18,7 @@ export class TestDocument {
   async exe(
     language: Irequest['language'],
     req: Irequest,
-    permissions: Ipermission2,
+    permissions: IpermissionFormControl,
     model: ImodelRecursive,
     document: any
 
@@ -53,7 +53,7 @@ export class TestDocument {
     }
   }
 
-  registerTest(language: Irequest['language'], request: Irequest, permissions: Ipermission2, model: ImodelRecursive, data: any) {
+  registerTest(language: Irequest['language'], request: Irequest, permissions: IpermissionFormControl, model: ImodelRecursive, data: any) {
 
     for (const permission of permissions) {
 
@@ -78,7 +78,7 @@ export class TestDocument {
         this.registerTest(
           language,
           request,
-          permission._group as Ipermission2,
+          permission._group as IpermissionFormControl,
           model[permission.id]._group as ImodelRecursive,
           data[permission.id]
         );

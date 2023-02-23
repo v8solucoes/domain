@@ -1,5 +1,6 @@
+import { _router } from './../repository/data-router-path';
 import { FirebaseAPI, FirebaseUserRecord } from "../../shared/api"
-import { Ipermission2, Irequest, IresponseValidatorCompose, Inivel, IpermissionNivel, Iuser } from "../../shared/interface"
+import { IpermissionFormControl, Irequest, IresponseValidatorCompose, Ilevel, IpermissionNivel, Iuser } from "../../shared/interface"
 import { Controllers } from "../controllers/controllers"
 import { UserController } from "../model/user.controllers"
 import { ModelUser } from "../model/users"
@@ -16,7 +17,7 @@ export class Firebase {
     try {
 
       const getUser = await FirebaseAPI.auth.verifyIdToken(token)
-      const nivel = getUser['nivel'] as Inivel
+      const nivel = getUser['nivel'] as Ilevel
 
       const user: Iuser = {
         'name': getUser.name,
@@ -34,7 +35,7 @@ export class Firebase {
 
         let model: any = {}
 
-        for (const acess of permission[nivel] as Ipermission2) {
+        for (const acess of permission[nivel] as IpermissionFormControl) {
 
           if (localModel.getRecursive(acess.id).model[acess.id].id == 'account-adm') {
             throw `Model not Exist ${acess.id}`
@@ -58,19 +59,19 @@ export class Firebase {
     }
   }
   static securityColectionAndDocumentAcessIsValid(permission: IpermissionNivel, req: Irequest): boolean {
-    const documentNivel = Controllers.path(req).nivel as Inivel
-    const documenteName = req.document == 'account-adm-new' ? 'user-adm' : req.document
+
+    const level = _router('test','localhost')[req.document].level
 
     let test: any = []
 
-    for (const acess of permission[documentNivel]) {
+    for (const acess of permission[level]) {
 
-      if (documenteName == acess?.colection && acess.id) {
-        test.push(documenteName)
-      } else {
-        throw `Colection: ${acess.id} not Permission: ID: ${acess.id} / Colection: ${acess.colection}`
+      if ( req.document == acess.id) {
+        test.push(req.document)
       }
     }
+    if (test.length) { } else { throw `Colection id: ${req.document} not existe in Permission: ${JSON.stringify(test)}`} 
+
     return test.length ? true : false
   }
   static async colection(req: Irequest) {

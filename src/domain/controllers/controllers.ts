@@ -11,8 +11,20 @@ export class Controllers implements Icontrollers {
     /*     super(req) */
     this.request = req
   }
+  // Adm
+    get [`user-adm`]() { return new AccountAdm(this.request) }
+    get [`developing-one`]() { return new AccountAdm(this.request) }
+    get [`developing-two`]() { return new AccountAdm(this.request) }
+  // Partner
+    get [`partner-developing-one`]() { return new AccountAdm(this.request) }
+    get [`partner-developing-two`]() { return new AccountAdm(this.request) }
+    get [`partner-developing-three`]() { return new AccountAdm(this.request) }
+  // Client
+    get [`client-developing-one`]() { return new AccountAdm(this.request) }
+    get [`client-developing-two`]() { return new AccountAdm(this.request) }
+    get [`client-developing-three`]() { return new AccountAdm(this.request) }
+ // System
   get [`dashboard`]() { return new AccountAdm(this.request) }
-  get [`user-adm`]() { return new AccountAdm(this.request) }
   get [`account-adm-new`]() { return new AccountAdm(this.request) }
   get [`sign-in`]() { return new AccountAdm(this.request) }
   get [`recursive`]() { return new AccountAdm(this.request) }
@@ -21,35 +33,10 @@ export class Controllers implements Icontrollers {
 
   static path(req: Irequest, id: string = FirebaseAPI.db.bundle().bundleId) {
     
-    const path = _router(req.environment,req.domain)[req.document].backAnd
+    const path = _router(req.environment,req.domain)[req.document]
     const router: any = path.root
     const level: any = path.level
-  /*   const rota: Ipath = {
-      [`dashboard`]: {
-        root: `${req.environment}/${req.domain}/adm/user-adm`,
-        nivel: 'adm'
-      },
-      [`account-adm-new`]: {
-        root: `${req.environment}/${req.domain}/adm/user-adm`,
-        nivel: 'adm'
-      },
-      [`user-adm`]: {
-        root: `${req.environment}/${req.domain}/adm/user-adm`,
-        nivel: 'adm'
-      },
-      [`sign-in`]: {
-        root: `${req.environment}/${req.domain}/adm/user-adm`,
-        nivel: 'adm'
-      },
-      [`recursive`]: {
-        root: `${req.environment}/${req.domain}/adm/any`,
-        nivel: 'adm'
-      },
-      [`null`]: {
-        root: `${req.environment}/${req.domain}/adm/any`,
-        nivel: 'adm'
-      },
-    } */
+ 
     return {
       get colection() { return FirebaseAPI.db.collection(`${router}/colection/`) },
       get document() { return FirebaseAPI.db.collection(`${router}/colection/`).doc(id) },

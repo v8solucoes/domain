@@ -19,6 +19,7 @@ export abstract class DataRemote {
       lote: getFirestore().batch(),
       getStatistic: this.statistic,
       getLocalDocument: new DataLocal().getRecursive(this.req.document),
+      permissions: new DataLocal().permission,
       getUserAdm: new DataLocal().getRecursive('user-adm'),
       pathDocument: (id?: string) => Controllers.path(this.req, id),
       crud: getFirestore(),

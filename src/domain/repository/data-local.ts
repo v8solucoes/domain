@@ -4,6 +4,7 @@ import { DataModel } from './data-model';
 import { inputModel, inputType, inputTypeHtml } from "./data-variables";
 import { _permission } from "./data-permission";
 import { _router } from "./data-router-path";
+import { _document } from "./data.document";
 
 export class DataLocal extends DataModel {
 
@@ -22,6 +23,422 @@ export class DataLocal extends DataModel {
   }
 
   model: Imodel2 = {
+    [`developing-one`]: {
+      id: 'developing-one',
+      typeModel: 'object',
+      typeInput: 'group',
+      typeInputHtml: 'text',
+      text: {
+        en: {
+          label: 'Developing 1',
+          valueTest: 'Value Test',
+          placeholder: 'Account',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+        pt: {
+          label: 'Desenvolvimento 1',
+          valueTest: 'Valor Teste',
+          placeholder: 'Faça su conta',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+      },
+      validate: {
+        sync: [],
+        async: [],
+        updateOn: 'change',
+        disabled: false,
+        valueMin: 8,
+        valueMax: 35,
+        required: false,
+        mask: 'namePersonal',
+      },
+      design: {
+        css: {
+          materialDesign: {
+            appearance: 'fill',
+          },
+          form: {
+            container: 'f-total',
+          },
+        },
+      },
+      _group: {
+        'email': this.userModel.model._group.email,
+        'name': this.userModel.model._group.name,
+        'phone': this.userModel.model._group.phone,
+      },
+      colection: {
+        title: 'name',
+        subTitle: 'email',
+        description: 'userId'
+      }
+    },
+    [`developing-two`]: {
+      id: 'developing-two',
+      typeModel: 'object',
+      typeInput: 'group',
+      typeInputHtml: 'text',
+      text: {
+        en: {
+          label: 'Developing 2',
+          valueTest: 'Vue Test',
+          placeholder: 'Account',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+        pt: {
+          label: 'Desenvolvimento 2',
+          valueTest: 'Valor Teste',
+          placeholder: 'Faça su conta',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+      },
+      validate: {
+        sync: [],
+        async: [],
+        updateOn: 'change',
+        disabled: false,
+        valueMin: 8,
+        valueMax: 35,
+        required: false,
+        mask: 'namePersonal',
+      },
+      design: {
+        css: {
+          materialDesign: {
+            appearance: 'fill',
+          },
+          form: {
+            container: 'f-total',
+          },
+        },
+      },
+      _group: {
+        'email': this.userModel.model._group.email,
+        'name': this.userModel.model._group.name,
+        'phone': this.userModel.model._group.phone,
+      },
+      colection: {
+        title: 'name',
+        subTitle: 'email',
+        description: 'userId'
+      }
+    },
+    [`partner-developing-one`]: {
+      id: 'partner-developing-one',
+      typeModel: 'object',
+      typeInput: 'group',
+      typeInputHtml: 'text',
+      text: {
+        en: {
+          label: 'Developing Partner 1',
+          valueTest: 'Value Test',
+          placeholder: 'Account',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+        pt: {
+          label: 'Desenvolvimento Parceiro 1',
+          valueTest: 'Valor Teste',
+          placeholder: 'Faça su conta',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+      },
+      validate: {
+        sync: [],
+        async: [],
+        updateOn: 'change',
+        disabled: false,
+        valueMin: 8,
+        valueMax: 35,
+        required: false,
+        mask: 'namePersonal',
+      },
+      design: {
+        css: {
+          materialDesign: {
+            appearance: 'fill',
+          },
+          form: {
+            container: 'f-total',
+          },
+        },
+      },
+      _group: {
+        'email': this.userModel.model._group.email,
+        'name': this.userModel.model._group.name,
+        'phone': this.userModel.model._group.phone,
+      },
+      colection: {
+        title: 'name',
+        subTitle: 'email',
+        description: 'userId'
+      }
+    },
+    [`partner-developing-two`]: {
+      id: 'partner-developing-two',
+      typeModel: 'object',
+      typeInput: 'group',
+      typeInputHtml: 'text',
+      text: {
+        en: {
+          label: 'Developing Partner 2',
+          valueTest: 'Vue Test',
+          placeholder: 'Account',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+        pt: {
+          label: 'Desenvolvimento Parceiro 2',
+          valueTest: 'Valor Teste',
+          placeholder: 'Faça su conta',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+      },
+      validate: {
+        sync: [],
+        async: [],
+        updateOn: 'change',
+        disabled: false,
+        valueMin: 8,
+        valueMax: 35,
+        required: false,
+        mask: 'namePersonal',
+      },
+      design: {
+        css: {
+          materialDesign: {
+            appearance: 'fill',
+          },
+          form: {
+            container: 'f-total',
+          },
+        },
+      },
+      _group: {
+        'email': this.userModel.model._group.email,
+        'name': this.userModel.model._group.name,
+        'phone': this.userModel.model._group.phone,
+      },
+      colection: {
+        title: 'name',
+        subTitle: 'email',
+        description: 'userId'
+      }
+    },
+    [`partner-developing-three`]: {
+      id: 'partner-developing-three',
+      typeModel: 'object',
+      typeInput: 'group',
+      typeInputHtml: 'text',
+      text: {
+        en: {
+          label: 'Developing Partner 3',
+          valueTest: 'Vue Test',
+          placeholder: 'Account',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+        pt: {
+          label: 'Desenvolvimento Parceiro 3',
+          valueTest: 'Valor Teste',
+          placeholder: 'Faça su conta',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+      },
+      validate: {
+        sync: [],
+        async: [],
+        updateOn: 'change',
+        disabled: false,
+        valueMin: 8,
+        valueMax: 35,
+        required: false,
+        mask: 'namePersonal',
+      },
+      design: {
+        css: {
+          materialDesign: {
+            appearance: 'fill',
+          },
+          form: {
+            container: 'f-total',
+          },
+        },
+      },
+      _group: {
+        'email': this.userModel.model._group.email,
+        'name': this.userModel.model._group.name,
+        'phone': this.userModel.model._group.phone,
+      },
+      colection: {
+        title: 'name',
+        subTitle: 'email',
+        description: 'userId'
+      }
+    },
+    [`client-developing-one`]: {
+      id: 'client-developing-one',
+      typeModel: 'object',
+      typeInput: 'group',
+      typeInputHtml: 'text',
+      text: {
+        en: {
+          label: 'Developing Client 1',
+          valueTest: 'Vue Test',
+          placeholder: 'Account',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+        pt: {
+          label: 'Desenvolvimento Cliente 1',
+          valueTest: 'Valor Teste',
+          placeholder: 'Faça su conta',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+      },
+      validate: {
+        sync: [],
+        async: [],
+        updateOn: 'change',
+        disabled: false,
+        valueMin: 8,
+        valueMax: 35,
+        required: false,
+        mask: 'namePersonal',
+      },
+      design: {
+        css: {
+          materialDesign: {
+            appearance: 'fill',
+          },
+          form: {
+            container: 'f-total',
+          },
+        },
+      },
+      _group: {
+        'email': this.userModel.model._group.email,
+        'name': this.userModel.model._group.name,
+        'phone': this.userModel.model._group.phone,
+      },
+      colection: {
+        title: 'name',
+        subTitle: 'email',
+        description: 'userId'
+      }
+    },
+    [`client-developing-two`]: {
+      id: 'client-developing-two',
+      typeModel: 'object',
+      typeInput: 'group',
+      typeInputHtml: 'text',
+      text: {
+        en: {
+          label: 'Developing Client 2',
+          valueTest: 'Vue Test',
+          placeholder: 'Account',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+        pt: {
+          label: 'Desenvolvimento Cliente 2',
+          valueTest: 'Valor Teste',
+          placeholder: 'Faça su conta',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+      },
+      validate: {
+        sync: [],
+        async: [],
+        updateOn: 'change',
+        disabled: false,
+        valueMin: 8,
+        valueMax: 35,
+        required: false,
+        mask: 'namePersonal',
+      },
+      design: {
+        css: {
+          materialDesign: {
+            appearance: 'fill',
+          },
+          form: {
+            container: 'f-total',
+          },
+        },
+      },
+      _group: {
+        'email': this.userModel.model._group.email,
+        'name': this.userModel.model._group.name,
+        'phone': this.userModel.model._group.phone,
+      },
+      colection: {
+        title: 'name',
+        subTitle: 'email',
+        description: 'userId'
+      }
+    },
+    [`client-developing-three`]: {
+      id: 'client-developing-three',
+      typeModel: 'object',
+      typeInput: 'group',
+      typeInputHtml: 'text',
+      text: {
+        en: {
+          label: 'Developing Client 3',
+          valueTest: 'Vue Test',
+          placeholder: 'Account',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+        pt: {
+          label: 'Desenvolvimento Cliente 3',
+          valueTest: 'Valor Teste',
+          placeholder: 'Faça su conta',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+      },
+      validate: {
+        sync: [],
+        async: [],
+        updateOn: 'change',
+        disabled: false,
+        valueMin: 8,
+        valueMax: 35,
+        required: false,
+        mask: 'namePersonal',
+      },
+      design: {
+        css: {
+          materialDesign: {
+            appearance: 'fill',
+          },
+          form: {
+            container: 'f-total',
+          },
+        },
+      },
+      _group: {
+        'email': this.userModel.model._group.email,
+        'name': this.userModel.model._group.name,
+        'phone': this.userModel.model._group.phone,
+      },
+      colection: {
+        title: 'name',
+        subTitle: 'email',
+        description: 'userId'
+      }
+    },
     [`user-adm`]: {
       id: 'user-adm',
       typeModel: 'object',
@@ -441,39 +858,7 @@ export class DataLocal extends DataModel {
       },
     },
   }
-  document: Idoc = {
-    [`user-adm`]: {
-      "emailVerified": false,
-      "password": "123456",
-      "multiFactor": false,
-      "name": "Emerson Felix",
-      "acceptTerms": true,
-      "phone": "11981231970",
-      "nivel": "adm",
-      "userId": "mvP0YpF2NIm0EFf50gfTR7EnBNUz",
-      "email": "contato@v8sites.com.br"
-    },
-    [`account-adm-new`]: {
-      name: 'Emerson Felix',
-      email: 'contato@v8sites.com.br',
-      phone: '11981231970',
-      password: '123456',
-      acceptTerms: true
-    },
-    [`sign-in`]: {
-      email: 'contato@v8sites.com.br',
-      password: '123456',
-    },
-    [`recursive`]: {
-      any: 'any',
-    },
-    [`null`]: {
-      any: 'any',
-    },
-    [`dashboard`]: {
-      any: 'any',
-    },
-  }
+  document: Idoc = _document
   colection: Icol = {} as any
  
   constructor(){
@@ -482,9 +867,10 @@ export class DataLocal extends DataModel {
   }
 
   getRecursive(module: Irequest['document']) {
-   
-    const level = _router('', '')[module].frontAnd.level
-    const permission = this.permission[level].filter((permissions) => permissions.id == module)
+
+    const level = _router('test', 'localhost')[module].level
+
+    const permission = this.permission[level as 'adm'].filter((permissions: any) => permissions.id == module)
     const model = this.model as unknown as ImodelRecursive
     const document = this.document[module]
 

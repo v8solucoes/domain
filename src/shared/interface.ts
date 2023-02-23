@@ -4,37 +4,87 @@ import { NameProperty } from "./typscript";
 import { ValidatorsLocal } from "./validator-local";
 
 export { ModelUser as ImodelUser }
+// Create New Colection
+// 1 Create name in
+    // IDoc
+    // IpermissionFormControl
+    // Ipermission
+    // Data Base - domain/src/domain/controllers/account-adm.ts line 70
+    // Validator - domain/src/domain/options/options.validator.ts
+    // Level domain/repository/data-router-path.ts
 
-// FORM GROUP
-
-export interface FormControl<T> {
-  permission: Ipermission2[number];
-  model: Imodel2;
-  document: any
-  language: Irequest['language']
-  request: Irequest
-  form: T
-}
-
-//Constructor DOCUMENT / COLECTION
-export type UserModel = {
-  model: ImodelCreate<'user-adm'>
-}
+// Constructor DOCUMENT / COLECTION
 
 export type Idoc = {
 
   [`user-adm`]: Pick<ModelUser, 'name' | 'email' | 'phone' | 'password' | 'acceptTerms' | 'emailVerified' | 'multiFactor' | 'nivel' | 'userId'>
   [`account-adm-new`]: Pick<ModelUser, 'name' | 'email' | 'phone' | 'password' | 'acceptTerms'>
   [`sign-in`]: Pick<ModelUser, 'email' | 'password'>
-  [`dashboard`]: { [x:string] : string}
+  [`dashboard`]: { [x: string]: string }
+  [`developing-one`]: Pick<ModelUser, 'name' | 'email' | 'phone'>
+  [`developing-two`]: Pick<ModelUser, 'name' | 'email' | 'phone'>
+  [`partner-developing-one`]: Pick<ModelUser, 'name' | 'email' | 'phone'>
+  [`partner-developing-two`]: Pick<ModelUser, 'name' | 'email' | 'phone'>
+  [`partner-developing-three`]: Pick<ModelUser, 'name' | 'email' | 'phone'>
+  [`client-developing-one`]: Pick<ModelUser, 'name' | 'email' | 'phone'>
+  [`client-developing-two`]: Pick<ModelUser, 'name' | 'email' | 'phone'>
+  [`client-developing-three`]: Pick<ModelUser, 'name' | 'email' | 'phone'>
 
   // funcões básicas do sistema não modificar
   [`recursive`]: { [x: string]: string }
-  [`null`]: { [x:string] : string}
+  [`null`]: { [x: string]: string }
 }
-export type test = { oi:string}
-export type Icol = { [key in keyof Idoc]: { [x:string]: any } }
-export type Icontrollers = { [key in keyof Idoc]: Record<Irequest['action'], () => Promise<IresponseValidatorCompose | null> > }
+
+export type IpermissionFormControl = [
+// adm
+  IpermissionCreate<'account-adm-new'>,
+  IpermissionCreate<'developing-one'>,
+  IpermissionCreate<'developing-two'>,
+// partner
+  IpermissionCreate<'user-adm'>,
+  IpermissionCreate<'partner-developing-one'>,
+  IpermissionCreate<'partner-developing-two'>,
+  IpermissionCreate<'partner-developing-three'>,
+ // client 
+  IpermissionCreate<'client-developing-one'>,
+  IpermissionCreate<'client-developing-two'>,
+  IpermissionCreate<'client-developing-three'>,
+  
+// system
+  IpermissionCreate<'sign-in'>,
+  IpermissionCreate<'recursive'>,
+  IpermissionCreate<'dashboard'>,
+  IpermissionCreate<'null'>,
+]
+export type Ipermission = {
+  adm: [
+    IpermissionCreate<'user-adm'>,
+    IpermissionCreate<'developing-one'>,
+    IpermissionCreate<'developing-two'>
+  ]
+  partner: [
+    IpermissionCreate<'partner-developing-one'>,
+    IpermissionCreate<'partner-developing-two'>,
+    IpermissionCreate<'partner-developing-three'>,
+  ],
+  client: [
+    IpermissionCreate<'client-developing-one'>,
+    IpermissionCreate<'client-developing-two'>,
+    IpermissionCreate<'client-developing-three'>,
+  ],
+  system: [
+    IpermissionCreate<'user-adm'>,
+    IpermissionCreate<'account-adm-new'>,
+    IpermissionCreate<'sign-in'>,
+    IpermissionCreate<'recursive'>,
+    IpermissionCreate<'dashboard'>,
+    IpermissionCreate<'null'>,
+  ]
+}
+
+export type test = { oi: string }
+export type Icol = { [key in keyof Idoc]: { [x: string]: any } }
+export type Icontrollers = { [key in keyof Idoc]: Record<Irequest['action'], () => Promise<IresponseValidatorCompose | null>> }
 
 //Constructor PERMISSION
 
@@ -48,7 +98,7 @@ export type IpermissionCreate<name extends keyof Idoc> = {
   id: name
   view: IpermissionView
   colection?: Irequest['document']
-  _group: { [key in keyof Idoc[name] as `id` | `view` ] :  key | IpermissionView }[]
+  _group: { [key in keyof Idoc[name]as `id` | `view`]: key | IpermissionView }[]
 }
 export type IpermissionRecursive =
   Record<keyof Pick<IpermissionCreate<'recursive'>, 'id'>, string> &
@@ -62,38 +112,16 @@ export type Isettings = {
   fontSize: number,
   language: Irequest['language']
 }
-export type Ipermission2 = [
-    IpermissionCreate<'user-adm'>,
-    IpermissionCreate<'account-adm-new'>,
-    IpermissionCreate<'sign-in'>,
-    IpermissionCreate<'recursive'>,
-    IpermissionCreate<'dashboard'>,
-    IpermissionCreate<'null'>,
-  ]
-export type Ipermission = {
-  adm: [
-    IpermissionCreate<'user-adm'>,
-  ]
-  partner: [],
-  client: [],
-  system: [
-    IpermissionCreate<'user-adm'>,
-    IpermissionCreate<'account-adm-new'>,
-    IpermissionCreate<'sign-in'>,
-    IpermissionCreate<'recursive'>,
-    IpermissionCreate<'dashboard'>,
-    IpermissionCreate<'null'>,
-  ]
-}
-export type IpermissionTypes =  keyof Ipermission
+
+export type Ilevel = keyof Ipermission
 
 //Constructor Model
 
 export interface ImodelConfig {
 
   typeModel: 'object' | 'array' | 'value'
-  typeInput: 'generic'| 'booleanToggle' | 'acceptTerms' | 'group';
-  typeInputHtml: 'password'| 'email' | 'text';
+  typeInput: 'generic' | 'booleanToggle' | 'acceptTerms' | 'group';
+  typeInputHtml: 'password' | 'email' | 'text';
   text: {
     en: {
       clearInput: string;
@@ -186,7 +214,7 @@ export type ImodelRecursiveConfig =
   Partial<Record<keyof Pick<ImodelCreate<'recursive'>, '_group'>, ImodelRecursive>> &
   ImodelConfig
 
-export type Iuser = Pick<ModelUser, 'nivel' | 'name' | 'userId'> & {acessToken:string}
+export type Iuser = Pick<ModelUser, 'nivel' | 'name' | 'userId'> & { acessToken: string }
 
 export type Inivel = keyof Ipermission
 
@@ -195,29 +223,13 @@ export type Inivel = keyof Ipermission
 export type IpermissionNivel = {
   [key in keyof Ipermission]: IpermissionRecursive[]
 }
-
-export type IrouterPath = { [key in keyof Idoc]: {
-  backAnd: {
-    root: string,
-    level: Inivel
-  }
-  frontAnd: {
-    root: string
-    level: Inivel
-  }
+export type IrouterPathColection = { [key in keyof Idoc]: {
+  root: string;
+  level: Ilevel;
 } }
 
-export type IrouterPathFunction = { test():string}
-
-export type Ipath = {
-  [key in keyof Idoc]: {
-    root: string
-    nivel: Inivel
-  }
-}
-
 export type Irequest = {
-  language: 'en'| 'pt';
+  language: 'en' | 'pt';
   page: 'account' | 'login' | 'app';
   document: NameProperty<Idoc>;
   controller: 'accountAdmFirst' | null
@@ -238,19 +250,21 @@ export type Irequest = {
 export type InameValidatorLocal = NameProperty<ValidatorsLocal>
 export type InameValidatorRemote = NameProperty<ValidatorsRemote>
 
+// FORM GROUP
 
+export interface FormControl<T> {
+  permission: IpermissionFormControl[number];
+  model: Imodel2;
+  document: any
+  language: Irequest['language']
+  request: Irequest
+  form: T
+}
 
+export type UserModel = {
+  model: ImodelCreate<'user-adm'>
+}
 
-/* export interface Ipermission {
-  id: string;
-  view: {
-    form: boolean;
-    title: boolean;
-    subTitle: boolean;
-  }
-  colection?: Irequest['document']
-  _group?: Ipermission[]
-} */
 export interface ImodalErrorForm {
   width: string,
   error: string[],
@@ -267,7 +281,7 @@ export interface Ivalidator {
   language: Irequest['language'];
   typeExecute: 'front' | 'back'
 }
-export type IvalidatorError = Record<Irequest['language'],{ [key: string]: any }>
+export type IvalidatorError = Record<Irequest['language'], { [key: string]: any }>
 
 export type IresponseValidatorUnit = {
   [key: string]: any;

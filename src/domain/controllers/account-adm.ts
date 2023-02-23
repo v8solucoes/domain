@@ -67,11 +67,19 @@ export class AccountAdm extends DataRemote {
               ...personUser,
               userId
            }
-            const permission = { [`${customUser.nivel}`]: db.getUserAdm.permission }  
+            const permission = db.permissions 
             
             db.lote.create(db.pathDocument(userId).document, {
               permission,
               [`user-adm`]: user,
+              [`developing-one`]: user,
+              [`developing-two`]: user,
+              [`partner-developing-one`]: user,
+              [`partner-developing-two`]: user,
+              [`partner-developing-three`]: user,
+              [`client-developing-one`]: user,
+              [`client-developing-two`]: user,
+              [`client-developing-three`]: user,
               _dateLastUpdate: new Date(),
               _hitoric: db.getStatistic.historicDocument({
                 userId: user.userId,
@@ -161,7 +169,7 @@ export class AccountAdm extends DataRemote {
               ...personUser,
               userId: this.req.user!.userId
            }
-            const permission = { [`${customUser.nivel}`]: db.getUserAdm.permission }  
+            const permission = db.permissions 
             
             db.lote.update(db.pathDocument(this.req.user!.userId).document, {
               permission,
