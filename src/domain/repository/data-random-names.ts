@@ -100,3 +100,9 @@ export const _randomName = [
   "Michael Scott",
   "Thomas Lynn",
 ];
+export function genericName() {
+  return _randomName[Math.floor(Math.random() * 100)]
+}
+export function genericNumber(number:number) {
+  return Math.floor(Math.random() * number)
+}

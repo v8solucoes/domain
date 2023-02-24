@@ -1,11 +1,5 @@
-import { _randomName } from './data-random-names';
 import { Idoc } from "../../shared/interface";
 
-const randon = {
-  name: Math.floor(Math.random() * 100),
-  tel: Math.floor(Math.random() * 999)
-}
-const name = _randomName[randon.name]
 export const _document: Idoc = {
   [`developing-one`]: {
     "name": "Emerson Felix",
@@ -59,7 +53,7 @@ export const _document: Idoc = {
     "email": "contato@v8sites.com.br"
   },
   [`account-adm-new`]: {
-    name: `${name}`,
+    name: `Emerson Felix`,
     email: 'contato@v8sites.com.br',
     phone: '11981231970',
     password: '123456',
