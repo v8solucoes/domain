@@ -1,4 +1,4 @@
-import { Inivel } from "../../shared/interface";
+import { Ilevel } from './../../shared/interface';
 
 export class ModelUser {
   constructor(
@@ -6,7 +6,7 @@ export class ModelUser {
     public name: string,
     public email: string,
     public phone: string,
-    public nivel: Inivel,
+    public level: Ilevel,
     public password: string,
     public acceptTerms: boolean,
     public emailVerified: boolean,

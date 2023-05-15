@@ -1,5 +1,6 @@
 export const action = {
   en: {
+    error: 'Error try again later',
     sucess: 'Sucess!',
     update: 'Update',
     create: 'Create',
@@ -8,6 +9,7 @@ export const action = {
     redirect: 'You will be Redirected...'
   },
   pt: {
+    error: 'Erro tente novamente mais tarde',
     sucess: 'Sucesso!',
     update: 'Salvar',
     create: 'Criar',

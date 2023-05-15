@@ -467,8 +467,8 @@ export class DataModel {
             },
           },
         },
-        nivel: {
-          id: 'nivel',
+        level: {
+          id: 'level',
           typeModel: 'value',
           typeInput: 'generic',
           typeInputHtml: 'text',

@@ -530,7 +530,7 @@ export class DataLocal extends DataModel {
       },
       _group: {
         name: this.userModel.model._group.name,
-        email: this.emailAccountExistResponseErrorAsync,
+        email: this.emailSimpleValidation,
         phone: this.userModel.model._group.phone,
         password: this.userModel.model._group.password,
         acceptTerms: this.userModel.model._group.acceptTerms,
@@ -544,7 +544,7 @@ export class DataLocal extends DataModel {
     [`sign-in`]: {
       id: 'sign-in',
       _group: {
-        email: { ...this.emailAccountExistResponseSucessAsync },
+        email: { ...this.emailSimpleValidation },
         password: this.userModel.model._group.password
       },
       typeModel: 'object',

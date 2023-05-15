@@ -17,16 +17,16 @@ export class Firebase {
     try {
 
       const getUser = await FirebaseAPI.auth.verifyIdToken(token)
-      const nivel = getUser['nivel'] as Ilevel
+      const level = getUser['level'] as Ilevel
 
       const user: Iuser = {
         'name': getUser.name,
-        nivel,
+        level,
         'userId': getUser.uid,
         acessToken: token
       }
 
-      const credential = await FirebaseAPI.db.collection(`${req.environment}/${req.domain}/${nivel}/user-${nivel}/colection/`).doc(getUser.uid).get()
+      const credential = await FirebaseAPI.db.collection(`${req.environment}/${req.domain}/${level}/user-${level}/colection/`).doc(getUser.uid).get()
 
       if (credential.exists) {
         const { permission } = credential.data() as any
@@ -35,7 +35,7 @@ export class Firebase {
 
         let model: any = {}
 
-        for (const acess of permission[nivel] as IpermissionFormControl) {
+        for (const acess of permission[level] as IpermissionFormControl) {
 
           if (localModel.getRecursive(acess.id).model[acess.id].id == 'account-adm') {
             throw `Model not Exist ${acess.id}`
@@ -134,6 +134,7 @@ export class Firebase {
 
     } catch (error) {
       console.log('error Firebase Create user')
+      console.log(new UserController(user).firebaseCreate)
       console.log(error)
       return responseValidatorError({ error, message }, req)
     }

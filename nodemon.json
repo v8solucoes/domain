@@ -2,6 +2,6 @@
     "watch": ["src/study-concept/"],
     "ext": ".ts,.js",
     "ignore": ["/src/construtor/04-dist/"],
-    "exec": "ts-node ./src/study-concept/head-object.ts"
+    "exec": "ts-node ./src/study-concept/sync-async-compose.ts"
   }
   

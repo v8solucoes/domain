@@ -335,7 +335,7 @@ export class TestUnit {
     }
 
   }
-  async composeAsync(...funcoes: any): Promise<IresponseValidatorUnit> {
+  /* async composeAsync(...funcoes: any): Promise<IresponseValidatorUnit> {
 
     try {
       const validators = await this.composeTest(funcoes)
@@ -346,7 +346,6 @@ export class TestUnit {
         return { email: 'invalido email' }
       } else {
         console.log('INVALIDO')
-        /*  return {email:'invalido email'} */
         throw new Error(`${JSON.stringify(validators)}`);
 
       }
@@ -354,5 +353,5 @@ export class TestUnit {
       console.log('catherror')
       return { xxx: 'errrorrr' }
     }
-  }
+  } */
 }

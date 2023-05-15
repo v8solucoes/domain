@@ -281,7 +281,7 @@ export const _permission: Ipermission = {
         },
 
         {
-          id: 'nivel',
+          id: 'level',
           view: {
             form: true,
             title: true,
@@ -433,7 +433,7 @@ export const _permission: Ipermission = {
           },
         },
         {
-          id: 'nivel',
+          id: 'level',
           view: {
             form: true,
             title: true,

@@ -48,7 +48,7 @@ export const _document: Idoc = {
     "name": "Emerson Felix",
     "acceptTerms": true,
     "phone": "11981231970",
-    "nivel": "adm",
+    "level": "adm",
     "userId": "mvP0YpF2NIm0EFf50gfTR7EnBNUz",
     "email": "contato@v8sites.com.br"
   },

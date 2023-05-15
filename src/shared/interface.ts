@@ -17,7 +17,7 @@ export { ModelUser as ImodelUser }
 
 export type Idoc = {
 
-  [`user-adm`]: Pick<ModelUser, 'name' | 'email' | 'phone' | 'password' | 'acceptTerms' | 'emailVerified' | 'multiFactor' | 'nivel' | 'userId'>
+  [`user-adm`]: Pick<ModelUser, 'name' | 'email' | 'phone' | 'password' | 'acceptTerms' | 'emailVerified' | 'multiFactor' | 'level' | 'userId'>
   [`account-adm-new`]: Pick<ModelUser, 'name' | 'email' | 'phone' | 'password' | 'acceptTerms'>
   [`sign-in`]: Pick<ModelUser, 'email' | 'password'>
   [`dashboard`]: { [x: string]: string }
@@ -112,8 +112,17 @@ export type Isettings = {
   fontSize: number,
   language: Irequest['language']
 }
-
 export type Ilevel = keyof Ipermission
+export type IlevelSelect = { [key in keyof Pick<Idoc,'account-adm-new'>]: Ilevel }
+export type IlevelPermissionOption = 
+Ipermission |
+Pick<Ipermission, `partner` | `client` | `system`> |
+Pick<Ipermission, `client` | `system`> |
+Pick<Ipermission, 'system'> 
+
+export type IlevelPermission = {
+  [key in keyof Ipermission]: IlevelPermissionOption
+}
 
 //Constructor Model
 
@@ -214,7 +223,7 @@ export type ImodelRecursiveConfig =
   Partial<Record<keyof Pick<ImodelCreate<'recursive'>, '_group'>, ImodelRecursive>> &
   ImodelConfig
 
-export type Iuser = Pick<ModelUser, 'nivel' | 'name' | 'userId'> & { acessToken: string }
+export type Iuser = Pick<ModelUser, 'level' | 'name' | 'userId'> & { acessToken: string }
 
 export type Inivel = keyof Ipermission
 

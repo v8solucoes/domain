@@ -2,7 +2,7 @@ import { getFirestore } from "firebase-admin/firestore";
 import { FirebaseAPI } from "../../shared/api";
 import { Irequest, IresponseValidatorCompose } from "../../shared/interface";
 import { DataLocal } from "./data-local";
-import { Firebase } from "../api/firebase";
+/* import { Firebase } from "../api/firebase"; */
 import { TestDocument } from "../../shared/validator-remote";
 import { Controllers } from "../controllers/controllers";
 import { ModelUser } from "../model/users";
@@ -13,11 +13,17 @@ export abstract class DataRemote {
 
   get db() {
     return {
-      createUser: Firebase.createUser(this.req),
+      /* createUser: Firebase.createUser(this.req), */
 /*       updateUser: Firebase.updateUser(this.req), */
+      auth: FirebaseAPI.auth,
       createUserConfig: FirebaseAPI.auth,
       lote: getFirestore().batch(),
       getStatistic: this.statistic,
+      statistic: {
+        create: this.statistic.create,
+        update: this.statistic.update,
+        null: null
+      },
       getLocalDocument: new DataLocal().getRecursive(this.req.document),
       permissions: new DataLocal().permission,
       getUserAdm: new DataLocal().getRecursive('user-adm'),
