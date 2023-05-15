@@ -1,22 +1,24 @@
-# README: LastUpdate (03/01/22)
+# README: LastUpdate (15/05/23)
 
-## SETUP WorkSpace - [WSL - Update](.readme/ubunto.md)
+## SETUP WSL - [WSL - Update](.readme/ubunto.md)
 
-### UBUNTO  - [WSL - Update](.readme/ubunto.md)
+## UBUNTO  - [WSL - Update](.readme/ubunto.md)
 
-### NVM - [Install / Update - Node, NPM](.readme/nvm.md)
+## NVM > Node > NPM - [Install  - Update](.readme/nvm.md)
 
-### GIT - [Git](.readme/git.md)
+## FIREBASE FrontEnd - [Install / Update](../front/.readme/firebase-frontend.md)
 
-### FIREBASE - [Install / Update](.readme/firebase.md)
+## FIREBASE BackEnd > Functions - [Install / Update](../back/.readme/firebase-functions.md)
 
-### FIREBASE - Emulator [Install / Update](.readme/firebase-emulator.md)
+## FIREBASE - Emulator [Install / Update](.readme/firebase-emulator.md)
 
-### NOTEPAD Migration- [Install / Update](.readme/notepade-migration.md)
+## GIT - [Git](.readme/git.md)
+
+## NOTEPAD Migration- [Install / Update](.readme/notepade-migration.md)
 
 - [Update](#npm-comand)
 
-# NPM Comand
+## NPM Comand
 
 npm outdated                     # verifica dependências que possuem atualização
 npm update                       # atualiza dependências

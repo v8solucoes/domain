@@ -12,12 +12,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^16.18.12",
+    "@types/node": "^20.1.4",
     "nodemon": "^2.0.20",
     "ts-node": "^10.9.1"
   },
   "dependencies": {
-    "firebase": "^9.17.1",
-    "firebase-admin": "^11.5.0"
+    "firebase-admin": "^11.8.0"
   }
 }
