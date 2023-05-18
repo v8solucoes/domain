@@ -1,10 +1,11 @@
 export const _debug = {
-  resolver: false,
-  guard: false,
+  resolver: true,
+  guard: true,
   action: false,
+  form: true,
   pg: {
-    document: false,
     login: false,
+    document: false,
     account: false,
     colection: false,
     interface: false,

@@ -23,6 +23,155 @@ export class DataLocal extends DataModel {
   }
 
   model: Imodel2 = {
+
+    [`sign-in`]: {
+      id: 'sign-in',
+      _group: {
+        email: { ...this.emailAccountExistResponseSucessAsync },
+        password: this.userModel.model._group.password
+      },
+      typeModel: 'object',
+      typeInput: 'group',
+      typeInputHtml: 'text',
+      text: {
+        en: {
+          label: 'Log In',
+          valueTest: 'Value Test',
+          placeholder: 'Text Name',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+        pt: {
+          label: 'Login',
+          valueTest: 'Valor Teste',
+          placeholder: 'Texto Nome',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+      },
+      validate: {
+        sync: [],
+        async: [],
+        updateOn: 'change',
+        disabled: false,
+        valueMin: 8,
+        valueMax: 35,
+        required: false,
+        mask: 'namePersonal',
+      },
+      design: {
+        css: {
+          materialDesign: {
+            appearance: 'fill',
+          },
+          form: {
+            container: 'f-total',
+          },
+        },
+      }
+    },
+    [`account-adm-new`]: {
+      id: 'account-adm-new',
+      typeModel: 'object',
+      typeInput: 'group',
+      typeInputHtml: 'text',
+      text: {
+        en: {
+          label: 'New Account',
+          valueTest: 'Value Test',
+          placeholder: 'Create Account',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+        pt: {
+          label: 'Nova Conta',
+          valueTest: 'Valor Teste',
+          placeholder: 'Create Account',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+      },
+      validate: {
+        sync: [],
+        async: [],
+        updateOn: 'change',
+        disabled: false,
+        valueMin: 8,
+        valueMax: 35,
+        required: false,
+        mask: 'namePersonal',
+      },
+      design: {
+        css: {
+          materialDesign: {
+            appearance: 'fill',
+          },
+          form: {
+            container: 'f-total',
+          },
+        },
+      },
+      _group: {
+        name: this.userModel.model._group.name,
+        email: this.emailAccountExistResponseErrorAsync,
+        phone: this.userModel.model._group.phone,
+        password: this.userModel.model._group.password,
+        acceptTerms: this.userModel.model._group.acceptTerms,
+      },
+      colection: {
+        title: 'name',
+        subTitle: 'email',
+        description: 'userId'
+      }
+    },
+    [`user-adm`]: {
+      id: 'user-adm',
+      typeModel: 'object',
+      typeInput: 'group',
+      typeInputHtml: 'text',
+      text: {
+        en: {
+          label: 'Users Adm',
+          valueTest: 'Valor Teste',
+          placeholder: 'Faça su conta',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+        pt: {
+          label: 'Usuários Adm',
+          valueTest: 'Valor Teste',
+          placeholder: 'Faça su conta',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+      },
+      validate: {
+        sync: [],
+        async: [],
+        updateOn: 'change',
+        disabled: false,
+        valueMin: 8,
+        valueMax: 35,
+        required: false,
+        mask: 'namePersonal',
+      },
+      design: {
+        css: {
+          materialDesign: {
+            appearance: 'fill',
+          },
+          form: {
+            container: 'f-total',
+          },
+        },
+      },
+      _group: this.userModel.model._group,
+      colection: {
+        title: 'name',
+        subTitle: 'email',
+        description: 'userId'
+      }
+    },
     [`developing-one`]: {
       id: 'developing-one',
       typeModel: 'object',
@@ -437,154 +586,6 @@ export class DataLocal extends DataModel {
         title: 'name',
         subTitle: 'email',
         description: 'userId'
-      }
-    },
-    [`user-adm`]: {
-      id: 'user-adm',
-      typeModel: 'object',
-      typeInput: 'group',
-      typeInputHtml: 'text',
-      text: {
-        en: {
-          label: 'Users Adm',
-          valueTest: 'Valor Teste',
-          placeholder: 'Faça su conta',
-          clearInput: 'Clear',
-          valueDefault: null
-        },
-        pt: {
-          label: 'Usuários Adm',
-          valueTest: 'Valor Teste',
-          placeholder: 'Faça su conta',
-          clearInput: 'Clear',
-          valueDefault: null
-        },
-      },
-      validate: {
-        sync: [],
-        async: [],
-        updateOn: 'change',
-        disabled: false,
-        valueMin: 8,
-        valueMax: 35,
-        required: false,
-        mask: 'namePersonal',
-      },
-      design: {
-        css: {
-          materialDesign: {
-            appearance: 'fill',
-          },
-          form: {
-            container: 'f-total',
-          },
-        },
-      },
-      _group: this.userModel.model._group,
-      colection: {
-        title: 'name',
-        subTitle: 'email',
-        description: 'userId'
-      }
-    },
-    [`account-adm-new`]: {
-      id: 'account-adm-new',
-      typeModel: 'object',
-      typeInput: 'group',
-      typeInputHtml: 'text',
-      text: {
-        en: {
-          label: 'New Account',
-          valueTest: 'Value Test',
-          placeholder: 'Create Account',
-          clearInput: 'Clear',
-          valueDefault: null
-        },
-        pt: {
-          label: 'Nova Conta',
-          valueTest: 'Valor Teste',
-          placeholder: 'Create Account',
-          clearInput: 'Clear',
-          valueDefault: null
-        },
-      },
-      validate: {
-        sync: [],
-        async: [],
-        updateOn: 'change',
-        disabled: false,
-        valueMin: 8,
-        valueMax: 35,
-        required: false,
-        mask: 'namePersonal',
-      },
-      design: {
-        css: {
-          materialDesign: {
-            appearance: 'fill',
-          },
-          form: {
-            container: 'f-total',
-          },
-        },
-      },
-      _group: {
-        name: this.userModel.model._group.name,
-        email: this.emailSimpleValidation,
-        phone: this.userModel.model._group.phone,
-        password: this.userModel.model._group.password,
-        acceptTerms: this.userModel.model._group.acceptTerms,
-      },
-      colection: {
-        title: 'name',
-        subTitle: 'email',
-        description: 'userId'
-      }
-    },
-    [`sign-in`]: {
-      id: 'sign-in',
-      _group: {
-        email: { ...this.emailSimpleValidation },
-        password: this.userModel.model._group.password
-      },
-      typeModel: 'object',
-      typeInput: 'group',
-      typeInputHtml: 'text',
-      text: {
-        en: {
-          label: 'Log In',
-          valueTest: 'Value Test',
-          placeholder: 'Text Name',
-          clearInput: 'Clear',
-          valueDefault: null
-        },
-        pt: {
-          label: 'Login',
-          valueTest: 'Valor Teste',
-          placeholder: 'Texto Nome',
-          clearInput: 'Clear',
-          valueDefault: null
-        },
-      },
-      validate: {
-        sync: [],
-        async: [],
-        updateOn: 'change',
-        disabled: false,
-        valueMin: 8,
-        valueMax: 35,
-        required: false,
-        mask: 'namePersonal',
-      },
-      design: {
-        css: {
-          materialDesign: {
-            appearance: 'fill',
-          },
-          form: {
-            container: 'f-total',
-          },
-        },
       }
     },
     [`recursive`]: {

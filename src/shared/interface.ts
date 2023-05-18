@@ -7,8 +7,8 @@ export { ModelUser as ImodelUser }
 // Create New Colection
 // 1 Create name in
     // IDoc
-    // IpermissionFormControl
     // Ipermission
+    // IpermissionFormControl
     // Data Base - domain/src/domain/controllers/account-adm.ts line 70
     // Validator - domain/src/domain/options/options.validator.ts
     // Level domain/repository/data-router-path.ts
@@ -34,28 +34,6 @@ export type Idoc = {
   [`recursive`]: { [x: string]: string }
   [`null`]: { [x: string]: string }
 }
-
-export type IpermissionFormControl = [
-// adm
-  IpermissionCreate<'account-adm-new'>,
-  IpermissionCreate<'developing-one'>,
-  IpermissionCreate<'developing-two'>,
-// partner
-  IpermissionCreate<'user-adm'>,
-  IpermissionCreate<'partner-developing-one'>,
-  IpermissionCreate<'partner-developing-two'>,
-  IpermissionCreate<'partner-developing-three'>,
- // client 
-  IpermissionCreate<'client-developing-one'>,
-  IpermissionCreate<'client-developing-two'>,
-  IpermissionCreate<'client-developing-three'>,
-  
-// system
-  IpermissionCreate<'sign-in'>,
-  IpermissionCreate<'recursive'>,
-  IpermissionCreate<'dashboard'>,
-  IpermissionCreate<'null'>,
-]
 export type Ipermission = {
   adm: [
     IpermissionCreate<'user-adm'>,
@@ -81,6 +59,30 @@ export type Ipermission = {
     IpermissionCreate<'null'>,
   ]
 }
+export type IpermissionFormControl = [
+// adm
+  IpermissionCreate<'account-adm-new'>,
+  IpermissionCreate<'developing-one'>,
+  IpermissionCreate<'developing-two'>,
+
+// partner
+  IpermissionCreate<'user-adm'>,
+  IpermissionCreate<'partner-developing-one'>,
+  IpermissionCreate<'partner-developing-two'>,
+  IpermissionCreate<'partner-developing-three'>,
+  
+ // client 
+  IpermissionCreate<'client-developing-one'>,
+  IpermissionCreate<'client-developing-two'>,
+  IpermissionCreate<'client-developing-three'>,
+  
+// system
+  IpermissionCreate<'sign-in'>,
+  IpermissionCreate<'recursive'>,
+  IpermissionCreate<'dashboard'>,
+  IpermissionCreate<'null'>,
+]
+
 
 export type test = { oi: string }
 export type Icol = { [key in keyof Idoc]: { [x: string]: any } }

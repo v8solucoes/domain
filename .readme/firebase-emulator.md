@@ -4,6 +4,8 @@ Execute:
 
 `curl -sL firebase.tools | bash`
 
+`npm install -g firebase-tools` Instalar no Node
+
 `firebase init emulators` - Escolha as opções do emulador
 
 ## Verifique se Java está instalado

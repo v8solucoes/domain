@@ -20,8 +20,8 @@ export class GenericCrud extends DataRemote {
     const data = this.req.data[this.req.document] as any 
 
     // User - Custom Back
-    const customUser: Pick<ModelUser, 'nivel'> = {
-      nivel: 'adm'
+    const customUser: Pick<ModelUser, 'level'> = {
+      level: 'adm'
     }
     // User - ID Firebase Auth
     let userId: ModelUser['userId']
@@ -64,7 +64,7 @@ export class GenericCrud extends DataRemote {
               ...personUser,
               userId
            }
-            const permission = { [`${customUser.nivel}`]: db.getUserAdm.permission }  
+            const permission = { [`${customUser.level}`]: db.getUserAdm.permission }  
             
             db.lote.create(db.pathDocument(userId).document, {
               permission,
@@ -115,8 +115,8 @@ export class GenericCrud extends DataRemote {
       ModelUser, 'name' | 'email' | 'password' |'phone' | 'acceptTerms'> 
 
     // User - Custom Back
-    const customUser: Pick<ModelUser, 'nivel'> = {
-      nivel: 'adm'
+    const customUser: Pick<ModelUser, 'level'> = {
+      level: 'adm'
     }
     // User - ID Firebase Auth
     let userId: ModelUser['userId']
@@ -159,7 +159,7 @@ export class GenericCrud extends DataRemote {
               ...personUser,
               userId
            }
-            const permission = { [`${customUser.nivel}`]: db.getUserAdm.permission }  
+            const permission = { [`${customUser.level}`]: db.getUserAdm.permission }  
             
             db.lote.create(db.pathDocument(userId).document, {
               permission,
