@@ -1,4 +1,4 @@
-# NVM - LAST UPDATE 15-01-23
+# NVM - LAST UPDATE 19-01-23
 
 ## Las Version Consult [https://github.com/nvm-sh/nvm]
 

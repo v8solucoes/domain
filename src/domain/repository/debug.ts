@@ -2,7 +2,7 @@ export const _debug = {
   resolver: true,
   guard: true,
   action: false,
-  form: true,
+  form: false,
   pg: {
     login: false,
     document: false,
