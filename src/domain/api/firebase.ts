@@ -18,6 +18,7 @@ export class Firebase {
 
       const getUser = await FirebaseAPI.auth.verifyIdToken(token)
       const level = getUser['level'] as Ilevel
+/*       const environment = req.environment  */
 
       const user: Iuser = {
         'name': getUser.name,
@@ -26,9 +27,19 @@ export class Firebase {
         acessToken: token
       }
 
-      const credential = await FirebaseAPI.db.collection(`${req.environment}/${req.domain}/${level}/user-${level}/colection/`).doc(getUser.uid).get()
+      const path = `${req.domain}/${req.environment}/${level}/user-${level}/colection/`
+      const key = getUser.uid
+      console.log('asdlfasdasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfas')
+      console.log(path)
+      console.log(key)
 
+      const credential = await FirebaseAPI.db.collection(path).doc(key).get()
+      /* /prod/v8app-888cd.web.app/adm/user-adm/colection/CCxxKDg8fWTUp4xt5iUCe86Spov2 */
+      console.log(req)
+      console.log(credential.exists)
+      console.log(credential.data())
       if (credential.exists) {
+        
         const { permission } = credential.data() as any
 
         const localModel = new DataLocal()

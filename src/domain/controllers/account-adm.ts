@@ -18,11 +18,56 @@ export class AccountAdm extends DataRemote {
     console.log(this.data)
 
   }
+  async create(): Promise<IresponseValidatorCompose | null> {
 
-  createUserLevel() {
+    try {
+
+      this.testUserLevel()
+      this.testUserPermission()
+      this.createUserCustom()
+      await this.createNewUserAndId()
+      await this.setUserCustomInGoogleAuth()
+      await this.createLoteAndSaveDataBase()
+      await this.createStatistic()
+
+      return null
+    } catch (error) {
+
+      console.log('CREATE NEW USER: ======================================')
+      console.log(error)
+      return responseValidatorError(error, this.req)
+
+    }
+  }
+  async updateNotImplmented(): Promise<IresponseValidatorCompose | null> {
+
+    try {
+
+      this.testUserLevel()
+      this.testUserPermission()
+      /*   this.createUserCustom() */
+      await this.updateUserAuth()
+      await this.setUserCustomInGoogleAuth()
+      await this.updateLoteAndSaveDataBase()
+      await this.createStatistic()
+
+      return null
+    } catch (error) {
+
+      console.log('Update USER: ======================================')
+      console.log(error)
+      return responseValidatorError(error, this.req)
+
+    }
+  }
+
+  testUserLevel() {
 
     const document = this.req.document as keyof IlevelSelect
-    const level: IlevelSelect = { 'account-adm-new': 'adm' }
+    const level: IlevelSelect = {
+      'account-adm-new': 'adm',
+      'user-adm': 'adm'
+    }
 
     if (level[document]) {
 
@@ -34,25 +79,13 @@ export class AccountAdm extends DataRemote {
     }
 
     if (_debugBack.createUser) {
-      console.log('01-createUserLevel')
+      console.log('testUserLevel')
       console.log('Level: ', this.data.level)
       console.log('Data: ', this.data)
     }
   }
 
-  createUserCustom() {
-
-    this.data.emailVerified = false
-    this.data.multiFactor = false
-
-    if (_debugBack.createUser) {
-      console.log('02-createUserCustom')
-      console.log('emailVerified: ', this.data.emailVerified)
-      console.log('multiFactor: ', this.data.multiFactor)
-    }
-    
-  }
-  createUserPermission() {
+  testUserPermission() {
     const level = this.data.level
     const permission = this.db.permissions
     const { partner, client, system } = permission
@@ -68,34 +101,82 @@ export class AccountAdm extends DataRemote {
     } else { throw new Error(`Level Permission: ${level} not Exist`); }
 
     if (_debugBack.createUser) {
-      console.log('03-createUserPermission')
+      console.log('testUserPermission')
       console.log('Level Permission: ', this.data.level)
     }
-    
+
+  }
+
+  createUserCustom() {
+
+    this.data.emailVerified = false
+    this.data.multiFactor = false
+
+    if (_debugBack.createUser) {
+      console.log('02-createUserCustom')
+      console.log('emailVerified: ', this.data.emailVerified)
+      console.log('multiFactor: ', this.data.multiFactor)
+    }
+
+  }
+
+  updateUserPermission() {
+    const level = this.data.level
+    const permission = this.db.permissions
+    const { partner, client, system } = permission
+    const levelPermission: IlevelPermission = {
+      'adm': permission,
+      'partner': { partner, client, system },
+      'client': { client, system },
+      'system': { system }
+    }
+
+    if (levelPermission[level]) {
+      this.permission = levelPermission[level]
+    } else { throw new Error(`Level Permission: ${level} not Exist`); }
+
+    if (_debugBack.createUser) {
+      console.log('testUserPermission')
+      console.log('Level Permission: ', this.data.level)
+    }
+
   }
 
   async createNewUserAndId() {
+
     const { uid } = await this.db.auth.createUser(new UserController(this.data).firebaseCreate) as FirebaseUserRecord
     this.data.userId = uid
 
     if (_debugBack.createUser) {
-      console.log('04-createNewUserAndId')
+      console.log('createNewUserAndId')
       console.log('UserId: ', this.data.userId)
     }
     return
   }
 
-  async createUserCustomInGoogleAuth() {
-    const { level } = this.data
-   
-    await this.db.auth.setCustomUserClaims(this.data.userId, { level })
-  
+  async updateUserAuth() {
+
+    await this.db.auth.updateUser(this.data.userId, new UserController(this.data).firebaseUpdate) as FirebaseUserRecord
+
     if (_debugBack.createUser) {
-      console.log('05-createUserCustomInGoogleAuth')
+      console.log('createNewUserAndId')
+      console.log('UserId: ', this.data.userId)
+    }
+    return
+  }
+
+  async setUserCustomInGoogleAuth() {
+
+    const { level } = this.data
+
+    await this.db.auth.setCustomUserClaims(this.data.userId, { level })
+
+    if (_debugBack.createUser) {
+      console.log('createUserCustomInGoogleAuth')
       console.log('Level: ', level)
     }
   }
- 
+
   async createLoteAndSaveDataBase() {
 
     const db = this.db
@@ -122,7 +203,7 @@ export class AccountAdm extends DataRemote {
         email: data.email
       }, { permission, data })
     })
-    db.lote.set(db.pathDocument().historic, { ...db.statistic[this.req.action]})
+    db.lote.set(db.pathDocument().historic, { ...db.statistic[this.req.action] })
 
     await db.lote.commit()
 
@@ -133,6 +214,37 @@ export class AccountAdm extends DataRemote {
     return
 
   }
+
+  async updateLoteAndSaveDataBase() {
+
+    const db = this.db
+    const req = this.req
+    const data = this.req.data
+    const permission = this.permission
+
+    db.lote.update(db.pathDocument(data.userId).document, {
+
+      [`${req.document}`]: data,
+
+      _dateLastUpdate: new Date(),
+      _hitoric: db.getStatistic.historicDocument({
+        userId: data.userId,
+        name: data.name,
+        email: data.email
+      }, { permission, data })
+    })
+    db.lote.set(db.pathDocument().historic, { ...db.statistic[this.req.action] })
+
+    await db.lote.commit()
+
+    if (_debugBack.createUser) {
+      console.log('06-createLoteAndSaveDataBase')
+      console.log('Commit: ')
+    }
+    return
+
+  }
+
   async createStatistic() {
     const db = this.db
 
@@ -141,237 +253,24 @@ export class AccountAdm extends DataRemote {
     await (exists ?
       db.pathDocument('user-adm').statistic.update({ ...db.getStatistic.create }) :
       db.pathDocument('user-adm').statistic.create({ ...db.getStatistic.create }))
-   
+
     if (_debugBack.createUser) {
-        console.log('07-createStatistic')
-        console.log('Statistic ok: ')
-      }
-    
+      console.log('07-createStatistic')
+      console.log('Statistic ok: ')
+    }
+
     return null
-  }
-  async create(): Promise<IresponseValidatorCompose | null> {
-
-    try {
-
-      this.createUserLevel()
-      this.createUserCustom()
-      this.createUserPermission()
-      await this.createNewUserAndId()
-      await this.createUserCustomInGoogleAuth()
-      await this.createLoteAndSaveDataBase()
-      await this.createStatistic()
-
-      return null
-    } catch (error) {
-
-      console.log('CREATE NEW USER: ======================================')
-      console.log(error)
-      return responseValidatorError(error, this.req)
-
-    }
-  }
-
-  async createiNVALIDE(): Promise<IresponseValidatorCompose | null> {
-
-    /* console.log('Error DE user') */
-
-    /* this.createNewUserId() */
-
-    const db = this.db
-
-    // User - Front Input
-    const data = this.req.data[this.req.document] as Pick<
-      ModelUser, 'name' | 'email' | 'password' | 'phone' | 'acceptTerms'>
-
-    // User - Custom Back
-    const customUser: Pick<ModelUser, 'level'> = {
-      level: 'adm'
-    }
-    // User - ID Firebase Auth
-    let userId: ModelUser['userId']
-
-    // User Default Config
-    const personUser: Pick<ModelUser, 'emailVerified' | 'multiFactor'> = {
-      emailVerified: false,
-      multiFactor: false
-    }
-
-    // Create Status
-    const create = {
-      test: true,
-      user: false,
-      userConfig: false,
-      userPermission: false,
-      statistic: false
-    }
-
-    try {
-
-      // CREATE USER
-      if (create.user = create.test) {
-
-        /* const { uid } = await db.createUser as FirebaseUserRecord */
-        const uid = 'teste'
-        userId = uid
-
-        // CREATE CONFIG
-        if (create.userConfig = typeof uid === 'string' ? true : false) {
-
-          const config = await db.createUserConfig.setCustomUserClaims(userId, customUser)
-
-          // CREATE USER PERMISSION
-
-          if (create.userPermission = typeof config == 'undefined' ? true : false) {
-            const user = {
-              ...data,
-              ...customUser,
-              ...personUser,
-              userId
-            }
-            const permission = db.permissions
-
-            db.lote.create(db.pathDocument(userId).document, {
-              permission,
-              [`user-adm`]: user,
-              [`developing-one`]: user,
-              [`developing-two`]: user,
-              [`partner-developing-one`]: user,
-              [`partner-developing-two`]: user,
-              [`partner-developing-three`]: user,
-              [`client-developing-one`]: user,
-              [`client-developing-two`]: user,
-              [`client-developing-three`]: user,
-              _dateLastUpdate: new Date(),
-              _hitoric: db.getStatistic.historicDocument({
-                userId: user.userId,
-                name: user.name,
-                email: user.email
-              }, { permission, user })
-            })
-            db.lote.set(db.pathDocument().historic, { ...db.getStatistic.create })
-
-            const salve = await db.lote.commit()
-
-            if (create.statistic = Array.isArray(salve)) {
-
-              const { exists } = await db.pathDocument('user-adm').statistic.get()
-
-              console.log(create)
-
-              await (exists ?
-                db.pathDocument('user-adm').statistic.update({ ...db.getStatistic.update }) :
-                db.pathDocument('user-adm').statistic.create({ ...db.getStatistic.create }))
-
-              return null
-
-            }
-
-          }
-        }
-
-      }
-
-      return null
-
-    } catch (error) {
-      console.log('Error Create user')
-      return responseValidatorError(error, this.req)
-    }
   }
 
   async update(): Promise<IresponseValidatorCompose | null> {
-    const db = this.db
-
-    // User - Front Input
-    const data = this.req.data[this.req.document] as ModelUser
-
-    // User - Custom Back
-    const customUser: Pick<ModelUser, 'level'> = {
-      level: data.level
-    }
-    // User - ID Firebase Auth
-    /*     let userId: ModelUser['userId'] */
-
-    // User Default Config
-    const personUser: Pick<ModelUser, 'emailVerified' | 'multiFactor'> = {
-      emailVerified: false,
-      multiFactor: false
-    }
-
-    // Create Status
-    const create = {
-      test: true,
-      user: false,
-      userConfig: false,
-      userPermission: false,
-      statistic: false
-    }
 
     try {
-
-      console.log('Error DE user')
-      // Update Get USER
-      if (create.user = create.test) {
-
-        /*  const emailUpdate = await FirebaseAPI.auth.updateProviderConfig(this.req.user!.userId, new UserController(data).firebaseCreate)
-        console.log(emailUpdate) */
-        // CREATE CONFIG
-        if (create.userConfig = true) {
-
-          const config = await db.createUserConfig.setCustomUserClaims(this.req.user!.userId, customUser)
-
-
-          // CREATE USER PERMISSION
-
-          if (create.userPermission = typeof config == 'undefined' ? true : false) {
-            const user = {
-              ...data,
-              ...customUser,
-              ...personUser,
-              userId: this.req.user!.userId
-            }
-            const permission = db.permissions
-
-            db.lote.update(db.pathDocument(this.req.user!.userId).document, {
-              permission,
-              [`user-adm`]: user,
-              _dateLastUpdate: { ...db.getStatistic.dateLastUpdate },
-              _hitoric: db.getStatistic.historicDocument({
-                userId: user.userId,
-                name: user.name,
-                email: user.email
-              }, { permission, user })
-            })
-            db.lote.set(db.pathDocument().historic, { ...db.getStatistic.update })
-
-            const salve = await db.lote.commit()
-
-            if (create.statistic = Array.isArray(salve)) {
-
-              const { exists } = await db.pathDocument('user-adm').statistic.get()
-
-              console.log(create)
-
-              await (exists ?
-                db.pathDocument('user-adm').statistic.update({ ...db.getStatistic.update }) :
-                db.pathDocument('user-adm').statistic.create({ ...db.getStatistic.create }))
-
-              return null
-
-            }
-
-          }
-        }
-
-      }
 
       return null
 
     } catch (error) {
-      console.log('Error Create user')
-      console.log(new UserController(data).firebaseCreate)
-
-      return responseValidatorError(error, this.req)
+      console.log('Error Update')
+      return responseValidatorError(null, this.req)
     }
   }
   async null(): Promise<IresponseValidatorCompose | null> {
@@ -384,5 +283,6 @@ export class AccountAdm extends DataRemote {
       console.log('Error Null')
       return responseValidatorError(null, this.req)
     }
+
   }
 }

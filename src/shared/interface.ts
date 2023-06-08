@@ -115,7 +115,7 @@ export type Isettings = {
   language: Irequest['language']
 }
 export type Ilevel = keyof Ipermission
-export type IlevelSelect = { [key in keyof Pick<Idoc,'account-adm-new'>]: Ilevel }
+export type IlevelSelect = { [key in keyof Pick<Idoc,'account-adm-new' | 'user-adm' >]: Ilevel }
 export type IlevelPermissionOption = 
 Ipermission |
 Pick<Ipermission, `partner` | `client` | `system`> |

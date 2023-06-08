@@ -12,4 +12,12 @@ get firebaseCreate(): FirebaseCreateRequest {
       password: this.user.password
     }
   }
+get firebaseUpdate(): FirebaseCreateRequest {
+    return {
+      disabled: this.user.emailVerified,
+      email: this.user.email,
+      phoneNumber: this.user.phone,
+      password: this.user.password
+    }
+  }
 }

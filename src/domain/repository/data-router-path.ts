@@ -6,22 +6,22 @@ export const _router = (environment: Irequest['environment'], domain: Irequest['
   return {
 
     // Adm
-    [`user-adm`]: {level: 'adm', root: `${environment}/${domain}/adm/user-adm`},
-    [`developing-one`]: {level: 'adm', root: `${environment}/${domain}/adm/user-adm`},
-    [`developing-two`]: { level: 'adm', root: `${environment}/${domain}/adm/user-adm` },
+    [`user-adm`]: {level: 'adm', root: `${domain}/${environment}/adm/user-adm`},
+    [`developing-one`]: {level: 'adm', root: `${domain}/${environment}/adm/user-adm`},
+    [`developing-two`]: { level: 'adm', root: `${domain}/${environment}/adm/user-adm` },
     // Partner
-    [`partner-developing-one`]: {level: 'partner', root: `${environment}/${domain}/adm/user-adm`},
-    [`partner-developing-two`]: { level: 'partner', root: `${environment}/${domain}/adm/user-adm` },
-    [`partner-developing-three`]: { level: 'partner', root: `${environment}/${domain}/adm/user-adm` },
+    [`partner-developing-one`]: {level: 'partner', root: `${domain}/${environment}/adm/user-adm`},
+    [`partner-developing-two`]: { level: 'partner', root: `${domain}/${environment}/adm/user-adm` },
+    [`partner-developing-three`]: { level: 'partner', root: `${domain}/${environment}/adm/user-adm` },
     // Client
-    [`client-developing-one`]: {level: 'client', root: `${environment}/${domain}/adm/user-adm`},
-    [`client-developing-two`]: { level: 'client', root: `${environment}/${domain}/adm/user-adm` },
-    [`client-developing-three`]: { level: 'client', root: `${environment}/${domain}/adm/user-adm` },
+    [`client-developing-one`]: {level: 'client', root: `${domain}/${environment}/adm/user-adm`},
+    [`client-developing-two`]: { level: 'client', root: `${domain}/${environment}/adm/user-adm` },
+    [`client-developing-three`]: { level: 'client', root: `${domain}/${environment}/adm/user-adm` },
     // System
-    [`account-adm-new`]: {level: 'system', root: `${environment}/${domain}/adm/user-adm`},
-    [`sign-in`]: {level: 'system', root: `${environment}/${domain}/adm/user-adm`},
-    [`recursive`]: {level: 'system', root: `${environment}/${domain}/adm/user-adm`},
-    [`dashboard`]: {level: 'adm', root: `${environment}/${domain}/adm/user-adm`},
-    [`null`]: {level: 'system', root: `${environment}/${domain}/adm/user-adm`},
+    [`account-adm-new`]: {level: 'system', root: `${domain}/${environment}/adm/user-adm`},
+    [`sign-in`]: {level: 'system', root: `${domain}/${environment}/adm/user-adm`},
+    [`recursive`]: {level: 'system', root: `${domain}/${environment}/adm/user-adm`},
+    [`dashboard`]: {level: 'adm', root: `${domain}/${environment}/adm/user-adm`},
+    [`null`]: {level: 'system', root: `${domain}/${environment}/adm/user-adm`},
   }
 }

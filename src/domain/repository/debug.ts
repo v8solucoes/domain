@@ -1,20 +1,20 @@
 export const _debug = {
   resolver: true,
-  guard: true,
+  guard: false,
   action: false,
   form: false,
+  auth: false,
   pg: {
     login: false,
+    interface: false,
     document: false,
     account: false,
     colection: false,
-    interface: false,
-    firebase: false,
     menu: false
-  }
+  },
 
 }
 export const _debugBack = {
-  createUser: true
-
+  login: false,
+  createUser: false
 }
