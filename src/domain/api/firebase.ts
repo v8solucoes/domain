@@ -6,19 +6,17 @@ import { UserController } from "../model/user.controllers"
 import { ModelUser } from "../model/users"
 import { DataLocal } from "../repository/data-local"
 import { responseValidatorError } from "../validators/validators-response"
+import { _debugBack } from '../repository/debug';
 
 
 export class Firebase {
 
   static async userPermissionAndModelAsync(token: string, req: Irequest) {
 
-    /*  const tokenInvalid = `eyJfQXV0aEVtdWxhdG9yUmVmcmVzaFRva2VuIjoiRE8gTk9UIE1PRElGWSIsImxvY2FsSWQiOiJMNzlVTE1iZVV6OEowYnNJUDlkb0xNcXV5ajNzIiwicHJvdmlkZXIiOiJwYXNzd29yZCIsImV4dHJhQ2xhaW1zIjp7fSwicHJvamVjdElkIjoidjhhcHAtODg4Y2QifQ` */
-
     try {
 
       const getUser = await FirebaseAPI.auth.verifyIdToken(token)
       const level = getUser['level'] as Ilevel
-/*       const environment = req.environment  */
 
       const user: Iuser = {
         'name': getUser.name,
@@ -29,15 +27,25 @@ export class Firebase {
 
       const path = `${req.domain}/${req.environment}/${level}/user-${level}/colection/`
       const key = getUser.uid
-      console.log('asdlfasdasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfas')
-      console.log(path)
-      console.log(key)
 
+     if(_debugBack.getUser){
+      console.log('GET USER PATH')
+      console.log(path)
+      console.log('GET USER KEY')
+      console.log(key)
+     }
+     
       const credential = await FirebaseAPI.db.collection(path).doc(key).get()
-      /* /prod/v8app-888cd.web.app/adm/user-adm/colection/CCxxKDg8fWTUp4xt5iUCe86Spov2 */
-      console.log(req)
+     
+      if(_debugBack.getUser){
+        console.log('GET USER REQUEST')
+        console.log(req)
+        console.log('GET USER CREDENTIAL')
       console.log(credential.exists)
+      console.log('GET USER DATA')
       console.log(credential.data())
+       }
+
       if (credential.exists) {
         
         const { permission } = credential.data() as any
@@ -71,7 +79,7 @@ export class Firebase {
   }
   static securityColectionAndDocumentAcessIsValid(permission: IpermissionNivel, req: Irequest): boolean {
 
-    const level = _router('test','localhost')[req.document].level
+    const level = _router(req.environment, req.domain)[req.document].level
 
     let test: any = []
 
@@ -80,6 +88,7 @@ export class Firebase {
       if ( req.document == acess.id) {
         test.push(req.document)
       }
+
     }
     if (test.length) { } else { throw `Colection id: ${req.document} not existe in Permission: ${JSON.stringify(test)}`} 
 
@@ -87,10 +96,17 @@ export class Firebase {
   }
   static async colection(req: Irequest) {
 
-
     try {
-
+      if(_debugBack.getColection) {
+        console.log('Colection Request')
+        console.log(req)
+      }
       const colection = await Controllers.path(req).colection.get()
+
+      if(_debugBack.getColection) {
+/*         console.log('ResponseApi')
+        console.log(colection) */
+      }
       let dataBase: any = {}
       colection.forEach((doc: { id: string; data: any }) => {
         dataBase[doc.id] = {

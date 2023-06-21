@@ -1,5 +1,3 @@
-
-
 import { Irequest } from "../../shared/interface";
 
 export class OptionsValidator {
@@ -7,7 +5,7 @@ export class OptionsValidator {
   language: Irequest['language'][] = ['en','pt']
   page: Irequest['page'][] = ['account', 'login', 'app']
   action: Irequest['action'][] = ['create', 'update', 'null']
-  document: Irequest['document'][] = [
+  document: Irequest['document'][] = [ 'send-message', 'pendency', 'client-adm',
     'developing-one', 'developing-two', 'account-adm-new',
     'client-developing-one', 'client-developing-two', 'client-developing-three',
     'partner-developing-three', 'partner-developing-one', 'partner-developing-two',

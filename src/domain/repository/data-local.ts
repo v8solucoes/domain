@@ -24,6 +24,151 @@ export class DataLocal extends DataModel {
 
   model: Imodel2 = {
 
+    [`send-message`]: {
+      id: 'send-message',
+      typeModel: 'object',
+      typeInput: 'group',
+      typeInputHtml: 'text',
+      text: {
+        en: {
+          label: 'Send Message',
+          valueTest: 'Value Test',
+          placeholder: 'Faça su conta',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+        pt: {
+          label: 'Enviar Mensagem',
+          valueTest: 'Valor Teste',
+          placeholder: 'Faça su conta',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+      },
+      validate: {
+        sync: [],
+        async: [],
+        updateOn: 'change',
+        disabled: false,
+        valueMin: 8,
+        valueMax: 35,
+        required: false,
+        mask: 'anyResNull',
+      },
+      design: {
+        css: {
+          materialDesign: {
+            appearance: 'fill',
+          },
+          form: {
+            container: 'f-total',
+          },
+        },
+      },
+      _group: this.sendMessage.model._group,
+      colection: {
+        title: 'name',
+        subTitle: 'email',
+        description: 'userId'
+      }
+    },
+    [`pendency`]: {
+      id: 'pendency',
+      typeModel: 'object',
+      typeInput: 'group',
+      typeInputHtml: 'text',
+      text: {
+        en: {
+          label: 'Pendency',
+          valueTest: 'Value Test',
+          placeholder: 'Faça su conta',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+        pt: {
+          label: 'Pendências',
+          valueTest: 'Valor Teste',
+          placeholder: 'Faça su conta',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+      },
+      validate: {
+        sync: [],
+        async: [],
+        updateOn: 'change',
+        disabled: false,
+        valueMin: 8,
+        valueMax: 35,
+        required: false,
+        mask: 'anyResNull',
+      },
+      design: {
+        css: {
+          materialDesign: {
+            appearance: 'fill',
+          },
+          form: {
+            container: 'f-total',
+          },
+        },
+      },
+      _group: this.clientPendency.model._group,
+      colection: {
+        title: 'name',
+        subTitle: 'email',
+        description: 'userId'
+      }
+    },
+    [`client-adm`]: {
+      id: 'client-adm',
+      typeModel: 'object',
+      typeInput: 'group',
+      typeInputHtml: 'text',
+      text: {
+        en: {
+          label: 'Client',
+          valueTest: 'Valor Teste',
+          placeholder: 'Faça su conta',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+        pt: {
+          label: 'Cliente',
+          valueTest: 'Valor Teste',
+          placeholder: 'Faça su conta',
+          clearInput: 'Clear',
+          valueDefault: null
+        },
+      },
+      validate: {
+        sync: [],
+        async: [],
+        updateOn: 'change',
+        disabled: false,
+        valueMin: 8,
+        valueMax: 35,
+        required: false,
+        mask: 'anyResNull',
+      },
+      design: {
+        css: {
+          materialDesign: {
+            appearance: 'fill',
+          },
+          form: {
+            container: 'f-total',
+          },
+        },
+      },
+      _group: this.clientModel.model._group,
+      colection: {
+        title: 'name',
+        subTitle: 'email',
+        description: 'userId'
+      }
+    },
+
     [`sign-in`]: {
       id: 'sign-in',
       _group: {

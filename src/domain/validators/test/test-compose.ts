@@ -50,6 +50,7 @@ export class TestCompose extends TestUnit {
       this.existValueInArray(req.domain, options.domain),
       this.existValueInArray(req.action, options.action),
       this.existValueInArray(req.document, options.document),
+      this.existValueInArray(req.documentSub, options.document),
       this.existValueInArray(req.environment, options.environment),
     )
     return responseValidatorCompose(test, this.req)

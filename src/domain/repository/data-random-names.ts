@@ -106,3 +106,6 @@ export function genericName() {
 export function genericNumber(number:number) {
   return Math.floor(Math.random() * number)
 }
+export function genericPhoneNumber(number:number) {
+  return Math.floor(Math.random() * number).toString() as string
+}

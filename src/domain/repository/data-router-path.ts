@@ -6,7 +6,10 @@ export const _router = (environment: Irequest['environment'], domain: Irequest['
   return {
 
     // Adm
+    [`send-message`]: {level: 'adm', root: `${domain}/${environment}/adm/user-adm`},
+    [`pendency`]: {level: 'adm', root: `${domain}/${environment}/adm/user-adm`},
     [`user-adm`]: {level: 'adm', root: `${domain}/${environment}/adm/user-adm`},
+    [`client-adm`]: {level: 'adm', root: `${domain}/${environment}/adm/user-adm`},
     [`developing-one`]: {level: 'adm', root: `${domain}/${environment}/adm/user-adm`},
     [`developing-two`]: { level: 'adm', root: `${domain}/${environment}/adm/user-adm` },
     // Partner

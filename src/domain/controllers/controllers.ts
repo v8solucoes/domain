@@ -12,6 +12,9 @@ export class Controllers implements Icontrollers {
     this.request = req
   }
   // Adm
+    get [`send-message`]() { return new AccountAdm(this.request) }
+    get [`pendency`]() { return new AccountAdm(this.request) }
+    get [`client-adm`]() { return new AccountAdm(this.request) }
     get [`user-adm`]() { return new AccountAdm(this.request) }
     get [`developing-one`]() { return new AccountAdm(this.request) }
     get [`developing-two`]() { return new AccountAdm(this.request) }
@@ -33,7 +36,7 @@ export class Controllers implements Icontrollers {
 
   static path(req: Irequest, id: string = FirebaseAPI.db.bundle().bundleId) {
     
-    const path = _router(req.environment,req.domain)[req.document]
+    const path = _router(req.environment, req.domain)[req.document]
     const router: any = path.root
     const level: any = path.level
  

@@ -1,9 +1,11 @@
 export const _debug = {
-  resolver: true,
+  resolver: false,
   guard: false,
   action: false,
   form: false,
   auth: false,
+  permission: false,
+  backand: false,
   pg: {
     login: false,
     interface: false,
@@ -16,5 +18,9 @@ export const _debug = {
 }
 export const _debugBack = {
   login: false,
-  createUser: false
+  getUser: false,
+  createUser: false,
+  testRequestGet: false,
+  securityGetColection: false,
+  getColection: true
 }

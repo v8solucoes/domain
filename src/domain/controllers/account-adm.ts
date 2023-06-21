@@ -3,6 +3,7 @@ import { FirebaseUserRecord } from "../../shared/api";
 import { Irequest, IresponseValidatorCompose } from "../../shared/interface";
 import { ModelUser } from "../model/users";
 import { DataRemote } from "../repository/data-remote";
+import { DataLocal } from "../repository/data-local";
 import { responseValidatorError } from "../validators/validators-response";
 import { UserController } from "../model/user.controllers"
 import { _debugBack } from '../repository/debug';
@@ -11,8 +12,10 @@ export class AccountAdm extends DataRemote {
 
   data = {} as ModelUser
   permission = {} as IlevelPermissionOption
-
-  constructor(public req: Irequest,) {
+  datalocal = new DataLocal()
+  constructor(
+    public req: Irequest,
+   ) {
     super(req)
     this.data = this.req.data[this.req.document]
     console.log(this.data)
@@ -187,6 +190,9 @@ export class AccountAdm extends DataRemote {
     db.lote.create(db.pathDocument(data.userId).document, {
       permission,
       [`${req.document}`]: data,
+      [`send-message`]: this.datalocal.document['send-message'],
+      [`pendency`]: this.datalocal.document['pendency'],
+      [`client-adm`]: this.datalocal.document['client-adm'],
       [`user-adm`]: data,
       [`developing-one`]: data,
       [`developing-two`]: data,

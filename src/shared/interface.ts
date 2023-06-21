@@ -1,13 +1,28 @@
+import { ModelClient } from "../domain/model/client";
+import { ModelPendency } from "../domain/model/pendency";
+import { ModelSendMessage } from "../domain/model/sendMessage";
 import { ModelUser } from "../domain/model/users";
 import { ValidatorsRemote } from "../domain/validators/validators-remote";
 import { NameProperty } from "./typscript";
 import { ValidatorsLocal } from "./validator-local";
 
 export { ModelUser as ImodelUser }
+export { ModelClient as ImodelClient }
+
+export type UserModel = {
+  model: ImodelCreate<'user-adm'>
+}
+export type ClientModel = {
+  model: ImodelCreate<'client-adm'>
+}
+export type ClientPendency = {
+  model: ImodelCreate<'pendency'>
+}
+export type IModelSendMessage = {
+  model: ImodelCreate<'send-message'>
+}
 // Create New Colection
-// 1 Create name in
-    // IDoc
-    // Ipermission
+    // Review
     // IpermissionFormControl
     // Data Base - domain/src/domain/controllers/account-adm.ts line 70
     // Validator - domain/src/domain/options/options.validator.ts
@@ -16,7 +31,10 @@ export { ModelUser as ImodelUser }
 // Constructor DOCUMENT / COLECTION
 
 export type Idoc = {
-
+  
+  [`send-message`]: Pick<ModelSendMessage, 'message' | 'title'>
+  [`pendency`]: Pick<ModelPendency, 'document' | 'firstContact' | 'inspection' | 'payment' |'proposalComplete' | 'proposalFast' | 'signature'>
+  [`client-adm`]: Pick<ModelClient, 'nameCorporate' | 'nameFantasy' | 'namePersonal' | 'cpfCnpj' | 'phonePrimary' | 'phoneSecundary'| 'emailPrimary'| 'emailSecundary'>
   [`user-adm`]: Pick<ModelUser, 'name' | 'email' | 'phone' | 'password' | 'acceptTerms' | 'emailVerified' | 'multiFactor' | 'level' | 'userId'>
   [`account-adm-new`]: Pick<ModelUser, 'name' | 'email' | 'phone' | 'password' | 'acceptTerms'>
   [`sign-in`]: Pick<ModelUser, 'email' | 'password'>
@@ -37,9 +55,13 @@ export type Idoc = {
 export type Ipermission = {
   adm: [
     IpermissionCreate<'user-adm'>,
+    IpermissionCreate<'client-adm'>,
+    IpermissionCreate<'pendency'>,
+    IpermissionCreate<'send-message'>,
     IpermissionCreate<'developing-one'>,
     IpermissionCreate<'developing-two'>
   ]
+
   partner: [
     IpermissionCreate<'partner-developing-one'>,
     IpermissionCreate<'partner-developing-two'>,
@@ -61,6 +83,9 @@ export type Ipermission = {
 }
 export type IpermissionFormControl = [
 // adm
+/*   IpermissionCreate<'user-adm'>,
+  IpermissionCreate<'client-adm'>,
+  IpermissionCreate<'send-message'>, */
   IpermissionCreate<'account-adm-new'>,
   IpermissionCreate<'developing-one'>,
   IpermissionCreate<'developing-two'>,
@@ -100,6 +125,7 @@ export type IpermissionCreate<name extends keyof Idoc> = {
   id: name
   view: IpermissionView
   colection?: Irequest['document']
+  documentSub: Irequest['document']
   _group: { [key in keyof Idoc[name]as `id` | `view`]: key | IpermissionView }[]
 }
 export type IpermissionRecursive =
@@ -243,6 +269,7 @@ export type Irequest = {
   language: 'en' | 'pt';
   page: 'account' | 'login' | 'app';
   document: NameProperty<Idoc>;
+  documentSub: NameProperty<Idoc>;
   controller: 'accountAdmFirst' | null
   action: 'create' | 'update' | 'null';
   key: string | null;
@@ -272,9 +299,7 @@ export interface FormControl<T> {
   form: T
 }
 
-export type UserModel = {
-  model: ImodelCreate<'user-adm'>
-}
+
 
 export interface ImodalErrorForm {
   width: string,
