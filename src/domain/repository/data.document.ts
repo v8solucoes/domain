@@ -1,5 +1,5 @@
 import { Idoc } from "../../shared/interface";
-import { genericName, genericNumber, genericPhoneNumber } from "./data-random-names";
+import { genericName, genericPhoneNumber } from "./data-random-names";
 
 export const _document: Idoc = {
   [`send-message`]: {
