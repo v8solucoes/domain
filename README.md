@@ -1,10 +1,16 @@
-# README: LastUpdate (15/05/23)
+# README: LastUpdate (13/07/2023)
 
-## SETUP WSL - [WSL - Update](.readme/ubunto.md)
+## SETUP WSL - [WSL - Update](.readme/setup-wsl.md)
 
 ## UBUNTO  - [WSL - Update](.readme/ubunto.md)
 
+## Node > NPM - [Install  - Update](.readme/node.md)
+## Node > Yarn - [Install  - Update](.readme/yarn.md)
+
+NVM não vai executar no root (c# backend)
 ## NVM > Node > NPM - [Install  - Update](.readme/nvm.md)
+
+## ANGULAR - [Install  - Update](../front/.readme/angular.md)
 
 ## FIREBASE FrontEnd - [Install / Update](../front/.readme/firebase-frontend.md)
 

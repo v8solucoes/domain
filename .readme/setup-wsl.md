@@ -1,8 +1,9 @@
 # [README](./../README.md)
 
-## 1 Install WSL
+## 1 Install WSL - Ubuntu-22.04
 
 Abrir PowerShel como Administrador
+`wsl --shutdown` Restart WSL
 `wsl --install`
 `wsl --list --online`
 `wsl --update`

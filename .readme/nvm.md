@@ -8,15 +8,19 @@ Install: `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.
 Basic Comand:
 
 - `nvm --version` ( current version 0.39.3)
+- `nvm current` ( Node Version)
 - `nvm ls` (installed version)
 - `nvm ls-remote`(versions available)
 - `nvm deactivate` (Stop Node/NVM before Uninstall)
-- `nvm uninstall 16.19.0` (desinstala Versão)
-- `nvm install 18.16.0` (versão estável LTS)
+- `nvm uninstall 18.16.0` (desinstala Versão)
+- `nvm install 18.16.1` (versão estável LTS)
 - `nvm unload` (Start Node/NVM before Uninstall)
-- `nvm alias default 18.16.0` (executa versão defina)
+- `nvm alias default 18.16.1` (executa versão defina)
+- `rm -rf $NVM_DIR ~/.npm ~/.bower` (remover)
 
-## NPM Install (9.6.6)
+After Install Need install Angluar CLI
 
-- `npm --v (version 6.14.4)`
+## NPM Install (9.8.0)
+
+- `npm --v (version 9.8.0)`
 - `npm install -g npm (Update NPM)`
